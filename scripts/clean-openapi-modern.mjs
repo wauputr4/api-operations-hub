@@ -7,6 +7,7 @@ const targets = [
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
   'openapi/ipaymu/ipaymu.openapi.yaml',
+  'openapi/flip/flip.openapi.yaml',
   'openapi/fastpay/fastpay.openapi.yaml',
   'openapi/finpay/finpay-billing.openapi.yaml',
   'openapi/finpay/finpay-disbursement.openapi.yaml',
@@ -26,6 +27,10 @@ for (const target of targets) {
       normalizedPath = normalizedPath
         .replace('/183xx00010100000', '/{merchant_id}')
         .replace('/182xx00010100000', '/{merchant_id}');
+    }
+
+    if (target.includes('flip')) {
+      normalizedPath = normalizedPath.replaceAll(':bill_id', '{bill_id}');
     }
     const existing = cleanedPaths[normalizedPath];
     if (!existing) {
@@ -87,6 +92,31 @@ for (const target of targets) {
               type: 'string',
             },
             description: 'Faspay merchant identifier in URL path.',
+          });
+          op.parameters = params;
+        }
+      }
+    }
+  }
+
+  if (target.includes('flip')) {
+    for (const [path, operations] of Object.entries(cleanedPaths)) {
+      if (!path.includes('{bill_id}')) {
+        continue;
+      }
+
+      for (const op of Object.values(operations)) {
+        const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
+        const hasBillId = params.some((item) => item?.in === 'path' && item?.name === 'bill_id');
+        if (!hasBillId) {
+          params.push({
+            name: 'bill_id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+            description: 'Flip payment link identifier.',
           });
           op.parameters = params;
         }

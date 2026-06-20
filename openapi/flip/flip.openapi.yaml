@@ -1,0 +1,313 @@
+openapi: 3.1.0
+info:
+  title: Flip for Business API
+  version: 1.0.0
+  description: >-
+    Docs-derived Postman collection for core Flip for Business API endpoints.
+    Source:
+    https://beta-docs-flip.netlify.app/docs/api/flip-for-business-api-documentation
+    and https://docs.flip.id/docs/postman-collection/.
+paths:
+  /v2/general/balance:
+    get:
+      summary: Deposit balance
+      description: Retrieve the current Flip account balance in Rupiah (IDR).
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Deposit balance:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/general/banks:
+    get:
+      summary: List of Bank
+      description: Return bank codes and bank availability information.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            List of Bank:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/disbursement/bank-account-inquiry:
+    post:
+      summary: Bank Account Inquiry
+      description: Get the bank account holder name before creating a disbursement.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Bank Account Inquiry:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Bank Account Inquiry:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Bank Account Inquiry:
+                value: |-
+                  {
+                    "account_number": "1234567890",
+                    "bank_code": "bca"
+                  }
+  /v3/disbursement:
+    post:
+      summary: Create Disbursement
+      description: Create a common disbursement transaction.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Create Disbursement:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Disbursement:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Disbursement:
+                value: |-
+                  {
+                    "account_number": "1234567890",
+                    "bank_code": "bca",
+                    "amount": 10000,
+                    "remark": "Invoice payout"
+                  }
+    get:
+      summary: Get All Disbursement
+      description: Get the paginated list of disbursement transactions.
+      parameters:
+        - name: pagination
+          in: query
+          examples:
+            Get All Disbursement:
+              value: '20'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          examples:
+            Get All Disbursement:
+              value: '1'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: Accept
+          in: header
+          examples:
+            Get All Disbursement:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v3/get-disbursement:
+    get:
+      summary: Get Disbursement by ID or Idempotency Key
+      description: Get one specific disbursement transaction by id or idempotency key.
+      parameters:
+        - name: id
+          in: query
+          examples:
+            Get Disbursement by ID or Idempotency Key:
+              value: '1234567890'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: Accept
+          in: header
+          examples:
+            Get Disbursement by ID or Idempotency Key:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/pwf/bill:
+    post:
+      summary: Create Bill
+      description: Create a payment/bill link.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Create Bill:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Bill:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Bill:
+                value: |-
+                  {
+                    "title": "Invoice payment",
+                    "type": "SINGLE",
+                    "amount": 10000,
+                    "expired_date": "2026-12-31 23:59"
+                  }
+    get:
+      summary: Get All Bills
+      description: Get all existing payment links.
+      parameters:
+        - name: pagination
+          in: query
+          examples:
+            Get All Bills:
+              value: '20'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          examples:
+            Get All Bills:
+              value: '1'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: Accept
+          in: header
+          examples:
+            Get All Bills:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/pwf/{bill_id}/bill:
+    get:
+      summary: Get Bill / Payment Link
+      description: Get a specific payment link.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Get Bill / Payment Link:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: bill_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Flip payment link identifier.
+  /v2/pwf/{bill_id}/payment:
+    get:
+      summary: Get Payment
+      description: Get payment transactions from a specific bill link.
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Get Payment:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: bill_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Flip payment link identifier.
+  /v2/pwf/payment:
+    get:
+      summary: Get All Payment
+      description: Get all existing payment transactions.
+      parameters:
+        - name: pagination
+          in: query
+          examples:
+            Get All Payment:
+              value: '20'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: page
+          in: query
+          examples:
+            Get All Payment:
+              value: '1'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: Accept
+          in: header
+          examples:
+            Get All Payment:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/international-disbursement/exchange-rates:
+    get:
+      summary: Get Exchanges Rate
+      description: Get exchange rates and destination corridor transfer details.
+      parameters:
+        - name: currency
+          in: query
+          examples:
+            Get Exchanges Rate:
+              value: USD
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Get Exchanges Rate:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []
+servers:
+  - url: https://bigflip.id/big_sandbox_api

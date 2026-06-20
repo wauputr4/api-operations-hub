@@ -1,0 +1,428 @@
+{
+  "info": {
+    "name": "Flip for Business API",
+    "description": "Docs-derived Postman collection for core Flip for Business API endpoints. Source: https://beta-docs-flip.netlify.app/docs/api/flip-for-business-api-documentation and https://docs.flip.id/docs/postman-collection/.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{flip_api_secret_key}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://bigflip.id/big_sandbox_api",
+      "type": "string"
+    },
+    {
+      "key": "flip_api_secret_key",
+      "value": "YOUR_FLIP_API_SECRET_KEY",
+      "type": "string"
+    },
+    {
+      "key": "bill_id",
+      "value": "1234567890",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Deposit balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Retrieve the current Flip account balance in Rupiah (IDR).",
+        "url": {
+          "raw": "{{base_url}}/v2/general/balance",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "general",
+            "balance"
+          ],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "List of Bank",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Return bank codes and bank availability information.",
+        "url": {
+          "raw": "{{base_url}}/v2/general/banks",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "general",
+            "banks"
+          ],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bank Account Inquiry",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get the bank account holder name before creating a disbursement.",
+        "url": {
+          "raw": "{{base_url}}/v2/disbursement/bank-account-inquiry",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "disbursement",
+            "bank-account-inquiry"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_number\": \"1234567890\",\n  \"bank_code\": \"bca\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Disbursement",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Create a common disbursement transaction.",
+        "url": {
+          "raw": "{{base_url}}/v3/disbursement",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v3",
+            "disbursement"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"account_number\": \"1234567890\",\n  \"bank_code\": \"bca\",\n  \"amount\": 10000,\n  \"remark\": \"Invoice payout\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Disbursement by ID or Idempotency Key",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get one specific disbursement transaction by id or idempotency key.",
+        "url": {
+          "raw": "{{base_url}}/v3/get-disbursement?id=1234567890",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v3",
+            "get-disbursement"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "1234567890"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Disbursement",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get the paginated list of disbursement transactions.",
+        "url": {
+          "raw": "{{base_url}}/v3/disbursement?pagination=20&page=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v3",
+            "disbursement"
+          ],
+          "query": [
+            {
+              "key": "pagination",
+              "value": "20"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Bill",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "description": "Create a payment/bill link.",
+        "url": {
+          "raw": "{{base_url}}/v2/pwf/bill",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "pwf",
+            "bill"
+          ],
+          "query": []
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Invoice payment\",\n  \"type\": \"SINGLE\",\n  \"amount\": 10000,\n  \"expired_date\": \"2026-12-31 23:59\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Bill / Payment Link",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get a specific payment link.",
+        "url": {
+          "raw": "{{base_url}}/v2/pwf/:bill_id/bill",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "pwf",
+            ":bill_id",
+            "bill"
+          ],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Bills",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get all existing payment links.",
+        "url": {
+          "raw": "{{base_url}}/v2/pwf/bill?pagination=20&page=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "pwf",
+            "bill"
+          ],
+          "query": [
+            {
+              "key": "pagination",
+              "value": "20"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Payment",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get payment transactions from a specific bill link.",
+        "url": {
+          "raw": "{{base_url}}/v2/pwf/:bill_id/payment",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "pwf",
+            ":bill_id",
+            "payment"
+          ],
+          "query": []
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Payment",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get all existing payment transactions.",
+        "url": {
+          "raw": "{{base_url}}/v2/pwf/payment?pagination=20&page=1",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "pwf",
+            "payment"
+          ],
+          "query": [
+            {
+              "key": "pagination",
+              "value": "20"
+            },
+            {
+              "key": "page",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Exchanges Rate",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "description": "Get exchange rates and destination corridor transfer details.",
+        "url": {
+          "raw": "{{base_url}}/v2/international-disbursement/exchange-rates?currency=USD",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "v2",
+            "international-disbursement",
+            "exchange-rates"
+          ],
+          "query": [
+            {
+              "key": "currency",
+              "value": "USD"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
