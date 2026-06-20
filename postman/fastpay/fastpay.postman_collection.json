@@ -1,0 +1,396 @@
+{
+	"info": {
+		"_postman_id": "421f6bef-ddf3-4f52-828e-304b565d21f2",
+		"name": "Post TRX Example",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26984767"
+	},
+	"item": [
+		{
+			"name": "XML",
+			"item": [
+				{
+					"name": "Post Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<faspay>\n  <request>Post Data Transaksi</request>\n  <merchant_id>99999</merchant_id>\n  <merchant>MI Test</merchant>\n  <bill_no>8987984789977873</bill_no>\n  <bill_reff>AGS/005</bill_reff>\n  <bill_date>2023-04-27 14:40:00</bill_date>\n  <bill_expired>2023-04-28 08:50:43</bill_expired>\n  <bill_desc>Pembayaran Via Faspay</bill_desc>\n  <bill_currency>IDR</bill_currency>\n  <bill_gross>0</bill_gross>\n  <bill_tax>0</bill_tax>\n  <bill_miscfee>0</bill_miscfee>\n  <bill_total>1000000</bill_total>\n  <cust_no>5002</cust_no>\n  <cust_name>Agus Priyono</cust_name>\n  <payment_channel>812</payment_channel>\n  <pay_type>1</pay_type>\n  <bank_userid/>\n  <msisdn/>\n  <email>dummy@gmail.com</email>\n  <terminal>10</terminal>\n  <billing_address>jalan pintu air raya</billing_address>\n  <billing_address_city>Jakarta Pusat</billing_address_city>\n  <billing_address_region>DKI Jakarta</billing_address_region>\n  <billing_address_state>Indonesia</billing_address_state>\n  <billing_address_poscode>10710</billing_address_poscode>\n  <billing_address_country_code>ID</billing_address_country_code>\n  <receiver_name_for_shipping>Faspay</receiver_name_for_shipping>\n  <shipping_address>jalan pintu air raya</shipping_address>\n  <shipping_address_city>Jakarta Pusat</shipping_address_city>\n  <shipping_address_region>DKI Jakarta</shipping_address_region>\n  <shipping_address_state>Indonesia</shipping_address_state>\n  <shipping_address_poscode>10710</shipping_address_poscode>\n  <shipping_msisdn>089943244883</shipping_msisdn>\n  <shipping_address_country_code>ID</shipping_address_country_code>\n   <item>\n    <id>102</id>\n    <product>Test Barang 1</product>\n    <merchant_id>99999</merchant_id>\n    <qty>1</qty>\n    <amount>10000</amount>\n    <type>Smartphone</type>\n    <url>http://localhost:8088/index</url>\n    <image_url>https://cdn.mos.cms.futurecdn.net/Mffc35PH77Dq7USrHb4qNm-1200-80.jpg</image_url>\n  </item>\n  <reserve1/>\n  <reserve2></reserve2>\n  <signature>84b8efda38630ce85fbdf886edcf16569a1da5de</signature>\n</faspay>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/pws/300011/183xx00010100000/",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"pws",
+								"300011",
+								"183xx00010100000",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Refund",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<faspay>\r\n\t<request>Pembatalan Pembelian Barang</request>\r\n\t<merchant_id>99999</merchant_id>\r\n\t<merchant>Mi Test</merchant>\r\n\t<trx_id>9999980725630821</trx_id>\r\n\t<bill_no>141431359</bill_no>\r\n\t<payment_reff>9999980725630821-2563301</payment_reff>\r\n\t<payment_channel_uid>807</payment_channel_uid>\r\n\t<bill_total>1000000</bill_total>\r\n\t<cancellation_reason>Out of Stock</cancellation_reason>\r\n\t<cancelled_by>Faspay</cancelled_by>\r\n\t<cancellation_type>FULL</cancellation_type>\r\n\t<signature>bb5e34c98eb13b5a7bc1418403a8220f70b80f08</signature>\r\n</faspay>"
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/pws/300013/183xx00010100000",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"pws",
+								"300013",
+								"183xx00010100000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/xml"
+							},
+							{
+								"key": "gaga",
+								"type": "text",
+								"value": "54t3g5ed",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<faspay>\r\n<request>Canceling Payment</request>\r\n<trx_id>7139999902053922</trx_id>\r\n<merchant_id>99999</merchant_id>\r\n<merchant>Faspay Demo</merchant>\r\n<bill_no>14143135</bill_no>\r\n<payment_cancel>Barang Habis</payment_cancel>\r\n<signature>05bcad0dc7cc6538c4bcd76ed884243931575752</signature>\r\n</faspay>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/pws/100005/183xx00010100000",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"pws",
+								"100005",
+								"183xx00010100000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<faspay>\n<request>Inquiry Status Payment</request>\n<trx_id>992022022500000969</trx_id>\n<merchant_id>99999</merchant_id>\n<bill_no>407</bill_no>\n<signature>e7d3315cd8c132f18441109bd07d41dcce932c7e</signature>\n</faspay>\n"
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/pws/100004/183xx00010100000",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"pws",
+								"100004",
+								"183xx00010100000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/xml"
+							},
+							{
+								"key": "key",
+								"value": "432er5423452",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<faspay>\r\n<request>Request List of Payment Gateway</request>\r\n<merchant_id>99999</merchant_id>\r\n<merchant>STORE</merchant>\r\n<signature>1ac4d5a611ec5376d8da43bbe33aaea1719076b6</signature>\r\n</faspay>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/pws/100001/182xx00010100000",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"pws",
+								"100001",
+								"182xx00010100000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Json",
+			"item": [
+				{
+					"name": "Post Json",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"request\":\"Transmisi Info Detil Pembelian\",\r\n\t\"merchant_id\":\"99999\",\r\n\t\"merchant\":\"FASPAY STORE\",\r\n\t\"bill_no\":\"AGS/2997\",\r\n\t\"bill_reff\":\"StagingTest\",\r\n\t\"bill_date\":\"2023-04-27 14:00:00\",\r\n\t\"bill_expired\":\"2023-04-28 13:45:00\",\r\n\t\"bill_desc\":\"Pembayaran #12345678\",\r\n\t\"bill_currency\":\"IDR\",\r\n\t\"bill_gross\":\"0\",\r\n\t\"bill_tax\":\"0\",\r\n\t\"bill_miscfee\":\"0\",\r\n\t\"bill_total\":\"4000000\",\r\n\t\"cust_no\":\"1\",\r\n\t\"cust_name\":\"Test Faspay\",\r\n\t\"cust_lastname\":\"faspay\",\r\n\t\"payment_channel\":\"812\",\r\n\t\"pay_type\":\"1\",\r\n\t\"bank_userid\":\"\",\r\n\t\"msisdn\":\"\",\r\n\t\"email\":\"\",\r\n\t\"terminal\":\"10\",\r\n\t\"billing_name\":\"test faspay\",\r\n\t\"billing_lastname\":\"0\",\r\n\t\"billing_address\":\"jalan pintu air raya\",\r\n\t\"billing_address_city\":\"Jakarta Pusat\",\r\n\t\"billing_address_region\":\"DKI Jakarta\",\r\n\t\"billing_address_state\":\"Indonesia\",\r\n\t\"billing_address_poscode\":\"10710\",\r\n\t\"billing_msisdn\":\"\",\r\n\t\"billing_address_country_code\":\"ID\",\r\n\t\"receiver_name_for_shipping\":\"Faspay Test\",\r\n\t\"shipping_lastname\":\"\",\r\n\t\"shipping_address\":\"jalan pintu air raya\",\r\n\t\"shipping_address_city\":\"Jakarta Pusat\",\r\n\t\"shipping_address_region\":\"DKI Jakarta\",\r\n\t\"shipping_address_state\":\"Indonesia\",\r\n\t\"shipping_address_poscode\":\"10710\",\r\n\t\"shipping_msisdn\":\"08766688686\",\r\n\t\"shipping_address_country_code\":\"ID\",\r\n\t\"item\":[{\t\r\n\t\t\t\"id\":\"01\",\r\n\t\t\t\"product\":\"Invoice No. inv-985/2017-03/1234567892\",\r\n\t\t\t\"qty\":\"1\",\r\n\t\t\t\"amount\":\"10000\",\r\n\t\t\t\"payment_plan\":\"01\",\r\n\t\t\t\"tenor\":\"00\",\r\n\t\t\t\"type\":\"Smartphone\",\r\n\t\t\t\"url\":\"http://localhost:8088/index\",\r\n\t\t\t\"image_url\":\"https://cdn.mos.cms.futurecdn.net/Mffc35PH77Dq7USrHb4qNm-1200-80.jpg\"\r\n\t\t\t\r\n\t}],\r\n\t\"reserve1\":\"0\",\r\n\t\"reserve2\":\"\",\r\n\t\"signature\":\"a2f94b8c673ea11d9fbf9a7baa1af4d1996515ce\"\r\n}"
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/cvr/300011/10",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"cvr",
+								"300011",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Refund",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"request\" : \"Pembatalan Pembelian Barang\",\r\n  \"merchant_id\" : \"99999\",\r\n  \"merchant\" : \"Mi Test\",\r\n  \"trx_id\" : \"9999970900002998\",\r\n  \"bill_no\" : \"999333\",\r\n  \"payment_reff\" : \"999333\",\r\n  \"payment_channel_uid\" : \"302\",\r\n  \"bill_total\" : \"1000000\",\r\n  \"cancellation_reason\" : \"Out of stock\",\r\n  \"cancelled_by\" : \"Dummy\",\r\n  \"cancellation_type\" : \"FULL\",\r\n  \"signature\" : \"b4ea7bd1a7fcaddd3a65e78072d88065c6333cb6\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/cvr/300013/10",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"cvr",
+								"300013",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post Cancel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"request\":\"Canceling Payment\",\r\n \"trx_id\":\"7139999902053922\",\r\n \"merchant_id\":\"99999\",\r\n \"merchant\" : \"Faspay Demo\",\r\n \"bill_no\":\"14143135\",\r\n \"payment_cancel\" : \"Barang Habis\",\r\n \"signature\":\"05bcad0dc7cc6538c4bcd76ed884243931575752\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/cvr/100005/10",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"cvr",
+								"100005",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request\": \"Pengecekan Status Pembayaran\",\r\n    \"trx_id\": \"9999981209493296\",\r\n    \"merchant_id\": \"99999\",\r\n    \"bill_no\": \"776781331\",\r\n    \"signature\": \"35b5cde57c64ce943a16634f0f315c46be1bcc01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/cvr/100004/10",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"cvr",
+								"100004",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry Channel",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"request\": \"Pengecekan Status Pembayaran\",\r\n    \"merchant_id\": \"99999\",\r\n    \"merchant\": \"STORE\",\r\n    \"signature\": \"1ac4d5a611ec5376d8da43bbe33aaea1719076b6\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://debit-sandbox.faspay.co.id/cvr/100001/10",
+							"protocol": "https",
+							"host": [
+								"debit-sandbox",
+								"faspay",
+								"co",
+								"id"
+							],
+							"path": [
+								"cvr",
+								"100001",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
