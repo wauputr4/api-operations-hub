@@ -20,7 +20,7 @@ If you work with several providers and need a single source of truth for API def
 - DOKU API Collection
 - Xendit API
 - Xendit SNAP API
-- Fastpay API
+- Faspay API
 - Finpay Billing API
 - Finpay Disbursement API
 - Finpay Payment Gateway API
@@ -41,13 +41,13 @@ If you work with several providers and need a single source of truth for API def
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
   - Cleanup notes and process documentation.
 - `scripts/`
-- `convert-postman-to-openapi-modern.mjs`
+  - `convert-postman-to-openapi-modern.mjs`
   - `convert-postman-to-openapi.mjs`
   - `convert-mayar-mintlify.mjs`
   - `clean-openapi-modern.mjs`
@@ -56,7 +56,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 

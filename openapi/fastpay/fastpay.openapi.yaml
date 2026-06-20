@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
-  title: Post TRX Example
+  title: Faspay API
   version: 1.0.0
 paths:
-  /pws/300011/183xx00010100000/:
+  /pws/300011/{merchant_id}/:
     post:
       tags:
         - XML
@@ -17,6 +17,12 @@ paths:
               x-disabled: false
           schema:
             type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
       requestBody:
         content:
           application/xml:
@@ -75,7 +81,7 @@ paths:
                     <reserve2></reserve2>
                     <signature>84b8efda38630ce85fbdf886edcf16569a1da5de</signature>
                   </faspay>
-  /pws/300013/183xx00010100000:
+  /pws/300013/{merchant_id}:
     post:
       tags:
         - XML
@@ -89,6 +95,12 @@ paths:
               x-disabled: false
           schema:
             type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
       requestBody:
         content:
           application/xml:
@@ -97,7 +109,7 @@ paths:
             examples:
               Post Refund:
                 value: "<faspay>\r\n\t<request>Pembatalan Pembelian Barang</request>\r\n\t<merchant_id>99999</merchant_id>\r\n\t<merchant>Mi Test</merchant>\r\n\t<trx_id>9999980725630821</trx_id>\r\n\t<bill_no>141431359</bill_no>\r\n\t<payment_reff>9999980725630821-2563301</payment_reff>\r\n\t<payment_channel_uid>807</payment_channel_uid>\r\n\t<bill_total>1000000</bill_total>\r\n\t<cancellation_reason>Out of Stock</cancellation_reason>\r\n\t<cancelled_by>Faspay</cancelled_by>\r\n\t<cancellation_type>FULL</cancellation_type>\r\n\t<signature>bb5e34c98eb13b5a7bc1418403a8220f70b80f08</signature>\r\n</faspay>"
-  /pws/100005/183xx00010100000:
+  /pws/100005/{merchant_id}:
     post:
       tags:
         - XML
@@ -111,15 +123,12 @@ paths:
               x-disabled: false
           schema:
             type: string
-        - name: gaga
-          in: header
-          examples:
-            Post Cancel:
-              value: 54t3g5ed
-              x-disabled: true
+        - name: merchant_id
+          in: path
+          required: true
           schema:
             type: string
-          x-scalar-disabled: true
+          description: Faspay merchant identifier in URL path.
       requestBody:
         content:
           application/xml:
@@ -128,7 +137,7 @@ paths:
             examples:
               Post Cancel:
                 value: "<faspay>\r\n<request>Canceling Payment</request>\r\n<trx_id>7139999902053922</trx_id>\r\n<merchant_id>99999</merchant_id>\r\n<merchant>Faspay Demo</merchant>\r\n<bill_no>14143135</bill_no>\r\n<payment_cancel>Barang Habis</payment_cancel>\r\n<signature>05bcad0dc7cc6538c4bcd76ed884243931575752</signature>\r\n</faspay>"
-  /pws/100004/183xx00010100000:
+  /pws/100004/{merchant_id}:
     post:
       tags:
         - XML
@@ -142,6 +151,12 @@ paths:
               x-disabled: false
           schema:
             type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
       requestBody:
         content:
           application/xml:
@@ -163,7 +178,7 @@ paths:
                   <signature>e7d3315cd8c132f18441109bd07d41dcce932c7e</signature>
 
                   </faspay>
-  /pws/100001/182xx00010100000:
+  /pws/100001/{merchant_id}:
     post:
       tags:
         - XML
@@ -177,15 +192,12 @@ paths:
               x-disabled: false
           schema:
             type: string
-        - name: key
-          in: header
-          examples:
-            Inquiry channel:
-              value: 432er5423452
-              x-disabled: true
+        - name: merchant_id
+          in: path
+          required: true
           schema:
             type: string
-          x-scalar-disabled: true
+          description: Faspay merchant identifier in URL path.
       requestBody:
         content:
           application/xml:
@@ -303,7 +315,13 @@ paths:
               type: object
             examples:
               Inquiry Channel:
-                value: "{\r\n    \"request\": \"Pengecekan Status Pembayaran\",\r\n    \"merchant_id\": \"99999\",\r\n    \"merchant\": \"STORE\",\r\n    \"signature\": \"1ac4d5a611ec5376d8da43bbe33aaea1719076b6\"\r\n}\r\n"
+                value: |
+                  {
+                    "request": "Request List of Payment Gateway",
+                    "merchant_id": "99999",
+                    "merchant": "STORE",
+                    "signature": "1ac4d5a611ec5376d8da43bbe33aaea1719076b6"
+                  }
 tags:
   - name: XML
   - name: Json
