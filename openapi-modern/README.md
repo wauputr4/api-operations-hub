@@ -4,18 +4,18 @@ Date: 2026-06-20
 
 ## Scope
 OpenAPI modern dibuat dari Postman collections:
-- Midtrans: [postman/midtrans/midtrans.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/midtrans/midtrans.postman_collection.json)
-- DOKU: [postman/doku/doku.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/doku/doku.postman_collection.json)
-- Xendit API: [postman/xendit/xendit.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/xendit/xendit.postman_collection.json)
-- Xendit SNAP: [postman/xendit/xendit-snap.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/xendit/xendit-snap.postman_collection.json)
-- iPaymu API v2: [postman/ipaymu/ipaymu.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/ipaymu/ipaymu.postman_collection.json)
+- Midtrans: [postman/midtrans/midtrans.postman_collection.json](../postman/midtrans/midtrans.postman_collection.json)
+- DOKU: [postman/doku/doku.postman_collection.json](../postman/doku/doku.postman_collection.json)
+- Xendit API: [postman/xendit/xendit.postman_collection.json](../postman/xendit/xendit.postman_collection.json)
+- Xendit SNAP: [postman/xendit/xendit-snap.postman_collection.json](../postman/xendit/xendit-snap.postman_collection.json)
+- iPaymu API v2: [postman/ipaymu/ipaymu.postman_collection.json](../postman/ipaymu/ipaymu.postman_collection.json)
 
 ## Output (OpenAPI modern)
-- [openapi/midtrans/midtrans.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/midtrans/midtrans.openapi.yaml)
-- [openapi/doku/doku.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/doku/doku.openapi.yaml)
-- [openapi/xendit/xendit.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/xendit/xendit.openapi.yaml)
-- [openapi/xendit/xendit-snap.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/xendit/xendit-snap.openapi.yaml)
-- [openapi/ipaymu/ipaymu.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/ipaymu/ipaymu.openapi.yaml)
+- [openapi/midtrans/midtrans.openapi.yaml](../openapi/midtrans/midtrans.openapi.yaml)
+- [openapi/doku/doku.openapi.yaml](../openapi/doku/doku.openapi.yaml)
+- [openapi/xendit/xendit.openapi.yaml](../openapi/xendit/xendit.openapi.yaml)
+- [openapi/xendit/xendit-snap.openapi.yaml](../openapi/xendit/xendit-snap.openapi.yaml)
+- [openapi/ipaymu/ipaymu.openapi.yaml](../openapi/ipaymu/ipaymu.openapi.yaml)
 
 ## Cleanup yang dilakukan
 - Semua `/v2/[INSERT-ORDER-ID]/...` (hanya di Midtrans) dinormalisasi jadi `/v2/{order_id}/...`.
@@ -32,7 +32,7 @@ npm run clean-openapi-modern
 - `openapi/doku/doku.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/xendit/xendit.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/xendit/xendit-snap.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
-- `openapi/ipaymu/ipaymu.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
+- `openapi/ipaymu/ipaymu.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=1`
 
 ## Ringkasan cepat (setelah convert)
 - Midtrans: `10` path, `10` operasi

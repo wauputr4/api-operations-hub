@@ -354,7 +354,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: Content-Type
           in: header
           examples:
@@ -377,6 +377,12 @@ paths:
         - Direct Payment COD
       summary: Download Label
       parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: iPaymu COD transaction identifier.
         - name: va
           in: header
           examples:
@@ -392,7 +398,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: Content-Type
           in: header
           examples:
@@ -430,7 +436,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: Content-Type
           in: header
           examples:
@@ -506,7 +512,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: Content-Type
           in: header
           examples:
@@ -574,7 +580,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: Content-Type
           in: header
           examples:
@@ -1142,7 +1148,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           examples:
@@ -1544,7 +1550,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           examples:
@@ -2859,7 +2865,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           examples:
@@ -3526,7 +3532,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           description: |
@@ -3785,7 +3791,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           description: |
@@ -4619,7 +4625,7 @@ paths:
               value: ''
               x-disabled: false
           schema:
-            type: integer
+            type: string
         - name: va
           in: header
           examples:

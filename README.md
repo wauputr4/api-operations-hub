@@ -25,7 +25,7 @@ If you work with several providers and need a single source of truth for API def
 ## Repository structure
 
 - `postman/`
-- `midtrans/`
+  - `midtrans/`
   - `doku/`
   - `xendit/`
   - `ipaymu/`
