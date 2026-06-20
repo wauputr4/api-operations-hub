@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Duitku API
+  version: 1.0.0
+  description: >-
+    Docs-derived Postman collection from Duitku API documentation. Official Run
+    in Postman link is listed in the docs, but the public collection export
+    endpoint is not directly downloadable without Postman API access.
+paths:
+  /webapi/api/merchant/paymentmethod/getpaymentmethod:
+    post:
+      summary: Get Payment Method
+      description: 'Source: https://docs.duitku.com/api/en/#get-payment-method'
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Get Payment Method:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Payment Method:
+                value: |-
+                  {
+                    "merchantcode": "{{merchantCode}}",
+                    "amount": "10000",
+                    "datetime": "2026-06-20 10:00:00",
+                    "signature": "<HMAC_SHA256(merchantcode + amount + datetime, apiKey)>"
+                  }
+  /webapi/api/merchant/v2/inquiry:
+    post:
+      summary: Request Transaction
+      description: 'Source: https://docs.duitku.com/api/en/#request-transaction'
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Request Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Request Transaction:
+                value: |-
+                  {
+                    "merchantCode": "{{merchantCode}}",
+                    "paymentAmount": 40000,
+                    "paymentMethod": "VC",
+                    "merchantOrderId": "abcde12345",
+                    "productDetails": "Payment example for example merchant",
+                    "additionalParam": "",
+                    "merchantUserInfo": "",
+                    "customerVaName": "John Doe",
+                    "email": "customer@example.com",
+                    "phoneNumber": "08123456789",
+                    "callbackUrl": "https://example.com/callback",
+                    "returnUrl": "https://example.com/return",
+                    "expiryPeriod": 10,
+                    "signature": "<HMAC_SHA256(merchantCode + merchantOrderId + paymentAmount, apiKey)>"
+                  }
+  /webapi/api/merchant/transactionStatus:
+    post:
+      summary: Check Transaction
+      description: 'Source: https://docs.duitku.com/api/en/#check-transaction'
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Check Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Check Transaction:
+                value: |-
+                  {
+                    "merchantCode": "{{merchantCode}}",
+                    "merchantOrderId": "abcde12345",
+                    "signature": "<HMAC_SHA256(merchantCode + merchantOrderId, apiKey)>"
+                  }
+servers:
+  - url: https://sandbox.duitku.com

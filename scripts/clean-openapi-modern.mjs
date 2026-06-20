@@ -7,6 +7,7 @@ const targets = [
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
   'openapi/ipaymu/ipaymu.openapi.yaml',
+  'openapi/duitku/duitku.openapi.yaml',
   'openapi/fastpay/fastpay.openapi.yaml',
   'openapi/finpay/finpay-billing.openapi.yaml',
   'openapi/finpay/finpay-disbursement.openapi.yaml',

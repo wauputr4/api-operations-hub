@@ -25,6 +25,10 @@ const pairs = [
     output: 'openapi/ipaymu/ipaymu.openapi.yaml',
   },
   {
+    input: 'postman/duitku/duitku.postman_collection.json',
+    output: 'openapi/duitku/duitku.openapi.yaml',
+  },
+  {
     input: 'postman/fastpay/fastpay.postman_collection.json',
     output: 'openapi/fastpay/fastpay.openapi.yaml',
   },
