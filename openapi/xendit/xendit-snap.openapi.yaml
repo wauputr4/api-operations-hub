@@ -1,0 +1,1180 @@
+openapi: 3.1.0
+info:
+  title: API-Xendit SNAP
+  version: 1.0.0
+paths:
+  /snap/v1.0/utilities/asymmetric-signature-service:
+    post:
+      tags:
+        - Utility APIs (Test mode only)
+      summary: Generate Asymmetric Signature
+      description: >-
+        Asymmetric Signature API allow you to generate signature for all Xendit
+        SNAP APIs. The purpose of this API is to simulate signature generation,
+        and will work in Test mode only. For API integration, you MUST generate
+        the signature NOT by calling this API, but by calculating the signature
+        based on SNAP algorithm. [Documentation
+        here](https://xendit.stoplight.io/docs/api-webhook-signature/branches/main/ghau5r7abzpjg-signature-and-key-exchange#signature-and-key-exchange)
+
+
+        You will need the following information to generate signature
+
+
+        - \[Header\] X-TIMESTAMP, timestamp of the request in ISO8601 format.
+        Example 2022-08-31T06:00:00Z
+
+        - \[Header\] Private_key, this is your RSA 2048 format in Xendit
+
+        - \[Header\] httpmethod, which is the HTTP Method on the API you want to
+        use
+
+        - \[Header\] endpointurl, which is the relative URL of the API path you
+        want to use
+
+        - \[Body\] Request body is the request body of the API you want to use
+        and sign (must be in JSON format)
+            
+
+        You will get `signature` value which you could attach to `X-SIGNATURE`
+        header on the API you want to use
+      parameters:
+        - name: X-CLIENT-KEY
+          in: header
+          examples:
+            Generate Asymmetric Signature:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Private_Key
+          in: header
+          examples:
+            Generate Asymmetric Signature:
+              value: '{{private-key}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Generate Asymmetric Signature:
+              value: '2023-01-06T12:24:00+07:00'
+              x-disabled: false
+          schema:
+            type: string
+        - name: endpointurl
+          in: header
+          examples:
+            Generate Asymmetric Signature:
+              value: /snap/v1.0/transfer-va/inquiry-va
+              x-disabled: false
+          schema:
+            type: string
+        - name: httpmethod
+          in: header
+          examples:
+            Generate Asymmetric Signature:
+              value: POST
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Generate Asymmetric Signature:
+                value: "{\r\n  \"trxId\": \"demo_test-0320943981575\"\r\n}"
+      servers:
+        - url: https://api.xendit.co
+  /snap/v1.0/transfer-va/create-va:
+    post:
+      tags:
+        - VA
+      summary: Create VA
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Create VA:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Create VA:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Create VA:
+              value: >-
+                CaVyb15eQIELexfq5gwDta0Q5jW7/Dqsl1u1/viLHXhUIgIkbGgHyOqD2FjEtmPru7dyBUw6V80ukudMa5KmcemvhmB9iBDU8e1B9fJ6ta5K5LEse5MFTRzM7vhKjWiaA3fReWB6nQbaJ/cPE/T6wFi7/zqPXsR2sey7brey7tb7EO8egoT7avV6EqW7IZ7Hde+/T9ia9giUZ+ff20ucduR7jZ/HuvAi+y7alIp9JQVdVK8lJDiYh0+h3PZeLKUaf50HRUQApX6swR+NCOc9quaTH+ql4U1gNkmejUnNlQa2azgqr/hrEHCOQwy3po4R9AGaNkipnSvaOc1vly9qKw==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Create VA:
+              value: '2023-01-06T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Create VA:
+              value: test1
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create VA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create VA:
+                value: "{\r\n    \"virtualAccountName\": \"John Cena Michael\",\r\n    \"trxId\": \"demo_test-0320943981575\",\r\n    \"totalAmount\": {\r\n        \"value\": \"20000.00\",\r\n        \"currency\": \"IDR\"\r\n    },\r\n    \"freeTexts\": [\r\n        {\r\n            \"english\": \"Payment for Body Soap\"\r\n        }\r\n    ],\r\n    \"expiredDate\": \"2023-12-31T17:00:00Z\",\r\n    \"additionalInfo\": {\r\n        \"channelCode\": \"MANDIRI\",\r\n        \"reusability\": \"ONE_TIME_USE\"\r\n    }\r\n}"
+  /snap/v1.0/transfer-va/update-va:
+    post:
+      tags:
+        - VA
+      summary: Update VA
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Update VA:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Update VA:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Update VA:
+              value: ''
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Update VA:
+              value: '2022-08-30T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Update VA:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update VA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Update VA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update VA:
+                value: "{\r\n  \"trxId\": \"13517001\",\r\n  \"totalAmount\": {\r\n      \"value\": \"50000.00\",\r\n      \"currency\": \"IDR\"\r\n  },\r\n  \"freeTexts\": [\r\n        {\r\n            \"english\": \"this is updated text!\"\r\n        }\r\n    ]\r\n}"
+  /snap/v1.0/transfer-va/delete-va:
+    post:
+      tags:
+        - VA
+      summary: Deactivate VA
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Deactivate VA:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Deactivate VA:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Deactivate VA:
+              value: ''
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Deactivate VA:
+              value: '2022-08-30T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Deactivate VA:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Deactivate VA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Deactivate VA:
+                value: "{\r\n  \"trxId\": \"demo_12317008\"\r\n}"
+  /snap/v1.0/transfer-va/inquiry-va:
+    post:
+      tags:
+        - VA
+      summary: Inquiry VA
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Inquiry VA:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Inquiry VA:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Inquiry VA:
+              value: ''
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Inquiry VA:
+              value: '2023-01-06T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Inquiry VA:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Inquiry VA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Inquiry VA:
+                value: "{\r\n  \"trxId\": \"demo_12317008\"\r\n}"
+  /snap/v1.0/payouts:
+    post:
+      tags:
+        - Payouts
+      summary: Create Payout
+      description: 'Create Payout. Service code: 43.'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: '2004300'
+                  responseMessage: Request has been processed successfully
+                  referenceNo: 57f1ce05bb1a631a65eee662
+                  partnerReferenceNo: test-transaction-010121
+                  customerNumber: '6281773628883'
+                  amount:
+                    value: '10123.00'
+                    currency: IDR
+                  additionalInfo:
+                    channelCode: ID_SHOPEEPAY
+                    customerName: John Doe
+                    notes: your-description-here-12345
+                    latestTransactionStatus: '01'
+                    transactionStatusDesc: Initiated
+                    emailTo:
+                      - somebody@email.com
+                    emailCc:
+                      - somebody.else@gmail.com
+                    emailBcc:
+                      - someone@mail.co
+                    created: '2020-07-10 15:00:00'
+                    updated: '2020-07-12 15:00:00'
+                    estimatedArrivalTime: '2020-07-13 15:00:00'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '403':
+          description: Forbidden
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '409':
+          description: Conflict
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          description: (Required) Your Xendit merchant ID
+          examples:
+            Create Payout:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          description: >-
+            (Required) Also known as idempotency key. Provided to prevent
+            duplicate requests. Can be equal to any UUID. Idempotency keys are
+            stored on the request layer; it expires after 24 hours from the
+            first request.
+          examples:
+            Create Payout:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          description: >-
+            (Required) Non-repudiation signature for the request. See [this
+            article](docs/Xendit-OAuth2-Security.md) for more info.
+          examples:
+            Create Payout:
+              value: >-
+                Yxr/KXLm5X1y/xCpcczaRA8a9h42FwU4stoo282lGwHUnEGViVRV6Fidk601SIcN3aMoNLQvK3c6VR8ZxKz7p6qiU4Y9nS4KVuN5Hq5w/Q/mYIUYuckkugj+VwPb2/1EDeM8qU4VwEHGC5ivKNNT2DpJ8uH3EY35QX0RtEKPdysI2ZH3y63/+Dl5Nu0CS7IPKC/yjXBNQumhSrVf8lAfKKE9PeAiO5J+3vdG+1dllBHuWn0VhHkNAAmr5ntJwgkKWP6ifIsdiqefyFAShlxvhT9yJpIuF9n+9ofHcFYnJIYOVuFayW5P20+wglx4fIKYJn6GO4WffvJ3WR5oblrFYQ==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          description: >-
+            (Required) Timestamp for the non-repudiation signature. Format must
+            be yyyy-MM-ddTHH:mm:ssTZD.
+          examples:
+            Create Payout:
+              value: '2022-09-24T15:32:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          description: >-
+            (Required) Device identification on which the API services is
+            currently being accessed by the end user. If not available, set to
+            'unknown'.
+          examples:
+            Create Payout:
+              value: test1
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Payout:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Create Payout:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Payout:
+                value: |-
+                  {
+                      "partnerReferenceNo": "test-transaction-0101252180",
+                      "customerNumber": "6281773628883",
+                      "customerName": "Michael Jordan",
+                      "amount": {
+                          "value": "90000.00",
+                          "currency": "IDR"
+                      },
+                      "notes": "your-description-here-12345",
+                      "additionalInfo": {
+                          "channelCode": "ID_SHOPEEPAY",
+                          "emailTo": [
+                              "somebody@gmail.com"
+                          ],
+                          "emailCc": [
+                              "somebody.else@gmail.com"
+                          ],
+                          "emailBcc": [
+                              "someone@gmail.com"
+                          ]
+                      }
+                  }
+  /snap/v1.0/payouts-status:
+    post:
+      tags:
+        - Payouts
+      summary: Get Transaction Status Inquiry
+      description: 'Get Transaction Status Inquiry. Service code: 39.'
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: '2003900'
+                  responseMessage: Successful
+                  originalPartnerReferenceNo: test-transaction-010121
+                  originalReferenceNo: 57f1ce05bb1a631a65eee662
+                  serviceCode: '38'
+                  amount:
+                    value: '10123.00'
+                    currency: IDR
+                  latestTransactionStatus: '00'
+                  transactionStatusDesc: Success
+                  additionalInfo:
+                    businessId: 5785e6334d7b410667d355c4
+                    channelCode: ID_SHOPEEPAY
+                    customerName: John Doe
+                    customerNumber: '6281773628883'
+                    notes: your-description-here-12345
+                    emailTo:
+                      - somebody@email.com
+                    emailCc:
+                      - somebody.else@gmail.com
+                    emailBcc:
+                      - someone@mail.co
+                    created: '2020-07-10 15:00:00'
+                    updated: '2020-07-12 15:00:00'
+                    estimatedArrivalTime: '2020-07-13 15:00:00'
+        '400':
+          description: Bad Request
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '401':
+          description: Unauthorized
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '403':
+          description: Forbidden
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '404':
+          description: Not Found
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '409':
+          description: Conflict
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+        '500':
+          description: Internal Server Error
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  responseCode: Ut do proident elit
+                  responseMessage: adipisicing fugiat cillum ut
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          description: (Required) Your Xendit merchant ID
+          examples:
+            Get Transaction Status Inquiry:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          description: >-
+            (Required) Also known as idempotency key. Provided to prevent
+            duplicate requests. Can be equal to any UUID. Idempotency keys are
+            stored on the request layer; it expires after 24 hours from the
+            first request.
+          examples:
+            Get Transaction Status Inquiry:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          description: >-
+            (Required) Non-repudiation signature for the request. See [this
+            article](docs/Xendit-OAuth2-Security.md) for more info.
+          examples:
+            Get Transaction Status Inquiry:
+              value: >-
+                Yxr/KXLm5X1y/xCpcczaRA8a9h42FwU4stoo282lGwHUnEGViVRV6Fidk601SIcN3aMoNLQvK3c6VR8ZxKz7p6qiU4Y9nS4KVuN5Hq5w/Q/mYIUYuckkugj+VwPb2/1EDeM8qU4VwEHGC5ivKNNT2DpJ8uH3EY35QX0RtEKPdysI2ZH3y63/+Dl5Nu0CS7IPKC/yjXBNQumhSrVf8lAfKKE9PeAiO5J+3vdG+1dllBHuWn0VhHkNAAmr5ntJwgkKWP6ifIsdiqefyFAShlxvhT9yJpIuF9n+9ofHcFYnJIYOVuFayW5P20+wglx4fIKYJn6GO4WffvJ3WR5oblrFYQ==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          description: >-
+            (Required) Timestamp for the non-repudiation signature. Format must
+            be yyyy-MM-ddTHH:mm:ssTZD.
+          examples:
+            Get Transaction Status Inquiry:
+              value: '2022-11-10T15:30:12Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          description: >-
+            (Required) Device identification on which the API services is
+            currently being accessed by the end user. If not available, set to
+            'unknown'.
+          examples:
+            Get Transaction Status Inquiry:
+              value: test1
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Transaction Status Inquiry:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Get Transaction Status Inquiry:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Transaction Status Inquiry:
+                value: |-
+                  {
+                    "originalPartnerReferenceNo": "test-transaction-010121",
+                    "serviceCode": "38"
+                  }
+  /snap/remittances/v1.0/emoney/top-up:
+    post:
+      tags:
+        - Remittances
+      summary: Create Remittance
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Create Remittance:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Create Remittance:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Create Remittance:
+              value: >-
+                XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          description: '2022-08-30T09:22:00Z'
+          examples:
+            Create Remittance:
+              value: '2022-08-30T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Create Remittance:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Create Remittance:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Remittance:
+                value: "{\r\n  \"partnerReferenceNo\": \"bi-snap-smock-test-{{$timestamp}}\",\r\n  \"amount\": {\r\n    \"value\": \"25000.00\",\r\n    \"currency\": \"IDR\"\r\n  },\r\n  \"notes\": \"uang test\",\r\n  \"additionalInfo\": {\r\n    \"purposeCode\": \"FAMILY\",\r\n    \"sourceOfFunds\": \"PERSONAL_SAVINGS\",\r\n    \"senderCustomerId\": \"e55d073c-ec11-4b53-a7a5-a974f634accb\",\r\n    \"recipientCustomerId\": \"5542e10f-92f2-4fc1-96df-74253313f12a\"\r\n  }\r\n}"
+  /snap/remittances/v1.0/emoney/topup-status:
+    post:
+      tags:
+        - Remittances
+      summary: Get Remittance Payout
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: >-
+                XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: '2022-08-30T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Get Remittance Payout:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Remittance Payout:
+                value: "{\r\n  \"originalPartnerReferenceNo\": \"bi-snap-smock-test-1667443523\",\r\n  \"serviceCode\": \"38\"\r\n}"
+  /snap/remittance-collections/v1.0/transfer-va/create-va:
+    post:
+      tags:
+        - Remittances
+      summary: Create Remittance Collection Virtual Account
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Create Remittance Collection Virtual Account:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Create Remittance Collection Virtual Account:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Create Remittance Collection Virtual Account:
+              value: >-
+                XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Create Remittance Collection Virtual Account:
+              value: '2022-12-24T07:39:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Create Remittance Collection Virtual Account:
+              value: '12345'
+              x-disabled: false
+          schema:
+            type: integer
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Remittance Collection Virtual Account:
+                value: "{\r\n  \"trxId\": \"bi_snap_test_32132128192\",\r\n  \"expiredDate\": \"2024-12-31T23:59:59-07:00\",\r\n  \"virtualAccountNo\": \"9999654481\",\r\n  \"virtualAccountName\": \"Test Luminto Remittance VA\",\r\n  \"additionalInfo\": {\r\n    \"senderCustomerId\": \"8e806b54-a85a-4ec2-a8b4-090998aa7a6e\",\r\n    \"channelCode\": \"BRI\",\r\n    \"reusability\": \"ONE_TIME_USE\"\r\n  }\r\n}"
+  /snap/remittance-collections/v1.0/emoney/top-up:
+    post:
+      tags:
+        - Remittances
+      summary: Refund Remittance Collection Virtual Account Payment
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Refund Remittance Collection Virtual Account Payment:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Refund Remittance Collection Virtual Account Payment:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Refund Remittance Collection Virtual Account Payment:
+              value: >-
+                XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Refund Remittance Collection Virtual Account Payment:
+              value: '2022-08-30T09:22:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Refund Remittance Collection Virtual Account Payment:
+              value: '{{channel-id}}'
+              x-disabled: false
+          schema:
+            type: string
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund Remittance Collection Virtual Account Payment:
+                value: "{\r\n  \"partnerReferenceNo\": \"rcvap-6ef438f8-976e-49bd-aab3-60ab5cd4f289\",\r\n  \"customerNumber\": \"1234567890\",\r\n  \"customerName\": \"Ichwano Sembo\",\r\n  \"additionalInfo\": {\r\n    \"virtualAccountInfo\": {\r\n      \"id\": \"rcva-127a27e9-85cf-44b1-9563-fef5a4b26289\"\r\n    },\r\n    \"channelCode\": \"BRI\",\r\n    \"metadata\": {\r\n      \"message\": \"Test Remittance Collection Refund\"\r\n    }\r\n  }\r\n}"
+  /snap/remittance-collections/v1.0/transfer-va/delete-va:
+    post:
+      tags:
+        - Remittances
+      summary: Deactivate existing Remittance Collection Virtual Account
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Deactivate existing Remittance Collection Virtual Account:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Deactivate existing Remittance Collection Virtual Account:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Deactivate existing Remittance Collection Virtual Account:
+              value: >-
+                AcqMzEv4V+p7s1SZtOG6VPc0tLxwPLExwisNrIFtfeQiXLuoc0v0gx08iFmVowJwrxaxoTk5v7bio72MM7OzwtoPgeTU7GuhexPbqhSt/ZiVqBIs55t9KyhTtRMpUEqHpBxQ2SCLpuHEbXjs+hRwGw6tQ7V2293O1dnJXfSwzfie+MESKxvswsjaJsF5IxsCJzjUM/BoN4iym7ZExXkHAenAR/yjT/ZtNakiMhj9+0xERnG+VPWOamy7rokpYvJUtkOBv+HjbEmzNl56lWbTujJgH8iwGG6KCmXXX4NEQUtHbFG81AhBopnnsdgMNPEeEqPUQrlJ+CWtF3XKy1YN5g==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Deactivate existing Remittance Collection Virtual Account:
+              value: '2022-11-17T03:25:00Z'
+              x-disabled: false
+          schema:
+            type: string
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Deactivate existing Remittance Collection Virtual Account:
+              value: '12345'
+              x-disabled: false
+          schema:
+            type: integer
+      security: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Deactivate existing Remittance Collection Virtual Account:
+                value: "{\r\n  \"partnerServiceId\": \"13281\",\r\n  \"customerNo\": \"9999654483\",\r\n  \"virtualAccountNo\": \"132819999654483\",\r\n  \"virtualAccountName\": \"Test Irfan Prod Dev\",\r\n  \"trxId\": \"bi_snap_test_123456\"\r\n}"
+  /customers:
+    post:
+      tags:
+        - Remittances
+      summary: Create Customer
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Customer:
+                value: |-
+                  {
+                    "external_id": "r-1235-{{$guid}}",
+                    "customer_type": "INDIVIDUAL",
+                    "given_name": "Ichwano",
+                    "surname": "Sembo",
+                    "address": {
+                        "country_code": "ID",
+                        "province": "DKI Jakarta",
+                        "city": "Jakarta Selatan",
+                        "line_1": "Jl. Senayan 1 No.15"
+                    },
+                    "date_of_birth": "11-01-1990",
+                    "identification": {
+                        "ktp_number": "0987654321320987",
+                        "npwp_number": "098765432132098"
+                    },
+                    "account_details": {
+                        "currency": "IDR",
+                        "account_code": "PERMATA",
+                        "account_number": "111111",
+                        "account_holder_name": "Ichwano"
+                    },
+                    "email": "ichwano@email.com",
+                    "mobile_number": "+628111555777",
+                    "phone_number": "+622199990000"
+                  }
+tags:
+  - name: Utility APIs (Test mode only)
+  - name: VA
+  - name: Payouts
+  - name: Remittances
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+servers:
+  - url: https://{xendit-url}
+    variables:
+      xendit-url:
+        default: example.com
+        description: Declared in Postman collection variables.

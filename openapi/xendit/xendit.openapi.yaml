@@ -1,0 +1,5122 @@
+openapi: 3.1.0
+info:
+  title: API-Xendit
+  version: 1.0.0
+  description: >-
+    # Reference
+
+    - [Xendit API Reference](https://developers.xendit.co/)
+
+    - [Testing
+    Scenarios](https://developers.xendit.co/api-reference/#test-scenarios)
+
+    - [Implementation
+    Guide](https://xendit.github.io/xendit-dashboard-docs/postman-instructions.html)
+
+
+    # Getting Started
+
+    - [Signup](https://dashboard.xendit.co/register)
+
+    - [Get API Keys](https://dashboard.xendit.co/settings/developers#api-keys)
+paths:
+  /payment_requests/{id}:
+    get:
+      tags:
+        - BRI 🇮🇩 One-time or Multiple use / Link and Pay
+      summary: Get Payment Request by ID
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Payment Request by ID:
+              value: <payment request id>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /payment_requests:
+    get:
+      tags:
+        - General
+      summary: List Payment Requests
+      parameters:
+        - name: id
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: reference_id
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: customer_id
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: limit
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: after_id
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: before_id
+          in: query
+          examples:
+            List Payment Requests:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+    post:
+      tags:
+        - Payment Request
+      summary: Open Amount multiple use
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Open Amount multiple use:
+                value: |-
+                  {
+                      "currency": "IDR",
+                      "amount": null,
+                      "payment_method": {
+                          "type": "VIRTUAL_ACCOUNT",
+                          "reusability": "MULTIPLE_USE",
+                          "reference_id": "pm-level-{{$randomUUID}}",
+                          "virtual_account": {
+                              "channel_code": "BRI",
+                              "channel_properties": {
+                                  "customer_name": "John Doe"
+                              }
+                          }
+                      },
+                      "metadata": {
+                          "sku": "ABCDEFGH"
+                      }
+                  }
+  /v2/payment_methods/{id}:
+    get:
+      tags:
+        - General
+        - Tokenized - Account Linking
+        - Unlinking with Confirmation - TH - KTB
+      summary: Check Payment Status
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store, no-cache, must-revalidate, proxy-revalidate
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Tue, 06 Apr 2021 06:23:48 GMT
+            Etag:
+              schema:
+                type: string
+                examples:
+                  - W/"10c-K+CPO4qjjUd0CHG8AL2l9bMvcaQ"
+            Expires:
+              schema:
+                type: string
+                examples:
+                  - '0'
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=2592000; includeSubDomains
+            Surrogate-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store
+            Content-Length:
+              schema:
+                type: string
+                examples:
+                  - '219'
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            X-CDN:
+              schema:
+                type: string
+                examples:
+                  - Imperva
+            X-Iinfo:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    12-48646183-48384082 pNNN RT(1617689888703 337845) q(0 0 0
+                    -1) r(11 11) U16
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  business_id: 5f34f60535ba7c1123123123
+                  id: pm-6d1c123123-f4d9-421c-9f0b-ab3b2b6bbc39
+                  type: EWALLET
+                  reusability: MULTIPLE_USE
+                  customer_id: 720123123-ce35-436d-8fa1-3695ecc5889a
+                  country: ID
+                  status: PENDING
+                  actions:
+                    - action: AUTH
+                      url_type: API
+                      url: string
+                      method: GET
+                  ewallet:
+                    channel_code: SHOPEEPAY
+                    channel_properties:
+                      success_return_url: https://your-redirect-website.com/success
+                      failure_return_url: https://your-redirect-website.com/failure
+                      cancel_return_url: https://your-redirect-website.com/cancel
+                      mobile_number: '+628123123123'
+                    account:
+                      account_details: https://your-redirect-website.com/failure
+                      name: null
+                      balance: 10000
+                      point_balance: 10000
+                  direct_debit:
+                    channel_code: BRI
+                    type: BANK_ACCOUNT
+                    channel_properties:
+                      mobile_number: '+62818555988'
+                      card_last_four: '8888'
+                      card_expiry: 06/24
+                      email: test.email@xendit.co
+                      success_return_url: https://your-redirect-website.com/success
+                      failure_return_url: https://your-redirect-website.com/failure
+                    bank_account:
+                      masked_bank_account_number: +****1234
+                      bank_account_hash: 8887558fa5617db25ab4cea427215ca4d2f8
+                    debit_card:
+                      card_last_four: '8888'
+                      card_expiry: 06/24
+                      email: test.email@xendit.co
+                      mobile_number: '+62818555988'
+                  created: '2020-08-29T09:12:33.001Z'
+                  updated: '2020-08-29T09:12:33.001Z'
+                  metadata:
+                    sku: ABCDEFGH
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            Get Payment Method by ID:
+              value: <payment method id>
+              x-disabled: false
+        - name: Idempotency-key
+          in: header
+          examples:
+            Tokenized - Get Account Balance/ payment method info:
+              value: example-idepmtoncey-key
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Tokenized - Get Account Balance/ payment method info:
+                value: ''
+    patch:
+      tags:
+        - Payment Request
+      summary: Update Payment Method
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Update Payment Method:
+              value: <payment method id>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Payment Method:
+                value: |-
+                  {
+                      "virtual_account": {
+                          "channel_properties": {
+                              "expires_at": "2022-12-31T17:00:00.000Z"
+                          }
+                      },
+                      "description": "updated description"
+                  }
+  /v2/payment_methods:
+    get:
+      tags:
+        - General
+      summary: List Payment Methods
+      parameters:
+        - name: id
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: reusability
+          in: query
+          examples:
+            List Payment Methods:
+              value: MULTIPLE_USE
+              x-disabled: true
+          schema:
+            type: string
+          x-scalar-disabled: true
+        - name: type
+          in: query
+          examples:
+            List Payment Methods:
+              value: QR_CODE
+              x-disabled: true
+          schema:
+            type: string
+          x-scalar-disabled: true
+        - name: status
+          in: query
+          examples:
+            List Payment Methods:
+              value: ACTIVE
+              x-disabled: true
+          schema:
+            type: string
+          x-scalar-disabled: true
+        - name: reference_id
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: customer_id
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: limit
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: after_id
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+        - name: before_id
+          in: query
+          examples:
+            List Payment Methods:
+              value: ''
+              x-disabled: true
+          schema:
+            type: integer
+          x-scalar-disabled: true
+    post:
+      tags:
+        - eWallet / Linking Only
+        - Account Linking - Step 2
+      summary: Get Linked Account
+      responses:
+        '200':
+          description: OK
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store, no-cache, must-revalidate, proxy-revalidate
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Tue, 06 Apr 2021 06:21:49 GMT
+            Etag:
+              schema:
+                type: string
+                examples:
+                  - W/"111-76KNzhGy9D2FweeL2RRMnJx7Gfo"
+            Expires:
+              schema:
+                type: string
+                examples:
+                  - '0'
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=2592000; includeSubDomains
+            Surrogate-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store
+            Content-Length:
+              schema:
+                type: string
+                examples:
+                  - '215'
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            X-CDN:
+              schema:
+                type: string
+                examples:
+                  - Imperva
+            X-Iinfo:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    12-48646183-48579826 pNNN RT(1617689888703 218187) q(0 0 0
+                    -1) r(15 15) U6
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: pm-123123123-f4d9-421c-9f0b-ab3b2b6bbc39
+                  type: EWALLET
+                  country: PH
+                  business_id: 5f27a14a9bf05c73123123123
+                  customer_id: fc4123123-3c41-4707-b7b2-df9c3376edde
+                  reference_id: b63798d3-8240-48c3-af12-3b3c62c0981a
+                  reusability: MULTIPLE_USE
+                  status: REQUIRES_ACTION
+                  actions:
+                    - action: AUTH
+                      url: >-
+                        https://link-web.xendit.co/auth/lat-bcf19cc8-f097-44fb-839c-6e4aed807d00/confirm
+                      url_type: WEB
+                      method: GET
+                  description: null
+                  created: '2021-08-18T03:52:56.936277373Z'
+                  updated: '2021-08-18T03:52:56.936277373Z'
+                  metadata:
+                    sku: IPHONE20
+                  ewallet:
+                    channel_code: SHOPEEPAY
+                    channel_properties:
+                      failure_return_url: https://your-redirect-website.com/failure
+                      success_return_url: https://your-redirect-website.com/success
+                    account:
+                      name: null
+                      account_details: null
+                      balance: null
+                      point_balance: null
+                  direct_bank_transfer: null
+                  direct_debit: null
+                  card: null
+                  over_the_counter: null
+                  qr_code: null
+                  virtual_account: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ShopeePay PH Tokenized - Create Payment Method:
+                value: "{\r\n  \"type\": \"EWALLET\",\r\n  \"reusability\": \"MULTIPLE_USE\",\r\n  \"country\": \"PH\",\r\n  \"ewallet\": {\r\n    \"channel_code\": \"SHOPEEPAY\",\r\n    \"channel_properties\": {\r\n      \"success_return_url\": \"https://your-redirect-website.com/success\",\r\n      \"failure_return_url\": \"https://your-redirect-website.com/failure\"\r\n    }\r\n  },\r\n  \"customer_id\": \"fc4123123-3c41-4707-b7b2-df9c3376edde\",\r\n  \"metadata\": {\r\n    \"sku\": \"IPHONE20\"\r\n  }\r\n}"
+              Get Linked Account:
+                value: |-
+                  {
+                      "type": "EWALLET",
+                      "reusability": "MULTIPLE_USE",
+                      "customer_id": "<customer id from step 1>",
+                      "ewallet": {
+                          "channel_code": "OVO",
+                          "channel_properties": {
+                              "success_return_url": "https://redirect.me/goodstuff",
+                              "failure_return_url": "https://redirect.me/badstuff",
+                              "cancel_return_url": "https://redirect.me/nostuff"
+                          }
+                      },
+                      "metadata": {
+                          "foo": "bar"
+                      }
+                  }
+  /v2/payment_methods/{id}/payments:
+    get:
+      tags:
+        - General
+      summary: List Payments by Payment Method ID
+      parameters:
+        - name: id
+          in: path
+          examples:
+            List Payments by Payment Method ID:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /refunds:
+    post:
+      tags:
+        - General
+      summary: Refund Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund Payment:
+                value: |-
+                  {
+                      "payment_request_id": "pr-5cb2a862-1b1e-40eb-962e-ba6309488a88"
+                  }
+  /payment_requests/{id}/captures:
+    post:
+      tags:
+        - Manual Capture
+      summary: Capture Payment - Full Amount
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Capture Payment - Full Amount:
+              value: <payment request id>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Capture Payment - Full Amount:
+                value: |-
+                  {
+                      "capture_amount": 1500,
+                      "reference_id": "capture-reference-{{$randomUUID}}"
+                  }
+    get:
+      tags:
+        - Manual Capture
+      summary: List Captures by Payment Request ID
+      parameters:
+        - name: id
+          in: path
+          examples:
+            List Captures by Payment Request ID:
+              value: <payment request id>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /v2/payment_methods/{id}/expire:
+    post:
+      tags:
+        - Payment Request
+        - Unlinking with Confirmation - TH - KTB
+      summary: Expire Payment Method
+      responses: {}
+      parameters:
+        - name: success_return_url
+          in: query
+          examples:
+            'Expire Payment Method #1':
+              value: https://your-redirect-website.com/success
+              x-disabled: false
+          schema:
+            type: string
+        - name: failure_return_url
+          in: query
+          examples:
+            'Expire Payment Method #1':
+              value: https://your-redirect-website.com/failure
+              x-disabled: false
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples:
+            Expire Payment Method:
+              value: null
+              x-disabled: false
+  /customers:
+    post:
+      tags:
+        - eWallet / Link and Pay
+        - Create Customer - Step 1
+        - Paylater
+        - Direct Debit
+        - Recurring
+      summary: Create Customer
+      description: >-
+        A customer object is required in order to link a payment method for
+        direct debit. This allows you to easily link and track payment methods
+        and transactions.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+      parameters:
+        - name: API-VERSION
+          in: header
+          examples:
+            'Create Customer #1':
+              value: '2020-10-31'
+              x-disabled: false
+          schema:
+            type: string
+        - name: api-version
+          in: header
+          examples:
+            Create Paylater Customer:
+              value: '2020-05-19'
+              x-disabled: false
+          schema:
+            type: string
+        - name: API-Version
+          in: header
+          examples:
+            Create Customer:
+              value: '2020-10-31'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'Create Customer #1':
+                value: |-
+                  {
+                      "reference_id": "{{$randomUUID}}",
+                      "mobile_number": "+628888811111",
+                      "email": "merchant@xendit.co",
+                      "type" : "INDIVIDUAL",
+                      "individual_detail": {
+                          "given_names": "Mlon Eusk"
+                          }
+                  }
+              Binding - Create Customer:
+                value: "{\n\t\"given_names\": \"postman_given_names\",\n\t\"reference_id\": \"test_customer_reference_id\",\n\t\"email\": \"testemail@email.com\"\n}"
+              Create Paylater Customer:
+                value: "{\n\t\"given_names\": \"Harry\",\n    \"surname\":\"Potter\",\n    \"email\": \"customer@domain.co\",\n    \"mobile_number\": \"+628123456789\",\n    \"reference_id\": \"Hogwarts\",\n    \"addresses\": [{\n        \"street_line1\": \"Jalan Makan\",\n        \"city\": \"Jakarta Pusat\",\n        \"province\": \"Daerah Khusus Ibukota Jakarta\",\n        \"postal_code\": \"12160\",\n            \"country\": \"ID\"\n    }]\n}"
+              ShopeePay PH Tokenized - Create Customer Copy 2:
+                value: "{\r\n\t\"reference_id\": \"mock-reference-id-{{$timestamp}}\",\r\n\t\"email\": \"testemail@email.com\",\r\n\t\"given_names\": \"John Doe\"\r\n}\r\n"
+              Create Customer:
+                value: |-
+                  {
+                      "reference_id": "demo-{{$randomUUID}}",
+                      "type": "INDIVIDUAL",
+                      "individual_detail": {
+                          "given_names": "John",
+                          "surname": "Doe"
+                      },
+                      "email": "testemail@email.com",
+                      "mobile_number": "+628774494404"
+                  }
+      x-pre-request: >-
+        // --- Binding - Create Customer ---
+
+        var uuid = require('uuid');
+
+
+        pm.environment.set("normal_customer_reference_id", "myreference-" +
+        uuid.v4());
+      x-post-response: |-
+        // --- Binding - Create Customer ---
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+
+        var jsonData = pm.response.json();
+        pm.environment.set("preparation_customer_id", jsonData.id);
+  /v2/payment_methods/{id}/auth:
+    post:
+      tags:
+        - BRI 🇮🇩 One-time or Multiple use / Link and Pay
+      summary: Confirm Linking and Payment - Validate OTP
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Confirm Linking and Payment - Validate OTP:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Confirm Linking and Payment - Validate OTP:
+                value: |-
+                  {
+                      "auth_code": "333000"
+                  }
+  /payment_requests/{id}/auth:
+    post:
+      tags:
+        - Bank Account / Link and Pay
+      summary: Confirm Payment - Validate OTP via API
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Confirm Payment - Validate OTP via API:
+              value: <payment request id>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Confirm Payment - Validate OTP via API:
+                value: |-
+                  {
+                      "auth_code": "222000"
+                  }
+  /customers/{id}:
+    get:
+      tags:
+        - eWallet / Linking Only
+      summary: Get Customer
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Customer:
+              value: ad440acd-4f97-4488-8a09-31cf4a863e96
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: API-Version
+          in: header
+          examples:
+            Get Customer:
+              value: '2020-10-31'
+              x-disabled: false
+          schema:
+            type: string
+  /v2/payment_methods/{id}/payments/simulate:
+    post:
+      tags:
+        - Virtual Account / Simulate Payments (Test/Dev Mode Only)
+      summary: Simulate Payment
+      parameters:
+        - name: id
+          in: path
+          description: Payment Method ID.
+          examples:
+            Simulate Payment:
+              value: <pm-xx>
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Simulate Payment:
+                value: |-
+                  {
+                      "amount": 100000
+                  }
+  /credit_card_charges:
+    post:
+      tags:
+        - '[DEV] Test cases'
+      summary: PROCESSOR_ERROR
+      description: >-
+        Use the [Tokenization Demo](https://js.xendit.co/test_tokenize.html) to
+        create a token & authentication ID
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            PROCESSOR_ERROR:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              PROCESSOR_ERROR:
+                value: "{\n\t\"token_id\" : \"5caf29f7d3c9b11b9fa09c96\",\n\t\"external_id\": \"card_charge-{{$timestamp}}\",\n\t\"amount\": 5003\n}"
+  /credit_card_charges/5c1106df15dcfc7bc88b6ed6/capture:
+    post:
+      tags:
+        - Authorization & Capture
+      summary: Capture Auth
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Capture Auth:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Capture Auth:
+                value: "{\n\t\"amount\": 88000\n}"
+  /credit_card_charges/5c1106df15dcfc7bc88b6ed6/auth_reversal:
+    post:
+      tags:
+        - Authorization & Capture
+      summary: Reverse Auth
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Reverse Auth:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Reverse Auth:
+                value: "{\n\t\"external_id\": \"card_revAuth-{{$timestamp}}\"\n}"
+  /credit_card_charges/5bda9c5cb53e060168464ffd/refunds:
+    post:
+      tags:
+        - Charge & Refund
+      summary: Refund Charge
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Refund Charge:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund Charge:
+                value: "{\n\t\"amount\": 100000,\n\t\"external_id\": \"card_refund-{{$timestamp}}\"\n}"
+  /credit_card_charges/{id}/refunds:
+    post:
+      tags:
+        - Charge & Refund
+      summary: Refund Charge by External ID
+      responses:
+        '200':
+          description: OK
+          headers:
+            connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            content-encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            content-length:
+              schema:
+                type: string
+                examples:
+                  - '209'
+            content-type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            date:
+              schema:
+                type: string
+                examples:
+                  - Thu, 06 Dec 2018 04:22:17 GMT
+            etag:
+              schema:
+                type: string
+                examples:
+                  - W/"120-MYnlD0mZF1+DZ4cLdXbYdn3X8Hw"
+            server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            x-powered-by:
+              schema:
+                type: string
+                examples:
+                  - Express
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  updated: '2018-12-06T04:22:11.978Z'
+                  created: '2018-12-06T04:22:11.801Z'
+                  credit_card_charge_id: 5c07580018a17323d667af55
+                  user_id: 5c04a792a4d5492fc034ac42
+                  amount: 100
+                  external_id: card_refund-1544070137
+                  status: PENDING
+                  id: 5c08a3f3ae343910b2835b59
+                  fee_refund_amount: 3
+      parameters:
+        - name: id_type
+          in: query
+          examples:
+            Refund Charge by External ID:
+              value: external
+              x-disabled: false
+          schema:
+            type: string
+        - name: id
+          in: path
+          examples:
+            Refund Charge by External ID:
+              value: card_charge-1543985147
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Refund Charge by External ID:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund Charge by External ID:
+                value: "{\n\t\"amount\": 100000,\n\t\"external_id\": \"card_refund-{{$timestamp}}\"\n}"
+  /credit_card_charges/{credit_card_charge_id}:
+    get:
+      tags:
+        - Charge & Refund
+      summary: Get Charge
+      responses:
+        '200':
+          description: OK
+          headers:
+            connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            content-encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            content-length:
+              schema:
+                type: string
+                examples:
+                  - '321'
+            content-type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            date:
+              schema:
+                type: string
+                examples:
+                  - Thu, 06 Dec 2018 04:18:12 GMT
+            etag:
+              schema:
+                type: string
+                examples:
+                  - W/"1d4-rZZpRTVEIvQw7sTh4K1Kq9ryIKw"
+            server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            x-powered-by:
+              schema:
+                type: string
+                examples:
+                  - Express
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  created: '2018-12-05T04:45:52.020Z'
+                  business_id: 5c04a792a4d5492fc034ac42
+                  authorized_amount: 8000
+                  external_id: card_charge-1543985147
+                  merchant_id: xendit
+                  merchant_reference_code: 5c0757dd18a17323d667af4e
+                  masked_card_number: 400000XXXXXX0002
+                  charge_type: SINGLE_USE_TOKEN
+                  card_brand: VISA
+                  card_type: CREDIT
+                  bank_reconciliation_id: '5439851446196244203010'
+                  status: CAPTURED
+                  eci: '05'
+                  capture_amount: 8000
+                  id: 5c07580018a17323d667af55
+      parameters:
+        - name: id_type
+          in: query
+          examples:
+            Get Charge by External ID:
+              value: external
+              x-disabled: false
+          schema:
+            type: string
+        - name: credit_card_charge_id
+          in: path
+          examples:
+            Get Charge by External ID:
+              value: test-123
+              x-disabled: false
+            Get Charge:
+              value: 5c11060415dcfc7bc88b6eca
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Charge:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Charge:
+                value: ''
+  /ewallets/charges:
+    post:
+      tags:
+        - Charge & Check Charge Status
+      summary: Create GrabPay Tokenized eWallet Charge
+      description: >-
+        This API will allow you to charge Grabpay eWallet using tokens in
+        Philippines through Xendit.
+
+
+        Account linking has to be performed before using this endpoint to make a
+        tokenized payment. It will accept order information such as
+        `reference_id`, `amount`, `payment_method_id` and will produce
+        `is_redirect_required` = `false`. 
+
+
+        A webhook or callback will be sent to your system after payment has been
+        completed or failed. 
+
+
+        Learn more about eWallet API in [Xendit API
+        Reference](https://developers.xendit.co/api-reference/#create-ewallet-charge)
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: ewc_532as23lew2321id
+                  business_id: 5easfnn23aadlmnaa42
+                  reference_id: test_reference_id
+                  status: PENDING
+                  currency: PHP
+                  charge_amount: 25000
+                  capture_amount: 25000
+                  refunded_amount: null
+                  checkout_method: TOKENIZED_PAYMENT
+                  channel_code: PH_GRABPAY
+                  channel_properties: null
+                  actions: null
+                  is_redirect_required: false
+                  callback_url: https://webhook.me/gethooked
+                  created: '2020-04-20T16:23:52Z'
+                  updated: '2020-04-20T16:23:52Z'
+                  void_status: null
+                  voided_at: null
+                  capture_now: true
+                  customer_id: fea3b000-f9dc-41c5-9bfc-fdrui2b0d84d
+                  payment_method_id: pm-fea3b000-f9dc-41c5-9bfc-fdrui2b0d84d
+                  failure_code: null
+                  basket: null
+                  metadata:
+                    branch_code: QUEZON
+                    branch_city: MANILA
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create GrabPay Tokenized eWallet Charge:
+                value: |
+                  {
+                      "reference_id" : "test_reference_id",
+                      "currency" : "PHP",
+                      "amount" : 25000,
+                      "checkout_method" : "TOKENIZED_PAYMENT",
+                      "payment_method_id" : "pm-fea3b000-f9dc-41c5-9bfc-fdrui2b0d84d",
+                      "metadata" : 
+                          {
+                          "branch_code" : "QUEZON",
+                          "branch_city" : "MANILA"    
+                          }
+                      }
+  /ewallets/charges/{charge_id}:
+    get:
+      tags:
+        - Charge & Check Charge Status
+      summary: Get Charge Status
+      description: >-
+        Get Charge Status allow you to retrive charges you have made via Charge
+        ID
+
+        You'll need to save Charge ID from POST eWallet API response
+
+
+        Learn more about eWallet API in [Xendit API
+        Reference](https://developers.xendit.co/api-reference/#get-ewallet-charge-status)
+      parameters:
+        - name: charge_id
+          in: path
+          examples:
+            Get Charge Status:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /:
+    post:
+      tags:
+        - Void and Refund
+      summary: Sample refund notification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Sample refund notification:
+                value: "{\r\n  \"event\": \"ewallet.refund\",\r\n  \"business_id\": \"5abe2389ewpejrt238\",\r\n  \"created\": \"2020-04-20T16:25:52Z\",\r\n  \"data\": {\r\n    \"id\": \"ewr_532as23lew2321id\",\r\n    \"charge_id\": \"ewc_5easfnn23aadlmnaa42\",\r\n    \"status\": \"SUCCEEDED\",\r\n    \"currency\": \"IDR\",\r\n    \"channel_code\": \"ID_DANA\",\r\n    \"capture_amount\": 123456,\r\n    \"refund_amount\": 123456,\r\n    \"reason\": \"REQUESTED_BY_CUSTOMER\",\r\n    \"failure_code\": null,\r\n    \"created\": \"2020-04-20T16:23:52Z\",\r\n    \"updated\": \"2020-04-20T16:23:52Z\"\r\n  }\r\n}"
+      servers:
+        - url: https://yourendpointhere
+        - url: https://your endpoint here
+    view:
+      tags:
+        - Recurring
+      summary: Cycle Callbacks
+      description: ''
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  created: '2022-10-01T12:37:08.251Z'
+                  business_id: 62440e322008e87fb29c1fd0
+                  event: recurring.cycle.failed
+                  data:
+                    id: recy-239c16f4-866d-43e8-9341-7badafbc019f
+                    reference_id: test_reference_id
+                    customer_id: cust-239c16f4-866d-43e8-9341-7badafbc019f
+                    recurring_action: PAYMENT
+                    type: SCHEDULED
+                    cycle_number: 1
+                    attempt_count: 1
+                    attempt_details:
+                      - attempt_number: 1
+                        created: '2020-04-21T16:23:52Z'
+                        action_id: ewc-239c16f4-866d-43e8-9341-7badafbc019f
+                        status: FAILED
+                        Failure_code: INSUFFICIENT_BALANCE
+                        next_retry_timestamp: null
+                    status: FAILED
+                    scheduled_timestamp: '2020-12-20T16:23:52Z'
+                    created: '2020-11-20T16:23:52Z'
+                    updated: '2020-11-20T16:23:52Z'
+                    currency: IDR
+                    amount: 13579
+                    metadata: null
+                  api_version: v1
+      parameters: []
+      x-postman-folder-segments:
+        - Recurring
+      x-postman-example-name: Cycle Callbacks
+  /ewallets/charges/{id}/void:
+    post:
+      tags:
+        - Void and Refund
+      summary: Void charge
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: ewc_532as23lew2321id
+                  business_id: 5easfnn23aadlmnaa42
+                  reference_id: test_reference_id
+                  status: SUCCEEDED
+                  currency: IDR
+                  charge_amount: 123456
+                  capture_amount: 123456
+                  refunded_amount: null
+                  checkout_method: ONE_TIME_PAYMENT
+                  channel_code: ID_DANA
+                  channel_properties:
+                    mobile_number: '+6287777771111'
+                  actions: null
+                  is_redirect_required: false
+                  callback_url: https://webhook.me/gethooked
+                  created: '2020-04-20T16:23:52Z'
+                  updated: '2020-04-20T16:23:52Z'
+                  void_status: PENDING
+                  voided_at: null
+                  capture_now: true
+                  customer_id: null
+                  payment_method_id: null
+                  failure_code: null
+                  basket: null
+                  metadata:
+                    branch_code: senayan_372
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Void charge:
+                value: ''
+    get:
+      tags:
+        - Void and Refund
+      summary: Get void status
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  event: ewallet.void
+                  business_id: 5abe2389ewpejrt238
+                  created: '2020-04-20T16:25:52Z'
+                  data:
+                    id: ewc_532as23lew2321id
+                    reference_id: test_reference_id
+                    status: VOIDED
+                    currency: IDR
+                    checkout_method: ONE_TIME_PAYMENT
+                    charge_amount: 123456
+                    capture_amount: 123456
+                    refunded_amount: null
+                    channel_code: ID_DANA
+                    channel_properties:
+                      mobile_number: '+6287777771111'
+                    actions: null
+                    is_redirect_required: false
+                    callback_url: https://webhook.me/gethooked
+                    created: '2020-04-20T16:23:52Z'
+                    updated: '2020-04-20T16:23:52Z'
+                    void_status: SUCCEEDED
+                    voided_at: '2020-04-20T23:24:30Z'
+                    capture_now: true
+                    customer_id: null
+                    payment_method_id: null
+                    failure_code: null
+                    basket: null
+                    metadata:
+                      branch_code: senayan_372
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get void status:
+                value: ''
+  /ewallets/charges/{id}/refunds:
+    post:
+      tags:
+        - Void and Refund
+      summary: Refund charge
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: ewr_532as23lew2321id
+                  charge_id: 5easfnn23aadlmnaa42
+                  status: PENDING
+                  currency: IDR
+                  channel_code: ID_DANA
+                  capture_amount: 123456
+                  refund_amount: 123456
+                  reason: REQUESTED_BY_CUSTOMER
+                  failure_code: null
+                  created: '2020-04-20T16:23:52Z'
+                  updated: '2020-04-20T16:23:52Z'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund charge:
+                value: ''
+    get:
+      tags:
+        - Void and Refund
+      summary: Get list of refunds
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  data:
+                    - id: ewr_532as23lew2321id
+                      charge_id: ewc_5easfnn23aadlmnaa42
+                      status: SUCCEEDED
+                      currency: IDR
+                      channel_code: ID_DANA
+                      capture_amount: 123456
+                      refund_amount: 100000
+                      reason: REQUESTED_BY_CUSTOMER
+                      failure_code: null
+                      created: '2020-04-20T16:23:52Z'
+                      updated: '2020-04-20T16:23:52Z'
+                    - id: ewr_532as23lew2321id
+                      charge_id: 5easfnn23aadlmnaa42
+                      status: SUCCEEDED
+                      currency: IDR
+                      channel_code: ID_DANA
+                      capture_amount: 123456
+                      refund_amount: 23456
+                      reason: OTHER
+                      failure_code: null
+                      created: '2020-04-20T16:23:52Z'
+                      updated: '2020-04-20T16:23:52Z'
+                  has_more: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get list of refunds:
+                value: ''
+  /ewallets/charges/{charge_id}/refunds/{refund_id}:
+    get:
+      tags:
+        - Void and Refund
+      summary: Get refund status
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: ewr_532as23lew2321id
+                  charge_id: 5easfnn23aadlmnaa42
+                  status: SUCCEEDED
+                  currency: IDR
+                  channel_code: ID_DANA
+                  capture_amount: 123456
+                  refund_amount: 100000
+                  reason: REQUESTED_BY_CUSTOMER
+                  failure_code: null
+                  created: '2020-04-20T16:23:52Z'
+                  updated: '2020-04-20T16:23:52Z'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get refund status:
+                value: ''
+  /paylater/plans:
+    post:
+      tags:
+        - Initiate Paylater Plans
+      summary: Initiate INDODANA plans
+      responses:
+        '201':
+          description: Created
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store, no-cache, must-revalidate, proxy-revalidate
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Wed, 16 Mar 2022 07:27:31 GMT
+            Etag:
+              schema:
+                type: string
+                examples:
+                  - W/"3ff-+XxnHseod7r7iD8k8FBheBaytaQ"
+            Expires:
+              schema:
+                type: string
+                examples:
+                  - '0'
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Request-Id:
+              schema:
+                type: string
+                examples:
+                  - '4792986326874107084'
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=2592000; includeSubDomains
+            Surrogate-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store
+            Vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            X-CDN:
+              schema:
+                type: string
+                examples:
+                  - Imperva
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            X-Iinfo:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    12-73434067-73206155 sNYN RT(1647415572044 77967) q(0 0 0
+                    -1) r(14 14) U6
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: plp_2dfb7baf-3831-451a-aae1-c38f032f9f0c
+                  customer_id: cc564259-ab7f-4dc8-9d5b-12f2f466d40b
+                  channel_code: ID_INDODANA
+                  currency: IDR
+                  amount: 500000
+                  order_items:
+                    - type: DIGITAL_PRODUCT
+                      reference_id: SKU_1323
+                      name: Potion ebooks
+                      net_unit_amount: 500000
+                      quantity: 1
+                      url: https://www.zngmyhome.com/ebooks
+                      category: Classes
+                      subcategory: null
+                      description: null
+                      metadata: null
+                  options:
+                    - downpayment_amount: 0
+                      installment_amount: 505000
+                      interest_rate: 0
+                      total_amount: 505000
+                      interval: MONTH
+                      interval_count: 1
+                      total_recurrence: 1
+                      description: Bayar dalam 30 hari
+                    - downpayment_amount: 0
+                      installment_amount: 184000
+                      interest_rate: 3
+                      total_amount: 552000
+                      interval: MONTH
+                      interval_count: 1
+                      total_recurrence: 3
+                      description: Bayar dalam 3 bulan
+                    - downpayment_amount: 0
+                      installment_amount: 100000
+                      interest_rate: 3
+                      total_amount: 600000
+                      interval: MONTH
+                      interval_count: 1
+                      total_recurrence: 6
+                      description: Bayar dalam 6 bulan
+                  created: '2022-03-16T07:27:31.627Z'
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Initiate INDODANA plans:
+                value: |-
+                  {
+                      "customer_id": "cc564259-ab7f-4dc8-9d5b-12f2f466d40b",
+                      "channel_code": "ID_INDODANA",
+                      "currency": "IDR",
+                      "amount": 500000,
+                      "order_items": [{
+                          "type": "DIGITAL_PRODUCT",
+                          "reference_id": "SKU_1323",
+                          "name": "Potion ebooks",
+                          "net_unit_amount": 500000,
+                          "quantity": 1,
+                          "url": "https://www.zngmyhome.com/ebooks",
+                          "category": "Classes"
+                      }]
+                  }
+  /paylater/charges:
+    post:
+      tags:
+        - Create Paylater Transactions
+      summary: Create INDODANA Charge
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store, no-cache, must-revalidate, proxy-revalidate
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json; charset=utf-8
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Wed, 16 Mar 2022 07:30:06 GMT
+            Etag:
+              schema:
+                type: string
+                examples:
+                  - W/"631-GaoxugrELZjAqNcHtANO9vB8YfE"
+            Expires:
+              schema:
+                type: string
+                examples:
+                  - '0'
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Request-Id:
+              schema:
+                type: string
+                examples:
+                  - '7486632352886213079'
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=2592000; includeSubDomains
+            Surrogate-Control:
+              schema:
+                type: string
+                examples:
+                  - no-store
+            Vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            X-CDN:
+              schema:
+                type: string
+                examples:
+                  - Imperva
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            X-Iinfo:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    12-73434067-73206155 pNYN RT(1647415572044 231850) q(0 0 0
+                    -1) r(19 19) U6
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: plc_ffc4d4a2-6790-48f8-b316-958cef672651
+                  business_id: 603f1c4172bbe840979fd408
+                  reference_id: order_id_234
+                  customer_id: cc564259-ab7f-4dc8-9d5b-12f2f466d40b
+                  plan_id: plp_2dfb7baf-3831-451a-aae1-c38f032f9f0c
+                  currency: IDR
+                  amount: 500000
+                  channel_code: ID_INDODANA
+                  checkout_method: ONE_TIME_PAYMENT
+                  status: PENDING
+                  actions:
+                    desktop_web_checkout_url: >-
+                      https://indodana.id/product-installment/payment?purchaseTransactionId=e6877934-a4fa-11ec-a02b-1f5a649c9ac2&pid=Xendit&c=checkout&utm_source=Xendit&utm_campaign=Xendit
+                    mobile_web_checkout_url: >-
+                      https://indodana.id/product-installment/payment?purchaseTransactionId=e6877934-a4fa-11ec-a02b-1f5a649c9ac2&pid=Xendit&c=checkout&utm_source=Xendit&utm_campaign=Xendit
+                    mobile_deeplink_checkout_url: >-
+                      https://indodana.id/product-installment/payment?purchaseTransactionId=e6877934-a4fa-11ec-a02b-1f5a649c9ac2&pid=Xendit&c=checkout&utm_source=Xendit&utm_campaign=Xendit
+                  success_redirect_url: https://google.com
+                  failure_redirect_url: https://twitter.com
+                  callback_url: '{{vault:zapier-webhook-url}}'
+                  created: '2022-03-16T07:30:05.322Z'
+                  updated: '2022-03-16T07:30:05.916Z'
+                  order_items:
+                    - type: DIGITAL_PRODUCT
+                      reference_id: SKU_1323
+                      name: Potion ebooks
+                      net_unit_amount: 500000
+                      quantity: 1
+                      url: https://www.zngmyhome.com/ebooks
+                      category: Classes
+                      subcategory: null
+                      description: null
+                      metadata: null
+                  voided_at: null
+                  payment_method_id: null
+                  metadata: null
+                  channel_reference: a3ce1a23-3565-4e07-8ed8-f5246e114988
+                  valid_until: '2022-03-17T07:30:05.322Z'
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create INDODANA Charge:
+                value: |-
+                  {
+                      "plan_id": "plp_2dfb7baf-3831-451a-aae1-c38f032f9f0c",
+                      "reference_id": "order_id_234",
+                      "checkout_method": "ONE_TIME_PAYMENT",
+                      "success_redirect_url": "https://google.com",
+                      "failure_redirect_url": "https://twitter.com"
+                  }
+  /paylater/charges/{charge-id-plc-format}:
+    get:
+      tags:
+        - Create Paylater Transactions
+      summary: GET Paylater Charge by ID
+  /paylater/charges/{id-plc-format}/refunds:
+    post:
+      tags:
+        - Paylater
+      summary: Create Paylater Cancel
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Paylater Cancel:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /paylater/charges/{refund_id_plc_format}/refunds/:
+    get:
+      tags:
+        - Refunds
+      summary: List Paylater Refunds
+      responses: {}
+  /qr_codes:
+    post:
+      tags:
+        - QR Codes
+      summary: Sample Payment Notification from Xendit
+      parameters:
+        - name: api-version
+          in: header
+          examples:
+            Sample Payment Notification from Xendit:
+              value: '2022-07-31'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Sample Payment Notification from Xendit:
+                value: |-
+                  {
+                  "event": "qr.payment",
+                  "api_version": "2022-07-31",
+                  "business_id": "603f1c4172bbe840979fd000",
+                  "created": "2022-07-15T09:58:43.60445Z",
+                  "data": 
+                      {
+                      "id": "qrpy_8182837te-87st-49ing-8696-1239bd4d759c",
+                      "business_id": "603f1c4172bbe840979fd000",
+                      "currency": "IDR",
+                      "amount": 100000,
+                      "status": "SUCCEEDED",
+                      "created": "2022-07-15T09:56:43.60445Z",
+                      "qr_id": "qr_8182837te-87st-49ing-8696-1239bd4d759c",
+                      "qr_string": "0002010102##########CO.XENDIT.WWW011893600#######14220002152#####414220010303TTT####015CO.XENDIT.WWW02180000000000000000000TTT52045######ID5911XenditQRIS6007Jakarta6105121606##########3k1mOnF73h11111111#3k1mOnF73h6v53033605401163040BDB",
+                      "reference_id": "order-id-1655287002",
+                      "type": "DYNAMIC",
+                      "channel_code": "ID_DANA",
+                      "expires_at": "2022-10-30T009:56:43.60445Z",
+                      },
+                  "basket":  null,
+                  "metadata": null,
+                  "payment_detail": 
+                      {
+                      "receipt_id": "000111666",
+                      "source": "GOPAY",
+                      "name": null,
+                      "account_details": null
+                      }
+                  }
+  /qr_codes/qr_61cb3576-3a25-4d35-8d15-0e8e3bdba4f2:
+    get:
+      tags:
+        - QR Codes
+      summary: Get QR Code by QR ID
+      responses:
+        default:
+          description: Default response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  reference_id: order-id-1666420204
+                  type: DYNAMIC
+                  currency: IDR
+                  channel_code: ID_DANA
+                  amount: 10000
+                  expires_at: '2022-10-23T09:56:43.60445Z'
+                  description: ''
+                  metadata: null
+                  business_id: 58cd618ba0464eb64acdb246
+                  created: '2022-10-22T06:30:05.86474Z'
+                  updated: '2022-10-22T06:30:05.86474Z'
+                  qr_string: >-
+                    0002010102##########CO.XENDIT.WWW011893600#######14220002152#####414220010303TTT####015CO.XENDIT.WWW02180000000000000000000TTT52045######ID5911XenditQRIS6007Jakarta6105121606##########3k1mOnF73h11111111#3k1mOnF73h6v53033605401163040BDB
+                  status: ACTIVE
+                  id: qr_61cb3576-3a25-4d35-8d15-0e8e3bdba4f2
+      parameters:
+        - name: api-version
+          in: header
+          examples:
+            Get QR Code by QR ID:
+              value: '2022-07-31'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get QR Code by QR ID:
+                value: ''
+  /qr_codes/qr_61cb3576-3a25-4d35-8d15-0e8e3bdba4f2/payments:
+    get:
+      tags:
+        - QR Codes
+      summary: Get List of QR Payments by QR ID
+      responses:
+        default:
+          description: Default response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  rawContent: |
+                    {
+                       "has_more": false,
+                       "data": [{
+                          "id": "qrpy_8182837te-87st-49ing-8696-1239bd4d759c",
+                          "business_id": "603f1c4172bbe840979fd000",
+                          "currency": "IDR",
+                          "amount": 100000,
+                          "status": "SUCCEEDED",
+                          "created": "2022-07-15T09:56:43.60445Z",
+                          "qr_id": "qr_8182837te-87st-49ing-8696-1239bd4d759c",
+                          "qr_string": "0002010102##########CO.XENDIT.WWW011893600#######14220002152#####414220010303TTT####015CO.XENDIT.WWW02180000000000000000000TTT52045######ID5911XenditQRIS6007Jakarta6105121606##########3k1mOnF73h11111111#3k1mOnF73h6v53033605401163040BDB",
+                          "reference_id": "order-id-1655287002",
+                          "type": "STATIC",
+                          "channel_code": "ID_DANA",
+                          "expires_at": null,
+                          },
+                       "basket":  null,
+                       "metadata": null,
+                       "payment_detail": {
+                          "receipt_id": "000111666",
+                          "source": "GOPAY",
+                          "name": null,
+                          "account_details": null
+                          }
+                       },
+                       {
+                          "id": "qrpy_8182837te-87st-49ing-8696-1229bd22222",
+                          "business_id": "603f1c4172bbe840979fd000",
+                          "currency": "IDR",
+                          "amount": 200000,
+                          "status": "SUCCEEDED",
+                          "created": "2022-07-16T09:56:43.60445Z",
+                          "qr_id": "qr_8182837te-87st-49ing-8696-1239bd4d759c",
+                          "qr_string": "0002010102##########CO.XENDIT.WWW011893600#######14220002152#####41422001030
+                          3TTT####015CO.XENDIT.WWW02180000000000000000000TTT52045######ID5911XenditQRIS6007Jakarta
+                          6105121606##########3k1mOnF73h11111111#3k1mOnF73h6v53033605401163040BDB",
+                          "reference_id": "order-id-1655287002",
+                          "type": "STATIC",
+                          "channel_code": "ID_DANA",
+                          "expires_at": null,
+                          },
+                       "basket":  null,
+                       "metadata": null,
+                       "payment_detail": {
+                          "receipt_id": "120318666",
+                          "source": "GOPAY",
+                          "name": null,
+                          "account_details": null
+                          }]
+                    }
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get List of QR Payments by QR ID:
+                value: ''
+  /qr_codes/order-id-1666420204/payments/simulate:
+    post:
+      tags:
+        - QR Codes
+      summary: Simulate QR Payments (Test Mode)
+      responses:
+        default:
+          description: Default response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: qrpy_c3e17e89-a27a-45e3-849b-83831c7d179d
+                  amount: 10000
+                  status: COMPLETED
+                  qr_code:
+                    id: qr_61cb3576-3a25-4d35-8d15-0e8e3bdba4f2
+                    external_id: order-id-1666420204
+                    qr_string: some-random-qr-string
+                    type: DYNAMIC
+                    metadata: null
+                  created: '2022-10-22T06:51:58.121993Z'
+                  payment_details:
+                    receipt_id: null
+                    source: null
+  /qr_codes/payments/{qrpy_id}/refunds:
+    post:
+      tags:
+        - QR Codes
+      summary: Sample Refund Notification from Xendit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Sample Refund Notification from Xendit:
+                value: |
+                  {
+                      "event": "qr.refund",
+                      "api_version": null,
+                      "business_id": "603f1c4172bbe840979fd000",
+                      "created": "2022-07-15T09:58:43.60445Z",
+                      "data": {
+                          "id": "qrrf_52b86306-7464-4fe2-8f98-967ca603f90a",
+                          "qrpy_id": "qrpy_319f4504-867f-45bc-aec4-8ac64fb6be78",
+                          "status": "SUCCEEDED",
+                          "currency": "IDR",
+                          "payment_amount": 100000,
+                          "refund_amount": 50000,
+                          "channel_code": "ID_DANA",
+                          "reason": "REQUESTED_BY_CUSTOMER",
+                          "failure_code": null,
+                          "created": "2022-07-15T09:56:43.60445Z",
+                          "updated": "2022-07-15T09:57:43.60445Z",
+                          "refunded_at": "2022-07-15T09:57:43.60445Z"
+                      }
+                  }
+    get:
+      tags:
+        - QR Codes
+      summary: List QR Refunds by QR Payment ID
+      responses:
+        default:
+          description: Default response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  has_more: false
+                  data:
+                    - id: qrrf_52b86306-7464-4fe2-8f98-967ca603f90a
+                      qrpy_id: qrpy_319f4504-867f-45bc-aec4-8ac64fb6be78
+                      status: SUCCEEDED
+                      currency: IDR
+                      payment_amount: 100000
+                      refund_amount: 50000
+                      channel_code: ID_DANA
+                      reason: REQUESTED_BY_CUSTOMER
+                      failure_code: null
+                      created: '2022-07-15T09:56:43.60445Z'
+                      updated: '2022-07-15T09:56:43.60445Z'
+                      refunded_at: '2022-07-15T09:57:43.60445Z'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              List QR Refunds by QR Payment ID:
+                value: ''
+  /qr_codes/payments/{qrpy_id}/refunds/{refund_id}:
+    get:
+      tags:
+        - QR Codes
+      summary: Get QR Refund by Refund ID
+      responses:
+        default:
+          description: Default response
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: qrrf_52b86306-7464-4fe2-8f98-967ca603f90a
+                  qrpy_id: qrpy_319f4504-867f-45bc-aec4-8ac64fb6be78
+                  status: SUCCEEDED
+                  currency: IDR
+                  payment_amount: 100000
+                  refund_amount: 50000
+                  channel_code: ID_DANA
+                  reason: REQUESTED_BY_CUSTOMER
+                  failure_code: null
+                  created: '2022-07-15T09:56:43.60445Z'
+                  updated: '2022-07-15T09:56:43.60445Z'
+                  refunded_at: '2022-07-15T09:57:43.60445Z'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get QR Refund by Refund ID:
+                value: ''
+  /linked_account_tokens/auth:
+    post:
+      tags:
+        - Direct Debit
+      summary: Binding - Initiate Account Authorization
+      description: >-
+        Account linking is required before performing direct debits. 
+
+
+        Account authorizations are represented by linked account tokens. This
+        endpoint initializes the authorization process and linked account token
+        creation.
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  customer_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  channel_code: <string>
+                  status: <string>
+                  type: <string>
+                  authorizer_url: <string>
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Binding - Initiate Account Authorization:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      x-pre-request: |-
+        function generateValidCardExpiry() {
+            const currentDate = new Date();
+            currentDate.setFullYear(currentDate.getFullYear() + 1)
+
+            const formattedMonth = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            const formattedYear = currentDate.getFullYear().toString().substr(2,2);    
+            
+            return `${formattedMonth}/${formattedYear}`
+        }
+
+        pm.environment.set("valid_card_expiry", generateValidCardExpiry());
+      x-post-response: |-
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+
+        var jsonData = pm.response.json();
+        pm.environment.set("normal_linked_account_token_id", jsonData.id);
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Binding - Initiate Account Authorization:
+                value: "{\n    \"customer_id\": \"test_customer_reference_id\",\n    \"channel_code\": \"DC_BRI\",\n    \"properties\": {\n\t    \"account_mobile_number\": \"+6287779944444\",\n\t    \"card_last_four\": \"8888\",\n\t    \"card_expiry\": \"11/23\",\n\t    \"account_email\": \"test.email@xendit.co\"\n    }\n}"
+  /linked_account_tokens/{linked_account_token_id}/validate_otp:
+    post:
+      tags:
+        - Direct Debit
+      summary: Binding - Validate OTP for Linked Account Token
+      description: >-
+        Account linking for BRI requires an OTP to proceed.
+
+
+        Upon successful initialization, the bank will send an OTP to the
+        customer's registered mobile number directly. This endpoint validates
+        the OTP with the bank.
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  customer_id: d290f1ee-6c54-4b01-90e6-d701748f0851
+                  channel_code: <string>
+                  status: <string>
+                  type: <string>
+                  authorizer_url: <string>
+      parameters:
+        - name: linked_account_token_id
+          in: path
+          examples:
+            Binding - Validate OTP for Linked Account Token:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Binding - Validate OTP for Linked Account Token:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      x-pre-request: |-
+        function generateValidCardExpiry() {
+            const currentDate = new Date();
+            currentDate.setFullYear(currentDate.getFullYear() + 1)
+
+            const formattedMonth = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            const formattedYear = currentDate.getFullYear().toString().substr(2,2);    
+            
+            return `${formattedMonth}/${formattedYear}`
+        }
+
+        pm.environment.set("valid_card_expiry", generateValidCardExpiry());
+      x-post-response: |-
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Binding - Validate OTP for Linked Account Token:
+                value: |-
+                  {
+                      "otp_code": "460046"
+                  }
+  /linked_account_tokens/{linked_account_token_id}/accounts:
+    get:
+      tags:
+        - Direct Debit
+      summary: Binding - Retreive Accessible Accounts Copy
+      description: >-
+        This endpoint returns a list of bank accounts accessible by the linked
+        account token. The response information from this endpoint is required
+        for creation of payment method.
+
+
+        For BPI, it is possible to have more than one accessible account.
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  - id: la-aa620619-124f-41db-995b-66a52abe036a
+                    channel_code: DC_BRI
+                    type: DEBIT_CARD
+                    properties:
+                      card_last_four: '1234'
+                      card_expiry: 06/24
+                      currency: IDR
+                      description: ''
+      parameters:
+        - name: linked_account_token_id
+          in: path
+          examples:
+            Binding - Retreive Accessible Accounts Copy:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Binding - Retreive Accessible Accounts Copy:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      x-post-response: |-
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+
+        var jsonData = pm.response.json();
+        pm.environment.set("preparation_debit_card_account_id", jsonData[0].id);
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Binding - Retreive Accessible Accounts Copy:
+                value: ''
+  /payment_methods:
+    post:
+      tags:
+        - Direct Debit
+      summary: Binding - Create Payment Method
+      description: >-
+        Payment methods enable you to abstract sources of funds and use them for
+        making direct debit payments or recurring payments. Currently, only
+        supports linked accounts.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+      x-post-response: |-
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+
+        pm.test("ACTIVE", function () {
+            var jsonData = pm.response.json();
+            
+            pm.expect(jsonData.status).to.eql('ACTIVE');
+        });
+
+
+        var jsonData = pm.response.json();
+        pm.environment.set("debit_card_payment_method_id", jsonData.id);
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Binding - Create Payment Method:
+                value: "{\n\t\"customer_id\": \"test_customer_reference_id\",\n\t\"type\": \"DEBIT_CARD\",\n\t\"properties\": {\n\t\t\"id\": \"[linked account id from GET - prefix la-XXXX]\"\n\t}\n}"
+  /direct_debits:
+    post:
+      tags:
+        - Direct Debit
+      summary: Payment - One Time Payment w OTP
+      description: >-
+        Create a single debit to pull funds from the end customer's account
+        using an active payment method.
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json: {}
+      parameters:
+        - name: idempotency-key
+          in: header
+          examples:
+            Payment - One Time Payment w OTP:
+              value: '{{normal_direct_debit_reference_id}}'
+              x-disabled: false
+          schema:
+            type: string
+      x-pre-request: >-
+        var uuid = require('uuid');
+
+
+        pm.environment.set("normal_direct_debit_reference_id", "payment-" +
+        uuid.v4());
+      x-post-response: >-
+        pm.test("Status code is 202", function () {
+            pm.response.to.have.status(202);
+        });
+
+
+        pm.test("PENDING status", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.status).to.eql('PENDING');
+        });
+
+
+        pm.test("OTP required", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.is_otp_required).to.eql(true);
+        });
+
+
+        var jsonData = pm.response.json();
+
+        pm.environment.set("dd_payment_with_otp", jsonData.id);
+
+        pm.environment.set("dd_payment_with_otp_reference_id",
+        pm.environment.get('normal_direct_debit_reference_id'));
+
+        pm.environment.set("dd_payment_with_otp_amount", jsonData.amount);
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Payment - One Time Payment w OTP:
+                value: |-
+                  {
+                      "reference_id": "{{normal_direct_debit_reference_id}}",
+                      "payment_method_id": "{{debit_card_payment_method_id}}",
+                      "currency": "IDR",
+                      "amount": 1688,
+                      "enable_otp": true,
+                      "callback_url": "https://yourwebhooksite"
+                  }
+  /direct_debits/{direct_debit_id}/validate_otp:
+    post:
+      tags:
+        - Direct Debit
+      summary: Payment - Validate OTP (One Time Payment w OTP)
+      description: >-
+        Validate the OTP provided by end customer via this endpoint to complete
+        the transaction when OTP is enabled.
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json: {}
+      parameters:
+        - name: direct_debit_id
+          in: path
+          examples:
+            Payment - Validate OTP (One Time Payment w OTP):
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      x-post-response: >-
+        pm.test("Status code is 202", function () {
+            pm.response.to.have.status(202);
+        });
+
+
+        pm.test("PENDING status", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.status).to.eql('PENDING');
+        });
+
+
+        pm.test("OTP required", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.is_otp_required).to.eql(true);
+        });
+
+
+        pm.test("Same reference ID", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.reference_id).to.eql(pm.environment.get('dd_payment_with_otp_reference_id'));
+        });
+
+
+
+        var jsonData = pm.response.json();
+
+        pm.environment.set("dd_payment_with_otp", jsonData.id);
+
+        pm.environment.set("dd_payment_with_otp_reference_id",
+        jsonData.reference_id);
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Payment - Validate OTP (One Time Payment w OTP):
+                value: "{\n\t\"otp_code\": \"222333\"\n}"
+  /recurring_payments:
+    post:
+      tags:
+        - Direct Debit
+        - xenPlatform
+      summary: Payment - Recurring Payments
+      description: >-
+        Recurring payments allow you to use the auto debit feature in direct
+        debit to pull funds from your customers bank account on a scheduled
+        basis.
+
+
+        Currently only supported for BRI Direct Debit.
+
+
+        You may also create a Recurring payment request on behalf of your
+        sub-accounts.
+
+
+        The value in this field should include the full `user_id` of a
+        sub-account that has previously been created by you.
+
+
+        This example demonstrates how to create a disbursement for a sub-account
+        using the Create Recurring Payment API.
+
+
+        Note that for the Create Recurring Payment API, the response will
+        provide you with a confirmation that the invoice was created for the
+        correct sub-account `user_id`.
+
+
+        Please refer to the [Xendit API
+        reference](https://xendit.github.io/apireference/) for all supported
+        APIs.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[EXAMPLE] Create Recurring Payment for Sub-account Request':
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: for-user-id
+          in: header
+          examples:
+            '[EXAMPLE] Create Recurring Payment for Sub-account Request':
+              value: 5cafed486b901f526e2ba04c
+              x-disabled: false
+          schema:
+            type: string
+        - name: idempotency-key
+          in: header
+          examples:
+            Payment - Recurring Payments:
+              value: '{{dd_payment_with_otp_reference_id}}'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[EXAMPLE] Create Recurring Payment for Sub-account Request':
+                value: "{\n\t\"external_id\": \"recurring_on_behalf_of_Shop1\",\n\t\"payer_email\": \"john_doe@xendit.co\",\n\t\"description\": \"Please pay your monthly subscription fee\",\n\t\"amount\": 100000,\n\t\"interval\": \"MONTH\",\n\t\"interval_count\": \"1\",\n\t\"should_send_email\": true\n}"
+              Payment - Recurring Payments:
+                value: "{\n\t\"external_id\": \"albert\",\n\t\"payer_email\": \"albert@xendit.co\",\n\t\"description\": \"description\",\n\t\"payment_method_id\": \"{{debit_card_payment_method_id}}\",\n\t\"amount\": 15000,\n\t\"interval\": \"DAY\",\n\t\"interval_count\": 1\t\n}"
+      x-pre-request: >-
+        // --- Payment - Recurring Payments ---
+
+        var uuid = require('uuid');
+
+
+        pm.environment.set("normal_direct_debit_reference_id", "myreference-" +
+        uuid.v4());
+      x-post-response: |-
+        // --- Payment - Recurring Payments ---
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+
+        pm.test("PENDING status", function () {
+            var jsonData = pm.response.json();
+
+            pm.expect(jsonData.payment_method_id).to.eql(pm.environment.get('debit_card_payment_method_id'));
+        });
+
+        var jsonData = pm.response.json();
+        pm.environment.set("recurring_with_payment_method_id", jsonData.id);
+  /linked_account_tokens/{linked_account_token_id}:
+    delete:
+      tags:
+        - Direct Debit
+      summary: Binding - Unlink KTB Linked Account Token
+      description: Unlinks or unbinds a successfully linked account token.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json: {}
+      parameters:
+        - name: success_redirect_url
+          in: query
+          examples:
+            Binding - Unlink KTB Linked Account Token:
+              value: https://google.com
+              x-disabled: false
+          schema:
+            type: string
+        - name: failure_redirect_url
+          in: query
+          examples:
+            Binding - Unlink KTB Linked Account Token:
+              value: https://youtube.com
+              x-disabled: false
+          schema:
+            type: string
+        - name: linked_account_token_id
+          in: path
+          examples:
+            Binding - Unlink KTB Linked Account Token:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Binding - Unlink KTB Linked Account Token:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      x-post-response: |-
+        pm.test("Status code is 200", function () {
+            pm.response.to.have.status(200);
+        });
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Binding - Unlink KTB Linked Account Token:
+                value: ''
+  /callback_virtual_accounts/external_id=VA_fixed-1541055143/simulate_payment:
+    post:
+      tags:
+        - Virtual Accounts / Simulations (Dev)
+      summary: '[TEST] Pay FVA'
+      description: Fixed Virtual Account (FVA) payment simulation by `external_id`
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[TEST] Pay FVA':
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[TEST] Pay FVA':
+                value: "{\n\t\"amount\": 50000\n}"
+  /callback_virtual_accounts:
+    post:
+      tags:
+        - Virtual Accounts
+      summary: Create Specific FVA
+      description: >-
+        [[API Reference] - Create Fixed
+        VA](https://xendit.github.io/apireference/#create-fixed-virtual-accounts)
+
+
+        [[Xendit Docs] - Fixed Virtual
+        Accounts](https://docs.xendit.co/xenpayments/virtual-account/)
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Specific FVA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Specific FVA:
+                value: |
+                  {
+                     "external_id": "VA_fixed-{{$timestamp}}",
+                     "bank_code": "MANDIRI",
+                     "name": "Steve Wozniak",
+                     "virtual_account_number": "9999000002"
+                  }
+  /available_virtual_account_banks:
+    get:
+      tags:
+        - Virtual Accounts
+      summary: List available FVA banks
+      description: >-
+        [[API Reference] - Get banks for virtual
+        accounts](https://xendit.github.io/apireference/#get-banks-for-virtual-accounts)
+
+
+        [[Xendit Docs] - Fixed Virtual
+        Accounts](https://docs.xendit.co/xenpayments/virtual-account/)
+  /callback_virtual_accounts/{id}:
+    get:
+      tags:
+        - Virtual Accounts
+      summary: Get Virtual Account
+      description: >-
+        [[API Reference] - Get banks for virtual
+        accounts](https://xendit.github.io/apireference/#get-banks-for-virtual-accounts)
+
+
+        [[Xendit Docs] - Fixed Virtual
+        Accounts](https://docs.xendit.co/xenpayments/virtual-account/)
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Virtual Account:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+    patch:
+      tags:
+        - Virtual Accounts
+      summary: Update Virtual Account
+      description: >-
+        [[API Reference] - Create Fixed
+        VA](https://xendit.github.io/apireference/#create-fixed-virtual-accounts)
+
+
+        [[Xendit Docs] - Fixed Virtual
+        Accounts](https://docs.xendit.co/xenpayments/virtual-account/)
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Update Virtual Account:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update Virtual Account:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Virtual Account:
+                value: |
+                  {
+                     "expected_amount": "100000"
+                  }
+  /callback_virtual_account_payments/payment_id={payment_id}:
+    get:
+      tags:
+        - Virtual Accounts
+      summary: Get Virtual Account Payment
+      description: >-
+        [[API Reference] - Get banks for virtual
+        accounts](https://xendit.github.io/apireference/#get-banks-for-virtual-accounts)
+
+
+        [[Xendit Docs] - Fixed Virtual
+        Accounts](https://docs.xendit.co/xenpayments/virtual-account/)
+  /fixed_payment_code/simulate_payment:
+    post:
+      tags:
+        - Retail Outlets - ID / Simulations (Dev)
+      summary: '[TEST] Pay Indomaret FPC'
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[TEST] Pay Indomaret FPC':
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[TEST] Pay Indomaret FPC':
+                value: |-
+                  {
+                      "retail_outlet_name": "INDOMARET",
+                      "payment_code": "JOE1",
+                      "transfer_amount": 25000
+                  }
+  /fixed_payment_code:
+    post:
+      tags:
+        - Retail Outlets - ID
+      summary: Create FPC (Indomaret)
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create FPC (Indomaret):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create FPC (Indomaret):
+                value: |-
+                  {
+                      "external_id": "FPC-{{$timestamp}}",
+                      "retail_outlet_name": "INDOMARET",
+                      "name": "JOHN DOE",
+                      "expected_amount": 25000
+                  }
+  /fixed_payment_code/{fixed_payment_code_id}:
+    patch:
+      tags:
+        - Retail Outlets - ID
+      summary: Update FPC
+      parameters:
+        - name: fixed_payment_code_id
+          in: path
+          examples:
+            Update FPC:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update FPC:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update FPC:
+                value: |-
+                  {
+                      "name": "JOHN DOE2",
+                      "expected_amount": 25000
+                  }
+    get:
+      tags:
+        - Retail Outlets - ID
+      summary: Get FPC Detail
+      parameters:
+        - name: fixed_payment_code_id
+          in: path
+          examples:
+            Get FPC Detail:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get FPC Detail:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /payment_codes:
+    post:
+      tags:
+        - Retail Outlets - PH
+      summary: Create Payment Code (CEBUANA)
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Payment Code (CEBUANA):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Payment Code (CEBUANA):
+                value: |-
+                  {
+                      "reference_id": "payment-code-{{$timestamp}}",
+                      "channel_code": "CEBUANA",
+                      "customer_name": "JOHN DOE",
+                      "amount": 100,
+                      "currency": "PHP",
+                      "market": "PH"
+                  }
+  /payment_codes/{payment_code_id}:
+    patch:
+      tags:
+        - Retail Outlets - PH
+      summary: Update Payment Code
+      parameters:
+        - name: payment_code_id
+          in: path
+          examples:
+            Update Payment Code:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update Payment Code:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Payment Code:
+                value: |-
+                  {
+                      "customer_name": "JOHN DOE",
+                      "amount": 100,
+                      "currency": "PHP"
+                  }
+    get:
+      tags:
+        - Retail Outlets - PH
+      summary: Get Payment Code by ID
+      parameters:
+        - name: payment_code_id
+          in: path
+          examples:
+            Get Payment Code by ID:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Payment Code by ID:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /payment_codes/{payment_code_id}/payments:
+    get:
+      tags:
+        - Retail Outlets - PH
+      summary: Get Payments
+      parameters:
+        - name: payment_code_id
+          in: path
+          examples:
+            Get Payments:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Payments:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /v2/invoices:
+    post:
+      tags:
+        - Invoices
+        - xenPlatform
+      summary: Create Invoice w/ FVA
+      description: >-
+        [[API Reference] - Create
+        Invoice](https://xendit.github.io/apireference/#create-invoices)
+
+
+        [[Xendit Docs] - Invoices](https://docs.xendit.co/xeninvoice/)
+
+
+        Once a sub-account has been created, you may make transactions for them
+        by simply including a `for-user-id` field in the header of your request
+        to any Xendit API.
+
+
+        The value in this field should include the full `user_id` of a
+        sub-account that has previously been created by you.
+
+
+        This example demonstrates how to create an invoice for a sub-account
+        using the Create Invoice API.
+
+
+        Note that for the Create Invoice API, the response will provide you with
+        a confirmation that the invoice was created for the correct sub-account
+        `user_id`.
+
+
+        Please refer to the [Xendit API
+        reference](https://xendit.github.io/apireference/) for all supported
+        APIs.
+      responses: {}
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[EXAMPLE] Creating an Invoice for a Sub-account':
+              value: application/json
+              x-disabled: false
+            Create Invoice w/ FVA:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: for-user-id
+          in: header
+          examples:
+            '[EXAMPLE] Creating an Invoice for a Sub-account':
+              value: 5d0c9bfa72667f2212d8f602
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[EXAMPLE] Creating an Invoice for a Sub-account':
+                value: "{\n\t\"external_id\": \"invoice_on_behalf_of_shop1\",\n\t\"description\": \"For Shirt sold by Shop 1\",\n\t\"amount\": 10000,\n\t\"payer_email\": \"john_doe@xendit.co\",\n\t\"should_send_email\": true\n}"
+              Create Invoice w/ FVA:
+                value: "{\n\t\"external_id\": \"invoice_fva-{{$timestamp}}\",\n\t\"amount\": 50000,\n\t\"payer_email\": \"customer@domain.com\",\n\t\"description\": \"Invoice-{{$timestamp}}\",\n\t\"callback_virtual_account_id\": \"5bdaa2a8aec237552b1d547b\"\n}"
+  /pool_virtual_accounts/simulate_payment:
+    post:
+      tags:
+        - Invoices / Simulations (Dev)
+      summary: '[TEST] Payment: Invoice VA'
+      description: >-
+        Invoice Virtual Account (IVA) payment simulation by
+        `bank_account_number`
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[TEST] Payment: Invoice VA':
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[TEST] Payment: Invoice VA':
+                value: "{\n\t\"bank_code\":\"MANDIRI\",\n\t\"bank_account_number\":\"886089999706981\",\n\t\"transfer_amount\": 50000\n}"
+  /non_fixed_payment_code/simulate_payment:
+    post:
+      tags:
+        - Invoices / Simulations (Dev)
+      summary: '[TEST] Alfamart Payment'
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[TEST] Alfamart Payment':
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[TEST] Alfamart Payment':
+                value: "{\n\t\"retail_outlet_name\" : \"ALFAMART\",\n\t\"payment_code\" : \"JOE1\",\n\t\"transfer_amount\" : 80000\n}"
+  /v2/invoices/5bdaa3d70b993c3b0ee8a162:
+    get:
+      tags:
+        - Invoices
+      summary: Get Invoice
+      description: >-
+        [[API Reference] - Get
+        Invoice](https://xendit.github.io/apireference/#get-an-invoice)
+
+
+        [[Xendit Docs] - Invoices](https://docs.xendit.co/xeninvoice/)
+  /disbursements:
+    post:
+      tags:
+        - Disbursements
+        - xenPlatform
+      summary: Create Disbursement
+      description: >-
+        You may also create a Disbursement request on behalf of your
+        sub-accounts to send funds out from your sub-accounts' Cash balance.
+
+
+        The value in this field should include the full `user_id` of a
+        sub-account that has previously been created by you.
+
+
+        This example demonstrates how to create a disbursement for a sub-account
+        using the Create Disbursement API.
+
+
+        Note that for the Create Disbursement API, the response will provide you
+        with a confirmation that the invoice was created for the correct
+        sub-account `user_id`.
+
+
+        Please refer to the [Xendit API
+        reference](https://xendit.github.io/apireference/) for all supported
+        APIs.
+      responses: {}
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            '[EXAMPLE] Create Disbursement for Sub-account Request':
+              value: application/json
+              x-disabled: false
+            Create Disbursement:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: for-user-id
+          in: header
+          examples:
+            '[EXAMPLE] Create Disbursement for Sub-account Request':
+              value: 5d0c9bfa72667f2212d8f602
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Create Disbursement:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[EXAMPLE] Create Disbursement for Sub-account Request':
+                value: "{\n\t\"external_id\": \"disbursement_on_behalf_of_Shop1\",\n\t\"bank_code\": \"BNI\",\n\t\"account_holder_name\": \"John Doe\",\n\t\"account_number\": \"12345678910\",\n\t\"description\": \"For 5d0c9bfa72667f2212d8f602\"\n}"
+              Create Disbursement:
+                value: |-
+                  {
+                     "external_id": "disb-{{$timestamp}}",
+                     "amount": 15000,
+                     "bank_code": "BCA",
+                     "account_holder_name": "Joe",
+                     "account_number": "1234567890",
+                     "description":"Disbursement from Postman"
+                  }
+  /batch_disbursements:
+    post:
+      tags:
+        - Disbursements
+      summary: Create Batch Disbursement
+      description: >-
+        Batch disbursements are a set of instructions containing multiple
+        commands to disburse funds to any bank in Indonesia.
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Batch Disbursement:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Create Batch Disbursement:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Batch Disbursement:
+                value: |-
+                  {
+                      "reference": "disb_batch-{{$timestamp}}",
+                      "disbursements": 
+                      [
+                          {
+                              "amount": 20000,
+                              "bank_code": "BCA",
+                              "bank_account_name": "Fadlan",
+                              "bank_account_number": "1234567890",
+                              "description": "Batch Disbursement",
+                              "external_id": "disbursement-1"
+                          },
+                          {
+                              "amount": 30000,
+                              "bank_code": "MANDIRI",
+                              "bank_account_name": "Lutfi",
+                              "bank_account_number": "1234567891",
+                              "description": "Batch Disbursement with email notifications",
+                              "external_id": "disbursement-2",
+                              "email_to": ["test+to@xendit.co"],
+                              "email_cc": ["test+cc@xendit.co"],
+                              "email_bcc": ["test+bcc1@xendit.co", "test+bcc2@xendit.co"]
+                          }
+                      ]
+                  }
+  /disbursements/5bdaa16d633edc1000afbc48:
+    get:
+      tags:
+        - Disbursements
+      summary: Get Disbursement
+  /available_disbursements_banks:
+    get:
+      tags:
+        - Disbursements
+      summary: List Disbursement Banks
+  /v2/payouts:
+    post:
+      tags:
+        - THB
+      summary: Failed create THB payout
+      parameters:
+        - name: IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Failed create THB payout:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Failed create THB payout:
+                value: |-
+                  {
+                      "reference_id": "sample-failed-create-thb-payout-feb-01",
+                      "channel_code": "TH_KTB",
+                      "channel_properties": {
+                          "account_holder_name": "Test",
+                          "account_number": "123456"
+                      },
+                      "amount": 1.11,
+                      "description": "Sample Failed Create THB Payout",
+                      "currency": "THB"
+                  }
+    get:
+      tags:
+        - THB
+      summary: Get THB payouts by reference ID
+      parameters:
+        - name: reference_id
+          in: query
+          examples:
+            Get THB payouts by reference ID:
+              value: sample-successful-create-thb-payout-feb-01
+              x-disabled: false
+          schema:
+            type: string
+        - name: IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Get THB payouts by reference ID:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+  /v2/payouts/{id}/cancel:
+    post:
+      tags:
+        - OTC
+      summary: Failed cancel IDR cash payout (OTC)
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Failed cancel IDR cash payout (OTC):
+              value: disb-ccfbfa7c-c7ab-4772-8c32-fad1e01fa12e
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Failed cancel IDR cash payout (OTC):
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+  /v2/payouts/{payout_id}:
+    get:
+      tags:
+        - IDR
+        - THB
+      summary: Get THB payout by ID
+      responses: {}
+      parameters:
+        - name: payout_id
+          in: path
+          examples:
+            Get THB payout by ID:
+              value: disb-b8d6200b-bcd9-412e-94d5-98b37963e5af
+              x-disabled: false
+            Get IDR payout by ID:
+              value: disb-eba35bd9-c8af-4d80-92f0-d90926e35e7a
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Get THB payout by ID:
+              value: '{{$timestamp}}'
+              x-disabled: false
+            Get IDR payout by ID:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+  /payouts_channels:
+    get:
+      tags:
+        - Regional Payouts
+      summary: Get Payout Channels
+      parameters:
+        - name: currency
+          in: query
+          examples:
+            Get Payout Channels:
+              value: IDR
+              x-disabled: false
+          schema:
+            type: string
+        - name: channel_category
+          in: query
+          examples:
+            Get Payout Channels:
+              value: BANK
+              x-disabled: false
+          schema:
+            type: string
+        - name: IDEMPOTENCY-KEY
+          in: header
+          examples:
+            Get Payout Channels:
+              value: '{{$timestamp}}'
+              x-disabled: false
+          schema:
+            type: string
+  /payouts:
+    post:
+      tags:
+        - Create Payout
+      summary: Create Payout
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Payout:
+                value: |-
+                  {
+                    "external_id": "demo_2392329329",
+                    "amount": 23000,
+                    "email": "demo@xendit.co"
+                  }
+  /payouts/{id}:
+    get:
+      tags:
+        - Get Payout
+      summary: Get Payout
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Payout:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /payouts/{id}/void:
+    post:
+      tags:
+        - Void Payout
+      summary: Void Payout
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Void Payout:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /v2/accounts:
+    post:
+      tags:
+        - xenPlatform
+      summary: Create Account V2
+      description: >-
+        The Create Account API allows you to create Accounts for your Partners
+        that are linked to your Platform. Once an Account is created, you may
+        accept payments on its behalf. Additionally, you can route payments
+        to/from the Account via the Transfers API or Platform fee API.
+
+
+        There are two types of Accounts that can be created: `MANAGED`, `OWNED`.
+        Review our documentation for recommendations on which Account type to
+        use for your business model.
+
+
+        `MANAGED` Accounts provide your Partners with full-fledged Xendit
+        Accounts that your Platform can transact on behalf of. Your Partners may
+        register their Account via an invitation email is sent to the `email`.
+        Thereafter, your Partners login to their own Xendit dashboard to
+        complete the onboarding process.
+
+
+        `OWNED` Accounts are invisible to your Partners and fully controlled by
+        you. You may transact on behalf of an `OWNED` Account once they have
+        been created using payment methods that have been enabled on your
+        Platform.
+
+
+        Note for `OWNED` Accounts: Newly activated payment methods and changes
+        made to Callback URLs on the Platform do not automatically change for
+        existing `OWNED` accounts. We recommend activating all relevant payment
+        methods and setting up your Callback URLs before creating `OWNED`
+        Accounts. Alternatively, contact us when you need to make a change.
+
+
+        Store the returned account `id` value to make transactions for that
+        Account in the future.
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Account V2:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Account V2:
+                value: |-
+                  {
+                      "email": "angie@pinkpanther.com",
+                      "type": "OWNED",
+                      "public_profile": {
+                          "business_name": "Retail Business 1"
+                      }
+                  }
+  /v2/accounts/{id}:
+    get:
+      tags:
+        - xenPlatform
+      summary: Get Account V2
+      description: >-
+        Use the GET Account endpoint to retrieve the details of a single Account
+        that has been created on or linked to your Platform.
+
+
+        You may poll this endpoint to get information like: i) the status of the
+        Account and whether real-money payments can be created on its behalf,
+        ii) the public information that is displayed when payments are created.
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Account V2:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Account V2:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+    patch:
+      tags:
+        - xenPlatform
+      summary: Link Account Holder
+      description: >-
+        Use the Update Account endpoint to update: i) `public_profile`
+        information (e.g. `business_name`) that is displayed when payments are
+        created on behalf of your Accounts', ii) Account identification labels
+        (e.g. `email`)
+
+
+        This operation is currently only enabled for `OWNED` accounts.
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Link Account Holder:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Link Account Holder:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Link Account Holder:
+                value: |-
+                  {
+                      "account_holder_id": "4376b7b0-1c44-46be-8640-828f79cdc8be"
+                  }
+  /v2/account_holders:
+    post:
+      tags:
+        - xenPlatform
+      summary: Create Account Holder
+      description: >-
+        The Create Account API allows you to create Accounts for your Partners
+        that are linked to your Platform. Once an Account is created, you may
+        accept payments on its behalf. Additionally, you can route payments
+        to/from the Account via the Transfers API or Platform fee API.
+
+
+        There are two types of Accounts that can be created: `MANAGED`, `OWNED`.
+        Review our documentation for recommendations on which Account type to
+        use for your business model.
+
+
+        `MANAGED` Accounts provide your Partners with full-fledged Xendit
+        Accounts that your Platform can transact on behalf of. Your Partners may
+        register their Account via an invitation email is sent to the `email`.
+        Thereafter, your Partners login to their own Xendit dashboard to
+        complete the onboarding process.
+
+
+        `OWNED` Accounts are invisible to your Partners and fully controlled by
+        you. You may transact on behalf of an `OWNED` Account once they have
+        been created using payment methods that have been enabled on your
+        Platform.
+
+
+        Note for `OWNED` Accounts: Newly activated payment methods and changes
+        made to Callback URLs on the Platform do not automatically change for
+        existing `OWNED` accounts. We recommend activating all relevant payment
+        methods and setting up your Callback URLs before creating `OWNED`
+        Accounts. Alternatively, contact us when you need to make a change.
+
+
+        Store the returned account `id` value to make transactions for that
+        Account in the future.
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Account Holder:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Account Holder:
+                value: |-
+                  {
+                      "business_detail": {
+                          "type": "INDIVIDUAL",
+                          "legal_name": "test17",
+                          "trading_name": "test",
+                          "description": "testing",
+                          "industry_category": "ACCOMMODATION",
+                          "date_of_registration": "2023-02-02",
+                          "country_of_operation":"PH"
+                      },
+                      "individual_details": [
+                          {
+                              "given_names": "test",
+                              "surname": "test",
+                              "phone_number": "+63021234567",
+                              "email": "test@xendit.co",
+                              "nationality": "PH",
+                              "place_of_birth": "PH",
+                              "date_of_birth": "2000-02-02",
+                              "gender": "MALE",
+                              "type": "PIC",
+                              "role": "owner"
+                          }
+                      ],
+                      "address": {
+                          "city": "test1",
+                          "country": "PH",
+                          "district": "test",
+                          "postal_code": "1111",
+                          "street_line1": "test",
+                          "street_line2": "test",
+                          "sub_district": "test",
+                          "province_state": "test"
+                      },
+                      "kyc_documents": [
+                          {
+                              "type": "SELFIE_WITH_PRIMARY_ID_DOCUMENT",
+                              "country": "PH",
+                              "file_id": "63f8719642f5856dcb142bd2"
+                          },
+                          {
+                              "type": "ACR_OR_IMMIGRANT_COR_DOCUMENT",
+                              "country": "PH",
+                              "file_id": "63f8719642f5856dcb142bd2"
+                          },
+                          {
+                              "type": "SERVICE_AGREEMENT_DOCUMENT",
+                              "country": "PH",
+                              "file_id": "63f8719642f5856dcb142bd2"
+                          }
+                      ],
+                      "website_url": "https://xendit.co",
+                      "phone_number": "+63281234567",
+                      "email": "test@xendit.co"
+                  }
+  /v2/account_holders/{id}:
+    get:
+      tags:
+        - xenPlatform
+      summary: Get Account Holder by ID
+      description: >-
+        Use the GET Account endpoint to retrieve the details of a single Account
+        that has been created on or linked to your Platform.
+
+
+        You may poll this endpoint to get information like: i) the status of the
+        Account and whether real-money payments can be created on its behalf,
+        ii) the public information that is displayed when payments are created.
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Account Holder by ID:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Account Holder by ID:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+    patch:
+      tags:
+        - xenPlatform
+      summary: Update Account Holder
+      description: >-
+        The Create Account API allows you to create Accounts for your Partners
+        that are linked to your Platform. Once an Account is created, you may
+        accept payments on its behalf. Additionally, you can route payments
+        to/from the Account via the Transfers API or Platform fee API.
+
+
+        There are two types of Accounts that can be created: `MANAGED`, `OWNED`.
+        Review our documentation for recommendations on which Account type to
+        use for your business model.
+
+
+        `MANAGED` Accounts provide your Partners with full-fledged Xendit
+        Accounts that your Platform can transact on behalf of. Your Partners may
+        register their Account via an invitation email is sent to the `email`.
+        Thereafter, your Partners login to their own Xendit dashboard to
+        complete the onboarding process.
+
+
+        `OWNED` Accounts are invisible to your Partners and fully controlled by
+        you. You may transact on behalf of an `OWNED` Account once they have
+        been created using payment methods that have been enabled on your
+        Platform.
+
+
+        Note for `OWNED` Accounts: Newly activated payment methods and changes
+        made to Callback URLs on the Platform do not automatically change for
+        existing `OWNED` accounts. We recommend activating all relevant payment
+        methods and setting up your Callback URLs before creating `OWNED`
+        Accounts. Alternatively, contact us when you need to make a change.
+
+
+        Store the returned account `id` value to make transactions for that
+        Account in the future.
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Update Account Holder:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update Account Holder:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Account Holder:
+                value: |-
+                  {
+                      "business_detail": {
+                          "description": "testing",
+                          "industry_category": "ACCOMMODATION"
+                      },
+                      "kyc_documents": [
+                          {
+                              "type": "SELFIE_WITH_PRIMARY_ID_DOCUMENT",
+                              "country": "PH",
+                              "file_id": "63f8719642f5856dcb142bd2"
+                          }
+                      ],
+                      "website_url": "https://xendit.co"
+                  }
+  /callback_urls/{type}:
+    post:
+      tags:
+        - xenPlatform
+      summary: Set Callback URL
+      description: >-
+        The Set Callback URLs API allows you to set your sub-accounts' Callback
+        URLs.
+
+
+        Use your production key to set production URLs; use your development key
+        to set development URLs.
+
+
+        Note: Production callback URLs have to use the HTTPs protocol.
+
+
+
+        The following can be used in the `:type` query parameter.
+
+        1. `invoice`: When an invoice is paid, our systems will send a callback
+        to the URL
+
+        2. `disbursement`: When a disbursement is sent, our systems will send a
+        callback to the URL
+
+        3. `fva_status`: When a FVA is created or updated, our systems will send
+        a callback to the URL
+
+        4. `fva_paid`: When a FVA is paid, our systems will send a callback to
+        the URL
+      parameters:
+        - name: type
+          in: path
+          examples:
+            Set Callback URL:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Set Callback URL:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: for-user-id
+          in: header
+          examples:
+            Set Callback URL:
+              value: 5d0c9bfa72667f2212d8f602
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Set Callback URL:
+                value: |-
+                  {
+                      "url": "https://www.xendit.co"
+                  }
+  /transfers:
+    post:
+      tags:
+        - xenPlatform
+      summary: Create Transfer
+      description: >-
+        The Transfers API allows you to transfer balances from your sub-accounts
+        to your master account and vice versa. Use this to manage, or split
+        payments between your platform and your sub accounts within the Xendit
+        ecosystem.
+
+
+        Visit your [xenPlatform dashboard](https://dashboard.xendit.co/login) in
+        order to view the user_id of your account and sub-accounts.
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Transfer:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Transfer:
+                value: |-
+                  {
+                      "reference": "transfer_a0001",
+                      "amount": 10000,
+                      "source_user_id": "5cafeb170a2b18519b1b8768",
+                      "destination_user_id": "5cc00501fe2ea41db700c9c9"
+                  }
+  /transfers/reference={reference}:
+    get:
+      tags:
+        - xenPlatform
+      summary: Get Transfer
+  /split_rules:
+    post:
+      tags:
+        - xenPlatform
+      summary: Create Split Rule
+      description: >-
+        The Platform Fee feature allows you to automatically charge a fee when
+        creating a payment on behalf of your sub-account. Use this feature to
+        collect fees for the transactions that you accept on behalf of your
+        Partners.
+
+
+        A Fee Rule Object defines how payments accepted on behalf of a
+        sub-account are routed by xenPlatform. Include the `fee_rule_id`
+        returned in the response in supported transaction endpoints - Invoices,
+        eWallets - to automatically charge a Platform fee once payments settle.
+
+
+        *Note: Fees are transferred from your sub-accounts at 15 minute
+        intervals once your transaction has settled. As such, you may find that
+        there is up to 15 minute delay from when settlement occurs, to when the
+        Platform fee is deducted.*
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Split Rule:
+                value: "{\r\n    \"name\": \"Standard platform fee\",\r\n    \"description\": \"Platform fee for all transactions accepted on behalf of vendors\",\r\n    \"routes\": [\r\n        {\r\n            \"flat_amount\": 3000,\r\n            \"currency\": \"IDR\",\r\n            \"destination_account_id\": \"5f8d0c0603ffe06b7d4d9fcf\",\r\n            \"reference_id\": \"reference1\"\r\n        },\r\n        {\r\n            \"percent_amount\": 5.25,\r\n            \"currency\": \"IDR\",\r\n            \"destination_account_id\": \"5cafeb170a2b18519b1b8768\",\r\n            \"reference_id\": \"reference2\"\r\n        }\r\n    ]\r\n}"
+  /fee_rules:
+    post:
+      tags:
+        - xenPlatform
+      summary: '[Deprecated] Create Fee Rule'
+      description: >-
+        The Platform Fee feature allows you to automatically charge a fee when
+        creating a payment on behalf of your sub-account. Use this feature to
+        collect fees for the transactions that you accept on behalf of your
+        Partners.
+
+
+        A Fee Rule Object defines how payments accepted on behalf of a
+        sub-account are routed by xenPlatform. Include the `fee_rule_id`
+        returned in the response in supported transaction endpoints - Invoices,
+        eWallets - to automatically charge a Platform fee once payments settle.
+
+
+        *Note: Fees are transferred from your sub-accounts at 15 minute
+        intervals once your transaction has settled. As such, you may find that
+        there is up to 15 minute delay from when settlement occurs, to when the
+        Platform fee is deducted.*
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              '[Deprecated] Create Fee Rule':
+                value: "{\r\n    \"name\": \"Standard platform fee\",\r\n    \"description\": \"Platform fee for all transactions accepted on behalf of vendors\",\r\n    \"routes\": [\r\n        {\r\n            \"unit\": \"flat\",\r\n            \"amount\": 3000,\r\n            \"currency\": \"IDR\"\r\n        }\r\n    ]\r\n}"
+  /recurring/plans:
+    post:
+      tags:
+        - Recurring
+      summary: Create Plan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Plan:
+                value: |-
+                  {
+                      "reference_id": "ref-{{$timestamp}}",
+                      "customer_id": "{{customer_id}}",
+                      "recurring_action": "PAYMENT",
+                      "currency": "IDR",
+                      "amount": 13579,
+                      "payment_methods": [
+                          {
+                              "payment_method_id": "{{payment_method_id}}",
+                              "rank": 1
+                          }
+                      ],
+                      "schedule": {
+                          "reference_id": "test-{{$timestamp}}",
+                          "interval": "MONTH",
+                          "interval_count": 1,
+                          "total_recurrence": 6,
+                          "anchor_date": "2022-02-15T09:44:19.546Z",
+                          "retry_interval": "DAY",
+                          "retry_interval_count": 1,
+                          "total_retry": 3,
+                          "failed_attempt_notifications": [
+                              1,3
+                          ]
+                      },
+                      "notification_config": {
+                          "locale": "en",
+                          "recurring_created": [
+                              "WHATSAPP",
+                              "EMAIL"
+                          ],
+                          "recurring_succeeded": [
+                              "WHATSAPP",
+                              "EMAIL"
+                          ],
+                          "recurring_failed": [
+                              "WHATSAPP",
+                              "EMAIL"
+                          ]
+                      },
+                      "failed_cycle_action": "STOP",
+                      "immediate_action_type": "FULL_AMOUNT",
+                      "metadata": null,
+                      "description": "Xendit Recurring Test"
+                  }
+  /recurring/plans/{id}:
+    patch:
+      tags:
+        - Recurring
+      summary: Update Plan
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Update Plan:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Plan:
+                value: |-
+                  {
+                      "customer_id": "cust-239c16f4-866d-43e8-9341-7badafbc019f",
+                      "currency": "IDR",
+                      "amount": 100000,
+                      "payment_methods": [
+                          {
+                              "payment_method_id": "pm-239c16f4-866d-43e8-9341-7badafbc019f",
+                              "rank": 1
+                          }
+                      ],
+                      "notification_config": {
+                          "recurring_created": [
+                              "WHATSAPP",
+                              "EMAIL"
+                          ],
+                          "recurring_succeeded": [],
+                          "recurring_failed": [
+                              "WHATSAPP"
+                          ]
+                      "locale": "en"
+                      },
+                      "metadata": null
+                  }
+  /api.xendit.co/recurring/plans/{id}/deactivate:
+    post:
+      tags:
+        - Recurring
+      summary: Deactivate Plan
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Deactivate Plan:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Deactivate Plan:
+                value: ''
+      servers:
+        - url: 'https://POST https:'
+  /api.xendit.co/recurring/plans/{id}/:
+    get:
+      tags:
+        - Recurring
+      summary: Get Plan
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Plan:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Plan:
+                value: ''
+  /api.xendit.co/recurring/plans/{id}/cycles:
+    get:
+      tags:
+        - Recurring
+      summary: Get Plan's list of Cycles
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Plan's list of Cycles:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Plan's list of Cycles:
+                value: ''
+  /recurring/plans/{plan_id}/cycles/{id}:
+    patch:
+      tags:
+        - Recurring
+      summary: Update Cycle
+      parameters:
+        - name: plan_id
+          in: path
+          examples:
+            Update Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          examples:
+            Update Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Cycle:
+                value: ''
+    get:
+      tags:
+        - Recurring
+      summary: Get Cycle
+      parameters:
+        - name: plan_id
+          in: path
+          examples:
+            Get Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          examples:
+            Get Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /recurring/plans/{plan_id}/cycles/{id}/cancel:
+    post:
+      tags:
+        - Recurring
+      summary: Cancel Cycle
+      parameters:
+        - name: plan_id
+          in: path
+          examples:
+            Cancel Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          examples:
+            Cancel Cycle:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /recurring/plans/{plan_id}/cycles/{id}/simulate:
+    post:
+      tags:
+        - Recurring
+      summary: Simulate Cycle Status
+      parameters:
+        - name: plan_id
+          in: path
+          examples:
+            Simulate Cycle Status:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          examples:
+            Simulate Cycle Status:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Simulate Cycle Status:
+                value: |-
+                  {
+                    "amount": 200000
+                  }
+  /recurring/schedules:
+    post:
+      tags:
+        - Recurring
+      summary: Create Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Schedule:
+                value: |-
+                  {
+                      "reference_id": "test_reference_id",
+                      "interval": "MONTH",
+                      "interval_count": 1,
+                      "total_recurrence": 12,
+                      "anchor_date": "2022-02-15T16:23:52Z",
+                      "retry_interval": "DAY",
+                      "retry_interval_count": 5,
+                      "total_retry": 5,
+                      "failed_attempt_notifications": [
+                          2,
+                          4
+                      ]
+                  }
+    patch:
+      tags:
+        - Recurring
+      summary: Update Schedule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update Schedule:
+                value: |-
+                  {
+                      "interval" : "MONTH",
+                      "interval_count" : 1,
+                      "total_recurrence" : 12,
+                      "anchor_date" : "2020-11-20T16:23:52Z",
+                      "retry_interval" : "DAY",
+                      "retry_interval_count" : 5,
+                      "total_retry" : 5,
+                      "failed_attempt_notifications" : [2,4]
+                  }
+  /recurring/schedules/{id}:
+    get:
+      tags:
+        - Recurring
+      summary: Get Schedule
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Schedule:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Get Schedule:
+                value: ''
+  /transactions/{id}:
+    get:
+      tags:
+        - Transactions
+      summary: Get Transaction
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Transaction:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /transactions:
+    get:
+      tags:
+        - Transactions
+      summary: List Transactions
+      parameters:
+        - name: types
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: statuses
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: channel_categories
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: reference_id
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: product_id
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: account_identifier
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: amount
+          in: query
+          examples:
+            List Transactions:
+              value: <number>
+              x-disabled: false
+          schema:
+            type: string
+        - name: currency
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: created[gte]
+          in: query
+          examples:
+            List Transactions:
+              value: <dateTime>
+              x-disabled: false
+          schema:
+            type: string
+        - name: created[lte]
+          in: query
+          examples:
+            List Transactions:
+              value: <dateTime>
+              x-disabled: false
+          schema:
+            type: string
+        - name: updated[gte]
+          in: query
+          examples:
+            List Transactions:
+              value: <dateTime>
+              x-disabled: false
+          schema:
+            type: string
+        - name: updated[lte]
+          in: query
+          examples:
+            List Transactions:
+              value: <dateTime>
+              x-disabled: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          examples:
+            List Transactions:
+              value: '10'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: after_id
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+        - name: before_id
+          in: query
+          examples:
+            List Transactions:
+              value: <string>
+              x-disabled: false
+          schema:
+            type: string
+  /reports/{id}:
+    get:
+      tags:
+        - Reports
+      summary: Get Report
+      parameters:
+        - name: id
+          in: path
+          examples:
+            Get Report:
+              value: ''
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /reports:
+    post:
+      tags:
+        - Reports
+      summary: Generate Report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Generate Report:
+                value: |-
+                  {
+                      "type": "BALANCE_HISTORY",
+                      "filter": {
+                          "from": "2021-06-23T04:01:55.574Z",
+                          "to": "2021-06-24T04:01:55.574Z"
+                      },
+                      "format": "CSV",
+                      "currency": "IDR"
+                  }
+  /sessions:
+    post:
+      tags:
+        - Payment Session
+      summary: Create Payment Session
+      responses:
+        default:
+          description: Default response
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  rawContent: ''
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Payment Session:
+                value: |-
+                  {
+                      "reference_id": "{{$randomUUID}}",
+                      "session_type": "SAVE",
+                      "mode": "PAYMENT_LINK",
+                      "amount": 0,
+                      "currency": "IDR",
+                      "country": "ID",
+                      "customer": {
+                          "reference_id": "{{$randomUUID}}",
+                          "type": "INDIVIDUAL",
+                          "email": "test@yourdomain.com",
+                          "mobile_number": "+6212345678",
+                          "individual_detail": {
+                              "given_names": "Lorem",
+                              "surname": "Ipsum"
+                          }
+                      },
+                      "success_return_url":"https://yourcompany.com/example_item=my_example_item",
+                      "cancel_return_url":"https://yourcompany.com/example_item=my_example_item"
+                  }
+  /sessions/{session_id}:
+    get:
+      tags:
+        - Payment Session
+      summary: GET Session
+      parameters:
+        - name: session_id
+          in: path
+          examples:
+            GET Session:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+      security:
+        - basicAuth: []
+  /sessions/{session_id}/cancel:
+    post:
+      tags:
+        - Payment Session
+      summary: Cancel Session
+      parameters:
+        - name: session_id
+          in: path
+          examples:
+            Cancel Session:
+              value: null
+              x-disabled: false
+          required: true
+          schema:
+            type: string
+  /snap/v1.0/debit/payment-host-to-host:
+    post:
+      tags:
+        - BI SNAP APIs
+      summary: Create Direct Debit Payment
+      parameters:
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Create Direct Debit Payment:
+              value: '123123'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Create Direct Debit Payment:
+              value: luminto-qa-testing-{{$timestamp}}
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Create Direct Debit Payment:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Create Direct Debit Payment:
+              value: >-
+                SHLc7TKuAPgm4d6jag6j5T6At5TGXsgXYujCcZ/C/2Pqrp3OnlDpzKFGUo+gYH5Wu8lLNJPDvwpxY6pWyExg48K4V9pYS+ErPL8wP6FOLWAZuEDiJHkPAudvpoDtxcOezUzctwE+8W5jijPxd/ULpeg36dvpFCpq+zOgoMZM2cQBjs8neD/UQhblgvTBeWYhlmgKmHFWjBJgUb2YtLq9P4ck8uROAPhRSIPbpD042Pnu493HANNzcSVvfu1wPdFBag2L4DrdQ3wbY5QoK00/w6XL137sdjzP7AHoiaYK3+sOs/Fg8RmMFojcpw7TXug4VsQlaqTuIb2t7GjdzATT3g==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Create Direct Debit Payment:
+              value: '2025-05-26T16:44:00+07:00'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Direct Debit Payment:
+                value: |-
+                  {
+                      "partnerReferenceNo": "reference-id-1238128319900000",
+                      "amount": {
+                          "value": "1.00",
+                          "currency": "IDR"
+                      },
+                      "urlParam": [
+                          {
+                              "url": "https://google.com",
+                              "type": "PAY_RETURN"
+                          },
+                          {
+                              "url": "https://yahoo.com",
+                              "type": "FAILURE_RETURN"
+                          },
+                          {
+                              "url": "https://bing.com",
+                              "type": "CANCEL_RETURN"
+                          }
+                      ],
+                      "payOptionDetails": [
+                          {
+                              "payMethod": "EWALLET",
+                              "payOption": "GOPAY",
+                              "additionalInfo": {
+                                  "reusability": "ONE_TIME_USE"
+                              }
+                          }
+                      ]
+                  }
+  /snap/v1.0/registration-account-binding:
+    post:
+      tags:
+        - BI SNAP APIs
+      summary: Inquiry Linked Account
+      parameters:
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Inquiry Linked Account:
+              value: '123123'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Inquiry Linked Account:
+              value: luminto-qa-testing-{{$timestamp}}
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Inquiry Linked Account:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Inquiry Linked Account:
+              value: >-
+                SHLc7TKuAPgm4d6jag6j5T6At5TGXsgXYujCcZ/C/2Pqrp3OnlDpzKFGUo+gYH5Wu8lLNJPDvwpxY6pWyExg48K4V9pYS+ErPL8wP6FOLWAZuEDiJHkPAudvpoDtxcOezUzctwE+8W5jijPxd/ULpeg36dvpFCpq+zOgoMZM2cQBjs8neD/UQhblgvTBeWYhlmgKmHFWjBJgUb2YtLq9P4ck8uROAPhRSIPbpD042Pnu493HANNzcSVvfu1wPdFBag2L4DrdQ3wbY5QoK00/w6XL137sdjzP7AHoiaYK3+sOs/Fg8RmMFojcpw7TXug4VsQlaqTuIb2t7GjdzATT3g==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Inquiry Linked Account:
+              value: '2025-05-26T16:44:00+07:00'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Inquiry Linked Account:
+                value: |-
+                  {
+                      "partnerReferenceNo": "reference-id-1238128319900000",
+                      "amount": {
+                          "value": "1.00",
+                          "currency": "IDR"
+                      },
+                      "urlParam": [
+                          {
+                              "url": "https://google.com",
+                              "type": "PAY_RETURN"
+                          },
+                          {
+                              "url": "https://yahoo.com",
+                              "type": "FAILURE_RETURN"
+                          },
+                          {
+                              "url": "https://bing.com",
+                              "type": "CANCEL_RETURN"
+                          }
+                      ],
+                      "payOptionDetails": [
+                          {
+                              "payMethod": "EWALLET",
+                              "payOption": "GOPAY",
+                              "additionalInfo": {
+                                  "reusability": "ONE_TIME_USE"
+                              }
+                          }
+                      ]
+                  }
+  /snap/v1.0/debit/refund:
+    post:
+      tags:
+        - BI SNAP APIs
+      summary: Create Direct Debit Refund
+      parameters:
+        - name: CHANNEL-ID
+          in: header
+          examples:
+            Create Direct Debit Refund:
+              value: '123123'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-EXTERNAL-ID
+          in: header
+          examples:
+            Create Direct Debit Refund:
+              value: luminto-qa-testing-{{$timestamp}}
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-PARTNER-ID
+          in: header
+          examples:
+            Create Direct Debit Refund:
+              value: '{{client-id}}'
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-SIGNATURE
+          in: header
+          examples:
+            Create Direct Debit Refund:
+              value: >-
+                iZuNnUEYS32D/V91skQJs+IYqcAzPHiltwCqorwViXTff1pDKiHokUxPi42Zcdr+eLACb0d3biVNVGtnBnVyeqolC3tJxUH/uU3rL9uZo4uRNEcDwF84UTImLuppkMRa2CRaRU4DBF//JhdvbFpofGx8JaWbGX3jsYtmSavoDrEoisBwcHumWnedMzu9WUJRgx2mCkyn3x2A3h9Z1KibRk8xH5FCZnVX0qaGMdeTWp/aJWk4JdGgQHcwGoWB9oe2Oq3PpZ2zSJJFlL0LLwNJ6UFv6RSmkSswunBuqDSDuE2R4HPkVTIauKg00XztBila+Rp9fk8JB+x0Z+4G9FIPRg==
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-TIMESTAMP
+          in: header
+          examples:
+            Create Direct Debit Refund:
+              value: '2025-05-26T16:50:30+07:00'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Direct Debit Refund:
+                value: |-
+                  {
+                      "originalPartnerReferenceNo": "reference-id-1238128319900000",
+                      "refundAmount": {
+                          "value": "1.00",
+                          "currency": "IDR"
+                      },
+                      "reason": "CANCELLATION"
+                  }
+  /balance:
+    get:
+      summary: Get Balance
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []
+tags:
+  - name: New Payment APIs
+  - name: General
+    description: Part of New Payment APIs
+  - name: Cards
+    description: Part of New Payment APIs
+  - name: Payment
+    description: Part of New Payment APIs -> Cards
+  - name: Automatic Capture
+    description: Part of New Payment APIs -> Cards -> Payment
+  - name: Manual Capture
+    description: Part of New Payment APIs -> Cards -> Payment
+  - name: Manage Payment Method
+    description: Part of New Payment APIs -> Cards
+  - name: New Payment APIs / Direct Debit
+    description: Part of New Payment APIs
+  - name: BRI 🇮🇩 One-time or Multiple use
+    description: Part of New Payment APIs -> Direct Debit
+  - name: BRI 🇮🇩 One-time or Multiple use / Linking Only
+    description: >-
+      Part of New Payment APIs -> Direct Debit -> BRI 🇮🇩 One-time or Multiple
+      use
+  - name: BRI 🇮🇩 One-time or Multiple use / Subsequent Payment
+    description: >-
+      Part of New Payment APIs -> Direct Debit -> BRI 🇮🇩 One-time or Multiple
+      use
+  - name: BRI 🇮🇩 One-time or Multiple use / Link and Pay
+    description: >-
+      Part of New Payment APIs -> Direct Debit -> BRI 🇮🇩 One-time or Multiple
+      use
+  - name: Bank Account
+    description: Part of New Payment APIs -> Direct Debit
+  - name: Bank Account / Linking Only
+    description: Part of New Payment APIs -> Direct Debit -> Bank Account
+  - name: Bank Account / Subsequent Payment
+    description: Part of New Payment APIs -> Direct Debit -> Bank Account
+  - name: Bank Account / Link and Pay
+    description: Part of New Payment APIs -> Direct Debit -> Bank Account
+  - name: Unlinking with Confirmation - TH - KTB
+    description: Part of New Payment APIs -> Direct Debit -> Bank Account
+  - name: eWallet
+    description: Part of New Payment APIs
+  - name: eWallet / Linking Only
+    description: Part of New Payment APIs -> eWallet
+  - name: eWallet / Subsequent Payment
+    description: Part of New Payment APIs -> eWallet
+  - name: One-time Payment
+    description: Part of New Payment APIs -> eWallet
+  - name: eWallet / Link and Pay
+    description: Part of New Payment APIs -> eWallet
+  - name: Over-the-Counter
+    description: Part of New Payment APIs
+  - name: Over-the-Counter / Via Payment Request
+    description: Part of New Payment APIs -> Over-the-Counter
+  - name: Over-the-Counter / Simulate Payments (Test/Dev Mode Only)
+    description: Part of New Payment APIs -> Over-the-Counter
+  - name: QR Code
+    description: Part of New Payment APIs
+  - name: QR Code / Via Payment Request
+    description: Part of New Payment APIs -> QR Code
+  - name: QR Code / Simulate Payments (Test/Dev Mode Only)
+    description: Part of New Payment APIs -> QR Code
+  - name: Virtual Account
+    description: Part of New Payment APIs
+  - name: Payment Request
+    description: Part of New Payment APIs -> Virtual Account
+  - name: Virtual Account / Simulate Payments (Test/Dev Mode Only)
+    description: Part of New Payment APIs -> Virtual Account
+  - name: Credit & Debit Cards
+    description: >-
+      - Tokenization & 3DS Authentication are performed using a Xendit SDK.
+
+      - Xendit provides SDKs for JS (web), iOS, Android, and React Native
+
+      - SDKs use the public API key, as the private API key is reserved for
+      server-side requests.
+
+
+      Examples HTML forms with xendit.js (you can use to quickly create tokens):
+
+      - [Tokenization demo](https://js.xendit.co/test_tokenize.html)
+
+      - [3DS Authentication demo](https://js.xendit.co/test_authenticate.html)
+  - name: Authorization & Capture
+    description: Part of Credit & Debit Cards
+  - name: Charge & Refund
+    description: Part of Credit & Debit Cards
+  - name: '[DEV] Test cases'
+    description: Part of Credit & Debit Cards
+  - name: eWallets
+    description: >-
+      New simple and consistent eWallets API to support top eWallets providers
+      in Indonesia and Philippines
+  - name: Charge & Check Charge Status
+    description: Part of eWallets
+  - name: Simulations (Test Mode)
+    description: Part of eWallets -> Charge & Check Charge Status
+  - name: Tokenized - Account Linking
+    description: Part of eWallets
+  - name: Create Customer - Step 1
+    description: Part of eWallets -> Tokenized - Account Linking
+  - name: Account Linking - Step 2
+    description: Part of eWallets -> Tokenized - Account Linking
+  - name: Void and Refund
+    description: Part of eWallets
+  - name: Simulations (Test mode)
+    description: Part of eWallets -> Void and Refund
+  - name: Paylater
+  - name: Initiate Paylater Plans
+    description: Part of Paylater
+  - name: Initiate PayLater plans with FEE and DISCOUNT
+    description: Part of Paylater -> Initiate Paylater Plans
+  - name: Create Paylater Transactions
+    description: Part of Paylater
+  - name: Refunds
+    description: Part of Paylater
+  - name: QR Codes
+  - name: Direct Debit
+    description: >-
+      Direct Debit enables merchants to pull payments directly from their end
+      user’s account bank balance by linking their debit card or bank account
+      access.
+
+
+      Currently supports BRI in Indonesia, and BPI and Unionbank in the
+      Philippines.
+
+
+      Learn more in [Xendit API
+      Reference](https://developers.xendit.co/api-reference/#direct-debit)
+  - name: Virtual Accounts
+    description: Fixed Virtual Accounts
+  - name: Virtual Accounts / Simulations (Dev)
+    description: Part of Virtual Accounts
+  - name: Retail Outlets - ID
+  - name: Retail Outlets - ID / Simulations (Dev)
+    description: Part of Retail Outlets - ID
+  - name: Retail Outlets - PH
+  - name: Invoices
+  - name: Invoices / Simulations (Dev)
+    description: Part of Invoices
+  - name: Disbursements
+  - name: Disbursements / Simulations (Dev)
+    description: Part of Disbursements
+  - name: Regional Payouts
+  - name: IDR
+    description: Part of Regional Payouts
+  - name: OTC
+    description: Part of Regional Payouts -> IDR
+  - name: PHP
+    description: Part of Regional Payouts
+  - name: MYR
+    description: Part of Regional Payouts
+  - name: VND
+    description: Part of Regional Payouts
+  - name: THB
+    description: Part of Regional Payouts
+  - name: Payouts
+  - name: Create Payout
+    description: Part of Payouts
+  - name: Get Payout
+    description: Part of Payouts
+  - name: Void Payout
+    description: Part of Payouts
+  - name: xenPlatform
+  - name: Recurring
+  - name: Transactions
+  - name: Reports
+  - name: Payment Session
+  - name: BI SNAP APIs
+servers:
+  - url: https://api.xendit.co
+  - url: https://{url}
+    variables:
+      url:
+        default: example.com
+        description: Declared in Postman collection variables.
+  - url: 'https://GET https:'

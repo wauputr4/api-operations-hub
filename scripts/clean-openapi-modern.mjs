@@ -4,6 +4,8 @@ import yaml from 'js-yaml';
 const targets = [
   'openapi/midtrans/midtrans.openapi.yaml',
   'openapi/doku/doku.openapi.yaml',
+  'openapi/xendit/xendit.openapi.yaml',
+  'openapi/xendit/xendit-snap.openapi.yaml',
 ];
 
 for (const target of targets) {

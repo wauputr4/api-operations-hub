@@ -1,0 +1,1772 @@
+{
+  "info": {
+    "_postman_id": "2d720f13-6ca4-4e00-acb0-1676c59e5b99",
+    "name": "API-Xendit SNAP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30672288"
+  },
+  "item": [
+    {
+      "name": "Utility APIs (Test mode only)",
+      "item": [
+        {
+          "name": "Generate Asymmetric Signature",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-CLIENT-KEY",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "Private_Key",
+                "value": "{{private-key}}",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2023-01-06T12:24:00+07:00",
+                "type": "text"
+              },
+              {
+                "key": "endpointurl",
+                "value": "/snap/v1.0/transfer-va/inquiry-va",
+                "type": "text"
+              },
+              {
+                "key": "httpmethod",
+                "value": "POST",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"trxId\": \"demo_test-0320943981575\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://api.xendit.co/snap/v1.0/utilities/asymmetric-signature-service",
+              "protocol": "https",
+              "host": [
+                "api",
+                "xendit",
+                "co"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "utilities",
+                "asymmetric-signature-service"
+              ]
+            },
+            "description": "Asymmetric Signature API allow you to generate signature for all Xendit SNAP APIs. The purpose of this API is to simulate signature generation, and will work in Test mode only. For API integration, you MUST generate the signature NOT by calling this API, but by calculating the signature based on SNAP algorithm. [Documentation here](https://xendit.stoplight.io/docs/api-webhook-signature/branches/main/ghau5r7abzpjg-signature-and-key-exchange#signature-and-key-exchange)\n\nYou will need the following information to generate signature\n\n- \\[Header\\] X-TIMESTAMP, timestamp of the request in ISO8601 format. Example 2022-08-31T06:00:00Z\n- \\[Header\\] Private_key, this is your RSA 2048 format in Xendit\n- \\[Header\\] httpmethod, which is the HTTP Method on the API you want to use\n- \\[Header\\] endpointurl, which is the relative URL of the API path you want to use\n- \\[Body\\] Request body is the request body of the API you want to use and sign (must be in JSON format)\n    \n\nYou will get `signature` value which you could attach to `X-SIGNATURE` header on the API you want to use"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "VA",
+      "item": [
+        {
+          "name": "Create VA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "CaVyb15eQIELexfq5gwDta0Q5jW7/Dqsl1u1/viLHXhUIgIkbGgHyOqD2FjEtmPru7dyBUw6V80ukudMa5KmcemvhmB9iBDU8e1B9fJ6ta5K5LEse5MFTRzM7vhKjWiaA3fReWB6nQbaJ/cPE/T6wFi7/zqPXsR2sey7brey7tb7EO8egoT7avV6EqW7IZ7Hde+/T9ia9giUZ+ff20ucduR7jZ/HuvAi+y7alIp9JQVdVK8lJDiYh0+h3PZeLKUaf50HRUQApX6swR+NCOc9quaTH+ql4U1gNkmejUnNlQa2azgqr/hrEHCOQwy3po4R9AGaNkipnSvaOc1vly9qKw==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2023-01-06T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "test1",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"virtualAccountName\": \"John Cena Michael\",\r\n    \"trxId\": \"demo_test-0320943981575\",\r\n    \"totalAmount\": {\r\n        \"value\": \"20000.00\",\r\n        \"currency\": \"IDR\"\r\n    },\r\n    \"freeTexts\": [\r\n        {\r\n            \"english\": \"Payment for Body Soap\"\r\n        }\r\n    ],\r\n    \"expiredDate\": \"2023-12-31T17:00:00Z\",\r\n    \"additionalInfo\": {\r\n        \"channelCode\": \"MANDIRI\",\r\n        \"reusability\": \"ONE_TIME_USE\"\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/transfer-va/create-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "transfer-va",
+                "create-va"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update VA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-08-30T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"trxId\": \"13517001\",\r\n  \"totalAmount\": {\r\n      \"value\": \"50000.00\",\r\n      \"currency\": \"IDR\"\r\n  },\r\n  \"freeTexts\": [\r\n        {\r\n            \"english\": \"this is updated text!\"\r\n        }\r\n    ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/transfer-va/update-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "transfer-va",
+                "update-va"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deactivate VA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-08-30T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"trxId\": \"demo_12317008\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/transfer-va/delete-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "transfer-va",
+                "delete-va"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Inquiry VA",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2023-01-06T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"trxId\": \"demo_12317008\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/transfer-va/inquiry-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "transfer-va",
+                "inquiry-va"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payouts",
+      "item": [
+        {
+          "name": "Create Payout",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Your Xendit merchant ID",
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}"
+              },
+              {
+                "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}"
+              },
+              {
+                "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                "key": "X-SIGNATURE",
+                "value": "Yxr/KXLm5X1y/xCpcczaRA8a9h42FwU4stoo282lGwHUnEGViVRV6Fidk601SIcN3aMoNLQvK3c6VR8ZxKz7p6qiU4Y9nS4KVuN5Hq5w/Q/mYIUYuckkugj+VwPb2/1EDeM8qU4VwEHGC5ivKNNT2DpJ8uH3EY35QX0RtEKPdysI2ZH3y63/+Dl5Nu0CS7IPKC/yjXBNQumhSrVf8lAfKKE9PeAiO5J+3vdG+1dllBHuWn0VhHkNAAmr5ntJwgkKWP6ifIsdiqefyFAShlxvhT9yJpIuF9n+9ofHcFYnJIYOVuFayW5P20+wglx4fIKYJn6GO4WffvJ3WR5oblrFYQ=="
+              },
+              {
+                "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                "key": "X-TIMESTAMP",
+                "value": "2022-09-24T15:32:00Z"
+              },
+              {
+                "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                "key": "CHANNEL-ID",
+                "value": "test1"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"partnerReferenceNo\": \"test-transaction-0101252180\",\n    \"customerNumber\": \"6281773628883\",\n    \"customerName\": \"Michael Jordan\",\n    \"amount\": {\n        \"value\": \"90000.00\",\n        \"currency\": \"IDR\"\n    },\n    \"notes\": \"your-description-here-12345\",\n    \"additionalInfo\": {\n        \"channelCode\": \"ID_SHOPEEPAY\",\n        \"emailTo\": [\n            \"somebody@gmail.com\"\n        ],\n        \"emailCc\": [\n            \"somebody.else@gmail.com\"\n        ],\n        \"emailBcc\": [\n            \"someone@gmail.com\"\n        ]\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/payouts",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "payouts"
+              ]
+            },
+            "description": "Create Payout. Service code: 43."
+          },
+          "response": [
+            {
+              "name": "Example response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"2004300\",\n  \"responseMessage\": \"Request has been processed successfully\",\n  \"referenceNo\": \"57f1ce05bb1a631a65eee662\",\n  \"partnerReferenceNo\": \"test-transaction-010121\",\n  \"customerNumber\": \"6281773628883\",\n  \"amount\": {\n    \"value\": \"10123.00\",\n    \"currency\": \"IDR\"\n  },\n  \"additionalInfo\": {\n    \"channelCode\": \"ID_SHOPEEPAY\",\n    \"customerName\": \"John Doe\",\n    \"notes\": \"your-description-here-12345\",\n    \"latestTransactionStatus\": \"01\",\n    \"transactionStatusDesc\": \"Initiated\",\n    \"emailTo\": [\n      \"somebody@email.com\"\n    ],\n    \"emailCc\": [\n      \"somebody.else@gmail.com\"\n    ],\n    \"emailBcc\": [\n      \"someone@mail.co\"\n    ],\n    \"created\": \"2020-07-10 15:00:00\",\n    \"updated\": \"2020-07-12 15:00:00\",\n    \"estimatedArrivalTime\": \"2020-07-13 15:00:00\"\n  }\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Transaction Status Inquiry",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) Your Xendit merchant ID",
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}"
+              },
+              {
+                "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}"
+              },
+              {
+                "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                "key": "X-SIGNATURE",
+                "value": "Yxr/KXLm5X1y/xCpcczaRA8a9h42FwU4stoo282lGwHUnEGViVRV6Fidk601SIcN3aMoNLQvK3c6VR8ZxKz7p6qiU4Y9nS4KVuN5Hq5w/Q/mYIUYuckkugj+VwPb2/1EDeM8qU4VwEHGC5ivKNNT2DpJ8uH3EY35QX0RtEKPdysI2ZH3y63/+Dl5Nu0CS7IPKC/yjXBNQumhSrVf8lAfKKE9PeAiO5J+3vdG+1dllBHuWn0VhHkNAAmr5ntJwgkKWP6ifIsdiqefyFAShlxvhT9yJpIuF9n+9ofHcFYnJIYOVuFayW5P20+wglx4fIKYJn6GO4WffvJ3WR5oblrFYQ=="
+              },
+              {
+                "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                "key": "X-TIMESTAMP",
+                "value": "2022-11-10T15:30:12Z"
+              },
+              {
+                "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                "key": "CHANNEL-ID",
+                "value": "test1"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"originalPartnerReferenceNo\": \"test-transaction-010121\",\n  \"serviceCode\": \"38\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/v1.0/payouts-status",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "v1.0",
+                "payouts-status"
+              ]
+            },
+            "description": "Get Transaction Status Inquiry. Service code: 39."
+          },
+          "response": [
+            {
+              "name": "Example response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"2003900\",\n  \"responseMessage\": \"Successful\",\n  \"originalPartnerReferenceNo\": \"test-transaction-010121\",\n  \"originalReferenceNo\": \"57f1ce05bb1a631a65eee662\",\n  \"serviceCode\": \"38\",\n  \"amount\": {\n    \"value\": \"10123.00\",\n    \"currency\": \"IDR\"\n  },\n  \"latestTransactionStatus\": \"00\",\n  \"transactionStatusDesc\": \"Success\",\n  \"additionalInfo\": {\n    \"businessId\": \"5785e6334d7b410667d355c4\",\n    \"channelCode\": \"ID_SHOPEEPAY\",\n    \"customerName\": \"John Doe\",\n    \"customerNumber\": \"6281773628883\",\n    \"notes\": \"your-description-here-12345\",\n    \"emailTo\": [\n      \"somebody@email.com\"\n    ],\n    \"emailCc\": [\n      \"somebody.else@gmail.com\"\n    ],\n    \"emailBcc\": [\n      \"someone@mail.co\"\n    ],\n    \"created\": \"2020-07-10 15:00:00\",\n    \"updated\": \"2020-07-12 15:00:00\",\n    \"estimatedArrivalTime\": \"2020-07-13 15:00:00\"\n  }\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            },
+            {
+              "name": "An error occured. More information can be found in the provided response code and response message.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) Must be set to application/json",
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "(Required) Your Xendit merchant ID",
+                    "key": "X-PARTNER-ID",
+                    "value": "6260cfebbb778e3602af3cdf"
+                  },
+                  {
+                    "description": "(Required) Also known as idempotency key. Provided to prevent duplicate requests. Can be equal to any UUID. Idempotency keys are stored on the request layer; it expires after 24 hours from the first request.",
+                    "key": "X-EXTERNAL-ID",
+                    "value": "f4d53a90-86aa-46f4-8738-169a4912eff0"
+                  },
+                  {
+                    "description": "(Required) Non-repudiation signature for the request. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "X-SIGNATURE",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Timestamp for the non-repudiation signature. Format must be yyyy-MM-ddTHH:mm:ssTZD.",
+                    "key": "X-TIMESTAMP",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Contains the OAuth2 Bearer Token. See [this article](docs/Xendit-OAuth2-Security.md) for more info.",
+                    "key": "Authorization",
+                    "value": "amet reprehenderit mollit exercitation"
+                  },
+                  {
+                    "description": "(Required) Device identification on which the API services is currently being accessed by the end user. If not available, set to 'unknown'.",
+                    "key": "CHANNEL-ID",
+                    "value": "amet reprehenderit mollit exercitation"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/snap/v1.0/payouts-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "snap",
+                    "v1.0",
+                    "payouts-status"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"responseCode\": \"Ut do proident elit\",\n  \"responseMessage\": \"adipisicing fugiat cillum ut\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Remittances",
+      "item": [
+        {
+          "name": "Create Remittance",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-08-30T09:22:00Z",
+                "description": "2022-08-30T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"partnerReferenceNo\": \"bi-snap-smock-test-{{$timestamp}}\",\r\n  \"amount\": {\r\n    \"value\": \"25000.00\",\r\n    \"currency\": \"IDR\"\r\n  },\r\n  \"notes\": \"uang test\",\r\n  \"additionalInfo\": {\r\n    \"purposeCode\": \"FAMILY\",\r\n    \"sourceOfFunds\": \"PERSONAL_SAVINGS\",\r\n    \"senderCustomerId\": \"e55d073c-ec11-4b53-a7a5-a974f634accb\",\r\n    \"recipientCustomerId\": \"5542e10f-92f2-4fc1-96df-74253313f12a\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/remittances/v1.0/emoney/top-up",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "remittances",
+                "v1.0",
+                "emoney",
+                "top-up"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Remittance Payout",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-08-30T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"originalPartnerReferenceNo\": \"bi-snap-smock-test-1667443523\",\r\n  \"serviceCode\": \"38\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/remittances/v1.0/emoney/topup-status",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "remittances",
+                "v1.0",
+                "emoney",
+                "topup-status"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Remittance Collection Virtual Account",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-12-24T07:39:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "12345",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"trxId\": \"bi_snap_test_32132128192\",\r\n  \"expiredDate\": \"2024-12-31T23:59:59-07:00\",\r\n  \"virtualAccountNo\": \"9999654481\",\r\n  \"virtualAccountName\": \"Test Luminto Remittance VA\",\r\n  \"additionalInfo\": {\r\n    \"senderCustomerId\": \"8e806b54-a85a-4ec2-a8b4-090998aa7a6e\",\r\n    \"channelCode\": \"BRI\",\r\n    \"reusability\": \"ONE_TIME_USE\"\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/remittance-collections/v1.0/transfer-va/create-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "remittance-collections",
+                "v1.0",
+                "transfer-va",
+                "create-va"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refund Remittance Collection Virtual Account Payment",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "XkzFSfpAuE8QSkOaHjiodvVz/nbU+pWSwOynaEnJWfCDq0KSCk+oBsUSsKaD1wvFjlwkEkoMGq3HeGIy0IZA6oN7lHEalmg375SAAxolp/pC9KS6BjjpxroNWZOSdm2r4LbJHyTqhIy7Z65/qLWa622fUHNYH4sNvJ7/gxpHtE0CZFvCRbyyjlvu1FiTkRFXNJJXAKp81KTxcYXomk1qt4N0QoQmJd7YIh67J1ZwS2AvYbXZlZbRD128cy1fxwErEQYMhlUIx/m9rjb8u28OXuc/9AsGBCs4XbYjVk8TYjzmlhlc11/GPjashwy5mOAQJqf8S8wpbLl1kiX8ZRtSEw==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-08-30T09:22:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "{{channel-id}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"partnerReferenceNo\": \"rcvap-6ef438f8-976e-49bd-aab3-60ab5cd4f289\",\r\n  \"customerNumber\": \"1234567890\",\r\n  \"customerName\": \"Ichwano Sembo\",\r\n  \"additionalInfo\": {\r\n    \"virtualAccountInfo\": {\r\n      \"id\": \"rcva-127a27e9-85cf-44b1-9563-fef5a4b26289\"\r\n    },\r\n    \"channelCode\": \"BRI\",\r\n    \"metadata\": {\r\n      \"message\": \"Test Remittance Collection Refund\"\r\n    }\r\n  }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/remittance-collections/v1.0/emoney/top-up",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "remittance-collections",
+                "v1.0",
+                "emoney",
+                "top-up"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Deactivate existing Remittance Collection Virtual Account",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-PARTNER-ID",
+                "value": "{{client-id}}",
+                "type": "text"
+              },
+              {
+                "key": "X-EXTERNAL-ID",
+                "value": "{{$timestamp}}",
+                "type": "text"
+              },
+              {
+                "key": "X-SIGNATURE",
+                "value": "AcqMzEv4V+p7s1SZtOG6VPc0tLxwPLExwisNrIFtfeQiXLuoc0v0gx08iFmVowJwrxaxoTk5v7bio72MM7OzwtoPgeTU7GuhexPbqhSt/ZiVqBIs55t9KyhTtRMpUEqHpBxQ2SCLpuHEbXjs+hRwGw6tQ7V2293O1dnJXfSwzfie+MESKxvswsjaJsF5IxsCJzjUM/BoN4iym7ZExXkHAenAR/yjT/ZtNakiMhj9+0xERnG+VPWOamy7rokpYvJUtkOBv+HjbEmzNl56lWbTujJgH8iwGG6KCmXXX4NEQUtHbFG81AhBopnnsdgMNPEeEqPUQrlJ+CWtF3XKy1YN5g==",
+                "type": "text"
+              },
+              {
+                "key": "X-TIMESTAMP",
+                "value": "2022-11-17T03:25:00Z",
+                "type": "text"
+              },
+              {
+                "key": "CHANNEL-ID",
+                "value": "12345",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"partnerServiceId\": \"13281\",\r\n  \"customerNo\": \"9999654483\",\r\n  \"virtualAccountNo\": \"132819999654483\",\r\n  \"virtualAccountName\": \"Test Irfan Prod Dev\",\r\n  \"trxId\": \"bi_snap_test_123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/snap/remittance-collections/v1.0/transfer-va/delete-va",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "snap",
+                "remittance-collections",
+                "v1.0",
+                "transfer-va",
+                "delete-va"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Customer",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{secret-api-key}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"external_id\": \"r-1235-{{$guid}}\",\n  \"customer_type\": \"INDIVIDUAL\",\n  \"given_name\": \"Ichwano\",\n  \"surname\": \"Sembo\",\n  \"address\": {\n      \"country_code\": \"ID\",\n      \"province\": \"DKI Jakarta\",\n      \"city\": \"Jakarta Selatan\",\n      \"line_1\": \"Jl. Senayan 1 No.15\"\n  },\n  \"date_of_birth\": \"11-01-1990\",\n  \"identification\": {\n      \"ktp_number\": \"0987654321320987\",\n      \"npwp_number\": \"098765432132098\"\n  },\n  \"account_details\": {\n      \"currency\": \"IDR\",\n      \"account_code\": \"PERMATA\",\n      \"account_number\": \"111111\",\n      \"account_holder_name\": \"Ichwano\"\n  },\n  \"email\": \"ichwano@email.com\",\n  \"mobile_number\": \"+628111555777\",\n  \"phone_number\": \"+622199990000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{xendit-url}}/customers",
+              "host": [
+                "{{xendit-url}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "client-id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "private-key",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
