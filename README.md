@@ -21,6 +21,9 @@ If you work with several providers and need a single source of truth for API def
 - Xendit API
 - Xendit SNAP API
 - Fastpay API
+- Finpay Billing API
+- Finpay Disbursement API
+- Finpay Payment Gateway API
 
 ## Repository structure
 
@@ -29,8 +32,9 @@ If you work with several providers and need a single source of truth for API def
   - `doku/`
   - `xendit/`
   - `fastpay/`
+  - `finpay/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -44,7 +48,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -86,6 +90,9 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
 - `openapi/fastpay/fastpay.openapi.yaml`
+- `openapi/finpay/finpay-billing.openapi.yaml`
+- `openapi/finpay/finpay-disbursement.openapi.yaml`
+- `openapi/finpay/finpay-payment-gateway.openapi.yaml`
 
 ## Contributing
 

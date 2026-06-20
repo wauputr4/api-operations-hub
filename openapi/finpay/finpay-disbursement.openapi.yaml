@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: Finpay Disbursement
+  version: 1.0.0
+paths:
+  /bank:
+    get:
+      summary: List of Bank
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              List of Bank:
+                value: "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"d191f909-d443-4d18-855c-aaea045f9a78\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321770\",\r\n        \"destBankCode\": \"07615\"\r\n    }\r\n}"
+  /inquiry/91161/654321772:
+    get:
+      summary: Inquiry
+      security:
+        - basicAuth: []
+  /transfer:
+    post:
+      summary: Transfer
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Transfer:
+                value: "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"e2010b92426345d88605f6d56cbc80d6\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321772\",\r\n        \"destBankCode\": \"91161\"\r\n    }\r\n}"
+  /check/91161/654321770/fa18bdad5d2f4d1ea3094027e42aa353:
+    get:
+      summary: Check Status
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Check Status:
+                value: "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"d191f909-d443-4d18-855c-aaea045f9a78\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321770\",\r\n        \"destBankCode\": \"07615\"\r\n    }\r\n}"
+  /balance:
+    get:
+      summary: Check Balance
+      security:
+        - basicAuth: []
+  /balance/history:
+    post:
+      summary: Balance History
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Balance History:
+                value: "{\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\"\r\n    },\r\n    \"startDate\": \"2023-06-01\",\r\n    \"endDate\": \"2023-09-01\"\r\n}"
+  /report:
+    post:
+      summary: Report
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Report:
+                value: "{\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\"\r\n    },\r\n    \"startDate\": \"2023-06-01\",\r\n    \"endDate\": \"2023-09-01\"\r\n}"
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+servers:
+  - url: https://{adapterMerchant}disbursement
+    variables:
+      adapterMerchant:
+        default: example.com
+        description: Declared in Postman collection variables.

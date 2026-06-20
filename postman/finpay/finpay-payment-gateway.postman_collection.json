@@ -1,0 +1,3113 @@
+{
+	"info": {
+		"_postman_id": "12e4e168-1e9b-471d-a5d5-3560073c93cf",
+		"name": "Finpay Payment Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13780641"
+	},
+	"item": [
+		{
+			"name": "Hosted Payment",
+			"item": [
+				{
+					"name": "Initiate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var date = Date.now()\r",
+									"var orderId = date\r",
+									"var bodyRaw = pm.request.body\r",
+									"pm.environment.set(\"orderId\", orderId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"10000\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adapterMerchant}}initiate",
+							"host": [
+								"{{adapterMerchant}}initiate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Core API",
+			"item": [
+				{
+					"name": "Credit Card",
+					"item": [
+						{
+							"name": "Advance Payment",
+							"item": [
+								{
+									"name": "Save Card",
+									"item": [
+										{
+											"name": "Transaction using stored card",
+											"item": [
+												{
+													"name": "Two Click Payment",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"var date = Date.now()\r",
+																	"var orderId = date\r",
+																	"var bodyRaw = pm.request.body\r",
+																	"pm.environment.set(\"orderId\", orderId)"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "password",
+																	"value": "{{passMerchant}}",
+																	"type": "string"
+																},
+																{
+																	"key": "username",
+																	"value": "{{userMerchant}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"card\": {\r\n        \"token\": \"f37a16436b98dcf3f144ae60ade56f8f14fd392faac57b71f46996c6200e9940\",\r\n        \"storedOnFile\": \"STORED\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{adapterMerchant}}initiate",
+															"host": [
+																"{{adapterMerchant}}initiate"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "One Click Payment",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"var date = Date.now()\r",
+																	"var orderId = date\r",
+																	"var bodyRaw = pm.request.body\r",
+																	"pm.environment.set(\"orderId\", orderId)"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "password",
+																	"value": "{{passMerchant}}",
+																	"type": "string"
+																},
+																{
+																	"key": "username",
+																	"value": "{{userMerchant}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"card\": {\r\n        \"token\": \"3dce54055851edb46a18b77bcd876b38aa00ed1380d526d48767a6418189b646\",\r\n        \"storedOnFile\": \"STORED\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{adapterMerchant}}payment",
+															"host": [
+																"{{adapterMerchant}}payment"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Stored Card Initiation",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"var date = Date.now()\r",
+															"var orderId = date\r",
+															"var bodyRaw = pm.request.body\r",
+															"pm.environment.set(\"orderId\", orderId)"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "{{passMerchant}}",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "{{userMerchant}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288800\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    },\r\n    \"card\": {\r\n        \"storedOnFile\": \"TO_BE_STORED\"\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{adapterMerchant}}initiate",
+													"host": [
+														"{{adapterMerchant}}initiate"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Retrieve Stored Card",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "{{passMerchant}}",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "{{userMerchant}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\"\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{adapterMerchant}}customer",
+													"host": [
+														"{{adapterMerchant}}customer"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete Stored Card",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "{{passMerchant}}",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "{{userMerchant}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{adapterMerchant}}customer/delete/b261fed76b65246f39f344a84443251cb1608c972f8e4e72a5eabc3992e4f94d",
+													"host": [
+														"{{adapterMerchant}}customer"
+													],
+													"path": [
+														"delete",
+														"b261fed76b65246f39f344a84443251cb1608c972f8e4e72a5eabc3992e4f94d"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Direct Integration",
+									"item": [
+										{
+											"name": "3DS Transaction",
+											"item": [
+												{
+													"name": "ThreeDS initiate",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"var date = Date.now()\r",
+																	"var orderId = date\r",
+																	"var bodyRaw = pm.request.body\r",
+																	"pm.environment.set(\"orderId\", orderId)"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "password",
+																	"value": "{{passMerchant}}",
+																	"type": "string"
+																},
+																{
+																	"key": "username",
+																	"value": "{{userMerchant}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"threeDsResponseUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"card\": {\r\n        \"number\": \"5123450000000008\"\r\n    },\r\n    \"device\": {\r\n        \"ani\": \"1\",\r\n        \"aniCallType\": \"ID\",\r\n        \"browser\": \"MOZILLA\",\r\n        \"fingerprint\": \"121311\",\r\n        \"hostname\": \"telkom\",\r\n        \"ipAddress\": \"202.1.201.1\",\r\n        \"mobilePhoneModel\": \"ANDROID\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{adapterMerchant}}threeds/initiate",
+															"host": [
+																"{{adapterMerchant}}threeds"
+															],
+															"path": [
+																"initiate"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "ThreeDS auth payer",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"var date = Date.now()\r",
+																	"var orderId = date\r",
+																	"var bodyRaw = pm.request.body\r",
+																	"pm.environment.set(\"orderId\", orderId)"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "password",
+																	"value": "{{passMerchant}}",
+																	"type": "string"
+																},
+																{
+																	"key": "username",
+																	"value": "{{userMerchant}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"card\": {\r\n        \"number\": \"5123450000000008\",\r\n        \"expiryDate\": \"3309\",\r\n        \"cvv\": \"100\",\r\n        \"nameOnCard\": \"Hajar Direct\"\r\n    },\r\n    \"transaction\": {\r\n        \"sessionId\": \"429ac6006921d6052488b9e8fb35ac88a5294391dda8b503e5324e7dc2b1071e\"\r\n    }\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{adapterMerchant}}threeds/auth/payer",
+															"host": [
+																"{{adapterMerchant}}threeds"
+															],
+															"path": [
+																"auth",
+																"payer"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "ThreeDS auth payment",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"exec": [
+																	"var date = Date.now()\r",
+																	"var orderId = date\r",
+																	"var bodyRaw = pm.request.body\r",
+																	"pm.environment.set(\"orderId\", orderId)"
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"auth": {
+															"type": "basic",
+															"basic": [
+																{
+																	"key": "password",
+																	"value": "{{passMerchant}}",
+																	"type": "string"
+																},
+																{
+																	"key": "username",
+																	"value": "{{userMerchant}}",
+																	"type": "string"
+																}
+															]
+														},
+														"method": "POST",
+														"header": [],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n    \"mpgsOrderId\": \"16855246307381000000000\",\r\n    \"mpgsTransactionId\": \"e626fc1f-3a87-4485-8caf-996d6354830f\"\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{adapterMerchant}}threeds/auth/payment",
+															"host": [
+																"{{adapterMerchant}}threeds"
+															],
+															"path": [
+																"auth",
+																"payment"
+															]
+														}
+													},
+													"response": []
+												}
+											]
+										},
+										{
+											"name": "Non 3DS Transaction",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"var date = Date.now()\r",
+															"var orderId = date\r",
+															"var bodyRaw = pm.request.body\r",
+															"pm.environment.set(\"orderId\", orderId)"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "basic",
+													"basic": [
+														{
+															"key": "password",
+															"value": "{{passMerchant}}",
+															"type": "string"
+														},
+														{
+															"key": "username",
+															"value": "{{userMerchant}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"card\": {\r\n        \"number\": \"5123450000000008\",\r\n        \"expiryDate\": \"3309\",\r\n        \"cvv\": \"100\",\r\n        \"nameOnCard\": \"Hajar Direct\"\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{adapterMerchant}}payment",
+													"host": [
+														"{{adapterMerchant}}payment"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Capture",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"order\": {\r\n        \"id\": \"1665562363188\",\r\n        \"amount\": \"200\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}capture",
+											"host": [
+												"{{adapterMerchant}}capture"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Filter BIN",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"transactionFiltering\": {\r\n            \"cardBin\": [\r\n                \"443426\"\r\n            ]\r\n        }\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Filter Card Type",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"transactionFiltering\": {\r\n            \"cardType\": [\r\n                \"DEBIT\"\r\n            ]\r\n        }\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Filter Point",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"10000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"transactionFiltering\": {\r\n            \"point\": {\r\n                \"last4\": \"0008\",\r\n                \"ownedPoints\": \"9999\",\r\n                \"rule\": [\r\n                    {\r\n                        \"cardBin\": \"512345\",\r\n                        \"pointToIdr\": \"5\",\r\n                        \"min\": {\r\n                            \"amount\": \"1000\"\r\n                        },\r\n                        \"max\": {\r\n                            \"amount\": \"150000\",\r\n                            \"disc\": \"50\"\r\n                        }\r\n                    }\r\n                ]\r\n            }\r\n        }\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Custom Acquirer",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://service2-dev.reddotpayment.com/service/payment-notify-handler\"\r\n    },\r\n    \"transaction\": {\r\n        \"acquirerId\" : \"12345678\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Custom FDS",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"900\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://service2-dev.reddotpayment.com/service/payment-notify-handler\"\r\n    },\r\n    \"transaction\": {\r\n        \"fdsId\" : \"000369990001\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Recurring",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"recurring\": {\r\n        \"type\": \"PURCHASE\",\r\n        \"id\": \"abcd\",\r\n        \"amount\": \"1000\",\r\n        \"interval\": \"1\",\r\n        \"intervalUnit\": \"monthly\",\r\n        \"maxInterval\": \"2\",\r\n        \"startDate\": \"20231027\",\r\n        \"endDate\": \"20231029\",\r\n        \"retry\": {\r\n            \"interval\": \"1\",\r\n            \"intervalUnit\": \"minutes\",\r\n            \"maxInterval\": \"1\"\r\n        }\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}initiate",
+											"host": [
+												"{{adapterMerchant}}initiate"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Basic Payment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288800\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"cc\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Virtual Akun",
+					"item": [
+						{
+							"name": "Open Payment",
+							"item": [
+								{
+									"name": "Register VA",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var key = 'mykey'\r",
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"aldo.finnet@gmail.com\",\r\n        \"email\": \"aldo.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabca\",\r\n        \"paymentCode\": \"8804483313131314\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}openpayment/register",
+											"host": [
+												"{{adapterMerchant}}openpayment"
+											],
+											"path": [
+												"register"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update VA",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var key = 'mykey'\r",
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"aldo.finnet@gmail.com\",\r\n        \"email\": \"aldo.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabca\",\r\n        \"paymentCode\": \"8804483313131313\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{adapterMerchant}}openpayment/update",
+											"host": [
+												"{{adapterMerchant}}openpayment"
+											],
+											"path": [
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Check VA",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var key = 'mykey'\r",
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{adapterMerchant}}openpayment/check/vabca/8804483313131312",
+											"host": [
+												"{{adapterMerchant}}openpayment"
+											],
+											"path": [
+												"check",
+												"vabca",
+												"8804483313131312"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete VA",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													"var key = 'mykey'\r",
+													"var date = Date.now()\r",
+													"var orderId = date\r",
+													"var bodyRaw = pm.request.body\r",
+													"pm.environment.set(\"orderId\", orderId)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "basic",
+											"basic": [
+												{
+													"key": "password",
+													"value": "{{passMerchant}}",
+													"type": "string"
+												},
+												{
+													"key": "username",
+													"value": "{{userMerchant}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{adapterMerchant}}openpayment/delete/vabca/8804483313131313",
+											"host": [
+												"{{adapterMerchant}}openpayment"
+											],
+											"path": [
+												"delete",
+												"vabca",
+												"8804483313131313"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "VA BCA",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+62 81286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandboxx.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabca\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BRI",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabri\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BSI",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabsi\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA Maybank",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vamaybank\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA Permata",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vapermata\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA Mandiri",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vamandiri\",\r\n        \"paymentCode\": \"8802700099980062\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BJB",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabjb\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BTN",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabtn\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BNI",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabni\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA BNC",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabnc\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VA Muamalat",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vamuamalat\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Emoney",
+					"item": [
+						{
+							"name": "Virgo",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"virgo\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LinkAja App",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"200\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"linkaja\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LinkAja WCO",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{passMerchant}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{userMerchant}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"linkajawco\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ShopeePay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"shopeepay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Dana",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"200\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"category\": \"apa\",\r\n                \"description\": \"apalah\",\r\n                \"unitPrice\": \"100\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"category\": \"apa\",\r\n                \"description\": \"apalah\",\r\n                \"unitPrice\": \"100\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"dana\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Gopay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"gopay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "OVO",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"ovo\",\r\n        \"accountId\":\"082232565453\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "JeniusPay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"jeniuspay\",\r\n        \"accountId\" : \"$testjenpay4\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Finpay Money",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"id\": \"hajar.finnet@gmail.com\",\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"finpaymoney\",\r\n        \"accountId\" : \"6281286288844\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Instan Payment",
+					"item": [
+						{
+							"name": "OctoClicks",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"octoclicks\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BSecure",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"200\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"100\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"bsecure\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PermataNet",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"successUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"permatanet\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Danamon Online",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"dbank\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BCA Klikpay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"klikpay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PayLater & Installments",
+					"item": [
+						{
+							"name": "Kredivo",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"100000\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"50000\",\r\n                \"url\": \"https://finpay.id\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"unitPrice\": \"50000\",\r\n                \"url\": \"https://finpay.id\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"kredivo\"\r\n    },\r\n    \"billing\": {\r\n        \"address\": {\r\n            \"city\": \"Jakarta Selatan\",\r\n            \"country\": \"IDN\",\r\n            \"postcodeZip\": \"12740\",\r\n            \"street\": \"Jalan Gatot Subroto\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Indodana",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\",\r\n        \"item\": [\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"category\": \"marketplace\",\r\n                \"description\": \"apalah\",\r\n                \"unitPrice\": \"500000\"\r\n            },\r\n            {\r\n                \"name\": \"name\",\r\n                \"quantity\": \"1\",\r\n                \"category\": \"marketplace\",\r\n                \"description\": \"apalah\",\r\n                \"unitPrice\": \"500000\"\r\n            }\r\n        ]\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"indodana\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Bayar dengan QR",
+					"item": [
+						{
+							"name": "QRIS",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"qris\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Alipay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"14000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"alipay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Wechat Pay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"14000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"wechatpay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UnionPay",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"var key = 'mykey'\r",
+											"var date = Date.now()\r",
+											"var orderId = date\r",
+											"var bodyRaw = pm.request.body\r",
+											"pm.environment.set(\"orderId\", orderId)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "mykey",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "FINPAY770",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"14000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"unionpay\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{adapterMerchant}}initiate",
+									"host": [
+										"{{adapterMerchant}}initiate"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Finpay Payment Code",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var key = 'mykey'\r",
+									"var date = Date.now()\r",
+									"var orderId = date\r",
+									"var bodyRaw = pm.request.body\r",
+									"pm.environment.set(\"orderId\", orderId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"finpaycode\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adapterMerchant}}initiate",
+							"host": [
+								"{{adapterMerchant}}initiate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Indomaret",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var key = 'mykey'\r",
+									"var date = Date.now()\r",
+									"var orderId = date\r",
+									"var bodyRaw = pm.request.body\r",
+									"pm.environment.set(\"orderId\", orderId)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"indomaret\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adapterMerchant}}initiate",
+							"host": [
+								"{{adapterMerchant}}initiate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "After Payment",
+			"item": [
+				{
+					"name": "Refund",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order\": {\r\n        \"id\": \"1693554115938\",\r\n        \"amount\": \"12000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{adapterMerchant}}refund",
+							"host": [
+								"{{adapterMerchant}}refund"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Status",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{adapterMerchant}}check/ed874ae961964cee95f408b3125e3d",
+							"host": [
+								"{{adapterMerchant}}check"
+							],
+							"path": [
+								"ed874ae961964cee95f408b3125e3d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Void",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{passMerchant}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{userMerchant}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{adapterMerchant}}void/1693899149093",
+							"host": [
+								"{{adapterMerchant}}void"
+							],
+							"path": [
+								"1693899149093"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

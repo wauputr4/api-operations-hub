@@ -9,6 +9,9 @@ OpenAPI modern dibuat dari Postman collections:
 - Xendit API: [postman/xendit/xendit.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/xendit/xendit.postman_collection.json)
 - Xendit SNAP: [postman/xendit/xendit-snap.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/xendit/xendit-snap.postman_collection.json)
 - Fastpay API: [postman/fastpay/fastpay.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/fastpay/fastpay.postman_collection.json)
+- Finpay Billing: [postman/finpay/finpay-billing.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-billing.postman_collection.json)
+- Finpay Disbursement: [postman/finpay/finpay-disbursement.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-disbursement.postman_collection.json)
+- Finpay Payment Gateway: [postman/finpay/finpay-payment-gateway.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-payment-gateway.postman_collection.json)
 
 ## Output (OpenAPI modern)
 - [openapi/midtrans/midtrans.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/midtrans/midtrans.openapi.yaml)
@@ -16,6 +19,9 @@ OpenAPI modern dibuat dari Postman collections:
 - [openapi/xendit/xendit.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/xendit/xendit.openapi.yaml)
 - [openapi/xendit/xendit-snap.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/xendit/xendit-snap.openapi.yaml)
 - [openapi/fastpay/fastpay.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/fastpay/fastpay.openapi.yaml)
+- [openapi/finpay/finpay-billing.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-billing.openapi.yaml)
+- [openapi/finpay/finpay-disbursement.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-disbursement.openapi.yaml)
+- [openapi/finpay/finpay-payment-gateway.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-payment-gateway.openapi.yaml)
 
 ## Cleanup yang dilakukan
 - Semua `/v2/[INSERT-ORDER-ID]/...` (hanya di Midtrans) dinormalisasi jadi `/v2/{order_id}/...`.
@@ -33,6 +39,9 @@ npm run clean-openapi-modern
 - `openapi/xendit/xendit.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/xendit/xendit-snap.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/fastpay/fastpay.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
+- `openapi/finpay/finpay-billing.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
+- `openapi/finpay/finpay-disbursement.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
+- `openapi/finpay/finpay-payment-gateway.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 
 ## Ringkasan cepat (setelah convert)
 - Midtrans: `10` path, `10` operasi
@@ -40,6 +49,9 @@ npm run clean-openapi-modern
 - Xendit: `100` path, `116` operasi
 - Xendit SNAP: `13` path, `13` operasi
 - Fastpay: `10` path, `10` operasi
+- Finpay Billing: `1` path, `1` operasi
+- Finpay Disbursement: `7` path, `7` operasi
+- Finpay Payment Gateway: `11` path, `11` operasi
 
 ## Catatan kualitas
 Konversi modern tetap endpoint-complete dari source collection, tapi belum semua schema/request-response di-hardcode.
