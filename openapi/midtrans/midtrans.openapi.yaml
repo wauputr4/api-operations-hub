@@ -1,0 +1,812 @@
+openapi: 3.1.0
+info:
+  title: Midtrans Payment API
+  version: 1.0.0
+  description: |-
+    Basic example of Midtrans.com payment API usage.
+    Including usage of:
+    - SNAP API
+    - Core API
+paths:
+  /snap/v1/transactions:
+    post:
+      tags:
+        - 1. SNAP API Sandbox
+        - 1.1 SNAP API Sandbox - Additional feature
+      summary: SNAP Custom Virtual Account Number Bank Transfer
+      description: >-
+        SNAP transaction token request with recommended parameter.
+
+        Learn more about the parameters here:
+
+        https://snap-docs.midtrans.com/#json-parameter-request-body
+
+
+        SNAP transaction token request with additional parameter to specify
+        custom VA number for bank transfer transaction (bca, permata, bni va).
+
+        Learn more about the parameters here:
+
+        https://snap-docs.midtrans.com/#custom-virtual-account-number
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            SNAP Custom Virtual Account Number Bank Transfer:
+              value: application/json
+              x-disabled: false
+            1.c.  Full Custom SNAP transaction token request (include optionals):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            SNAP Custom Virtual Account Number Bank Transfer:
+              value: application/json
+              x-disabled: false
+            1.c.  Full Custom SNAP transaction token request (include optionals):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              SNAP Custom Virtual Account Number Bank Transfer:
+                value: |-
+                  {
+                    "transaction_details": {
+                      "order_id": "ORDER-101-9-{{$timestamp}}",
+                      "gross_amount": 10000
+                    },
+                    "credit_card": {
+                      "secure": true
+                    },
+                    "bca_va": {
+                      "va_number": "12345678901"
+                    },
+                    "permata_va": {
+                      "va_number": "1234567890"
+                    },
+                    "bni_va": {
+                      "va_number": "12345678"
+                    }
+                  }
+              1.c.  Full Custom SNAP transaction token request (include optionals):
+                value: |-
+                  {
+                    "transaction_details": {
+                      "order_id": "ORDER-105-{{$timestamp}}",
+                      "gross_amount": 10000
+                    },
+                    "item_details": [{
+                      "id": "ITEM1",
+                      "price": 10000,
+                      "quantity": 1,
+                      "name": "Midtrans Bear",
+                      "brand": "Midtrans",
+                      "category": "Toys",
+                      "merchant_name": "Midtrans"
+                    }],
+                    "customer_details": {
+                      "first_name": "John",
+                      "last_name": "Watson",
+                      "email": "test@example.com",
+                      "phone": "+628123456",
+                      "billing_address": {
+                        "first_name": "John",
+                        "last_name": "Watson",
+                        "email": "test@example.com",
+                        "phone": "081 2233 44-55",
+                        "address": "Sudirman",
+                        "city": "Jakarta",
+                        "postal_code": "12190",
+                        "country_code": "IDN"
+                      },
+                      "shipping_address": {
+                        "first_name": "John",
+                        "last_name": "Watson",
+                        "email": "test@example.com",
+                        "phone": "0 8128-75 7-9338",
+                        "address": "Sudirman",
+                        "city": "Jakarta",
+                        "postal_code": "12190",
+                        "country_code": "IDN"
+                      }
+                    },
+                    "enabled_payments": ["credit_card", "mandiri_clickpay", "cimb_clicks","bca_klikbca", "bca_klikpay", "bri_epay", "echannel","mandiri_ecash", "permata_va", "bca_va", "bni_va", "other_va", "gopay", "indomaret", "alfamart", "danamon_online", "akulaku"],
+                    "credit_card": {
+                      "secure": true,
+                      "bank": "bca",
+                      "installment": {
+                        "required": false,
+                        "terms": {
+                          "bni": [3, 6, 12],
+                          "mandiri": [3, 6, 12],
+                          "cimb": [3],
+                          "bca": [3, 6, 12],
+                          "offline": [6, 12]
+                        }
+                      },
+                      "whitelist_bins": [
+                        "48111111",
+                        "41111111"
+                      ]
+                    },
+                    "bca_va": {
+                      "va_number": "12345678911",
+                      "sub_company_code": "00000",
+                      "free_text": {
+                        "inquiry": [
+                          {
+                            "en": "text in English",
+                            "id": "text in Bahasa Indonesia"
+                          }
+                        ],
+                        "payment": [
+                          {
+                            "en": "text in English",
+                            "id": "text in Bahasa Indonesia"
+                          }
+                        ]
+                      }
+                    },
+                    "bni_va": {
+                      "va_number": "12345678"
+                    },
+                    "permata_va": {
+                      "va_number": "1234567890",
+                      "recipient_name": "SUDARSONO"
+                    },
+                    "callbacks": {
+                      "finish": "https://demo.midtrans.com"
+                    },
+                    "expiry": {
+                      "start_time": "2019-12-13 18:11:08 +0700",
+                      "unit": "minutes",
+                      "duration": 1
+                    },
+                    "custom_field1": "custom field 1 content",
+                    "custom_field2": "custom field 2 content",
+                    "custom_field3": "custom field 3 content"
+                  }
+      servers:
+        - url: https://app.sandbox.midtrans.com
+  /v2/{order_id}/status:
+    get:
+      tags:
+        - 1. SNAP API Sandbox
+        - 2. Core API Sandbox
+      summary: GET transaction status
+      description: Get information status of a transaction with certain order_id
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            'GET transaction status #1':
+              value: application/json
+              x-disabled: false
+            GET transaction status:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            'GET transaction status #1':
+              value: application/json
+              x-disabled: false
+            GET transaction status:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'GET transaction status #1':
+                value: ''
+              GET transaction status:
+                value: ''
+  /v2/{order_id}/approve:
+    post:
+      tags:
+        - 1. SNAP API Sandbox
+        - 2. Core API Sandbox
+      summary: APPROVE transaction that suspected as fraud (challange status)
+      description: >-
+        Approve a transaction with certain order_id which gets challenge status
+        from Fraud Detection System
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            'APPROVE transaction that suspected as fraud (challange status) #1':
+              value: application/json
+              x-disabled: false
+            APPROVE transaction that suspected as fraud (challange status):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            'APPROVE transaction that suspected as fraud (challange status) #1':
+              value: application/json
+              x-disabled: false
+            APPROVE transaction that suspected as fraud (challange status):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'APPROVE transaction that suspected as fraud (challange status) #1':
+                value: ''
+              APPROVE transaction that suspected as fraud (challange status):
+                value: ''
+  /v2/{order_id}/deny:
+    post:
+      tags:
+        - 1. SNAP API Sandbox
+        - 2. Core API Sandbox
+      summary: DENY transaction that suspected as fraud (challange status)
+      description: >-
+        Deny a transaction with certain order_id which gets challenge status
+        from Fraud Detection System
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            'DENY transaction that suspected as fraud (challange status) #1':
+              value: application/json
+              x-disabled: false
+            DENY transaction that suspected as fraud (challange status):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            'DENY transaction that suspected as fraud (challange status) #1':
+              value: application/json
+              x-disabled: false
+            DENY transaction that suspected as fraud (challange status):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'DENY transaction that suspected as fraud (challange status) #1':
+                value: ''
+              DENY transaction that suspected as fraud (challange status):
+                value: ''
+  /v2/{order_id}/cancel:
+    post:
+      tags:
+        - 1. SNAP API Sandbox
+        - 2. Core API Sandbox
+      summary: CANCEL transaction
+      description: >-
+        Cancel a transaction with certain order_id. Cancelation can only be done
+        before settlement process for credit card transaction
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            'CANCEL transaction #1':
+              value: application/json
+              x-disabled: false
+            CANCEL transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            'CANCEL transaction #1':
+              value: application/json
+              x-disabled: false
+            CANCEL transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'CANCEL transaction #1':
+                value: ''
+              CANCEL transaction:
+                value: ''
+  /v2/{order_id}/refund:
+    post:
+      tags:
+        - 1. SNAP API Sandbox
+        - 2. Core API Sandbox
+      summary: Refund transaction
+      description: >-
+        Refund a transaction with certain order_id. Refund can only be done
+        after settlement process for credit card transaction
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            'Refund transaction #1':
+              value: application/json
+              x-disabled: false
+            Refund transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            'Refund transaction #1':
+              value: application/json
+              x-disabled: false
+            Refund transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'Refund transaction #1':
+                value: |-
+                  {
+                    "amount": 5000,
+                    "reason": "Product is out of stock, payment is being refunded"
+                  }
+              Refund transaction:
+                value: |-
+                  {
+                    "amount": 5000,
+                    "reason": "Product is out of stock, payment is being refunded"
+                  }
+  /v2/token:
+    get:
+      tags:
+        - 2. Core API Sandbox
+        - 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+      summary: GET card token
+      description: >-
+        IMPORTANT: This step should be done via `midtrans.min.js` in Frontend,
+        unless you have PCI DSS certification. Else, you are in risk of card
+        data breach!
+
+        Send Credit/Debit card information to Midtrans server and returns token
+        ID, you need token ID to charge card transaction.
+
+        https://api-docs.midtrans.com/#get-token
+
+
+        IMPORTANT: This step should be done via `midtrans.min.js` in Frontend,
+        unless you have PCI DSS certification. Else, you are in risk of card
+        data breach!
+      responses: {}
+      parameters:
+        - name: client_key
+          in: query
+          examples:
+            Step 3 - Next Transaction Retrieve one-time Card token:
+              value: <YOUR CLIENT KEY HERE>
+              x-disabled: false
+            GET card token:
+              value: <Merchant Client Key>
+              x-disabled: false
+          schema:
+            type: string
+        - name: token_id
+          in: query
+          description: >-
+            Retrieved from Step 2 3DS authenticate frontend callback (and
+            backend Notification)
+          examples:
+            Step 3 - Next Transaction Retrieve one-time Card token:
+              value: <saved_token_id here>
+              x-disabled: false
+          schema:
+            type: string
+        - name: card_cvv
+          in: query
+          examples:
+            Step 3 - Next Transaction Retrieve one-time Card token:
+              value: '123'
+              x-disabled: false
+            GET card token:
+              value: '123'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: Accept
+          in: header
+          examples:
+            Step 3 - Next Transaction Retrieve one-time Card token:
+              value: application/json
+              x-disabled: false
+            GET card token:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Step 3 - Next Transaction Retrieve one-time Card token:
+              value: application/json
+              x-disabled: false
+            GET card token:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: card_number
+          in: query
+          description: credit card number
+          examples:
+            GET card token:
+              value: 4811 1111 1111 1114
+              x-disabled: false
+          schema:
+            type: string
+        - name: card_exp_month
+          in: query
+          description: credit card expiry month
+          examples:
+            GET card token:
+              value: '12'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: card_exp_year
+          in: query
+          description: credit card expiry year
+          examples:
+            GET card token:
+              value: '24'
+              x-disabled: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          text/plain: {}
+          application/json:
+            schema:
+              type: object
+            examples:
+              GET card token:
+                value: ''
+  /v2/charge:
+    post:
+      tags:
+        - 2. Core API Sandbox
+        - 2.1 Core API Sandbox - Additional Feature
+        - 2.2 Core API Credit Card Recurring Flow
+        - 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+      summary: Core API Custom Field
+      description: >-
+        Pre-Authorize card transaction
+
+        Please do get token step first to get token_id.
+
+        https://api-docs.midtrans.com/#card-features-pre-authorization
+
+
+        Request charge transaction with additional parameter to input your
+        custom note/message
+
+
+        Send transaction data and charge the card.
+
+
+        Send transaction data and charge the card.
+      responses: {}
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Step 4 - Next transaction Charge 3DS:
+              value: application/json
+              x-disabled: false
+            Step 2 - Charge non 3DS:
+              value: application/json
+              x-disabled: false
+            Core API Custom Field:
+              value: application/json
+              x-disabled: false
+            Pre-Authorize Credit Card Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Step 4 - Next transaction Charge 3DS:
+              value: application/json
+              x-disabled: false
+            Step 2 - Charge non 3DS:
+              value: application/json
+              x-disabled: false
+            Core API Custom Field:
+              value: application/json
+              x-disabled: false
+            Pre-Authorize Credit Card Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Step 4 - Next transaction Charge 3DS:
+                value: "{\n    \"payment_type\": \"credit_card\",\n    \"credit_card\":{\n    \t\"token_id\": \"/* Card token id retrieved from step 3*/\",\n    \t\"authentication\": true,\n    \t\"save_token_id\": true\n    },\n    \"transaction_details\": {\n        \"order_id\": \"Order-123-{{$timestamp}}\",\n        \"gross_amount\": 10000\n    }\n}"
+              Step 2 - Charge non 3DS:
+                value: "{\n    \"payment_type\": \"credit_card\",\n    \"credit_card\":{\n    \t\"token_id\": \"/* Card token id retrieved from step 1*/\"\t\n    },\n    \"transaction_details\": {\n        \"order_id\": \"Order-123-{{$timestamp}}\",\n        \"gross_amount\": 10000\n    }\n}"
+              Core API Custom Field:
+                value: |-
+                  {
+                    "payment_type": "bank_transfer",
+                      "bank_transfer": {
+                      "bank": "permata"
+                    },
+                    "transaction_details": {
+                      "order_id": "order-102-10-{{$timestamp}}",
+                      "gross_amount": 44000
+                    },
+                    "customer_details": {
+                          "email": "test@Midtrans.com",
+                          "first_name": "budi",
+                          "last_name": "utomo",
+                          "phone": "+6281 1234 1234"
+                      },
+                    "custom_field1": "Your custom notes 1 (max 256 char)",
+                    "custom_field2": "Your custom notes 2 (max 256 char)",
+                    "custom_field3": "Your custom notes 3 (max 256 char)"
+                  }
+              Pre-Authorize Credit Card Transaction:
+                value: |-
+                  {
+                    "payment_type": "credit_card",
+                    "transaction_details": {
+                      "order_id": "order-101r",
+                      "gross_amount": 100000
+                    },
+                    "credit_card": {
+                      "token_id": "< Token ID from Get Token Step >",
+                      "type": "authorize"
+                    },
+                    "item_details": [{
+                        "id": "a1",
+                        "price": 50000,
+                        "quantity": 2,
+                        "name": "Apel",
+                        "brand": "Fuji Apple",
+                        "category": "Fruit",
+                        "merchant_name": "Fruit-store"
+                      }],
+                      "customer_details": {
+                        "first_name": "BUDI",
+                        "last_name": "UTOMO",
+                        "email": "noreply@example.com",
+                        "phone": "+628123456",
+                        "billing_address": {
+                          "first_name": "BUDI",
+                          "last_name": "UTOMO",
+                          "email": "noreply@example.com",
+                          "phone": "081 2233 44-55",
+                          "address": "Sudirman",
+                          "city": "Jakarta",
+                          "postal_code": "12190",
+                          "country_code": "IDN"
+                        },
+                        "shipping_address": {
+                          "first_name": "BUDI",
+                          "last_name": "UTOMO",
+                          "email": "noreply@example.com",
+                          "phone": "0 8128-75 7-9338",
+                          "address": "Sudirman",
+                          "city": "Jakarta",
+                          "postal_code": "12190",
+                          "country_code": "IDN"
+                        }
+                      }
+                  }
+  /v2/{order_id}/expire:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: EXPIRE pending transaction
+      description: Change order_id with pending status to be expired
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            EXPIRE pending transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            EXPIRE pending transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^[A-Za-z0-9._-]+$
+            minLength: 4
+          description: Order identifier in URL path.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              EXPIRE pending transaction:
+                value: ''
+  /v2/card/register:
+    get:
+      tags:
+        - 2.2 Core API Credit Card Recurring Flow
+      summary: Step 1 - Register Card
+      description: >-
+        IMPORTANT: This step should be done via `midtrans.min.js` in Frontend,
+        unless you have PCI DSS certification. Else, you are in risk of card
+        data breach!
+
+        Send Card data and retrieve Midtrans' long-term Card token_id, Card
+        token_id will be used for future transactions.
+      parameters:
+        - name: card_number
+          in: query
+          examples:
+            Step 1 - Register Card:
+              value: 5211 1111 1111 1117
+              x-disabled: false
+          schema:
+            type: string
+        - name: card_exp_month
+          in: query
+          examples:
+            Step 1 - Register Card:
+              value: '12'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: card_exp_year
+          in: query
+          examples:
+            Step 1 - Register Card:
+              value: '2021'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: client_key
+          in: query
+          examples:
+            Step 1 - Register Card:
+              value: <YOUR CLIENT KEY HERE>
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Step 1 - Register Card:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Step 1 - Register Card:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          text/plain: {}
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []
+tags:
+  - name: 1. SNAP API Sandbox
+  - name: 1.1 SNAP API Sandbox - Additional feature
+  - name: 2. Core API Sandbox
+  - name: 2.1 Core API Sandbox - Additional Feature
+  - name: 2.2 Core API Credit Card Recurring Flow
+  - name: 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+servers:
+  - url: https://api.sandbox.midtrans.com

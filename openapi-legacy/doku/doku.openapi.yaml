@@ -1,0 +1,3321 @@
+openapi: 3.0.0
+info:
+  title: DOKU API Collection
+  version: 1.0.0
+servers:
+  - url: undefined://{{url}}
+  - url: http://kjur.github.io
+tags:
+  - name: DOKU Direct
+    description: DOKU Direct is a collection of REST APIs for customizing your payment flow
+  - name: DOKU Direct > Credit Card
+  - name: DOKU Direct > Virtual Account
+  - name: DOKU Direct > Virtual Account > NON SNAP
+  - name: DOKU Direct > Virtual Account > NON SNAP > Mandiri VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > BCA VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > Bank Syariah Indonesia VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > DOKU VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > Permata VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > CIMB VA
+  - name: DOKU Direct > Virtual Account > NON SNAP > BNI VA
+  - name: DOKU Direct > Virtual Account > SNAP
+  - name: DOKU Direct > Virtual Account > SNAP > BNC SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > BNI SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > BRI SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > BSI SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > BTN SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > DANAMON SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > MANDIRI SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > MAYBANK SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > PERMATA SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > SINARMAS SNAP VA
+  - name: DOKU Direct > Virtual Account > SNAP > CIMB SNAP VA
+  - name: DOKU Direct > O2O
+  - name: DOKU Direct > O2O > Alfa Group
+  - name: DOKU Direct > E-Money
+  - name: DOKU Direct > E-Money > OVO
+  - name: DOKU Direct > E-Money > Shopee Pay
+  - name: DOKU Direct > Direct Debit
+  - name: DOKU Direct > Direct Debit > BRI Direct Debit
+  - name: DOKU Direct > Direct Debit > OVO Snap Direct Debit
+    description: >-
+      Note :
+
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+          
+      - No need to bind when calling the "Refund" API.
+          
+      - To get the b2b2c token : copy the "authCode" value from the "Account
+      Binding" response and paste it into the "authCode" field in the "Get Token
+      B2B2C" request body.
+          
+      - To unbind : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "tokenId" field in the "Unbinding" request
+      body.
+  - name: DOKU Direct > Direct Debit > CIMB Snap Direct Debit
+    description: >-
+      Note :
+
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+          
+      - To get the b2b2c token : copy the "authCode" value from the "Account
+      Binding" response and paste it into the "authCode" field in the "Get Token
+      B2B2C" request body.
+          
+      - To verify OTP : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "bankCardToken" field in the "Verify OTP
+      Payment" or "Verify OTP Unbinding" request body.
+          
+      - To unbind : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "tokenId" field in the "Unbinding" request
+      body.
+  - name: DOKU Direct > Direct Debit > ALLO Snap Direct Debit
+    description: >-
+      Note :
+
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+          
+      - To get the b2b2c token : copy the "authCode" value from the "Account
+      Binding" response and paste it into the "authCode" field in the "Get Token
+      B2B2C" request body.
+          
+      - To unbind : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "tokenId" field in the "Unbinding" request
+      body.
+  - name: DOKU Direct > Direct Debit > BRI Snap Direct Debit
+    description: >-
+      Note :
+
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+          
+      - To get the b2b2c token : copy the "authCode" value from the "Account
+      Binding" response and paste it into the "authCode" field in the "Get Token
+      B2B2C" request body.
+          
+      - To resend OTP : copy the "journeyId" value from the "Card Binding" or
+      "Payment" request and paste it into the "journeyId" field in the "Request
+      OTP Binding" or "Request OTP Payment" request body.
+          
+      - To verify OTP : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "bankCardToken" field in the "Verify OTP
+      Binding" or "Verify OTP Payment" request body.
+          
+      - To unbind : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "tokenId" field in the "Unbinding" request
+      body.
+  - name: DOKU Direct > Direct Debit > Mandiri Snap Direct Debit
+    description: >-
+      Note :
+
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+          
+      - To get the b2b2c token : copy the "authCode" value from the "Account
+      Binding" response and paste it into the "authCode" field in the "Get Token
+      B2B2C" request body.
+          
+      - To verify OTP : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "bankCardToken" field in the "Verify OTP
+      Binding" or "Verify OTP Payment" request body.
+          
+      - To unbind : copy the "accessToken" value from the "Get Token B2B2C"
+      response and paste it into the "tokenId" field in the "Unbinding" request
+      body.
+  - name: DOKU Direct > Direct Debit > Dana Snap Direct Debit
+    description: |-
+      Note :
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+  - name: DOKU Direct > Direct Debit > ShopeePay Snap Direct Debit
+    description: |-
+      Note :
+
+      - Call the "Misc - Init KJUR" API to import KJUR.
+  - name: DOKU Direct > Paylater
+  - name: DOKU Direct > Direct Transfer
+  - name: DOKU Direct > KKI
+  - name: DOKU Checkout
+    description: >-
+      DOKU Checkout is a Hosted Payment Page that helps you do single
+      integration for all payment channels available.
+  - name: Misc
+  - name: DOKU Sub Account
+paths:
+  /credit-card/v1/payment-page:
+    post:
+      tags:
+        - DOKU Direct > Credit Card
+      summary: CC - Generate Payment Page
+      description: >-
+        | Header Parameter | Type | Description |
+
+        | --- | --- | --- |
+
+        | Client-Id | `string` | The Client ID you retrieved from Jokul Back
+        Office<br>`MANDATORY` |
+
+        | Request-Id | `string` | Random string that must unique per request for
+        idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |
+
+        | Request-Timestamp | `string` | Request time in ISO8601 format with UTC
+        + 0<br>`MANDATORY` |
+
+        | Signature | `string` | Security parameter to ensure the request's
+        authenticity. Learn more how to generate Signature
+        [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  line_items:
+                    - name: DOKU T-Shirt Merah
+                      price: 30000
+                      quantity: 2
+                    - name: DOKU T-Shirt Biru
+                      price: 30000
+                      quantity: 1
+                  amount: 90000
+                  callback_url: https://doku.com
+                  auto_redirect: false
+                  session_id: '0000231223'
+                customer:
+                  id: W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX
+                  name: Anton Budiman
+                  email: anton@doku.com
+                  phone: '+6281287458232'
+                  address: Jakarta, Menara Mulia Lt 8
+                  country: ID
+                override_configuration:
+                  themes:
+                    language: ID
+                    background_color: ''
+                    font_color: ''
+                    button_background_color: ''
+                    button_font_color: ''
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /credit-card/v1/cancellation/credit-card/refund:
+    post:
+      tags:
+        - DOKU Direct > Credit Card
+      summary: CC - Online Refund
+      description: >-
+        | Header Parameter | Type | Description |
+
+        | --- | --- | --- |
+
+        | Client-Id | `string` | The Client ID you retrieved from Jokul Back
+        Office<br>`MANDATORY` |
+
+        | Request-Id | `string` | Random string that must unique per request for
+        idempotency<br>`MANDATORY` `ALPHA NUMERIC` `40 chars` |
+
+        | Request-Timestamp | `string` | Request time in ISO8601 format with UTC
+        + 0<br>`MANDATORY` |
+
+        | Signature | `string` | Security parameter to ensure the request's
+        authenticity. Learn more how to generate Signature
+        [here](https://jokul.doku.com/docs/docs/technical-references/generate-signature)<br>`MANDATORY`|
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  line_items:
+                    - name: DOKU T-Shirt Merah
+                      price: 30000
+                      quantity: 2
+                    - name: DOKU T-Shirt Biru
+                      price: 30000
+                      quantity: 1
+                  amount: 90000
+                  callback_url: https://doku.com
+                  auto_redirect: false
+                  session_id: '0000231223'
+                customer:
+                  id: W7rbKhPYh76VSHYwHRaGDIbBhgTebgAoWtX
+                  name: Anton Budiman
+                  email: anton@doku.com
+                  phone: '+6281287458232'
+                  address: Jakarta, Menara Mulia Lt 8
+                  country: ID
+                override_configuration:
+                  themes:
+                    language: ID
+                    background_color: ''
+                    font_color: ''
+                    button_background_color: ''
+                    button_font_color: ''
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /mandiri-virtual-account/v2/merchant-payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Mandiri VA
+      summary: Mandiri VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 200000
+                virtual_account_info:
+                  virtual_account_number: '8902208137011011'
+                  expired_time: 60
+                  reusable_status: true
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /mandiri-virtual-account/v2/payment-code:
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Mandiri VA
+      summary: Mandiri VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-20201224-00002
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 60
+                  virtual_account_number: '8889940000000152'
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bca-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > BCA VA
+      summary: BCA VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  reusable_status: true
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > BCA VA
+      summary: BCA VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-20201223-00001
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 60
+                  virtual_account_number: '8123400000005601'
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bsm-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Bank Syariah Indonesia VA
+      summary: BSI VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  reusable_status: false
+                  info1: Online Shoping Store
+                  info2: Contact support@oss.id
+                  info3: Thank for shopping in oss.id
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Bank Syariah Indonesia VA
+      summary: BSI VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-20201223-00001
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 60
+                  virtual_account_number: '6059000000000160'
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /doku-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > DOKU VA
+      summary: DOKU VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  reusable_status: false
+                  info1: Online Shoping Store
+                  info2: Contact support@oss.id
+                  info3: Thank for shopping in oss.id
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > DOKU VA
+      summary: DOKU VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-20201223-00001
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 60
+                  virtual_account_number: '8000100000000247'
+                  info1: Online Shoping 1
+                  info2: Online Shoping 2
+                  info3: Online Shoping 3
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /permata-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Permata VA
+      summary: Permata VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  reusable_status: true
+                  ref_info:
+                    - ref_name: kota
+                      ref_value: bekasi
+                    - ref_name: provinsi
+                      ref_value: jawa barat
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > Permata VA
+      summary: Permata VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-1634201275
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 120
+                  virtual_account_number: '8124600000000011'
+                  ref_info:
+                    - ref_name: kota
+                      ref_value: bekasi
+                    - ref_name: provinsi
+                      ref_value: jawa barat
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /cimb-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > CIMB VA
+      summary: CIMB VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  reusable_status: true
+                  ref_info:
+                    - ref_name: kota
+                      ref_value: bekasi
+                    - ref_name: provinsi
+                      ref_value: jawa barat
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    patch:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > CIMB VA
+      summary: CIMB VA - Update Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-1634201275
+                  amount: 40000
+                virtual_account_info:
+                  expired_time: 120
+                  virtual_account_number: '8124600000000011'
+                  ref_info:
+                    - ref_name: kota
+                      ref_value: bekasi
+                    - ref_name: provinsi
+                      ref_value: jawa barat
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bni-virtual-account/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > NON SNAP > BNI VA
+      summary: BNI VA - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 20000
+                virtual_account_info:
+                  expired_time: 60
+                  biling_type: FIXED
+                  info: Product detail here
+                  merchant_unique_reference: UNIQUE_00002
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jsrsasign/jsrsasign-latest-all-min.js:
+    get:
+      tags:
+        - Misc
+      summary: init KJUR
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authorization/v1/access-token/b2b:
+    post:
+      tags:
+        - DOKU Direct > KKI
+      summary: Get Token B2B
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                grantType: client_credentials
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /virtual-accounts/bi-snap-va/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > BNI SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  channel: VIRTUAL_ACCOUNT_BNI
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA004
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/bri/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > BRI SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA003
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/bsi/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > BSI SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA010
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/btn/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > BTN SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA009
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/danamon/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > DANAMON SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA005
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/mandiri/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > MANDIRI SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA009
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/maybank/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > MAYBANK SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA009
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/permata/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > PERMATA SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA007
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/sinarmas/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > SINARMAS SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA012
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bi-snap-va/cimb/v1/transfer-va/create-va:
+    post:
+      tags:
+        - DOKU Direct > Virtual Account > SNAP > CIMB SNAP VA
+      summary: Step 3 -  Create VA (DGPC)
+      description: >-
+        List of **virtualAccountTrxType**:
+
+
+        - 1 = C = Closed Payment
+            
+        - 2 = O = Open Payment
+            
+        - 3 = I = Partial
+            
+        - 4 = M = Minimum - Only can be paid once with minimum amount
+            
+        - 5 = L = Maximum
+            
+        - 6 = N = Open Minimum - Can be paid multiple with minimum amount
+            
+        - 7 = X = Open Maximum - Can be paid multiple with cumulative maximum
+        amount
+            
+        - 8 = V = Bill Variable
+            
+        - 9 = W = Multi Bill Variable
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerServiceId: '{{partner_service_id}}'
+                trxId: '{{invoice_number}}'
+                virtualAccountTrxType: '1'
+                totalAmount:
+                  value: '12500.00'
+                  currency: IDR
+                expiredDate: '{{expired_date}}'
+                virtualAccountName: Testing VA
+                virtualAccountEmail: testing@doku.com
+                virtualAccountPhone: '6281200001111'
+                billDetails:
+                  - billCode: '01'
+                    billNo: '123456789012345678'
+                    billName: Bill A for Jan
+                    billShortName: Bill A
+                    billDescription:
+                      english: Maintenance
+                      indonesia: Pemeliharaan
+                    billSubCompany: '00001'
+                    billAmount:
+                      value: '20000.00'
+                      currency: IDR
+                    additionalInfo: {}
+                freeTexts:
+                  - english: Free text
+                    indonesia: Tulisan bebas
+                additionalInfo:
+                  virtualAccountConfig:
+                    reusableStatus: true
+                  deviceId: '12345679237'
+                  channel: mobilephone
+      parameters:
+        - name: X-PARTNER-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_client_key}}'
+        - name: X-EXTERNAL-ID
+          in: header
+          schema:
+            type: string
+          example: '{{x_external_id}}'
+        - name: X-TIMESTAMP
+          in: header
+          schema:
+            type: string
+          example: '{{x_timestamp}}'
+        - name: X-SIGNATURE
+          in: header
+          schema:
+            type: string
+          example: '{{x_signature}}'
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Bearer {{snap_access_token_merchant}}
+        - name: CHANNEL-ID
+          in: header
+          schema:
+            type: string
+          description: http://confluence.doku.com/display/GAT/SNAP+CHANNEL-ID+List
+          example: VA011
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /alfa-online-to-offline/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > O2O > Alfa Group
+      summary: Alfa - Generate Payment Code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 150000
+                online_to_offline_info:
+                  expired_time: 60
+                  reusable_status: false
+                  info: Online Shoping Store
+                customer:
+                  name: Taufik Ismail
+                  email: taufik@doku.com
+                alfa_info:
+                  receipt:
+                    footer_message: Call Center 021 555-0525
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /indomaret-online-to-offline/v2/payment-code:
+    post:
+      tags:
+        - DOKU Direct > O2O > Alfa Group
+      summary: Indomaret - Generate Payment Code Copy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 150000
+                online_to_offline_info:
+                  expired_time: 60
+                  reusable_status: false
+                  info: Online Shoping Store
+                customer:
+                  name: Taufik Ismail
+                  email: taufik@doku.com
+                alfa_info:
+                  receipt:
+                    footer_message: Call Center 021 555-0525
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /ovo-emoney/v1/payment:
+    post:
+      tags:
+        - DOKU Direct > E-Money > OVO
+      summary: OVO - Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                client:
+                  id: '{{client_id}}'
+                order:
+                  invoice_number: INV-20210303-00123
+                  amount: 15000
+                ovo_info:
+                  ovo_id: '081211111111'
+                security:
+                  check_sum: '{{check_sum}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: text/plain
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Basic YWRtaW46cGFzc3dvcmQ=
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /ovo-emoney/v1/cancel:
+    post:
+      tags:
+        - DOKU Direct > E-Money > OVO
+      summary: OVO - Void
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                client:
+                  id: '{{client_id}}'
+                order:
+                  invoice_number: INV-20210303-001234-test11
+                  amount: 15000
+                ovo_info:
+                  ovo_id: '081211111111'
+                ovo_payment:
+                  batch_number: 500
+                  trace_number: 4451979
+                  reference_number: 12
+                  approval_code: '2404983'
+                security:
+                  check_sum: '{{check_sum}}'
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: text/plain
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: Basic YWRtaW46cGFzc3dvcmQ=
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /shopeepay-emoney/v2/order:
+    post:
+      tags:
+        - DOKU Direct > E-Money > Shopee Pay
+      summary: Shopee Pay - Create Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  amount: 150000
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/token:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Register Card - Create Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                acquirer:
+                  id: BRI
+                customer:
+                  id: CUST-{{$timestamp}}
+                  name: Anton Budiman
+                  email: anton@doku.com
+                  phone: '62811223344'
+                  id_card: '36032123123123'
+                  country: ID
+                  address: Menara Mulia Lantai 8
+                  date_of_birth: 02-02-1996
+                debit_card:
+                  account_email: wtda@mail.com
+                  account_mobile_phone: '6281394130621'
+                  card_expiry: '0525'
+                  card_last_four: '8224'
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/token/validate:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Register Card - Validate OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                debit_card:
+                  token_id: TOK_KEQYWDR7GSUMB5IOK6OJFVTBNCKAFW6O::062110:17:15.704
+                  otp: '999999'
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/token-otp:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Register Card - Resend OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                channel:
+                  id: DIRECT_DEBIT
+                acquirer:
+                  id: BRI
+                debit_card:
+                  token_id: TOK_MKZTIFPRLLDPIBH5BJNZWFUV4WE2ZO56::062116:56:56.355
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/tokens:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Get Card List
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                customer:
+                  id: CUST-123123123
+                  name: Anton Budiman
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/payment:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Payment - Create Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                channel:
+                  id: DIRECT_DEBIT
+                acquirer:
+                  id: BRI
+                customer:
+                  id: CUST-123123123
+                  name: Anton Budiman
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  line_items:
+                    - name: DOKU T-Shirt Black
+                      price: 100000
+                      quantity: 1
+                    - name: DOKU T-Shirt Red
+                      price: 150000
+                      quantity: 2
+                  amount: 400000
+                payment:
+                  token_id: TOK_OMCSBRGQT3P7KPCYQ26BSFH4JBLSIKLK::062108:41:41.496
+                  otp_expiration_timestamp: 360010
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/payment/validate:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Payment - Validate OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                channel:
+                  id: DIRECT_DEBIT
+                acquirer:
+                  id: BRI
+                payment:
+                  token: bzSvaFgw9g07C6VFWlkEhEQVDMEqUwE9YfjY5EM1lCI=
+                  otp: '999999'
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/payment-otp:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Payment - Resend OTP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                channel:
+                  id: DIRECT_DEBIT
+                acquirer:
+                  id: BRI
+                payment:
+                  token: uJytoKwQQ6iSgpo6wPvTuLsZQrjToz/+9X6pITHSA0o=
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/payment-recurring:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Payment - Create Recurring Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                channel:
+                  id: DIRECT_DEBIT
+                acquirer:
+                  id: BRI
+                customer:
+                  id: CUST-123123123
+                  name: Anton Budiman
+                order:
+                  invoice_number: INV-{{$timestamp}}
+                  line_items:
+                    - name: DOKU T-Shirt Black
+                      price: 100000
+                      quantity: 1
+                    - name: DOKU T-Shirt Red
+                      price: 150000
+                      quantity: 2
+                  amount: 400000
+                payment:
+                  token_id: TOK_WMBD4E7ETDYVUEHNK4NEZFQP2WVQFCTQ::062115:41:36.718
+                  otp_expiration_timestamp: 360010
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '201':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/v1/token-delete:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > BRI Direct Debit
+      summary: Delete Card
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                customer:
+                  id: CUST-123123
+                  name: Anton Budiman
+                debit_card:
+                  token_id: TOK_WMBD4E7ETDYVUEHNK4NEZFQP2WVQFCTQ::062115:41:36.718
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/registration-account-binding:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > ALLO Snap Direct Debit
+      summary: Account Binding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                phoneNo: '6287711114444'
+                additionalInfo:
+                  channel: DIRECT_DEBIT_ALLO_SNAP
+                  custIdMerchant: CUST_6287711114444
+                  customerName: anomymous
+                  email: john.doe@doku.com
+                  idCard: '12345'
+                  country: Indonesia
+                  address: Bali
+                  dateOfBirth: '19990101'
+                  successRegistrationUrl: https://sandbox.doku.com/bo/login/
+                  failedRegistrationUrl: https://www.seleniumeasy.com/test
+                  deviceModel: iphone12
+                  osType: ios
+                  channelId: app
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /authorization/v1/access-token/b2b2c:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > Mandiri Snap Direct Debit
+      summary: Get Token B2B2C
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                grantType: authorization_code
+                authCode: '2238240717133523163107188141436000691039'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/balance-inquiry:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > ALLO Snap Direct Debit
+      summary: Balance Inquiry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                additionalInfo:
+                  channel: DIRECT_DEBIT_ALLO_SNAP
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/debit/payment-host-to-host:
+    post:
+      tags:
+        - DOKU Direct > KKI
+      summary: Payment without AFP
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                partnerReferenceNo: SNAP2810020002
+                bankCardToken: 4e4ceb98729003ba38a362e7a415b3c7
+                amount:
+                  value: '10000.00'
+                  currency: IDR
+                additionalInfo:
+                  channel: KARTU_KREDIT_INDONESIA
+                  lineItems:
+                    - name: masker
+                      price: '40072.00'
+                      quantity: 1
+                  paymentType: RECURRING
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/debit/refund:
+    post:
+      tags:
+        - DOKU Direct > KKI
+      summary: Refund
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                originalReferenceNo: SNAP260824SNAP260824
+                originalPartnerReferenceNo: SNAP26082416
+                originalExternalId: '534656848'
+                partnerRefundNo: SNAP26082416-1
+                refundAmount:
+                  value: '10000.00'
+                  currency: IDR
+                latestTransactionStatus: '00'
+                reason: Customer Request
+                additionalInfo:
+                  channel: KARTU_KREDIT_INDONESIA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/registration-account-unbinding:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > ALLO Snap Direct Debit
+      summary: Account Unbinding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tokenId: >-
+                  eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE3MjI0OTQ3MDcsImlzcyI6IkRPS1UiLCJjbGllbnRJZCI6IkJSTi0wMjAyLTE2OTAyNzUzNTM3OTgiLCJhY2NvdW50SWQiOiI3MTYzYTg2MmY3ZmNkNGVmMDUwOGQyN2M5YmUyOTQzNiJ9.VPl3hvLRFsX5SGWOeSUUPge5b6uFcjhC-stdGQv1VzsCWnPA3Y58dDzq-HoIHZg11jJs2BBHEOETsAjvLkv8ren2FKiOEtE-4O7LKtgzjdJVLP_JBOt9gkdYIBrmWp2UnqtvtVter-C-HNsWJ29x7vUHrUNnJHFbtIG0gcgHcr0oZ5DCXbLTmg8L1oJjOsPRCYYsIJ4vpbCGz_SPmpWro0ZsPcJyHqW4s939hxA8r_diWERa2vOvWX52ELdXqt99fbTKOjttM2O9AZCl4iQCGQJVp0nO652oQf5nZz6sZZdqZ5gKgD42gvluzqft5yPz-IaQyHGtMh6YwSUJx_VNfw
+                additionalInfo:
+                  channel: DIRECT_DEBIT_ALLO_SNAP
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/otp-verification:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > Mandiri Snap Direct Debit
+      summary: Verify OTP Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                otp: '999999'
+                action: otpPayment
+                originalPartnerReferenceNo: INV2408150001
+                additionalInfo:
+                  channel: DIRECT_DEBIT_MANDIRI_SNAP
+                  bankCardToken: >-
+                    eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE3MjQzODM5MDQsImlzcyI6IkRPS1UiLCJjbGllbnRJZCI6IkJSTi0wMjAyLTE2OTAyNzUzNTM3OTgiLCJhY2NvdW50SWQiOiIyYWMxNWRhMmE1MWU5MzNkMmVjZTYyYmQ4MGVjMDdjOCJ9.eVn3ofvjrCXghWayAgUnkqM8JPelPmcJZVeL11xKUaAVUaX2yvWHSNBly1w5K__Xk5-FzdvU4uXNtEYyyW2RdaLxK-BugRF_LsS4cLh6_es5YmlY8Xg0Y0LRp9Rk4UT_pFO6i5KDn48sItPMt40VwJkdLPTjIyG7SQUk2fXxStrdEpfp85N3tpBRFxPk2h0NUPyMahIJSINMdQ9FPnj7PlwQAoF1FJeYGtqG16e1XPM6OdjEW3seAwuU8lSGhO7fQ0YCjYoEsYadyQg4apbjv10-3VpudaDvKcWflVeFqIki10TGURv6bDvoqw04MOKp4pmHrdXN8Gw8sbSU1dmTcw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/registration-card-bind:
+    post:
+      tags:
+        - DOKU Direct > KKI
+      summary: Binding Only
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                accountName: merchantDoku
+                cardData: >-
+                  Ie4kRYdMl3r7cxT/ALeiBfPU5z7L92BzkJDbUhOukkqBz6dk97Plw43+gHgQ5bKDck1HXw1UaqaJLccTkYjHAg==|oETj76OOa2760y8bI6ANgw==
+                custIdMerchant: merchantDoku
+                additionalInfo:
+                  channel: KARTU_KREDIT_INDONESIA
+                  customerName: merchantDoku
+                  email: merchant@doku.com
+                  dateOfBirth: '19990101'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/registration-card-unbind:
+    post:
+      tags:
+        - DOKU Direct > KKI
+      summary: Unbinding
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tokenId: 484f670190eab89da007c5cd2ba89099
+                additionalInfo:
+                  channel: KARTU_KREDIT_INDONESIA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/otp:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > Mandiri Snap Direct Debit
+      summary: Request OTP Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                otpTrxCode: '02'
+                journeyId: '778338493'
+                bankCardToken: >-
+                  eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTMyODExMjksImlzcyI6IkRPS1UiLCJjbGllbnRJZCI6IkJSTi0wMjA3LTE2NjkyNzMwNjQ2MjAiLCJhY2NvdW50SWQiOiI3MTc1YjhiNDU4NTZhNmVmNTcxOTY4NDdhZDIyNzMyMyJ9.2fTFRInImp__d3ysjewQawotftiNj0ayzFpLiTBhJx0
+                additionalInfo:
+                  channel: DIRECT_DEBIT_MANDIRI_SNAP
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /direct-debit/core/v1/debit/cancel:
+    post:
+      tags:
+        - DOKU Direct > Direct Debit > Mandiri Snap Direct Debit
+      summary: Cancel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                originalPartnerReferenceNo: INV2408150001
+                amount:
+                  value: '1000.00'
+                  currency: IDR
+                reason: Customer complain
+                additionalInfo:
+                  channel: DIRECT_DEBIT_MANDIRI_SNAP
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /akulaku-peer-to-peer/v2/generate-order:
+    post:
+      tags:
+        - DOKU Direct > Paylater
+      summary: Generate Order
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: invoice-000001014
+                  line_items:
+                    - name: The Way I Used to Be by Amber Smith
+                      price: '30000'
+                      quantity: '2'
+                      sku: '1002'
+                      category: Book
+                    - name: JAVA Programming
+                      price: '5000'
+                      quantity: '10'
+                      sku: '1001'
+                      category: Book
+                  amount: '110000'
+                  callback_url: https://merchant.com/return-url
+                payment:
+                  merchant_unique_reference: TEST-ABC-000104
+                customer:
+                  id: fyona
+                  name: fyona panjaitan
+                  phone: '6281874744447'
+                  address: taman setiabudi
+                  postcode: '120129'
+                  state: Jakarta
+                  city: Jakarta Selatan
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /akulaku-peer-to-peer/v2/cancel:
+    post:
+      tags:
+        - DOKU Direct > Paylater
+      summary: Cancellation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: CH-88277770234
+                payment:
+                  merchant_unique_reference: ABC-0090
+                  identifier:
+                    - name: AKULAKU_UNIQUE_REFERENCE
+                      value: MCH-1103200003ABC-0090
+                    - name: ORDER_ID
+                      value: '1000034679'
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /akulaku-peer-to-peer/v2/refund:
+    post:
+      tags:
+        - DOKU Direct > Paylater
+      summary: Refund
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  invoice_number: invoice-000001011245
+                payment:
+                  merchant_unique_reference: REFUND-ABC-000104567
+                  identifier:
+                    - name: ORDER_ID
+                      value: '1000043216'
+                    - name: AKULAKU_UNIQUE_REFERENCE
+                      value: MCH-0016-7451979181409REFUND-ABC-000104567
+                refund:
+                  merchant_unique_reference: XYZ-00645678
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /bca-direct-transfer/v1/order:
+    post:
+      tags:
+        - DOKU Direct > Direct Transfer
+      summary: Generate Payment Amount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  amount: 10000
+                  invoice_number: INV-234237
+                  item_name: Vario 160 Sticker
+                  customer_address: Jakarta Selatan
+                customer:
+                  email: heriyatmo@doku.com
+                  name: yatmo
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /checkout/v1/payment:
+    post:
+      tags:
+        - DOKU Checkout
+      summary: DOKU Checkout - Initiate Payment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                order:
+                  amount: 10500
+                  invoice_number: INV-{{$timestamp}}
+                  currency: IDR
+                  session_id: SU5WFDferd561dfasfasdfae123c
+                  callback_url: https://doku.com/
+                  line_items:
+                    - name: DOKU T-Shirt
+                      price: 10500
+                      quantity: 1
+                payment:
+                  payment_due_date: 60
+                customer:
+                  name: Anton Budiman
+                  email: anton@doku.com
+                  phone: '+6285694566147'
+                  address: Plaza Asia Office Park Unit 3
+                  country: ID
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /orders/v1/status/INV-1640746942:
+    get:
+      tags:
+        - Misc
+      summary: Check Status API
+      parameters:
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sac-merchant/v1/accounts:
+    post:
+      tags:
+        - DOKU Sub Account
+      summary: Create Sub Account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                account:
+                  email: alifiani+stan001@doku.com
+                  type: bank
+                  name: Alifiani Standard 001
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sac-merchant/v1/payouts:
+    post:
+      tags:
+        - DOKU Sub Account
+      summary: Payouts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                account:
+                  id: SAC-5933-1641483083409
+                payout:
+                  amount: 12000
+                  invoice_number: Invoice/001/SANDBOX
+                beneficiary:
+                  bank_code: BNINIDJA
+                  bank_account_number: '0577624308'
+                  bank_account_name: Sdri Artika Julianti
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sac-merchant/v1/transfers:
+    post:
+      tags:
+        - DOKU Sub Account
+      summary: Transfers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                transfer:
+                  origin: SAC-8698-1628220445878
+                  destination: SAC-1670-1628490169910
+                  amount: 100000
+                  invoice_number: TEST-SANDBOX-1
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sac-merchant/v1/balances/SAC-7549-1645676098163:
+    get:
+      tags:
+        - DOKU Sub Account
+      summary: Balance
+      parameters:
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Client-Id
+          in: header
+          schema:
+            type: string
+          example: '{{client_id}}'
+        - name: Request-Id
+          in: header
+          schema:
+            type: string
+          example: '{{request_id}}'
+        - name: Signature
+          in: header
+          schema:
+            type: string
+          example: '{{signature}}'
+        - name: Request-Timestamp
+          in: header
+          schema:
+            type: string
+          example: '{{request_timestamp}}'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

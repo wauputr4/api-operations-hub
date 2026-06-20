@@ -1,0 +1,371 @@
+openapi: 3.0.0
+info:
+  title: Midtrans Payment API
+  description: |-
+    Basic example of Midtrans.com payment API usage.
+    Including usage of:
+    - SNAP API
+    - Core API
+  version: 1.0.0
+servers:
+  - url: https://app.sandbox.midtrans.com
+  - url: https://api.sandbox.midtrans.com
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+security:
+  - basicAuth: []
+tags:
+  - name: 1. SNAP API Sandbox
+  - name: 1.1 SNAP API Sandbox - Additional feature
+  - name: 2. Core API Sandbox
+  - name: 2.1 Core API Sandbox - Additional Feature
+  - name: 2.2 Core API Credit Card Recurring Flow
+  - name: 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+paths:
+  /snap/v1/transactions:
+    post:
+      tags:
+        - 1.1 SNAP API Sandbox - Additional feature
+      summary: SNAP Custom Virtual Account Number Bank Transfer
+      description: >-
+        SNAP transaction token request with additional parameter to specify
+        custom VA number for bank transfer transaction (bca, permata, bni va).
+
+        Learn more about the parameters here:
+
+        https://snap-docs.midtrans.com/#custom-virtual-account-number
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                transaction_details:
+                  order_id: ORDER-101-9-{{$timestamp}}
+                  gross_amount: 10000
+                credit_card:
+                  secure: true
+                bca_va:
+                  va_number: '12345678901'
+                permata_va:
+                  va_number: '1234567890'
+                bni_va:
+                  va_number: '12345678'
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/status:
+    get:
+      tags:
+        - 2. Core API Sandbox
+      summary: GET transaction status
+      description: Get information status of a transaction with certain order_id
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/approve:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: APPROVE transaction that suspected as fraud (challange status)
+      description: >-
+        Approve a transaction with certain order_id which gets challenge status
+        from Fraud Detection System
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/deny:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: DENY transaction that suspected as fraud (challange status)
+      description: >-
+        Deny a transaction with certain order_id which gets challenge status
+        from Fraud Detection System
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/cancel:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: CANCEL transaction
+      description: >-
+        Cancel a transaction with certain order_id. Cancelation can only be done
+        before settlement process for credit card transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/refund:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: Refund transaction
+      description: >-
+        Refund a transaction with certain order_id. Refund can only be done
+        after settlement process for credit card transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                amount: 5000
+                reason: Product is out of stock, payment is being refunded
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/token:
+    get:
+      tags:
+        - 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+      summary: Step 3 - Next Transaction Retrieve one-time Card token
+      description: >-
+        IMPORTANT: This step should be done via `midtrans.min.js` in Frontend,
+        unless you have PCI DSS certification. Else, you are in risk of card
+        data breach!
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: client_key
+          in: query
+          schema:
+            type: string
+          example: <YOUR CLIENT KEY HERE>
+        - name: token_id
+          in: query
+          schema:
+            type: string
+          description: >-
+            Retrieved from Step 2 3DS authenticate frontend callback (and
+            backend Notification)
+          example: <saved_token_id here>
+        - name: card_cvv
+          in: query
+          schema:
+            type: integer
+          example: '123'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/charge:
+    post:
+      tags:
+        - 2.3 Core API Credit Card Saved Card 3DS Transaction Flow
+      summary: Step 4 - Next transaction Charge 3DS
+      description: Send transaction data and charge the card.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                payment_type: credit_card
+                credit_card:
+                  token_id: /* Card token id retrieved from step 3*/
+                  authentication: true
+                  save_token_id: true
+                transaction_details:
+                  order_id: Order-123-{{$timestamp}}
+                  gross_amount: 10000
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/[INSERT-ORDER-ID]/expire:
+    post:
+      tags:
+        - 2. Core API Sandbox
+      summary: EXPIRE pending transaction
+      description: Change order_id with pending status to be expired
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example: ''
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /v2/card/register:
+    get:
+      tags:
+        - 2.2 Core API Credit Card Recurring Flow
+      summary: Step 1 - Register Card
+      description: >-
+        IMPORTANT: This step should be done via `midtrans.min.js` in Frontend,
+        unless you have PCI DSS certification. Else, you are in risk of card
+        data breach!
+
+        Send Card data and retrieve Midtrans' long-term Card token_id, Card
+        token_id will be used for future transactions.
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          example: application/json
+        - name: card_number
+          in: query
+          schema:
+            type: string
+          example: 5211 1111 1111 1117
+        - name: card_exp_month
+          in: query
+          schema:
+            type: integer
+          example: '12'
+        - name: card_exp_year
+          in: query
+          schema:
+            type: integer
+          example: '2021'
+        - name: client_key
+          in: query
+          schema:
+            type: string
+          example: <YOUR CLIENT KEY HERE>
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

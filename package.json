@@ -1,0 +1,23 @@
+{
+  "name": "api-operations-hub",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "convert-postman": "node scripts/convert-postman-to-openapi-modern.mjs",
+    "convert-postman:modern": "node scripts/convert-postman-to-openapi-modern.mjs",
+    "convert-postman:legacy": "node scripts/convert-postman-to-openapi.mjs",
+    "clean-openapi-modern": "node scripts/clean-openapi-modern.mjs",
+    "convert-postman:all": "npm run convert-postman:modern && npm run convert-postman:legacy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@scalar/postman-to-openapi": "^0.7.10",
+    "js-yaml": "^4.2.0",
+    "postman-to-openapi": "^1.7.3"
+  }
+}
