@@ -6,6 +6,7 @@ const targets = [
   'openapi/doku/doku.openapi.yaml',
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
+  'openapi/ipaymu/ipaymu.openapi.yaml',
   'openapi/fastpay/fastpay.openapi.yaml',
   'openapi/finpay/finpay-billing.openapi.yaml',
   'openapi/finpay/finpay-disbursement.openapi.yaml',
@@ -89,6 +90,40 @@ for (const target of targets) {
           });
           op.parameters = params;
         }
+      }
+    }
+  }
+
+  if (target.includes('ipaymu')) {
+    for (const [path, operations] of Object.entries(cleanedPaths)) {
+      for (const op of Object.values(operations)) {
+        const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
+
+        for (const param of params) {
+          if (param?.in === 'header' && param?.name === 'signature') {
+            param.schema ??= {};
+            param.schema.type = 'string';
+          }
+        }
+
+        if (path.includes('{transaction_id}')) {
+          const hasTransactionId = params.some(
+            (item) => item?.in === 'path' && item?.name === 'transaction_id',
+          );
+          if (!hasTransactionId) {
+            params.unshift({
+              name: 'transaction_id',
+              in: 'path',
+              required: true,
+              schema: {
+                type: 'string',
+              },
+              description: 'iPaymu COD transaction identifier.',
+            });
+          }
+        }
+
+        op.parameters = params;
       }
     }
   }

@@ -21,6 +21,10 @@ const pairs = [
     output: 'openapi/xendit/xendit-snap.openapi.yaml',
   },
   {
+    input: 'postman/ipaymu/ipaymu.postman_collection.json',
+    output: 'openapi/ipaymu/ipaymu.openapi.yaml',
+  },
+  {
     input: 'postman/fastpay/fastpay.postman_collection.json',
     output: 'openapi/fastpay/fastpay.openapi.yaml',
   },

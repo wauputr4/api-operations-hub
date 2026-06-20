@@ -20,6 +20,7 @@ If you work with several providers and need a single source of truth for API def
 - DOKU API Collection
 - Xendit API
 - Xendit SNAP API
+- iPaymu API (v2)
 - Faspay API
 - Finpay Billing API
 - Finpay Disbursement API
@@ -35,13 +36,14 @@ If you work with several providers and need a single source of truth for API def
   - `midtrans/`
   - `doku/`
   - `xendit/`
+  - `ipaymu/`
   - `fastpay/`
   - `finpay/`
   - `mayar/`
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -56,7 +58,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -108,6 +110,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/doku/doku.openapi.yaml`
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
+- `openapi/ipaymu/ipaymu.openapi.yaml`
 - `openapi/fastpay/fastpay.openapi.yaml`
 - `openapi/finpay/finpay-billing.openapi.yaml`
 - `openapi/finpay/finpay-disbursement.openapi.yaml`
