@@ -1,7 +1,7 @@
 {
   "name": "api-operations-hub",
   "version": "1.0.0",
-  "description": "",
+  "description": "Open-source API assets hub for Postman collections, OpenAPI specs, and cleanup scripts",
   "main": "index.js",
   "scripts": {
     "convert-postman": "node scripts/convert-postman-to-openapi-modern.mjs",
@@ -11,7 +11,14 @@
     "convert-postman:all": "npm run convert-postman:modern && npm run convert-postman:legacy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "api",
+    "openapi",
+    "postman",
+    "openapi-spec",
+    "payment-api",
+    "gateway"
+  ],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
