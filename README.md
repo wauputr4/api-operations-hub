@@ -41,7 +41,7 @@ If you work with several providers and need a single source of truth for API def
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay, Mayar, Hostinger, Biznet Gio.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -117,6 +117,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/hostinger/hostinger.openapi.json`
 - `openapi/biznet-gio/biznet-gio.openapi.yaml`
 - `openapi/biznet-gio/biznet-gio.openapi.json`
+- `openapi/cloudflare/cloudflare.openapi.yaml`
 
 ## Contributing
 
