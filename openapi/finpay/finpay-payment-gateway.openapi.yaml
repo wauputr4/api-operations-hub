@@ -1,0 +1,227 @@
+openapi: 3.1.0
+info:
+  title: Finpay Payment Gateway
+  version: 1.0.0
+paths:
+  /:
+    post:
+      tags:
+        - Hosted Payment
+        - Core API
+        - After Payment
+      summary: Refund
+      responses: {}
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Refund:
+                value: "{\r\n    \"order\": {\r\n        \"id\": \"1693554115938\",\r\n        \"amount\": \"12000\"\r\n    }\r\n}"
+              Indomaret:
+                value: "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultfailed.php\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"indomaret\"\r\n    }\r\n}"
+              Initiate:
+                value: "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"10000\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"callbackUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/resultsuccess.php\"\r\n    }\r\n}"
+      x-pre-request: "// --- Initiate ---\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)\n\n// --- Indomaret ---\nvar key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      servers:
+        - url: https://{adapterMerchant}initiate
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+        - url: https://{adapterMerchant}payment
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+        - url: https://{adapterMerchant}capture
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+        - url: https://{adapterMerchant}refund
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+  /delete/b261fed76b65246f39f344a84443251cb1608c972f8e4e72a5eabc3992e4f94d:
+    get:
+      tags:
+        - Save Card
+      summary: Delete Stored Card
+      security:
+        - basicAuth: []
+  /initiate:
+    post:
+      tags:
+        - 3DS Transaction
+      summary: ThreeDS initiate
+      x-pre-request: "var date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ThreeDS initiate:
+                value: "{\r\n    \"customer\": {\r\n        \"email\": \"hajar.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\",\r\n        \"amount\": \"1000\",\r\n        \"currency\": \"IDR\",\r\n        \"description\": \"Testing\"\r\n    },\r\n    \"url\": {\r\n        \"threeDsResponseUrl\": \"https://sandbox.finpay.co.id/simdev/finpay/result/tangkapCurl.php\"\r\n    },\r\n    \"card\": {\r\n        \"number\": \"5123450000000008\"\r\n    },\r\n    \"device\": {\r\n        \"ani\": \"1\",\r\n        \"aniCallType\": \"ID\",\r\n        \"browser\": \"MOZILLA\",\r\n        \"fingerprint\": \"121311\",\r\n        \"hostname\": \"telkom\",\r\n        \"ipAddress\": \"202.1.201.1\",\r\n        \"mobilePhoneModel\": \"ANDROID\"\r\n    }\r\n}"
+  /auth/payer:
+    post:
+      tags:
+        - 3DS Transaction
+      summary: ThreeDS auth payer
+      x-pre-request: "var date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ThreeDS auth payer:
+                value: "{\r\n    \"card\": {\r\n        \"number\": \"5123450000000008\",\r\n        \"expiryDate\": \"3309\",\r\n        \"cvv\": \"100\",\r\n        \"nameOnCard\": \"Hajar Direct\"\r\n    },\r\n    \"transaction\": {\r\n        \"sessionId\": \"429ac6006921d6052488b9e8fb35ac88a5294391dda8b503e5324e7dc2b1071e\"\r\n    }\r\n}"
+  /auth/payment:
+    post:
+      tags:
+        - 3DS Transaction
+      summary: ThreeDS auth payment
+      x-pre-request: "var date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              ThreeDS auth payment:
+                value: "{\r\n    \"mpgsOrderId\": \"16855246307381000000000\",\r\n    \"mpgsTransactionId\": \"e626fc1f-3a87-4485-8caf-996d6354830f\"\r\n}"
+  /register:
+    post:
+      tags:
+        - Open Payment
+      summary: Register VA
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Register VA:
+                value: "{\r\n    \"customer\": {\r\n        \"id\": \"aldo.finnet@gmail.com\",\r\n        \"email\": \"aldo.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabca\",\r\n        \"paymentCode\": \"8804483313131314\"\r\n    }\r\n}"
+  /update:
+    post:
+      tags:
+        - Open Payment
+      summary: Update VA
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update VA:
+                value: "{\r\n    \"customer\": {\r\n        \"id\": \"aldo.finnet@gmail.com\",\r\n        \"email\": \"aldo.finnet@gmail.com\",\r\n        \"firstName\": \"Hajar\",\r\n        \"lastName\": \"Ismail\",\r\n        \"mobilePhone\": \"+6281286288844\"\r\n    },\r\n    \"sourceOfFunds\": {\r\n        \"type\": \"vabca\",\r\n        \"paymentCode\": \"8804483313131313\"\r\n    }\r\n}"
+  /check/vabca/8804483313131312:
+    get:
+      tags:
+        - Open Payment
+      summary: Check VA
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+  /delete/vabca/8804483313131313:
+    get:
+      tags:
+        - Open Payment
+      summary: Delete VA
+      x-pre-request: "var key = 'mykey'\r\nvar date = Date.now()\r\nvar orderId = date\r\nvar bodyRaw = pm.request.body\r\npm.environment.set(\"orderId\", orderId)"
+      security:
+        - basicAuth: []
+  /ed874ae961964cee95f408b3125e3d:
+    get:
+      tags:
+        - After Payment
+      summary: Check Status
+      security:
+        - basicAuth: []
+      servers:
+        - url: https://{adapterMerchant}check
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+  /1693899149093:
+    get:
+      tags:
+        - After Payment
+      summary: Void
+      security:
+        - basicAuth: []
+      servers:
+        - url: https://{adapterMerchant}void
+          variables:
+            adapterMerchant:
+              default: example.com
+              description: Declared in Postman collection variables.
+tags:
+  - name: Hosted Payment
+  - name: Core API
+  - name: Credit Card
+    description: Part of Core API
+  - name: Advance Payment
+    description: Part of Core API -> Credit Card
+  - name: Save Card
+    description: Part of Core API -> Credit Card -> Advance Payment
+  - name: Transaction using stored card
+    description: Part of Core API -> Credit Card -> Advance Payment -> Save Card
+  - name: Direct Integration
+    description: Part of Core API -> Credit Card -> Advance Payment
+  - name: 3DS Transaction
+    description: Part of Core API -> Credit Card -> Advance Payment -> Direct Integration
+  - name: Virtual Akun
+    description: Part of Core API
+  - name: Open Payment
+    description: Part of Core API -> Virtual Akun
+  - name: Emoney
+    description: Part of Core API
+  - name: Instan Payment
+    description: Part of Core API
+  - name: PayLater & Installments
+    description: Part of Core API
+  - name: Bayar dengan QR
+    description: Part of Core API
+  - name: After Payment
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+servers:
+  - url: https://{adapterMerchant}customer
+    variables:
+      adapterMerchant:
+        default: example.com
+        description: Declared in Postman collection variables.
+  - url: https://{adapterMerchant}threeds
+    variables:
+      adapterMerchant:
+        default: example.com
+        description: Declared in Postman collection variables.
+  - url: https://{adapterMerchant}openpayment
+    variables:
+      adapterMerchant:
+        default: example.com
+        description: Declared in Postman collection variables.

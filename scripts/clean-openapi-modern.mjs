@@ -7,6 +7,10 @@ const targets = [
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
   'openapi/ipaymu/ipaymu.openapi.yaml',
+  'openapi/fastpay/fastpay.openapi.yaml',
+  'openapi/finpay/finpay-billing.openapi.yaml',
+  'openapi/finpay/finpay-disbursement.openapi.yaml',
+  'openapi/finpay/finpay-payment-gateway.openapi.yaml',
 ];
 
 for (const target of targets) {
@@ -16,7 +20,13 @@ for (const target of targets) {
   const cleanedPaths = {};
 
   for (const [path, operations] of Object.entries(paths)) {
-    const normalizedPath = path.replace('/[INSERT-ORDER-ID]/', '/{order_id}/');
+    let normalizedPath = path.replace('/[INSERT-ORDER-ID]/', '/{order_id}/');
+
+    if (target.includes('fastpay')) {
+      normalizedPath = normalizedPath
+        .replace('/183xx00010100000', '/{merchant_id}')
+        .replace('/182xx00010100000', '/{merchant_id}');
+    }
     const existing = cleanedPaths[normalizedPath];
     if (!existing) {
       cleanedPaths[normalizedPath] = operations;
@@ -56,17 +66,76 @@ for (const target of targets) {
     }
   }
 
+  if (target.includes('fastpay')) {
+    doc.info ??= {};
+    doc.info.title = 'Faspay API';
+
+    for (const [path, operations] of Object.entries(cleanedPaths)) {
+      if (!path.includes('{merchant_id}')) {
+        continue;
+      }
+
+      for (const op of Object.values(operations)) {
+        const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
+        const hasMerchantId = params.some((item) => item?.in === 'path' && item?.name === 'merchant_id');
+        if (!hasMerchantId) {
+          params.push({
+            name: 'merchant_id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+            description: 'Faspay merchant identifier in URL path.',
+          });
+          op.parameters = params;
+        }
+      }
+    }
+  }
+
+  if (target.includes('ipaymu')) {
+    for (const [path, operations] of Object.entries(cleanedPaths)) {
+      for (const op of Object.values(operations)) {
+        const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
+
+        for (const param of params) {
+          if (param?.in === 'header' && param?.name === 'signature') {
+            param.schema ??= {};
+            param.schema.type = 'string';
+          }
+        }
+
+        if (path.includes('{transaction_id}')) {
+          const hasTransactionId = params.some(
+            (item) => item?.in === 'path' && item?.name === 'transaction_id',
+          );
+          if (!hasTransactionId) {
+            params.unshift({
+              name: 'transaction_id',
+              in: 'path',
+              required: true,
+              schema: {
+                type: 'string',
+              },
+              description: 'iPaymu COD transaction identifier.',
+            });
+          }
+        }
+
+        op.parameters = params;
+      }
+    }
+  }
+
   doc.paths = cleanedPaths;
   await fs.writeFile(target, yaml.dump(doc), 'utf8');
 
-  const cleanedRaw = await fs.readFile(target, 'utf8');
+  const pathNames = Object.keys(cleanedPaths);
   const checks = [
-    ['path-placeholders', '/\\[INSERT-ORDER-ID\\]/'],
-    ['path-item-template-brace', '/{order_id}/'],
-  ].map(([name, pattern]) => {
-    const matches = cleanedRaw.match(new RegExp(pattern, 'g')) || [];
-    return `${name}: ${matches.length}`;
-  });
+    `path-placeholders: ${pathNames.filter((item) => item.includes('[INSERT-ORDER-ID]')).length}`,
+    `path-item-template-brace: ${pathNames.filter((item) => /\{[^}]+\}/.test(item)).length}`,
+  ];
 
   console.log(`${target}\n  ${checks.join('\n  ')}\n`);
 }

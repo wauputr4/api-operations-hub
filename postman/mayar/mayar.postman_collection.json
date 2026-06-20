@@ -1,0 +1,2077 @@
+{
+  "info": {
+    "name": "Mayar API",
+    "description": "Generated from Mayar docs pages in llms.txt (best-effort extraction from Markdown docs).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mayar.id"
+    }
+  ],
+  "item": [
+    {
+      "name": "Add Customer Credit",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/customer/add-credit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "customer",
+            "add-credit"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/addcustomercredit",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerId\": \"9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55\",\n  \"productId\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n  \"amount\": 100\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"customerId\": \"faa4ee60-cf45-4043-b964-303890713bb9\",\n    \"productId\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n    \"amount\": 100,\n    \"customerBalance\": 911090\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Customer Balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/customer/balance",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "customer",
+            "balance"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/customerbalance",
+        "query": [
+          {
+            "key": "customerId",
+            "value": "customerId",
+            "description": "Sample placeholder/value from docs: 9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55"
+          },
+          {
+            "key": "productId",
+            "value": "productId",
+            "description": "Sample placeholder/value from docs: 2b649982-411e-42e0-9b9c-0a17f9a55d44"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"customerBalance\": 30001,\n  \"customerMainBalance\": 29801,\n  \"customerBalanceAddon\": 500\n}"
+        }
+      ]
+    },
+    {
+      "name": "Generate Immutable Checkout Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/generate/immutable/checkout",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "generate",
+            "immutable",
+            "checkout"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/generateimmutablecheckoutlink",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"0e787345-9aaf-4b72-aa00-1174be6b52b1\",\n  \"creditAmount\": 1000,\n  \"customerInfo\": {\n    \"name\": \"memberTambahan\",\n    \"email\": \"tambahan@gg.com\",\n    \"mobile\": \"08777777799\"\n  }\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"creditUsageImmutableCheckoutUrl\": \"https://donasisekutscom.myr.id/pl/test-product-credit?immutable=eyJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2U1QGdtYWlsLmNvbSIsIm1vYmlsZSI6IjA4Nzc3Nzc3Nzc3IiwiY3JlZGl0QW1vdW50IjoyMDAwMH0=.03de9bf29c5861d950d13364c2c23d62675cd2f03cd27a5b7c682f2c43d25b4e\",\n  \"paymentLinkUrl\": \"https://donasisekutscom.myr.id/pl/test-product-credit\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Paginate Customer Credit History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/customer/paginate-credit-history/PQVS4KGY",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "customer",
+            "paginate-credit-history",
+            "PQVS4KGY"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/paginatecustomercredithistory",
+        "query": [
+          {
+            "key": "productId",
+            "value": "productId",
+            "description": "Sample placeholder/value from docs: 40f26fbe-f4d8-4693-975f-e6d105d291e6"
+          },
+          {
+            "key": "membershipTierId",
+            "value": "membershipTierId",
+            "description": "Sample placeholder/value from docs: 261acae0-d6ae-4d8c-adf5-6fb8c2361514"
+          },
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "limit",
+            "value": "limit",
+            "description": "Sample placeholder/value from docs: 5"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"total\": 3,\n  \"page\": 1,\n  \"limit\": 10,\n  \"totalPages\": 1,\n  \"data\": [\n    {\n      \"id\": \"6970b4bcdfcfcfbbd8d7b617\",\n      \"createdAt\": \"2026-01-21T11:13:00.044Z\",\n      \"credit\": 0,\n      \"debit\": 50,\n      \"productId\": \"10291a3d-c53f-426f-9987-f879b4b87c64\",\n      \"status\": \"ACTIVE\",\n      \"customerId\": \"210e5193-7d66-4345-a5c7-07fe7552f2f7\",\n      \"merchantId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"expiredAt\": null,\n      \"walletType\": \"ADD_ON\",\n      \"type\": \"CREDIT_USAGE\"\n    },\n    {\n      \"id\": \"6970b49fdfcfcfbbd8d7b616\",\n      \"createdAt\": \"2026-01-21T11:12:31.325Z\",\n      \"credit\": 200,\n      \"debit\": 0,\n      \"productId\": \"10291a3d-c53f-426f-9987-f879b4b87c64\",\n      \"status\": \"ACTIVE\",\n      \"customerId\": \"210e5193-7d66-4345-a5c7-07fe7552f2f7\",\n      \"merchantId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"expiredAt\": null,\n      \"walletType\": \"ADD_ON\",\n      \"type\": \"MERCHANT_TOPUP\"\n    },\n    {\n      \"id\": \"6970b416dfcfcfbbd8d7b612\",\n      \"createdAt\": \"2026-01-21T11:10:14.827Z\",\n      \"credit\": 3000,\n      \"debit\": 0,\n      \"productId\": \"10291a3d-c53f-426f-9987-f879b4b87c64\",\n      \"status\": \"ACTIVE\",\n      \"customerId\": \"210e5193-7d66-4345-a5c7-07fe7552f2f7\",\n      \"merchantId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"expiredAt\": null,\n      \"walletType\": \"ADD_ON\",\n      \"type\": \"TRIAL_TOPUP\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Regist New Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/credit-usage/customer/regist",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "credit-usage",
+            "customer",
+            "regist"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/registernewcustomer",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"43eadce2-bc52-4e38-a832-93fb835f2a69\",\n  \"trialCredit\": 300,\n  \"customerInfo\": {\n    \"name\": \"john doe\",\n    \"email\": \"johndoe@gmail.com\",\n    \"mobile\": \"08777777777\"\n  }\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"data\": {\n    \"customerId\": \"bcf56452-ec21-4791-aca2-7a41b033e9d2\",\n    \"paymentLinkId\": \"43eadce2-bc52-4e38-a832-93fb835f2a69\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Spend Customer Credit",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/customer/spend",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "customer",
+            "spend"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: creditbasedproduct/spendcustomercredit",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"customerId\": \"9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55\",\n  \"productId\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n  \"amount\": 10\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"Successfully spent 10. MAIN: 10, ADD_ON: 0\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/customer/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "customer",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: customer/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Raihan Nur Azmii\",\n  \"email\": \"mraihanna19@gmail.com\",\n  \"mobile\": \"089912345678\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"name\": \"Raihan Nur Azmii\",\n    \"email\": \"mraihanna19@gmail.com\",\n    \"mobile\": \"089912345678\",\n    \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n    \"customerId\": \"b0356d4c-516a-403e-abfe-b144da7068b4\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Magic Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/customer/login/portal",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "customer",
+            "login",
+            "portal"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: customer/createmagiclink",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"mraihannanewpatch@gmail.com\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"url\": \"Sudah kami kirim ke email anda\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Customer",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/customer",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "customer"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: customer/getdetail",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 10"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 98,\n  \"pageSize\": 12,\n  \"page\": 1,\n  \"totalCustomer\": 1176,\n  \"data\": [\n    {\n      \"id\": \"0072cf8e-a8f1-4ce9-9dcd-3683f085ebf1\",\n      \"createdAt\": 1735787039376,\n      \"email\": \"ghasyiyahps@gmail.com\",\n      \"mobile\": \"6281296450946\",\n      \"name\": \"Kirana\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039377,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"0088e7bd-2f80-4cd8-ae7d-e5b01694669d\",\n      \"createdAt\": 1735787039363,\n      \"email\": \"gusty.saram@gmail.com\",\n      \"mobile\": \"628114618877\",\n      \"name\": \"Gusty Saram\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039363,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"00ae7695-1739-4bc3-a04f-16aa4b85ee1c\",\n      \"createdAt\": 1735787039379,\n      \"email\": \"mettakariyani@gmail.com\",\n      \"mobile\": \"6289693468304\",\n      \"name\": \"Metta\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039379,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"00bd27a6-8aac-4cac-bf3f-bf59db397730\",\n      \"createdAt\": 1730951705156,\n      \"email\": \"embuhsihombing.123@gmail.com\",\n      \"mobile\": \"6285797522261\",\n      \"name\": \"embuhsihombing\",\n      \"status\": \"active\",\n      \"updatedAt\": 1730951705156,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"00cda35d-8a9a-4a95-93d8-788fdb6461b4\",\n      \"createdAt\": 1735787039347,\n      \"email\": \"arnoldardian70@gmail.com\",\n      \"mobile\": \"6281329269290\",\n      \"name\": \"Arnoldus Ardiandono\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039347,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"00fb4573-56a1-4133-9cec-aa87cc137abb\",\n      \"createdAt\": 1735787039394,\n      \"email\": \"rio.aliwarga1@gmail.com\",\n      \"mobile\": \"6281388251387\",\n      \"name\": \"Rio Handoko\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039394,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"00fd76f0-db12-4d53-939d-8c68d767bd76\",\n      \"createdAt\": 1735787039365,\n      \"email\": \"kddianda25@gmail.com\",\n      \"mobile\": \"6285159103357\",\n      \"name\": \"I kadek dianda saputra\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039365,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"010e087c-4bc3-4aab-9eac-ab4001533a6d\",\n      \"createdAt\": 1736218312836,\n      \"email\": \"caca.bispes.1dddddddd567.87@gmail.com\",\n      \"mobile\": \"6285156369011\",\n      \"name\": \"caca. 90o bispes\",\n      \"status\": \"active\",\n      \"updatedAt\": 1736218312836,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"012b8d85-2a79-48ed-b5a9-d50f8503413d\",\n      \"createdAt\": 1735787039380,\n      \"email\": \"mochamadwirasanjaya@gmail.com\",\n      \"mobile\": \"6281353621080\",\n      \"name\": \"Mochamad Wira SanjayaÂ \",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039380,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"01382010-1a88-4f7b-800b-54efb35179a4\",\n      \"createdAt\": 1735787039371,\n      \"email\": \"hizkiajun@gmail.com\",\n      \"mobile\": \"6282299990094\",\n      \"name\": \"Juan\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039371,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"01533b70-25bf-4fa5-97f5-8c30fd9fe8d4\",\n      \"createdAt\": 1735787039375,\n      \"email\": \"ladyrajagukguk@gmail.com\",\n      \"mobile\": \"6285242715097\",\n      \"name\": \"Kezia Lady\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039375,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    },\n    {\n      \"id\": \"01656fe8-2715-41ea-ba73-6a6ec1a18119\",\n      \"createdAt\": 1735787039401,\n      \"email\": \"th_movita@yahoo.com\",\n      \"mobile\": \"6281310388140\",\n      \"name\": \"Theresia\",\n      \"status\": \"active\",\n      \"updatedAt\": 1735787039401,\n      \"userId\": \"4dba4996-7d74-483e-99fe-b52c60368cb5\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Search Customer By Email",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/customer/detail",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "customer",
+            "detail"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: customer/searchcustomerbyemail",
+        "query": [
+          {
+            "key": "email",
+            "value": "email",
+            "description": "Sample placeholder/value from docs: testingmayar@gmail.com"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"22eb6224-c20a-4bc2-9b99-13b21e7048c6\",\n    \"createdAt\": 1730782544663,\n    \"email\": \"testingmayar@gmail.com\",\n    \"mobile\": \"08112280103422\",\n    \"name\": \"Test Mayar\",\n    \"status\": \"active\",\n    \"updatedAt\": 1730782544663,\n    \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n    \"user\": {\n      \"id\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n      \"name\": \"GlazerOut\",\n      \"urlHook\": \"https://qtwxxqfulqrpuerjmtya.supabase.co/functions/v1/payment-webhook\",\n      \"email\": \"aldodwrzy@gmail.com\",\n      \"paymeLink\": \"testingmayar\",\n      \"isSelfDomain\": false,\n      \"accountId\": \"be305ea4-5fe1-4bb9-a5c8-6bc1d0bfd279\",\n      \"account\": {\n        \"id\": \"be305ea4-5fe1-4bb9-a5c8-6bc1d0bfd279\",\n        \"name\": \"Mayar Team\",\n        \"imageId\": \"efeecb5d-acac-45f8-8249-396f8a5b6a95\",\n        \"logo\": {\n          \"id\": \"efeecb5d-acac-45f8-8249-396f8a5b6a95\",\n          \"fileType\": \"jpeg\",\n          \"url\": \"https://media.mayar.id/images/efeecb5d-acac-45f8-8249-396f8a5b6a95.jpeg\"\n        }\n      }\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Update Customer Email",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/customer/update",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "customer",
+            "update"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: customer/update",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fromEmail\": \"mraihanna19@gmail.com\",\n  \"toEmail\": \"mraihannanewpatch@gmail.com\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"sukses\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Digital Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/digital-product/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "digital-product",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: digitalproduct/create"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"6894b1b2-f303-423b-a6b6-93e230e1d393\",\n    \"link\": \"https://testingmayar.myr.id/catalog/E-Book-Panduan-Bisnis-Buat-Pemula/\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Edit Digital Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/digital-product/edit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "digital-product",
+            "edit"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: digitalproduct/edit",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"6894b1b2-f303-423b-a6b6-93e230e1d393\",\n  \"name\": \"E-Book Panduan Bisnis Untuk Pemula Editan\",\n  \"description\": \"Panduan lengkap memulai bisnis online\",\n  \"amount\": 75000,\n  \"crossoutPrice\": 150000,\n  \"redirectUrl\": \"https://example.com/ebook-download\",\n  \"notes\": \"diskon-50\",\n  \"expiredAt\": \"2026-06-15T12:00:00.000Z\",\n  \"limit\": 200,\n  \"tax\": 7500\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"6894b1b2-f303-423b-a6b6-93e230e1d393\",\n    \"link\": \"https://testingmayar.myr.id/catalog/E-Book-Panduan-Bisnis-Buat-Pemula\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Discount with Coupon",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/coupon/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "coupon",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: discount/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"expiredAt\": \"2030-01-01T09:06:14.933Z\",\n  \"name\": \"Diskon Murmer\",\n  \"discount\": {\n    \"discountType\": \"monetary\",\n    \"eligibleCustomerType\": \"all\",\n    \"minimumPurchase\": 500000,\n    \"value\": 100000,\n    \"totalCoupons\": 100\n  },\n  \"coupon\": {\n    \"code\": \"haribaik\",\n    \"type\": \"reusable\"\n  },\n  \"products\": []\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"id\": \"c9aa143a-53f9-44e7-a9c6-83229ad7199b\",\n    \"createdAt\": 1755665561029,\n    \"expiredAt\": 1893488774933,\n    \"discountType\": \"monetary\",\n    \"discountProductType\": \"all\",\n    \"eligibleCustomerType\": \"all\",\n    \"name\": \"Diskon Murmer\",\n    \"minimumPurchase\": 500000,\n    \"isLifeTime\": null,\n    \"totalCoupons\": 100,\n    \"value\": 100000,\n    \"coupons\": [\n      {\n        \"code\": \"haribaik\",\n        \"type\": \"reusable\",\n        \"expiredAt\": \"2030-01-01T09:06:14.933Z\",\n        \"isActive\": true\n      }\n    ],\n    \"productDiscount\": []\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Coupon Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/coupon/c9aa143a-53f9-44e7-a9c6-83229ad7199b",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "coupon",
+            "c9aa143a-53f9-44e7-a9c6-83229ad7199b"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: discount/detail"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"id\": \"c9aa143a-53f9-44e7-a9c6-83229ad7199b\",\n    \"createdAt\": 1755665561029,\n    \"expiredAt\": 1893488774933,\n    \"productDiscount\": [],\n    \"discountType\": \"monetary\",\n    \"discountProductType\": \"all\",\n    \"eligibleCustomerType\": \"all\",\n    \"name\": \"Diskon Murmer\",\n    \"minimumPurchase\": 500000,\n    \"isLifeTime\": null,\n    \"totalCoupons\": 100,\n    \"value\": 100000,\n    \"coupons\": [\n      {\n        \"id\": \"532858fe-3722-4cf4-a8eb-f7c6765aba17\",\n        \"code\": \"haribaik\",\n        \"createdAt\": 1755665561256,\n        \"discountId\": \"c9aa143a-53f9-44e7-a9c6-83229ad7199b\",\n        \"endMonthTrial\": null,\n        \"expiredAt\": 1893488774933,\n        \"isActive\": true,\n        \"limit\": 100,\n        \"type\": \"reusable\",\n        \"updatedAt\": 1755665561256,\n        \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\"\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Validate Coupon",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/coupon/validate",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "coupon",
+            "validate"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: discount/validate",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"paymentLinkId\": \"4d26ea37-d093-4b92-8f5f-0faec64d65b0\",\n  \"tickets\": [],\n  \"couponCode\": \"NFRBFUK\",\n  \"finalAmount\": 0,\n  \"customerEmail\": \"\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"valid\": true,\n    \"coupon\": {\n      \"id\": \"08d233e9-91bc-4d9b-afc2-1dbbe38a1186\",\n      \"code\": \"143KYCN\",\n      \"discountType\": \"percentage\",\n      \"discountValue\": 10,\n      \"minimumPurchase\": null,\n      \"eligibleCustomerType\": \"all\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Event",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/event/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "event",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: event/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Bootcamp Coding Fullstack Asix\",\n  \"description\": \"Workshop fullstack development 2 hari\",\n  \"amount\": 3100000,\n  \"crossoutPrice\": 500000,\n  \"eventUrl\": \"https://meet.google.com/abc-defg-hij\",\n  \"notes\": \"offline-jakarta\",\n  \"terms\": \"Tiket tidak dapat di-refund\",\n  \"redirectUrl\": \"https://example.com/event-thanks\",\n  \"paymentType\": \"paid\",\n  \"startAt\": \"2026-07-01T08:00:00.000Z\",\n  \"eventStartAt\": \"2026-07-15T08:00:00.000Z\",\n  \"eventEndAt\": \"2026-07-16T17:00:00.000Z\",\n  \"expiredAt\": \"2026-07-10T17:00:00.000Z\",\n  \"limit\": 50,\n  \"event\": {\n    \"eventAddress\": \"jl perjuangan no 32\",\n    \"isOnlineEvent\": false,\n    \"maxTicket\": 5\n  }\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"7f992557-8791-41b5-a1c8-c5641c3e72b5\",\n    \"link\": \"https://testingmayar.myr.id/event/Bootcamp-Coding-Fullstack-Asix/\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Generic Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/paymentlink/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "paymentlink",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: genericlink/create"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"21d84338-b46d-42d7-9b49-d402520407a5\",\n    \"link\": \"https://testingmayar.myr.id/pl/Jasa-Buat-Website-Kece/\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Edit Generic Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/paymentlink/edit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "paymentlink",
+            "edit"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: genericlink/edit"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"21d84338-b46d-42d7-9b49-d402520407a5\",\n    \"link\": \"https://testingmayar.myr.id/pl/Jasa-Buat-Website-Kece\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "POST Create Installment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/installment/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "installment",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: installment/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"azumiikecee@gmail.com\",\n  \"mobile\": \"089961367511\",\n  \"name\": \"Azumii\",\n  \"amount\": 1500000,\n  \"installment\": {\n    \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n    \"interest\": 0,\n    \"tenure\": 3,\n    \"dueDate\": 11\n  }\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"id\": \"ba82c2dd-06c1-4b6c-bc59-a9c00801c842\",\n    \"createdAt\": 1755631209521,\n    \"dueDate\": 11,\n    \"interest\": 0,\n    \"interestType\": \"FLAT\",\n    \"period\": \"MONTHLY\",\n    \"tenure\": 3,\n    \"invoices\": [\n      {\n        \"id\": \"9fe1b9c4-b5d5-4d45-bf1a-5c4849631725\",\n        \"amount\": 500000,\n        \"updatedAt\": 1755631210118,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 1,\n        \"link\": \"mkcn4u72ki\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 1000000,\n        \"customerId\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n        \"customer\": {\n          \"id\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n          \"email\": \"azumiikecee@gmail.com\",\n          \"mobile\": \"089961367511\",\n          \"name\": \"Azumii\"\n        }\n      },\n      {\n        \"id\": \"977777d6-af25-464e-a8ca-e290b3007275\",\n        \"amount\": 500000,\n        \"updatedAt\": 1755631210119,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 2,\n        \"link\": \"0ll429zxvsue\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 500000,\n        \"customerId\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n        \"customer\": {\n          \"id\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n          \"email\": \"azumiikecee@gmail.com\",\n          \"mobile\": \"089961367511\",\n          \"name\": \"Azumii\"\n        }\n      },\n      {\n        \"id\": \"1dde3426-f6a4-43d2-a1d9-2cd2fa05eb9a\",\n        \"amount\": 500000,\n        \"updatedAt\": 1755631210120,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 3,\n        \"link\": \"h8fiobqkek\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 0,\n        \"customerId\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n        \"customer\": {\n          \"id\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\",\n          \"email\": \"azumiikecee@gmail.com\",\n          \"mobile\": \"089961367511\",\n          \"name\": \"Azumii\"\n        }\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Installment Detail",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/installment/ba82c2dd-06c1-4b6c-bc59-a9c00801c842",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "installment",
+            "ba82c2dd-06c1-4b6c-bc59-a9c00801c842"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: installment/detail"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"id\": \"ba82c2dd-06c1-4b6c-bc59-a9c00801c842\",\n    \"createdAt\": 1755631209521,\n    \"period\": \"MONTHLY\",\n    \"tenure\": 3,\n    \"dueDate\": 11,\n    \"interest\": 0,\n    \"interestType\": \"FLAT\",\n    \"paymentLinkId\": \"8f722421-e8fd-4d05-ae0c-5f4a224b7923\",\n    \"updatedAt\": 1755631209521,\n    \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n    \"paymentLink\": {\n      \"id\": \"8f722421-e8fd-4d05-ae0c-5f4a224b7923\",\n      \"name\": \"Azumii\",\n      \"amount\": 1500000,\n      \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n      \"customerId\": \"62d1a396-07d8-4d93-a14c-9ec801f3af20\"\n    },\n    \"invoices\": [\n      {\n        \"id\": \"9fe1b9c4-b5d5-4d45-bf1a-5c4849631725\",\n        \"expiredAt\": 1757523600000,\n        \"amount\": 500000,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 1,\n        \"link\": \"mkcn4u72ki\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 1000000\n      },\n      {\n        \"id\": \"977777d6-af25-464e-a8ca-e290b3007275\",\n        \"expiredAt\": 1760115600000,\n        \"amount\": 500000,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 2,\n        \"link\": \"0ll429zxvsue\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 500000\n      },\n      {\n        \"id\": \"1dde3426-f6a4-43d2-a1d9-2cd2fa05eb9a\",\n        \"expiredAt\": 1762794000000,\n        \"amount\": 500000,\n        \"category\": null,\n        \"status\": \"unpaid\",\n        \"index\": 3,\n        \"link\": \"h8fiobqkek\",\n        \"description\": \"Cicil Produk Kelas Online 3 Bulan\",\n        \"interestAmount\": 0,\n        \"remainingAmount\": 0\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Close Invoice",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice/close/f774034d-d9cc-43a0-97d8-a2520c127f03",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice",
+            "close",
+            "f774034d-d9cc-43a0-97d8-a2520c127f03"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/close"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/create"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"df65d192-8396-4f9a-b4e5-8244648c07c5\",\n    \"transactionId\": \"ca87fd13-8742-4d48-af33-7de1a417bc34\",\n    \"link\": \"https://korban-motivator.mayar.shop/invoices/ycfyxbj2h3\",\n    \"expiredAt\": 1776617003000,\n    \"extraData\": {\n      \"noCustomer\": \"827hiueqy271hj\",\n      \"idProd\": \"contoh aja\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Detail / Invoice Status",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice/f774034d-d9cc-43a0-97d8-a2520c127f03",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice",
+            "f774034d-d9cc-43a0-97d8-a2520c127f03"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/detail"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\",\n    \"amount\": 110000,\n    \"status\": \"unpaid\",\n    \"link\": \"ibzfrf4880\",\n    \"expiredAt\": 1764582069401,\n    \"transactions\": [\n      {\n        \"id\": \"23fa41c5-c6ed-45d4-8302-5fac4a165dfa\"\n      }\n    ],\n    \"customerId\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n    \"customer\": {\n      \"id\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n      \"email\": \"azumiikecee@gmail.com\",\n      \"mobile\": \"08996136751\",\n      \"name\": \"Azumii\"\n    },\n    \"transactionId\": \"23fa41c5-c6ed-45d4-8302-5fac4a165dfa\",\n    \"paymentUrl\": \"https://andiak.myr.id/invoices/ibzfrf4880\",\n    \"paymentLinkId\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Edit Invoice",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice/edit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice",
+            "edit"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/edit",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\",\n  \"redirectUrl\": \"https://web.mayar.id\",\n  \"description\": \"Berubah Jadi Invoice Yang Sudah Diedit\",\n  \"items\": [\n    {\n      \"quantity\": 2,\n      \"rate\": 55000,\n      \"description\": \"Berubah Jadi Invoice Yang Sudah Diedit\"\n    }\n  ]\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\",\n    \"link\": \"https://andiak.myr.id/invoices/ibzfrf4880\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Sort / Filter Invoice",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/filter",
+        "query": [
+          {
+            "key": "sort",
+            "value": "sort",
+            "description": "Sample placeholder/value from docs: closed"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 2,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"01918da0-704b-45d8-bf14-afbd738eb682\",\n      \"amount\": 2000,\n      \"category\": null,\n      \"createdAt\": 1691046324713,\n      \"description\": \"\",\n      \"link\": \"75py7f7vwwr\",\n      \"type\": \"invoice\",\n      \"status\": \"paid\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"transactions\": [\n        {\n          \"id\": \"d442dcbd-6dbb-4e26-aec5-8c4b5f5e13a2\",\n          \"status\": \"created\"\n        },\n        {\n          \"id\": \"5824155d-e125-418e-abb6-bd25e1cb6eaf\",\n          \"status\": \"paid\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\",\n        \"name\": \"Harus Buat auto testing\"\n      }\n    },\n    {\n      \"id\": \"0c0505d8-8265-4299-baa3-9fd4d7759588\",\n      \"amount\": 10000,\n      \"category\": null,\n      \"createdAt\": 1726051915939,\n      \"description\": \"Belajar\",\n      \"link\": \"w2wdxisnbtp\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n      \"transactions\": [\n        {\n          \"id\": \"9a5e044b-07b3-4dc5-a5a7-65aaef019728\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n        \"email\": \"mayartesting11@gmail.com\",\n        \"mobile\": \"081320549499\",\n        \"name\": \"Andika01\"\n      }\n    },\n    {\n      \"id\": \"11d15244-7ca1-42c0-9d06-def8574fd4f3\",\n      \"amount\": 9000,\n      \"category\": null,\n      \"createdAt\": 1737302488652,\n      \"description\": \"Terimakasih telah membeli prodak ini\",\n      \"link\": \"oby6el1hf4\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"transactions\": [\n        {\n          \"id\": \"752a5838-353c-4e68-84d6-fcd78a563889\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\",\n        \"name\": \"Harus Buat auto testing\"\n      }\n    },\n    {\n      \"id\": \"1545a45b-8b18-47b4-8371-532afd040f61\",\n      \"amount\": 575000,\n      \"category\": null,\n      \"createdAt\": 1730269014120,\n      \"description\": \"buat keterangan yang OCR mending gini gimana?\\nSheets in one file that has OCR are limited to a maximum of 100 pages\",\n      \"link\": \"3rjngpjzys8\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"e74850ba-bd72-4703-a7fa-b99c4166352e\",\n      \"transactions\": [\n        {\n          \"id\": \"c887e49c-0b47-43b9-b22c-263fb3fdfe79\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"e74850ba-bd72-4703-a7fa-b99c4166352e\",\n        \"email\": \"aldobaik18@gmail.com\",\n        \"mobile\": \"0877828291999\",\n        \"name\": \"Aldoghandika\"\n      }\n    },\n    {\n      \"id\": \"52aadb07-18a8-4b1b-be30-c35923890252\",\n      \"amount\": 10000,\n      \"category\": null,\n      \"createdAt\": 1737105096056,\n      \"description\": \"xcxcxc\",\n      \"link\": \"g0mlnqxi84n\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"transactions\": [\n        {\n          \"id\": \"00151cc8-858e-4dfb-a63d-57a4e74b88aa\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\",\n        \"name\": \"Harus Buat auto testing\"\n      }\n    },\n    {\n      \"id\": \"634e664e-a7bf-4f85-a321-ebeae0aa01cd\",\n      \"amount\": 100000,\n      \"category\": null,\n      \"createdAt\": 1732254931782,\n      \"description\": \"Jsjwhsbsbs\",\n      \"link\": \"gqevn4vro1f\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"627bc86f-44c8-401b-b4fc-50127183f9f9\",\n      \"transactions\": [\n        {\n          \"id\": \"ff388716-35ca-4427-b737-7d7d23329290\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"627bc86f-44c8-401b-b4fc-50127183f9f9\",\n        \"email\": \"Andiak@gmail.com\",\n        \"mobile\": \"081320547855\",\n        \"name\": \"Aandika\"\n      }\n    },\n    {\n      \"id\": \"89400a8d-276b-4b07-aad3-ac6cd3112281\",\n      \"amount\": 1000000,\n      \"category\": null,\n      \"createdAt\": 1732255465802,\n      \"description\": \"Bajwwhwh\",\n      \"link\": \"0aq2mvgze91\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"627bc86f-44c8-401b-b4fc-50127183f9f9\",\n      \"transactions\": [\n        {\n          \"id\": \"6464ad54-0e60-44d8-8056-f20ee601eab0\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"627bc86f-44c8-401b-b4fc-50127183f9f9\",\n        \"email\": \"Andiak@gmail.com\",\n        \"mobile\": \"081320547855\",\n        \"name\": \"Aandika\"\n      }\n    },\n    {\n      \"id\": \"8cb09626-aad6-4589-aabb-5d7887991922\",\n      \"amount\": 9000,\n      \"category\": null,\n      \"createdAt\": 1739088135842,\n      \"description\": \"Lorem ipsum dolor sit amet consectetur adipiscing elit risus etiam, eu vitae dapibus dui bibendum litora facilisis aliquet fames, velit cum mauris ultrices facilisi montes lobortis feugiat. Varius etiam eu cursus senectus magna orci pharetra vitae proin ornare, fusce ut molestie mi nascetur tellus quis mattis sem maecenas, ultrices montes vel sollicitudin duis auctor tincidunt aliquet primis. Tempus a cras sagittis sapien viverra maecenas non justo pharetra, sociosqu convallis vestibulum malesuada feugiat morbi hendrerit sociis, molestie fermentum sed orci urna pellentesque mollis faucibus. Nostra ad tempor sed venenatis eros fringilla semper euismod praesent, egestas eget purus proin vivamus est sagittis felis.\",\n      \"link\": \"2l2xp7qz3bs\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"transactions\": [\n        {\n          \"id\": \"31917bf2-1073-4655-8bf4-1229fa0d6d80\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\",\n        \"name\": \"Harus Buat auto testing\"\n      }\n    },\n    {\n      \"id\": \"a52e905f-3366-4199-9dfc-8ddeca679328\",\n      \"amount\": 100000,\n      \"category\": null,\n      \"createdAt\": 1730285756976,\n      \"description\": \"Bugs\\n- kalo akunnya belum pernah login lewat web mayar ga bisa daftar di app mayarbuat keterangan yang OCR mending gini gimana?\\nSheets in one file that has OCR are limited to a maximum of 100 pagesbuat keterangan yang OCR mending gini gimana?\\nSheets in one file that has OCR are limited to a maximum of 100 pages\",\n      \"link\": \"r4lhlfqzv\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n      \"transactions\": [\n        {\n          \"id\": \"86f439f4-55cf-4789-9e60-9701531f5499\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n        \"email\": \"mayartesting11@gmail.com\",\n        \"mobile\": \"081320549499\",\n        \"name\": \"Andika01\"\n      }\n    },\n    {\n      \"id\": \"bc8c1d9f-68e2-4f9c-a7b8-2718acec2f8c\",\n      \"amount\": 1000000,\n      \"category\": null,\n      \"createdAt\": 1731459885215,\n      \"description\": \"\",\n      \"link\": \"ly6bm0jkqhf\",\n      \"type\": \"invoice\",\n      \"status\": \"closed\",\n      \"name\": \"INVOICE\",\n      \"redirectUrl\": null,\n      \"customerId\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n      \"transactions\": [\n        {\n          \"id\": \"9f509c2e-0910-4b5a-9fcf-b7259b9f3324\",\n          \"status\": \"created\"\n        }\n      ],\n      \"customer\": {\n        \"id\": \"eaf5cd15-49c4-433b-b57b-a2175f4c41d8\",\n        \"email\": \"mayartesting11@gmail.com\",\n        \"mobile\": \"081320549499\",\n        \"name\": \"Andika01\"\n      }\n    }\n  ],\n  \"total\": 17\n}"
+        }
+      ]
+    },
+    {
+      "name": "Re-open Invoice",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/invoice/open/f774034d-d9cc-43a0-97d8-a2520c127f03",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "invoice",
+            "open",
+            "f774034d-d9cc-43a0-97d8-a2520c127f03"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: invoice/reopen"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Verify License",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/software/v1/license/verify",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "software",
+            "v1",
+            "license",
+            "verify"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: licensecode/verifylicense",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"licenseCode\": \"YOUR-LICENSE-CODE\",\n  \"productId\": \"YOUR-PRODUCT-ID\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"isLicenseActive\": true,\n  \"licenseCode\": {\n    \"licenseCode\": \"LICENSECODE12345\",\n    \"status\": \"ACTIVE\",\n    \"expiredAt\": \"2025-12-12T19:46:24.000Z\",\n    \"transactionId\": \"994d4071-a81e-4558-a854-47530eea9b6d\",\n    \"productId\": \"84d1d247-a8b3-4c7d-96f0-cf276edb7c33\",\n    \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n    \"customerName\": \"John Doe\",\n    \"customerEmail\": \"johndoe@gmail.com\",\n    \"activationLimit\": \"Tidak terbatas\",\n    \"useCount\": 10,\n    \"createdAt\": \"2024-02-12T08:41:13.579Z\",\n    \"updatedAt\": \"2024-02-12T08:57:36.047Z\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Close Product",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/close/a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "close",
+            "a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: product/close"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Detail Product",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/4d26ea37-d093-4b92-8f5f-0faec64d65b0",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "4d26ea37-d093-4b92-8f5f-0faec64d65b0"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: product/detail"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"6f8c19ff-5b97-4792-aa89-d2a12797b356\",\n    \"link\": \"pembuatan-jasa-web\",\n    \"name\": \"Pembuatan Jasa Web\",\n    \"category\": null,\n    \"limit\": null,\n    \"type\": \"generic_link\",\n    \"subType\": null,\n    \"variant\": \"[{\\\"id\\\":\\\"986cb91e-70ee-4579-a046-3201f936e6e1\\\",\\\"name\\\":\\\"Landing Page \\\",\\\"description\\\":\\\"<p></p>\\\\n\\\",\\\"amount\\\":100000,\\\"limit\\\":null,\\\"notes\\\":\\\"\\\",\\\"redirectUrl\\\":\\\"\\\",\\\"status\\\":\\\"ACTIVE\\\",\\\"createdAt\\\":1778236239496},{\\\"id\\\":\\\"99de25dc-0302-4d64-9467-6f1c85fbc1bb\\\",\\\"name\\\":\\\"Sistem Crud\\\",\\\"description\\\":\\\"<p></p>\\\\n\\\",\\\"amount\\\":500000,\\\"limit\\\":null,\\\"notes\\\":\\\"\\\",\\\"redirectUrl\\\":\\\"\\\",\\\"status\\\":\\\"ACTIVE\\\",\\\"createdAt\\\":1778236254836}]\",\n    \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n    \"membershipTier\": [],\n    \"event\": null,\n    \"order\": null,\n    \"qty\": null,\n    \"amount\": 100000,\n    \"status\": \"active\",\n    \"description\": \"<p>Testing</p>\\n\",\n    \"coverImageId\": null,\n    \"multipleImageId\": \"62840541-d45d-4e3f-a13a-e4f8bcdf4e5d\",\n    \"transactions\": [],\n    \"coverImage\": null,\n    \"multipleImage\": [\n      {\n        \"id\": \"503d493e-7ae5-4892-80a6-b925e057698f\",\n        \"fileType\": \"jpeg\",\n        \"url\": \"https://media.mayar.id/images/503d493e-7ae5-4892-80a6-b925e057698f.jpeg\"\n      }\n    ],\n    \"linkUrl\": \"https://testingmayar.myr.id/plink/pembuatan-jasa-web\",\n    \"linkPayment\": \"https://testingmayar.myr.id/pl/pembuatan-jasa-web\",\n    \"variants\": [\n      {\n        \"id\": \"986cb91e-70ee-4579-a046-3201f936e6e1\",\n        \"name\": \"Landing Page \",\n        \"description\": \"<p></p>\\n\",\n        \"amount\": 100000,\n        \"limit\": null,\n        \"notes\": \"\",\n        \"redirectUrl\": \"\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": 1778236239496\n      },\n      {\n        \"id\": \"99de25dc-0302-4d64-9467-6f1c85fbc1bb\",\n        \"name\": \"Sistem Crud\",\n        \"description\": \"<p></p>\\n\",\n        \"amount\": 500000,\n        \"limit\": null,\n        \"notes\": \"\",\n        \"redirectUrl\": \"\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": 1778236254836\n      }\n    ]\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Product Page",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: product/productpage",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 10"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 14,\n  \"pageSize\": \"10\",\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"fca92d4c-33e8-4334-b2f3-491af6d78a5b\",\n      \"amount\": 200000,\n      \"category\": null,\n      \"createdAt\": 1692004154797,\n      \"description\": \"<p><span style=\\\"color: rgb(51,51,51);background-color: rgb(251,252,252);font-size: 18px;font-family: Open Sans;\\\">The Invisible Man</span> <span style=\\\"color: rgb(51,51,51);background-color: rgb(251,252,252);font-size: 18px;font-family: Open Sans;\\\">(1897) is one of the most famous science fiction novels of all time. Written by H.G. Wells (1866-1946), it tells the story of a scientist who discovers the secret of invisibility and uses it on himself. The story begins as the Invisible Man, with a bandaged face and a heavy coat and gloves, takes a train to lodge in a country inn whilst he tries to discover the antidote and make himself visible again. The book inspired several films and is notable for its vivid descriptions of the invisible man-no mean feat, given that you can't see him!</span>&nbsp;</p>\\n\",\n      \"link\": \"invisible-man\",\n      \"type\": \"audiobook\",\n      \"subType\": null,\n      \"status\": \"active\",\n      \"name\": \"Invisible Man\",\n      \"limit\": null,\n      \"redirectUrl\": null,\n      \"installmentId\": null,\n      \"variant\": null,\n      \"membershipTier\": [],\n      \"event\": null,\n      \"order\": null,\n      \"coverImageId\": \"2529541f-dc98-4ca0-93bb-3c1d35a8dd07\",\n      \"multipleImageId\": null,\n      \"multipleImage\": null,\n      \"coverImage\": {\n        \"id\": \"2529541f-dc98-4ca0-93bb-3c1d35a8dd07\",\n        \"fileType\": \"jpeg\",\n        \"url\": \"https://media.mayar.id/images/2529541f-dc98-4ca0-93bb-3c1d35a8dd07.jpeg\"\n      },\n      \"variants\": null,\n      \"transactions\": [],\n      \"linkUrl\": \"https://testingmayar.myr.id/audiobook/invisible-man\",\n      \"linkPayment\": \"https://testingmayar.myr.id/pl/invisible-man\"\n    }\n  ],\n  \"total\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Product Page with Type Filter",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/type/ebook",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "type",
+            "ebook"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: product/productpagewithfilter",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 100"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": false,\n  \"pageCount\": 1,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"b1eae80c-cecf-48ee-8879-36f0b915603b\",\n      \"amount\": 0,\n      \"category\": null,\n      \"createdAt\": 1685963288286,\n      \"description\": \"<p style=\\\"text-align:start;\\\"><span style=\\\"color: rgb(73,80,87);background-color: rgb(251,252,252);font-size: 13px;font-family: Open Sans\\\">COVID-19 has plagued almost all corners of the world, including in Indonesia where the most common symptom is fever up to 38℃. Therefore, at this time in various places have imposed body temperature checks to detect the body temperature of visitors. To inhibit the spread of COVID-19 , the Government appeals to the public to implement health protocols, including wearing masks. This is the basis for making a visitor's body temperature detector when entering a building or public room, not only detecting body temperature but this tool is also able to detect the use of masks using the Haar Cascade Classifier method as one of the applications. An appeal from the government regarding health protocols. </span></p>\\n<p style=\\\"text-align:left;\\\"><span style=\\\"color: rgb(73,80,87);background-color: rgb(251,252,252);font-size: 13px;font-family: Open Sans\\\">The mask detection tool and body temperature detector use Arduino UNO as a microcontroller, ESP32-Cam as a face detection camera, MLX90614 sensor as a body temperature detector, LCD to display information about the results of body temperature detection and also masks, and servos as door movers. In designing the automatic door to detect face masks and body temperature, the author uses a Flowchart as a method for designing the system, this system is made using the C++ programming language and also the Open CV (Open Computer Vision) algorithm. Then perform system testing using hardware testing. After testing, conclusions are made whether the functions, inputs, and outputs of the system are in accordance with the required specifications or not. </span>&nbsp;</p>\\n\",\n      \"link\": \"journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya\",\n      \"type\": \"ebook\",\n      \"subType\": null,\n      \"status\": \"active\",\n      \"name\": \"DUPLICATE - JOURNAL DESIGN OF AUTOMATIC DOOR DETECTION OF FACE MASK AND  HUMAN BODY TEMPERATURE BASED ON Arduino UNO USING HAAR  CASCADE CLASSIFIER METHOD\",\n      \"limit\": null,\n      \"redirectUrl\": null,\n      \"installmentId\": null,\n      \"variant\": null,\n      \"membershipTier\": [],\n      \"event\": null,\n      \"order\": null,\n      \"coverImageId\": \"681abbf7-8620-405a-96f6-246cd7397cd9\",\n      \"multipleImageId\": null,\n      \"multipleImage\": null,\n      \"coverImage\": null,\n      \"transactions\": [],\n      \"linkUrl\": \"https://testingmayar.myr.id/ebook/journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya\",\n      \"linkPayment\": \"https://testingmayar.myr.id/pl/journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya\"\n    }\n  ],\n  \"total\": 1\n}"
+        }
+      ]
+    },
+    {
+      "name": "Re-open Product",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/open/a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "open",
+            "a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: product/reopen"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Close Single Payment Request",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/payment/close/e890d24a-cfc0-4915-83d2-3166b9ffba9e",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "payment",
+            "close",
+            "e890d24a-cfc0-4915-83d2-3166b9ffba9e"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: reqpayment/close"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Detail Single Payment Request",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/payment/e890d24a-cfc0-4915-83d2-3166b9ffba9e",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "payment",
+            "e890d24a-cfc0-4915-83d2-3166b9ffba9e"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: reqpayment/detail"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"e890d24a-cfc0-4915-83d2-3166b9ffba9e\",\n    \"link\": \"ohsjrd3wko\",\n    \"name\": \"Azumii\",\n    \"category\": null,\n    \"limit\": null,\n    \"type\": \"payment_request\",\n    \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n    \"event\": null,\n    \"order\": null,\n    \"qty\": null,\n    \"amount\": 100000,\n    \"status\": \"unpaid\",\n    \"description\": \"Ubah ReqPayment\",\n    \"coverImageId\": null,\n    \"multipleImageId\": null,\n    \"coverImage\": null,\n    \"multipleImage\": null\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Sort / Filter Single Payment Request Page",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/payment",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "payment"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: reqpayment/filter",
+        "query": [
+          {
+            "key": "status",
+            "value": "status",
+            "description": "Sample placeholder/value from docs: paid"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": false,\n  \"pageCount\": 1,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"abbf58dc-6e12-4bdc-bdcf-e0a53340227d\",\n      \"amount\": 1000,\n      \"category\": null,\n      \"createdAt\": 1685960215853,\n      \"description\": \"<p>Pembayaran Uang Demo Produk, mohon untuk menyelesaikan dan melakukan pembayaran.</p>\\n\",\n      \"link\": \"pagovztwbu\",\n      \"type\": \"payment_request\",\n      \"status\": \"paid\",\n      \"name\": \"Penagihan\",\n      \"limit\": null,\n      \"redirectUrl\": null,\n      \"installmentId\": null,\n      \"event\": null,\n      \"order\": null,\n      \"coverImageId\": null,\n      \"multipleImageId\": null,\n      \"coverImage\": null,\n      \"multipleImage\": null\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get All Reviews",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/reviews",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "reviews"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: reviews/getallreviews"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": false,\n  \"pageCount\": 1,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"total\": 1,\n  \"data\": [\n    {\n      \"id\": \"11f4d767-4d88-41ff-8777-06564d906fe7\",\n      \"createdAt\": 1778223034383,\n      \"customerId\": \"22eb6224-c20a-4bc2-9b99-13b21e7048c6\",\n      \"message\": \"Bagus sekali, takde minusnyo\",\n      \"paymentLinkId\": \"e2b3f5d5-0c62-47ba-8a01-6c1c209e0f77\",\n      \"rating\": 5,\n      \"status\": \"ACTIVE\",\n      \"updatedAt\": 1778225558788,\n      \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n      \"multipleImage\": [],\n      \"content\": [],\n      \"customer\": {\n        \"id\": \"22eb6224-c20a-4bc2-9b99-13b21e7048c6\",\n        \"name\": \"Test Mayar\"\n      },\n      \"paymentLink\": {\n        \"id\": \"e2b3f5d5-0c62-47ba-8a01-6c1c209e0f77\",\n        \"name\": \"Kelas Pemrograman Web Dasar\",\n        \"type\": \"course\",\n        \"link\": \"website\",\n        \"subType\": null\n      }\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Activate License",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/saas/v1/license/activate",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "saas",
+            "v1",
+            "license",
+            "activate"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: saas/activate",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"licenseCode\": \"YOUR-LICENSE-CODE\",\n  \"productId\": \"YOUR-PRODUCT-ID\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"Success updating license code status to ACTIVE.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Deactivate License",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/saas/v1/license/deactivate",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "saas",
+            "v1",
+            "license",
+            "deactivate"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: saas/deactivate",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"licenseCode\": \"YOUR-LICENSE-CODE\",\n  \"productId\": \"YOUR-PRODUCT-ID\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"Success updating license code status to INACTIVE.\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Verify License SaaS Subscription",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/saas/v1/license/verify",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "saas",
+            "v1",
+            "license",
+            "verify"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: saas/verify",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"licenseCode\": \"YOUR-LICENSE-CODE\",\n  \"productId\": \"YOUR-PRODUCT-ID\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"isLicenseActive\": true,\n  \"licenseCode\": {\n    \"licenseCode\": \"LICENSECODE12345\",\n    \"status\": \"ACTIVE\",\n    \"expiredAt\": \"2025-12-12T19:46:24.000Z\",\n    \"transactionId\": \"994d4071-a81e-4558-a854-47530eea9b6d\",\n    \"productId\": \"84d1d247-a8b3-4c7d-96f0-cf276edb7c33\",\n    \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n    \"customerName\": \"John Doe\",\n    \"customerEmail\": \"johndoe@gmail.com\",\n    \"activationLimit\": \"Tidak terbatas\",\n    \"useCount\": 10,\n    \"createdAt\": \"2024-02-12T08:41:13.579Z\",\n    \"updatedAt\": \"2024-02-12T08:57:36.047Z\",\n    \"membershipTierId\": \"c96850f9-b379-4ed3-bcf2-6d88a87bd20c\",\n    \"membershipTierName\": \"Master Black Belt Membership\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Account Balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/balance",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "balance"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: transaction/accountbalance"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"balanceActive\": 0,\n    \"balancePending\": 0,\n    \"balance\": 0\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Dynamic QRCode",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/qrcode/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "qrcode",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: transaction/createdynamicqrcode",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 10000\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"Success\",\n  \"data\": {\n    \"url\": \"https://media.mayar.id/images/resized/480/a30ed45f-976b-490f-b97c-72c90d1e8d9d.png\",\n    \"amount\": 10000\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Transaction Daily",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/transactions/daily",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "transactions",
+            "daily"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: transaction/dailytransaction"
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"data\": {\n    \"date\": \"2026-05-08\",\n    \"tpvCount\": 125000,\n    \"trxCount\": 10\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Paid Transactions",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/transactions",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "transactions"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: transaction/paidtransaction",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 10"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 70,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"ff5e591d-6740-442b-8aec-26e72b60c29e\",\n      \"credit\": 0,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"webinar\",\n      \"paymentMethod\": \"Gratis\",\n      \"customerId\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n      \"createdAt\": 1755534083905,\n      \"paymentLinkTransactionId\": \"98f26871-de3c-4bca-ac59-d079ca44d5bd\",\n      \"fee\": [],\n      \"paymentLinkId\": \"015ff1af-c83f-4684-9401-dd74a7c6da0f\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": null,\n      \"subscription\": null,\n      \"xenditTransaction\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"98f26871-de3c-4bca-ac59-d079ca44d5bd\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": null,\n        \"isChannelFeeBorneByCustomer\": null\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n        \"name\": \"trial\",\n        \"email\": \"trial@gmail.com\",\n        \"mobile\": \"0884444730242\"\n      },\n      \"paymentLink\": {\n        \"id\": \"015ff1af-c83f-4684-9401-dd74a7c6da0f\",\n        \"name\": \"test outlook\"\n      }\n    },\n    {\n      \"id\": \"40067bb5-e06f-4dc6-bd65-e2f6ac35643f\",\n      \"credit\": 0,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"membership\",\n      \"paymentMethod\": \"Gratis\",\n      \"customerId\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n      \"createdAt\": 1755244097529,\n      \"paymentLinkTransactionId\": \"00617429-fc1c-44db-a0ba-e31d3f0edd70\",\n      \"fee\": [],\n      \"paymentLinkId\": \"a6be24df-1335-4682-902c-f0474c1826c0\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": null,\n      \"subscription\": null,\n      \"xenditTransaction\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"00617429-fc1c-44db-a0ba-e31d3f0edd70\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": null,\n        \"isChannelFeeBorneByCustomer\": null\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n        \"name\": \"trial\",\n        \"email\": \"trial@gmail.com\",\n        \"mobile\": \"0884444730242\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a6be24df-1335-4682-902c-f0474c1826c0\",\n        \"name\": \"test membership cohort analisis\"\n      }\n    },\n    {\n      \"id\": \"306aa4ae-e41b-4dc3-89c5-585ec0ae92dd\",\n      \"credit\": 1059,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1755012459984,\n      \"paymentLinkTransactionId\": \"8e7646b1-8c65-4219-9c49-50de5e2f0420\",\n      \"fee\": [\n        {\n          \"id\": \"66e365d3-9afc-4dec-ad2d-ed925433ddd9\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 6\n        },\n        {\n          \"id\": \"973d31bb-c3cf-4b80-b09f-783b0a7fec88\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 53\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"a57b842e-8ffe-4851-9d15-7716c2f56902\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"8e7646b1-8c65-4219-9c49-50de5e2f0420\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"a57b842e-8ffe-4851-9d15-7716c2f56902\",\n        \"paymentLinkTransactionId\": \"8e7646b1-8c65-4219-9c49-50de5e2f0420\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"8e7646b1-8c65-4219-9c49-50de5e2f0420\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"59be9cd3-503b-446b-92cf-8df6b2b96345\",\n      \"credit\": 1059,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1755012407864,\n      \"paymentLinkTransactionId\": \"e1f9298c-01ad-4a1a-8677-e1afdc964a45\",\n      \"fee\": [\n        {\n          \"id\": \"b9356032-dd15-4808-869a-43d6b6d8fa18\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 6\n        },\n        {\n          \"id\": \"c172f92e-711d-4759-8236-1cd9ab3a5bd0\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 53\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"0f62b59a-ca73-4ee5-ae33-bfe1631f2218\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"e1f9298c-01ad-4a1a-8677-e1afdc964a45\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"0f62b59a-ca73-4ee5-ae33-bfe1631f2218\",\n        \"paymentLinkTransactionId\": \"e1f9298c-01ad-4a1a-8677-e1afdc964a45\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"e1f9298c-01ad-4a1a-8677-e1afdc964a45\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"618a2e42-fea1-49e7-8a2a-3b3b7b9d42e0\",\n      \"credit\": 1059,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1755012388185,\n      \"paymentLinkTransactionId\": \"11a8a7ee-88d5-4a36-9523-9e14fc845155\",\n      \"fee\": [\n        {\n          \"id\": \"2a043370-b62a-4f14-967f-5060224434a6\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 6\n        },\n        {\n          \"id\": \"8dc17d96-fa3f-4467-a21f-e316ab68b2ca\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 53\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"15e8a711-e99b-4a54-acf9-67cdcf3c034e\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"11a8a7ee-88d5-4a36-9523-9e14fc845155\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"15e8a711-e99b-4a54-acf9-67cdcf3c034e\",\n        \"paymentLinkTransactionId\": \"11a8a7ee-88d5-4a36-9523-9e14fc845155\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"11a8a7ee-88d5-4a36-9523-9e14fc845155\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"1d55351c-940f-4eb7-99ad-1ab6b1f0fd29\",\n      \"credit\": 1077,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"Ewallet - Gopay\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1754909424974,\n      \"paymentLinkTransactionId\": \"d6c93069-3c65-4235-8392-5644987a3a52\",\n      \"fee\": [\n        {\n          \"id\": \"16d2c286-f081-4e74-b481-6d6d25ed83af\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 23\n        },\n        {\n          \"id\": \"7b1353b9-2c12-488b-af5a-5950308e6fc2\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 54\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"1e3e3905-0fac-419a-b919-019ecfe3f7f9\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"d6c93069-3c65-4235-8392-5644987a3a52\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"1e3e3905-0fac-419a-b919-019ecfe3f7f9\",\n        \"paymentLinkTransactionId\": \"d6c93069-3c65-4235-8392-5644987a3a52\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"d6c93069-3c65-4235-8392-5644987a3a52\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"41c9ffd1-388d-40a1-8cef-965e33d459a1\",\n      \"credit\": 1059,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1754909018059,\n      \"paymentLinkTransactionId\": \"f62c271c-a7fd-443c-a437-80929ea6d98c\",\n      \"fee\": [\n        {\n          \"id\": \"9c37092d-780a-4ca1-963c-264280a9d944\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 6\n        },\n        {\n          \"id\": \"d29f93d8-06f1-4f9d-a348-3998bde669d8\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 53\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"f05f4764-2561-4ef3-8ba5-0a644d7eed16\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"f62c271c-a7fd-443c-a437-80929ea6d98c\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"f05f4764-2561-4ef3-8ba5-0a644d7eed16\",\n        \"paymentLinkTransactionId\": \"f62c271c-a7fd-443c-a437-80929ea6d98c\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"f62c271c-a7fd-443c-a437-80929ea6d98c\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"8ad2dfe7-ca76-4d97-b7de-6f6e58480404\",\n      \"credit\": 10493,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"event\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1754908707277,\n      \"paymentLinkTransactionId\": \"61617dfd-cf70-4cd8-9f20-b5ef77ebb390\",\n      \"fee\": [\n        {\n          \"id\": \"8d118e9a-393b-40b5-a559-def7f347c195\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 420\n        },\n        {\n          \"id\": \"92424261-0f69-4c79-bb99-9b389aadca44\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 73\n        }\n      ],\n      \"paymentLinkId\": \"a14295a7-f37c-44e0-a488-7c4732cb8491\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"31ab6c69-12c6-4234-b29f-59bba82b44d8\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"61617dfd-cf70-4cd8-9f20-b5ef77ebb390\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a14295a7-f37c-44e0-a488-7c4732cb8491\",\n        \"name\": \"test UIUX Event / Acara\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"31ab6c69-12c6-4234-b29f-59bba82b44d8\",\n        \"paymentLinkTransactionId\": \"61617dfd-cf70-4cd8-9f20-b5ef77ebb390\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"61617dfd-cf70-4cd8-9f20-b5ef77ebb390\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"e258dc42-191a-43a5-8856-582622553486\",\n      \"credit\": 15042,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"event\",\n      \"paymentMethod\": \"Transfer VA - MANDIRI\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1754908251426,\n      \"paymentLinkTransactionId\": \"0d8efb5a-403b-4060-ae31-6f9de016662c\",\n      \"fee\": [\n        {\n          \"id\": \"48bc4322-bd98-47d1-95db-e51f9805b19a\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 4440\n        },\n        {\n          \"id\": \"a1aa2545-f38a-41f3-afda-5d7bbddf46ae\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 602\n        }\n      ],\n      \"paymentLinkId\": \"a14295a7-f37c-44e0-a488-7c4732cb8491\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"f5f50c26-a484-4105-badf-94c67a5528c7\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"0d8efb5a-403b-4060-ae31-6f9de016662c\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a14295a7-f37c-44e0-a488-7c4732cb8491\",\n        \"name\": \"test UIUX Event / Acara\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"f5f50c26-a484-4105-badf-94c67a5528c7\",\n        \"paymentLinkTransactionId\": \"0d8efb5a-403b-4060-ae31-6f9de016662c\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"0d8efb5a-403b-4060-ae31-6f9de016662c\",\n          \"couponUsage\": null\n        }\n      }\n    },\n    {\n      \"id\": \"be5bfd6f-28b8-4729-8304-05a8cf95abcf\",\n      \"credit\": 1059,\n      \"status\": \"settled\",\n      \"balanceHistoryType\": \"digital_product\",\n      \"paymentMethod\": \"QRIS\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"createdAt\": 1754906098343,\n      \"paymentLinkTransactionId\": \"1ed9252b-d56b-4be3-8bb5-f75f654ec3ab\",\n      \"fee\": [\n        {\n          \"id\": \"5324f5c2-3520-481d-a106-889696a89f61\",\n          \"balanceHistoryType\": \"xendit_fee\",\n          \"debit\": 6\n        },\n        {\n          \"id\": \"e16e0178-ab58-4d10-9e33-d05d761d5969\",\n          \"balanceHistoryType\": \"mayar_fee\",\n          \"debit\": 53\n        }\n      ],\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"subscriptionId\": null,\n      \"xenditTransactionId\": \"7454ad4f-307a-4917-b3cc-ad87ab9fc26a\",\n      \"subscription\": null,\n      \"paymentLinkTransaction\": {\n        \"id\": \"1ed9252b-d56b-4be3-8bb5-f75f654ec3ab\",\n        \"urlParamTrackingData\": null,\n        \"isAdminFeeBorneByCustomer\": true,\n        \"isChannelFeeBorneByCustomer\": true\n      },\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"name\": \"Harus Buat auto testing\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n        \"name\": \"test UIUX Produk Digital\"\n      },\n      \"xenditTransaction\": {\n        \"id\": \"7454ad4f-307a-4917-b3cc-ad87ab9fc26a\",\n        \"paymentLinkTransactionId\": \"1ed9252b-d56b-4be3-8bb5-f75f654ec3ab\",\n        \"paymentLinkTransaction\": {\n          \"id\": \"1ed9252b-d56b-4be3-8bb5-f75f654ec3ab\",\n          \"couponUsage\": null\n        }\n      }\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Unpaid Transaction",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/transactions/unpaid",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "transactions",
+            "unpaid"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: transaction/unpaidtransaction",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 10"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 28,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"040d5adb-1496-45de-8435-5cab16526a8c\",\n      \"createdAt\": 1755627439078,\n      \"type\": \"payment_request\",\n      \"amount\": 100000,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"e890d24a-cfc0-4915-83d2-3166b9ffba9e\",\n      \"customerId\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n        \"email\": \"azumiikecee@gmail.com\",\n        \"name\": \"Azumii\",\n        \"mobile\": \"08996136751\"\n      },\n      \"paymentLink\": {\n        \"id\": \"e890d24a-cfc0-4915-83d2-3166b9ffba9e\",\n        \"category\": null,\n        \"createdAt\": 1755627438790,\n        \"description\": \"Ubah ReqPayment\",\n        \"link\": \"ohsjrd3wko\",\n        \"name\": \"Azumii\",\n        \"redirectUrl\": \"https://web.mayar.id.\",\n        \"userId\": \"348e083d-315a-4e5c-96b1-5a2a98c48413\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/040d5adb-1496-45de-8435-5cab16526a8c\"\n    },\n    {\n      \"id\": \"23fa41c5-c6ed-45d4-8302-5fac4a165dfa\",\n      \"createdAt\": 1755621464062,\n      \"type\": \"invoice\",\n      \"amount\": 110000,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\",\n      \"customerId\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ae57ce73-89a2-46a7-84d7-93a616ef220e\",\n        \"email\": \"azumiikecee@gmail.com\",\n        \"name\": \"Azumii\",\n        \"mobile\": \"08996136751\"\n      },\n      \"paymentLink\": {\n        \"id\": \"f774034d-d9cc-43a0-97d8-a2520c127f03\",\n        \"category\": null,\n        \"createdAt\": 1755621463743,\n        \"description\": \"Berubah Jadi Invoice Yang Sudah Diedit\",\n        \"link\": \"ibzfrf4880\",\n        \"name\": \"INVOICE\",\n        \"redirectUrl\": \"https://web.mayar.id\",\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/23fa41c5-c6ed-45d4-8302-5fac4a165dfa\"\n    },\n    {\n      \"id\": \"03f2e6e9-78c6-428c-999f-c02fdb067e32\",\n      \"createdAt\": 1755533945187,\n      \"type\": \"membership_payment\",\n      \"amount\": 104930,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"fdc44ac4-d06b-4906-ab3a-e35b61c1a6d0\",\n      \"customerId\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n        \"email\": \"trial@gmail.com\",\n        \"name\": \"trial\",\n        \"mobile\": \"0884444730242\"\n      },\n      \"paymentLink\": {\n        \"id\": \"fdc44ac4-d06b-4906-ab3a-e35b61c1a6d0\",\n        \"category\": null,\n        \"createdAt\": 1755533914224,\n        \"description\": \"Pembayaran Paket Membership paket 2 - Andika\",\n        \"link\": \"3j2z9bb1e5\",\n        \"name\": \"Tagihan Membership - paket 2\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/03f2e6e9-78c6-428c-999f-c02fdb067e32\"\n    },\n    {\n      \"id\": \"252fdc97-e14f-404a-956d-06262a7f2245\",\n      \"createdAt\": 1755511718734,\n      \"type\": \"generic_link\",\n      \"amount\": 10489,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"8872687f-f548-4327-b59b-1be9e8b9aa36\",\n      \"customerId\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n        \"email\": \"trial@gmail.com\",\n        \"name\": \"trial\",\n        \"mobile\": \"0884444730242\"\n      },\n      \"paymentLink\": {\n        \"id\": \"8872687f-f548-4327-b59b-1be9e8b9aa36\",\n        \"category\": null,\n        \"createdAt\": 1731653740699,\n        \"description\": \"<p>Hshshwhwh</p>\",\n        \"link\": \"Hshshshshsh\",\n        \"name\": \"Hshshshshsh\",\n        \"redirectUrl\": \"\",\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": \"162c8020-fdb0-4504-8999-4d23cfb96fdf\",\n        \"multipleImageId\": null,\n        \"multipleImage\": null,\n        \"coverImage\": {\n          \"id\": \"162c8020-fdb0-4504-8999-4d23cfb96fdf\",\n          \"fileType\": \"jpeg\",\n          \"url\": \"https://media.mayar.id/images/162c8020-fdb0-4504-8999-4d23cfb96fdf.jpeg\"\n        }\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/252fdc97-e14f-404a-956d-06262a7f2245\"\n    },\n    {\n      \"id\": \"05321c55-9c78-4627-b689-23e24d7e7957\",\n      \"createdAt\": 1755256632035,\n      \"type\": \"membership_payment\",\n      \"amount\": 41972,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"name\": \"Harus Buat auto testing\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n        \"category\": null,\n        \"createdAt\": 1755256271521,\n        \"description\": \"Pembayaran Paket Membership paket 1 - Andika\",\n        \"link\": \"evq5sq825kf\",\n        \"name\": \"Tagihan Membership - paket 1\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/05321c55-9c78-4627-b689-23e24d7e7957\"\n    },\n    {\n      \"id\": \"7943b939-fb78-4e8c-bb3a-b9b26e5eb9be\",\n      \"createdAt\": 1755256538587,\n      \"type\": \"membership_payment\",\n      \"amount\": 14840,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"name\": \"Harus Buat auto testing\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n        \"category\": null,\n        \"createdAt\": 1755256271521,\n        \"description\": \"Pembayaran Paket Membership paket 1 - Andika\",\n        \"link\": \"evq5sq825kf\",\n        \"name\": \"Tagihan Membership - paket 1\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/7943b939-fb78-4e8c-bb3a-b9b26e5eb9be\"\n    },\n    {\n      \"id\": \"82472171-f815-4cac-b8a9-f924cbceec35\",\n      \"createdAt\": 1755256520598,\n      \"type\": \"membership_payment\",\n      \"amount\": 14840,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n      \"customerId\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"6a38cf26-6bab-42c8-92be-72f3a9fd4c33\",\n        \"email\": \"mayartesting05@gmail.com\",\n        \"name\": \"Harus Buat auto testing\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"a33ce773-2380-48da-b891-e89a32170c7d\",\n        \"category\": null,\n        \"createdAt\": 1755256271521,\n        \"description\": \"Pembayaran Paket Membership paket 1 - Andika\",\n        \"link\": \"evq5sq825kf\",\n        \"name\": \"Tagihan Membership - paket 1\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/82472171-f815-4cac-b8a9-f924cbceec35\"\n    },\n    {\n      \"id\": \"f8b0ffba-c1bb-47c6-bd31-4b33fdbe3dd6\",\n      \"createdAt\": 1755256470651,\n      \"type\": \"membership_payment\",\n      \"amount\": 10493,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"586a2d96-41bb-4940-b54f-9d3dfdaf069e\",\n      \"customerId\": \"3a5d26f9-894d-47e8-b9e7-4f611979b007\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"3a5d26f9-894d-47e8-b9e7-4f611979b007\",\n        \"email\": \"muslimbasic8@gmail.com\",\n        \"name\": \"Raihan\",\n        \"mobile\": \"081320547877\"\n      },\n      \"paymentLink\": {\n        \"id\": \"586a2d96-41bb-4940-b54f-9d3dfdaf069e\",\n        \"category\": null,\n        \"createdAt\": 1755256364050,\n        \"description\": \"Pembayaran Paket Membership paket 2 - Andika\",\n        \"link\": \"e7uvqy4gbb9\",\n        \"name\": \"Tagihan Membership - paket 2\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/f8b0ffba-c1bb-47c6-bd31-4b33fdbe3dd6\"\n    },\n    {\n      \"id\": \"6457c7ae-632a-4708-acee-582cde2352b0\",\n      \"createdAt\": 1755256342870,\n      \"type\": \"membership_payment\",\n      \"amount\": 10493,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"bd98b446-1373-4842-a129-c75af36a9bf9\",\n      \"customerId\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"ce1234f3-6843-4d5c-8838-b7d6f7506955\",\n        \"email\": \"trial@gmail.com\",\n        \"name\": \"trial\",\n        \"mobile\": \"0884444730242\"\n      },\n      \"paymentLink\": {\n        \"id\": \"bd98b446-1373-4842-a129-c75af36a9bf9\",\n        \"category\": null,\n        \"createdAt\": 1755244488205,\n        \"description\": \"Pembayaran Paket Membership paket 2 - Andika\",\n        \"link\": \"sei6i61sv4\",\n        \"name\": \"Tagihan Membership - paket 2\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/6457c7ae-632a-4708-acee-582cde2352b0\"\n    },\n    {\n      \"id\": \"dd33202d-bab4-4283-9b78-b9f4f1ba308e\",\n      \"createdAt\": 1755256318689,\n      \"type\": \"membership_payment\",\n      \"amount\": 13640,\n      \"status\": \"active\",\n      \"urlParamTrackingData\": null,\n      \"paymentLinkId\": \"75130b99-5ecf-4846-967a-a240d75721b4\",\n      \"customerId\": \"db721f94-2f69-46de-8744-46066dd42af6\",\n      \"customeField\": null,\n      \"customer\": {\n        \"id\": \"db721f94-2f69-46de-8744-46066dd42af6\",\n        \"email\": \"mayartesting19@gmail.com\",\n        \"name\": \"test UIUX\",\n        \"mobile\": \"6281320549999\"\n      },\n      \"paymentLink\": {\n        \"id\": \"75130b99-5ecf-4846-967a-a240d75721b4\",\n        \"category\": null,\n        \"createdAt\": 1755256280592,\n        \"description\": \"Pembayaran Paket Membership paket 3 - Andika\",\n        \"link\": \"bn046sqay3\",\n        \"name\": \"Tagihan Membership - paket 3\",\n        \"redirectUrl\": null,\n        \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n        \"coverImageId\": null,\n        \"multipleImageId\": null,\n        \"coverImage\": null,\n        \"multipleImage\": null\n      },\n      \"paymentUrl\": \"https://andiak.myr.id/plt/dd33202d-bab4-4283-9b78-b9f4f1ba308e\"\n    }\n  ],\n  \"total\": 278\n}"
+        }
+      ]
+    },
+    {
+      "name": "Regist New Membership Customer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/credit/v1/credit/membership/customer/regist",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "credit",
+            "v1",
+            "credit",
+            "membership",
+            "customer",
+            "regist"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: usagebasedmembership/registnewmembershipcustomer",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"productId\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n  \"membershipTierId\": \"9bbbfa01-1bf8-4e4d-8470-cdf7066b6ea2\",\n  \"membershipMonthlyPeriod\": 1,\n  \"trialCredit\": 100,\n  \"customerInfo\": {\n    \"name\": \"memberTambahan\",\n    \"email\": \"tambahan@gg.com\",\n    \"mobile\": \"08777777799\"\n  }\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"message\": \"success\",\n  \"membershipCustomer\": {\n    \"id\": \"68ca1a1c-7ed8-47f3-a5c2-c5ff314dd750\",\n    \"userId\": \"35776524-8ea9-46ac-b2dd-89efc496593f\",\n    \"paymentLinkId\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n    \"createdAt\": 1756088397669,\n    \"nextPayment\": 1758766797571,\n    \"isLifetimePeriod\": null,\n    \"paymentLink\": {\n      \"id\": \"40f26fbe-f4d8-4693-975f-e6d105d291e6\",\n      \"name\": \"produk baru 2\",\n      \"description\": \"<p class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27; class=&#x27;preserveHtml&#x27;>xcxcxccx</p>\\n\"\n    }\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/webhook/history",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "webhook",
+            "history"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webhook/history",
+        "query": [
+          {
+            "key": "page",
+            "value": "page",
+            "description": "Sample placeholder/value from docs: 1"
+          },
+          {
+            "key": "pageSize",
+            "value": "pageSize",
+            "description": "Sample placeholder/value from docs: 10"
+          }
+        ]
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"hasMore\": true,\n  \"pageCount\": 77,\n  \"pageSize\": 10,\n  \"page\": 1,\n  \"data\": [\n    {\n      \"id\": \"7d567063-ad7f-48d5-9e84-0e41938783a5\",\n      \"createdAt\": 1745919352229,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"688b6a9f-2893-4b8a-a637-a008d91d0cfc\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"43b2f0ce-03f2-4f59-a341-299ea3ef19b6\\\",\\\"transactionId\\\":\\\"43b2f0ce-03f2-4f59-a341-299ea3ef19b6\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"paid\\\",\\\"createdAt\\\":\\\"2025-04-29T09:35:43.635Z\\\",\\\"updatedAt\\\":\\\"2025-04-29T09:35:43.635Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"ladu\\\",\\\"customerEmail\\\":\\\"ladusing@gmail.com\\\",\\\"customerMobile\\\":\\\"0888775540242\\\",\\\"amount\\\":0,\\\"isAdminFeeBorneByCustomer\\\":null,\\\"isChannelFeeBorneByCustomer\\\":null,\\\"productId\\\":\\\"688b6a9f-2893-4b8a-a637-a008d91d0cfc\\\",\\\"productName\\\":\\\"E-Book JOURNAL DESIGN OF AUTOMATIC\\\",\\\"productType\\\":\\\"ebook\\\",\\\"pixelFbp\\\":\\\"fb.1.1716364188358.1111830624\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745919352229,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"43b2f0ce-03f2-4f59-a341-299ea3ef19b6\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"7c98876e-bed4-44de-bd37-b144a4559476\",\n      \"createdAt\": 1745918541638,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"f361e6f5-5e92-4ba8-a244-b9b7823003fc\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"8e537afc-4f2f-4e1c-b91b-f75af34bf71a\\\",\\\"transactionId\\\":\\\"8e537afc-4f2f-4e1c-b91b-f75af34bf71a\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"paid\\\",\\\"createdAt\\\":\\\"2025-04-29T09:22:11.239Z\\\",\\\"updatedAt\\\":\\\"2025-04-29T09:22:11.239Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"ladu\\\",\\\"customerEmail\\\":\\\"ladusing@gmail.com\\\",\\\"customerMobile\\\":\\\"0888775540242\\\",\\\"amount\\\":0,\\\"isAdminFeeBorneByCustomer\\\":null,\\\"isChannelFeeBorneByCustomer\\\":null,\\\"productId\\\":\\\"f361e6f5-5e92-4ba8-a244-b9b7823003fc\\\",\\\"productName\\\":\\\"Test 04\\\",\\\"productType\\\":\\\"digital_product\\\",\\\"pixelFbp\\\":\\\"fb.1.1716364188358.1111830624\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745918541638,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"8e537afc-4f2f-4e1c-b91b-f75af34bf71a\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"6e93eae5-e190-4989-8e0f-1b4870be9bce\",\n      \"createdAt\": 1745569215626,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"d071116a-4359-4262-90dc-a7bd137c1baa\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.reminder\\\",\\\"data\\\":{\\\"id\\\":\\\"089fcdc2-5292-4e09-8b29-cfb7bdde3be6\\\",\\\"transactionId\\\":\\\"089fcdc2-5292-4e09-8b29-cfb7bdde3be6\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"created\\\",\\\"createdAt\\\":\\\"2025-04-25T07:58:27.539Z\\\",\\\"updatedAt\\\":\\\"2025-04-25T08:00:21.672Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Harus Buat auto testing\\\",\\\"customerEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerMobile\\\":\\\"081320547877\\\",\\\"amount\\\":107135,\\\"isAdminFeeBorneByCustomer\\\":true,\\\"isChannelFeeBorneByCustomer\\\":true,\\\"productId\\\":\\\"d071116a-4359-4262-90dc-a7bd137c1baa\\\",\\\"productName\\\":\\\"test UIUX Produk Digital\\\",\\\"productType\\\":\\\"digital_product\\\",\\\"pixelFbp\\\":\\\"fb.1.1737105110463.389414050868219356\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":\\\"qris\\\",\\\"paymentUrl\\\":\\\"https://andiak.myr.id/select-channel/089fcdc2-5292-4e09-8b29-cfb7bdde3be6?webhook=true\\\"}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.reminder\",\n      \"updatedAt\": 1745569215626,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"089fcdc2-5292-4e09-8b29-cfb7bdde3be6\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"af46a267-8896-446d-ac7e-90c212e756db\",\n      \"createdAt\": 1745386516347,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"0dd01bc9-ca99-4c0f-94df-fcfb78b835de\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"2c53458c-51ee-4fcc-8f6c-03b4ee948054\\\",\\\"transactionId\\\":\\\"2c53458c-51ee-4fcc-8f6c-03b4ee948054\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"paid\\\",\\\"createdAt\\\":\\\"2025-04-23T05:35:05.951Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T05:35:05.951Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Harus Buat auto testing\\\",\\\"customerEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerMobile\\\":\\\"081320547877\\\",\\\"amount\\\":0,\\\"isAdminFeeBorneByCustomer\\\":null,\\\"isChannelFeeBorneByCustomer\\\":null,\\\"productId\\\":\\\"0dd01bc9-ca99-4c0f-94df-fcfb78b835de\\\",\\\"productName\\\":\\\" Algoritma Pemrograman Dasar\\\",\\\"productType\\\":\\\"course\\\",\\\"pixelFbp\\\":\\\"fb.1.1737105110463.389414050868219356\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745386516348,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"2c53458c-51ee-4fcc-8f6c-03b4ee948054\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"7514ea9b-61e7-4d3f-af42-7f7fc08cfaa6\",\n      \"createdAt\": 1745386309689,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"f361e6f5-5e92-4ba8-a244-b9b7823003fc\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"e801de8c-ab24-4ffa-ac14-99349495c325\\\",\\\"transactionId\\\":\\\"e801de8c-ab24-4ffa-ac14-99349495c325\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"paid\\\",\\\"createdAt\\\":\\\"2025-04-23T05:31:39.805Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T05:31:39.805Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Harus Buat auto testing\\\",\\\"customerEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerMobile\\\":\\\"081320547877\\\",\\\"amount\\\":0,\\\"isAdminFeeBorneByCustomer\\\":null,\\\"isChannelFeeBorneByCustomer\\\":null,\\\"productId\\\":\\\"f361e6f5-5e92-4ba8-a244-b9b7823003fc\\\",\\\"productName\\\":\\\"Test 04\\\",\\\"productType\\\":\\\"digital_product\\\",\\\"pixelFbp\\\":\\\"fb.1.1737105110463.389414050868219356\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745386309689,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"e801de8c-ab24-4ffa-ac14-99349495c325\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"544df424-7584-478b-8ec9-37e4507d3296\",\n      \"createdAt\": 1745386189675,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"4f1af572-9a12-489f-b6bb-a067ab1402d5\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"f90f4d32-bdf7-4d11-8253-6f7ce19e4a78\\\",\\\"transactionId\\\":\\\"f90f4d32-bdf7-4d11-8253-6f7ce19e4a78\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"created\\\",\\\"createdAt\\\":\\\"2025-04-23T05:28:45.172Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T05:28:46.785Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Harus Buat auto testing\\\",\\\"customerEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerMobile\\\":\\\"081320547877\\\",\\\"amount\\\":1045,\\\"isAdminFeeBorneByCustomer\\\":true,\\\"isChannelFeeBorneByCustomer\\\":true,\\\"productId\\\":\\\"4f1af572-9a12-489f-b6bb-a067ab1402d5\\\",\\\"productName\\\":\\\"test UIUX Link Pembayaran\\\",\\\"productType\\\":\\\"generic_link\\\",\\\"pixelFbp\\\":\\\"fb.1.1737105110463.389414050868219356\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":\\\"QRIS\\\",\\\"nettAmount\\\":1000,\\\"custom_field\\\":[{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"text\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"6df52b26-b018-4855-ab3d-8fdfb46861b8\\\",\\\"type\\\":\\\"string\\\",\\\"value\\\":\\\"tests\\\"},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"multipleText\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"80912ec7-e83d-46c6-afab-55ad39e88114\\\",\\\"type\\\":\\\"string\\\",\\\"value\\\":\\\"belajara\\\"},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"checkbox\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"55695415-e3bb-4127-92e0-29c7a756812d\\\",\\\"type\\\":\\\"lists\\\",\\\"value\\\":[{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"value\\\":\\\"55695415-e3bb-4127-92e0-29c7a756812d\\\",\\\"selected\\\":true}]},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"textNumber\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"ddcd3c04-928e-4dd2-b011-5d5919a622e3\\\",\\\"type\\\":\\\"number\\\",\\\"value\\\":\\\"1232\\\"},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"date\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"fffe0331-8813-4e63-9802-8a3fab49368d\\\",\\\"type\\\":\\\"datetime\\\",\\\"value\\\":\\\"2025-04-25T17:00:00.000Z\\\"},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"select\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"0922d967-5635-43ce-855e-cb66e375047e\\\",\\\"type\\\":\\\"lists\\\",\\\"value\\\":[{\\\"name\\\":\\\"ddfdf\\\",\\\"value\\\":\\\"ddfdf\\\",\\\"key\\\":\\\"9f66d951-b773-4992-bccd-03586ffb865d\\\",\\\"selected\\\":false},{\\\"name\\\":\\\"perempuan\\\",\\\"value\\\":\\\"perempuan\\\",\\\"key\\\":\\\"51f180ec-70be-4588-83ba-f3faca6deea1\\\",\\\"selected\\\":false},{\\\"name\\\":\\\"laki\\\",\\\"value\\\":\\\"laki\\\",\\\"key\\\":\\\"c25f5360-c3e8-47d7-940c-d2f60d788225\\\",\\\"selected\\\":true}],\\\"selectedValue\\\":{\\\"name\\\":\\\"laki\\\",\\\"value\\\":\\\"laki\\\",\\\"key\\\":\\\"c25f5360-c3e8-47d7-940c-d2f60d788225\\\",\\\"selected\\\":true}},{\\\"name\\\":\\\"Harus Buat auto testing\\\",\\\"description\\\":\\\"Baskomg\\\",\\\"fieldType\\\":\\\"url\\\",\\\"isRequired\\\":false,\\\"key\\\":\\\"a598d6d6-e39c-4f30-8755-62141567c848\\\",\\\"type\\\":\\\"url\\\",\\\"value\\\":\\\"https://andiak.myr.id/pl/test-uiux-55576\\\"}]}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745386189676,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"f90f4d32-bdf7-4d11-8253-6f7ce19e4a78\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"897920cd-4dd8-4d40-af96-0c8c541fac43\",\n      \"createdAt\": 1745378929327,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"670ee967-8d09-40d4-95b2-7983f6ce5544\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.received\\\",\\\"data\\\":{\\\"id\\\":\\\"43bf4898-c081-4e5d-a6da-f5c78ec46486\\\",\\\"transactionId\\\":\\\"43bf4898-c081-4e5d-a6da-f5c78ec46486\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"paid\\\",\\\"createdAt\\\":\\\"2025-04-23T03:28:39.894Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T03:28:39.895Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantName\\\":\\\"Andika\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Aldoghandika\\\",\\\"customerEmail\\\":\\\"aldobaik18@gmail.com\\\",\\\"customerMobile\\\":\\\"0877828291999\\\",\\\"amount\\\":0,\\\"isAdminFeeBorneByCustomer\\\":null,\\\"isChannelFeeBorneByCustomer\\\":null,\\\"productId\\\":\\\"670ee967-8d09-40d4-95b2-7983f6ce5544\\\",\\\"productName\\\":\\\"test UIUX Membership\\\",\\\"productType\\\":\\\"membership\\\",\\\"pixelFbp\\\":\\\"fb.1.1737105110463.389414050868219356\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null,\\\"membershipTier\\\":{\\\"id\\\":\\\"3a57c51e-48d8-4051-9651-6eff0a5eae24\\\",\\\"createdAt\\\":1738212685739,\\\"paymentAtStart\\\":true,\\\"paymentLinkId\\\":\\\"670ee967-8d09-40d4-95b2-7983f6ce5544\\\",\\\"updatedAt\\\":1738212685739,\\\"gracePeriodInDays\\\":0,\\\"isTrialAvailable\\\":true,\\\"finishMembershipAt\\\":null,\\\"name\\\":\\\"test UIUX 3\\\",\\\"notes\\\":\\\"Lorem ipsum dolor sit amet consectetur adipiscing, elit posuere euismod nascetur purus morbi, nam commodo fames sociis non. Litora aliquam imperdiet vulputate iaculis quisque eleifend nam lectus eget facilisi maecenas ullamcorper, sed malesuada nisi est sollicitudin magnis aptent blandit lacus donec. Sed placerat volutpat natoque ullamcorper cubilia senectus, elementum nisi tristique venenatis himenaeos metus felis, faucibus scelerisque cras arcu pretium. Nisl tincidunt nullam imperdiet scelerisque condimentum lectus inceptos, risus suspendisse purus sociosqu hendrerit consequat arcu neque, erat urna donec nunc dapibus maecenas. Nostra id pellentesque bibendum porttitor cubilia etiam luctus platea nec, porta magnis tortor fringilla venenatis conubia enim nisi, dictumst habitasse eros integer dictum praesent accumsan euismod.  \\\",\\\"limit\\\":null},\\\"membershipCustomer\\\":{\\\"id\\\":\\\"3d22701d-0811-406e-b289-f7c92ce04a89\\\",\\\"isInTrial\\\":true,\\\"expiredAt\\\":1747970919291,\\\"status\\\":\\\"active\\\",\\\"isLifetimePeriod\\\":null,\\\"nextPayment\\\":1747970919291,\\\"monthlyPaymentPeriod\\\":null,\\\"membershipTierId\\\":\\\"3a57c51e-48d8-4051-9651-6eff0a5eae24\\\",\\\"isAlreadyUsedTrial\\\":null}}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.received\",\n      \"updatedAt\": 1745378929327,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"43bf4898-c081-4e5d-a6da-f5c78ec46486\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"8153c243-c5bf-4145-941e-9aef43011677\",\n      \"createdAt\": 1745377230152,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"670ee967-8d09-40d4-95b2-7983f6ce5544\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.reminder\\\",\\\"data\\\":{\\\"id\\\":\\\"d43eaa25-01b7-461e-9340-ba95b453cb84\\\",\\\"transactionId\\\":\\\"d43eaa25-01b7-461e-9340-ba95b453cb84\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"created\\\",\\\"createdAt\\\":\\\"2025-04-23T02:31:30.865Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T02:35:31.483Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"ali kusnadi\\\",\\\"customerEmail\\\":\\\"kugutsu.hiruko@gmail.com\\\",\\\"customerMobile\\\":\\\"6285797522261\\\",\\\"amount\\\":33000,\\\"isAdminFeeBorneByCustomer\\\":false,\\\"isChannelFeeBorneByCustomer\\\":false,\\\"productId\\\":\\\"670ee967-8d09-40d4-95b2-7983f6ce5544\\\",\\\"productName\\\":\\\"test UIUX Membership\\\",\\\"productType\\\":\\\"membership\\\",\\\"pixelFbp\\\":\\\"fb.1.1745375116069.518591344665233937\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":null,\\\"paymentUrl\\\":\\\"https://andiak.myr.id/plt/d43eaa25-01b7-461e-9340-ba95b453cb84?webhook=true\\\"}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.reminder\",\n      \"updatedAt\": 1745377230152,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"d43eaa25-01b7-461e-9340-ba95b453cb84\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"539e936e-5fa2-4710-b8fd-50863c188921\",\n      \"createdAt\": 1745377228533,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"670ee967-8d09-40d4-95b2-7983f6ce5544\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.reminder\\\",\\\"data\\\":{\\\"id\\\":\\\"c238d027-fe8c-4777-9241-48c635b66597\\\",\\\"transactionId\\\":\\\"c238d027-fe8c-4777-9241-48c635b66597\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"created\\\",\\\"createdAt\\\":\\\"2025-04-23T02:26:35.509Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T02:30:24.027Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"ali kusnadi\\\",\\\"customerEmail\\\":\\\"kugutsu.hiruko@gmail.com\\\",\\\"customerMobile\\\":\\\"6285797522261\\\",\\\"amount\\\":13782,\\\"isAdminFeeBorneByCustomer\\\":true,\\\"isChannelFeeBorneByCustomer\\\":true,\\\"productId\\\":\\\"670ee967-8d09-40d4-95b2-7983f6ce5544\\\",\\\"productName\\\":\\\"test UIUX Membership\\\",\\\"productType\\\":\\\"membership\\\",\\\"pixelFbp\\\":\\\"fb.1.1745375116069.518591344665233937\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":\\\"qris\\\",\\\"paymentUrl\\\":\\\"https://andiak.myr.id/select-channel/c238d027-fe8c-4777-9241-48c635b66597?webhook=true\\\"}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.reminder\",\n      \"updatedAt\": 1745377228533,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"c238d027-fe8c-4777-9241-48c635b66597\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    },\n    {\n      \"id\": \"b13dbe97-1dd6-4383-ab92-400f9cdd3b74\",\n      \"createdAt\": 1745377224450,\n      \"nextDelivery\": null,\n      \"paymentLinkId\": \"805ceb62-54c9-4671-9b2a-4d13c643b78e\",\n      \"payload\": \"{\\\"event\\\":\\\"payment.reminder\\\",\\\"data\\\":{\\\"id\\\":\\\"8850d886-39a7-42f7-927c-16e8fb346d16\\\",\\\"transactionId\\\":\\\"8850d886-39a7-42f7-927c-16e8fb346d16\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"transactionStatus\\\":\\\"created\\\",\\\"createdAt\\\":\\\"2025-04-23T02:30:29.693Z\\\",\\\"updatedAt\\\":\\\"2025-04-23T02:35:31.235Z\\\",\\\"merchantId\\\":\\\"8afa8430-9ccd-4d33-9c1b-e0999a319994\\\",\\\"merchantEmail\\\":\\\"mayartesting05@gmail.com\\\",\\\"customerName\\\":\\\"Firzha Ardhia Ramadhan\\\",\\\"customerEmail\\\":\\\"zhaardhiatesting@gmail.com\\\",\\\"customerMobile\\\":\\\"08551498798\\\",\\\"amount\\\":1073,\\\"isAdminFeeBorneByCustomer\\\":true,\\\"isChannelFeeBorneByCustomer\\\":true,\\\"productId\\\":\\\"805ceb62-54c9-4671-9b2a-4d13c643b78e\\\",\\\"productName\\\":\\\"test UIUX Audiobook\\\",\\\"productType\\\":\\\"audiobook\\\",\\\"pixelFbp\\\":\\\"fb.1.1721824347392.952216048745555286\\\",\\\"pixelFbc\\\":null,\\\"qty\\\":1,\\\"couponUsed\\\":null,\\\"paymentMethod\\\":\\\"qris\\\",\\\"paymentUrl\\\":\\\"https://andiak.myr.id/select-channel/8850d886-39a7-42f7-927c-16e8fb346d16?webhook=true\\\"}}\",\n      \"status\": \"SUCCESS\",\n      \"type\": \"payment.reminder\",\n      \"updatedAt\": 1745377224450,\n      \"userId\": \"8afa8430-9ccd-4d33-9c1b-e0999a319994\",\n      \"paymentLinkTransactionId\": \"8850d886-39a7-42f7-927c-16e8fb346d16\",\n      \"urlDestination\": \"https://eoze6x1sc8k58q4.m.pipedream.net\",\n      \"responsePayload\": null,\n      \"source\": \"AUTOMATIC\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Register URL Hook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/webhook/register",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "webhook",
+            "register"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webhook/registerurlhook",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"urlHook\": \"https://example.mayar.com\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Retry History",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/webhook/retry",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "webhook",
+            "retry"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webhook/retryhistory",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"webhookHistoryId\": \"9f8050f0-9a58-4432-bf36-a7eeff7d6aea\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Test URL Hook",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/webhook/test",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "webhook",
+            "test"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webhook/testurlhook",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"urlHook\": \"https://example.mayar.com\"\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Create Webinar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/webinar/create",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "webinar",
+            "create"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webinar/create",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Webinar Belajar Crypto Untuk Pemula\",\n  \"description\": \"Belajar dulu\",\n  \"amount\": 100000,\n  \"crossoutPrice\": 199000,\n  \"eventUrl\": \"https://zoom.us/j/123456\",\n  \"notes\": \"early-bird sd ds ds\",\n  \"terms\": \"Tidak ada refund setelah pembelian\",\n  \"redirectUrl\": \"https://example.com/webinar-thanks\",\n  \"paymentType\": \"paid\",\n  \"startAt\": \"2026-06-01T09:00:00.000Z\",\n  \"eventStartAt\": \"2026-06-10T09:00:00.000Z\",\n  \"eventEndAt\": \"2026-06-10T12:00:00.000Z\",\n  \"expiredAt\": \"2026-06-15T12:00:00.000Z\",\n  \"limit\": 100\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"3f4fc3fd-10dc-4a97-b54c-7632881858cb\",\n    \"link\": \"https://testingmayar.myr.id/pl/Webinar-Belajar-Crypto-Untuk-Pemula\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Edit Webinar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer <YOUR_API_KEY>",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/hl/v1/product/webinar/edit",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "hl",
+            "v1",
+            "product",
+            "webinar",
+            "edit"
+          ]
+        },
+        "description": "## Documentation Index\n\nSource: webinar/edit",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": \"3f4fc3fd-10dc-4a97-b54c-7632881858cb\",\n  \"name\": \"Webinar Belajar Crypto Untuk Pemula\",\n  \"description\": \"Belajar dulu\",\n  \"amount\": 100000,\n  \"crossoutPrice\": 199000,\n  \"eventUrl\": \"https://zoom.us/j/123456\",\n  \"notes\": \"Kalo susah tanya aja ya\",\n  \"terms\": \"Tidak ada refund setelah pembelian\",\n  \"redirectUrl\": \"https://example.com/webinar-thanks\",\n  \"paymentType\": \"paid\",\n  \"startAt\": \"2026-06-01T09:00:00.000Z\",\n  \"eventStartAt\": \"2026-06-10T09:00:00.000Z\",\n  \"eventEndAt\": \"2026-06-10T12:00:00.000Z\",\n  \"expiredAt\": \"2026-06-15T12:00:00.000Z\",\n  \"limit\": 100\n}"
+        }
+      },
+      "response": [
+        {
+          "name": "OK",
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "body": "{\n  \"statusCode\": 200,\n  \"messages\": \"success\",\n  \"data\": {\n    \"id\": \"3f4fc3fd-10dc-4a97-b54c-7632881858cb\",\n    \"link\": \"https://testingmayar.myr.id/pl/Webinar-Belajar-Crypto-Untuk-Pemula\"\n  }\n}"
+        }
+      ]
+    }
+  ]
+}

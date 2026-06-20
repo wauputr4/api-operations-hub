@@ -1,0 +1,26 @@
+openapi: 3.1.0
+info:
+  title: Finpay Billing
+  version: 1.0.0
+paths:
+  /:
+    post:
+      summary: Payment
+      responses: {}
+      x-pre-request: "// --- Inquiry ---\nconst moment = require('moment');\r\n\r\nvar userName = pm.globals.get(\"userName\");\r\nvar password = pm.globals.get(\"userPass\");\r\n\r\nvar bodyRaw = pm.request.body\r\nvar obj = JSON.parse(bodyRaw)\r\n\r\n\r\nvar date = Date.now()\r\ntimestamp = moment().format(\"DD-MM-YYYY HH:mm:ss:Z\")\r\n\r\n\r\nvar sha256Param = CryptoJS.SHA256(timestamp+password).toString()\r\nvar signatureToParse = userName+\r\n                obj.productCode+\r\n                obj.channel+\r\n                obj.terminal+\r\n                obj.transactionType+\r\n                obj.billNumber+\r\n                date+\r\n                sha256Param\r\n\r\nvar signature = CryptoJS.SHA256(signatureToParse).toString()\r\n\r\npm.environment.set(\"userName\", userName)\r\npm.environment.set(\"signature\", signature)\r\npm.environment.set(\"timestamp\", timestamp)\r\npm.environment.set(\"traxId\", date)\n\n// --- Payment ---\nconst moment = require('moment');\r\n\r\nvar userName = pm.globals.get(\"userName\");\r\nvar password = pm.globals.get(\"userPass\");\r\n\r\nvar bodyRaw = pm.request.body\r\nvar obj = JSON.parse(bodyRaw)\r\n\r\nvar date = Date.now()\r\ntimestamp = moment().format(\"DD-MM-YYYY HH:mm:ss:Z\")\r\n\r\n\r\nvar sha256Param = CryptoJS.SHA256(timestamp+password).toString()\r\nvar signatureToParse = userName+\r\n                obj.productCode+\r\n                obj.channel+\r\n                obj.terminal+\r\n                obj.transactionType+\r\n                obj.billNumber+\r\n                date+\r\n                sha256Param\r\n\r\nvar signature = CryptoJS.SHA256(signatureToParse).toString()\r\n\r\npm.environment.set(\"userName\", userName)\r\npm.environment.set(\"signature\", signature)\r\npm.environment.set(\"timestamp\", timestamp)\r\npm.environment.set(\"traxId\", date)\r\n\r\nconsole.log(sha256Param)\r\nconsole.log(signatureToParse)"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Payment:
+                value: "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"productCode\": \"001001\",\r\n    \"terminal\": \"G009TRKK\",\r\n    \"terminalName\": \"FINNET\",\r\n    \"terminalLocation\": \"Bidakara Pancoran\",\r\n    \"transactionType\": \"50\",\r\n    \"channel\": \"6018\",\r\n    \"billNumber\": \"0021001234001\",\r\n    \"amount\": \"000000010000\",\r\n    \"feeAmount\": \"2500\",\r\n    \"bit32\": \"770\",\r\n    \"bit33\": \"770924\",    \r\n    \"bit61\": \"00210829990010200011302A              10000IDHAM DHIYAULHAQ HABIBI       5066555567     \",\r\n    \"traxId\": \"{{traxId}}\",\r\n    \"timeStamp\": \"{{timestamp}}\"\r\n}"
+              Inquiry:
+                value: "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"productCode\": \"001001\",\r\n    \"terminal\": \"G009TRKK\",\r\n    \"terminalName\": \"FINNET\",\r\n    \"terminalLocation\": \"Bidakara Pancoran\",\r\n    \"transactionType\": \"38\",\r\n    \"channel\": \"6018\",\r\n    \"billNumber\": \"0021001236001 \",\r\n    \"amount\": \"0\",\r\n    \"feeAmount\": \"3500\",\r\n    \"bit32\": \"770\",\r\n    \"bit33\": \"770924\",    \r\n    \"bit61\": \"021001234001\",\r\n    \"traxId\": \"{{traxId}}\",\r\n    \"timeStamp\": \"{{timestamp}}\"\r\n}"
+servers:
+  - url: https://{urlBilling}
+    variables:
+      urlBilling:
+        default: example.com
+        description: Declared in Postman collection variables.

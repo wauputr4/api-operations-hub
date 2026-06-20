@@ -24,6 +24,22 @@ const pairs = [
     input: 'postman/ipaymu/ipaymu.postman_collection.json',
     output: 'openapi/ipaymu/ipaymu.openapi.yaml',
   },
+  {
+    input: 'postman/fastpay/fastpay.postman_collection.json',
+    output: 'openapi/fastpay/fastpay.openapi.yaml',
+  },
+  {
+    input: 'postman/finpay/finpay-billing.postman_collection.json',
+    output: 'openapi/finpay/finpay-billing.openapi.yaml',
+  },
+  {
+    input: 'postman/finpay/finpay-disbursement.postman_collection.json',
+    output: 'openapi/finpay/finpay-disbursement.openapi.yaml',
+  },
+  {
+    input: 'postman/finpay/finpay-payment-gateway.postman_collection.json',
+    output: 'openapi/finpay/finpay-payment-gateway.openapi.yaml',
+  },
 ];
 
 for (const p of pairs) {

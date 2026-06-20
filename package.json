@@ -8,6 +8,7 @@
     "convert-postman:modern": "node scripts/convert-postman-to-openapi-modern.mjs",
     "convert-postman:legacy": "node scripts/convert-postman-to-openapi.mjs",
     "clean-openapi-modern": "node scripts/clean-openapi-modern.mjs",
+    "convert-mayar": "node scripts/convert-mayar-mintlify.mjs",
     "convert-postman:all": "npm run convert-postman:modern && npm run convert-postman:legacy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

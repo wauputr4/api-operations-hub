@@ -1,0 +1,329 @@
+openapi: 3.1.0
+info:
+  title: Faspay API
+  version: 1.0.0
+paths:
+  /pws/300011/{merchant_id}/:
+    post:
+      tags:
+        - XML
+      summary: Post Data
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Data:
+              value: application/xml
+              x-disabled: false
+          schema:
+            type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: string
+            examples:
+              Post Data:
+                value: |-
+                  <faspay>
+                    <request>Post Data Transaksi</request>
+                    <merchant_id>99999</merchant_id>
+                    <merchant>MI Test</merchant>
+                    <bill_no>8987984789977873</bill_no>
+                    <bill_reff>AGS/005</bill_reff>
+                    <bill_date>2023-04-27 14:40:00</bill_date>
+                    <bill_expired>2023-04-28 08:50:43</bill_expired>
+                    <bill_desc>Pembayaran Via Faspay</bill_desc>
+                    <bill_currency>IDR</bill_currency>
+                    <bill_gross>0</bill_gross>
+                    <bill_tax>0</bill_tax>
+                    <bill_miscfee>0</bill_miscfee>
+                    <bill_total>1000000</bill_total>
+                    <cust_no>5002</cust_no>
+                    <cust_name>Agus Priyono</cust_name>
+                    <payment_channel>812</payment_channel>
+                    <pay_type>1</pay_type>
+                    <bank_userid/>
+                    <msisdn/>
+                    <email>dummy@gmail.com</email>
+                    <terminal>10</terminal>
+                    <billing_address>jalan pintu air raya</billing_address>
+                    <billing_address_city>Jakarta Pusat</billing_address_city>
+                    <billing_address_region>DKI Jakarta</billing_address_region>
+                    <billing_address_state>Indonesia</billing_address_state>
+                    <billing_address_poscode>10710</billing_address_poscode>
+                    <billing_address_country_code>ID</billing_address_country_code>
+                    <receiver_name_for_shipping>Faspay</receiver_name_for_shipping>
+                    <shipping_address>jalan pintu air raya</shipping_address>
+                    <shipping_address_city>Jakarta Pusat</shipping_address_city>
+                    <shipping_address_region>DKI Jakarta</shipping_address_region>
+                    <shipping_address_state>Indonesia</shipping_address_state>
+                    <shipping_address_poscode>10710</shipping_address_poscode>
+                    <shipping_msisdn>089943244883</shipping_msisdn>
+                    <shipping_address_country_code>ID</shipping_address_country_code>
+                     <item>
+                      <id>102</id>
+                      <product>Test Barang 1</product>
+                      <merchant_id>99999</merchant_id>
+                      <qty>1</qty>
+                      <amount>10000</amount>
+                      <type>Smartphone</type>
+                      <url>http://localhost:8088/index</url>
+                      <image_url>https://cdn.mos.cms.futurecdn.net/Mffc35PH77Dq7USrHb4qNm-1200-80.jpg</image_url>
+                    </item>
+                    <reserve1/>
+                    <reserve2></reserve2>
+                    <signature>84b8efda38630ce85fbdf886edcf16569a1da5de</signature>
+                  </faspay>
+  /pws/300013/{merchant_id}:
+    post:
+      tags:
+        - XML
+      summary: Post Refund
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Refund:
+              value: application/xml
+              x-disabled: false
+          schema:
+            type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: string
+            examples:
+              Post Refund:
+                value: "<faspay>\r\n\t<request>Pembatalan Pembelian Barang</request>\r\n\t<merchant_id>99999</merchant_id>\r\n\t<merchant>Mi Test</merchant>\r\n\t<trx_id>9999980725630821</trx_id>\r\n\t<bill_no>141431359</bill_no>\r\n\t<payment_reff>9999980725630821-2563301</payment_reff>\r\n\t<payment_channel_uid>807</payment_channel_uid>\r\n\t<bill_total>1000000</bill_total>\r\n\t<cancellation_reason>Out of Stock</cancellation_reason>\r\n\t<cancelled_by>Faspay</cancelled_by>\r\n\t<cancellation_type>FULL</cancellation_type>\r\n\t<signature>bb5e34c98eb13b5a7bc1418403a8220f70b80f08</signature>\r\n</faspay>"
+  /pws/100005/{merchant_id}:
+    post:
+      tags:
+        - XML
+      summary: Post Cancel
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Cancel:
+              value: application/xml
+              x-disabled: false
+          schema:
+            type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: string
+            examples:
+              Post Cancel:
+                value: "<faspay>\r\n<request>Canceling Payment</request>\r\n<trx_id>7139999902053922</trx_id>\r\n<merchant_id>99999</merchant_id>\r\n<merchant>Faspay Demo</merchant>\r\n<bill_no>14143135</bill_no>\r\n<payment_cancel>Barang Habis</payment_cancel>\r\n<signature>05bcad0dc7cc6538c4bcd76ed884243931575752</signature>\r\n</faspay>"
+  /pws/100004/{merchant_id}:
+    post:
+      tags:
+        - XML
+      summary: Inquiry Status
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Inquiry Status:
+              value: application/xml
+              x-disabled: false
+          schema:
+            type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: string
+            examples:
+              Inquiry Status:
+                value: >
+                  <faspay>
+
+                  <request>Inquiry Status Payment</request>
+
+                  <trx_id>992022022500000969</trx_id>
+
+                  <merchant_id>99999</merchant_id>
+
+                  <bill_no>407</bill_no>
+
+                  <signature>e7d3315cd8c132f18441109bd07d41dcce932c7e</signature>
+
+                  </faspay>
+  /pws/100001/{merchant_id}:
+    post:
+      tags:
+        - XML
+      summary: Inquiry channel
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Inquiry channel:
+              value: application/xml
+              x-disabled: false
+          schema:
+            type: string
+        - name: merchant_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Faspay merchant identifier in URL path.
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              type: string
+            examples:
+              Inquiry channel:
+                value: "<faspay>\r\n<request>Request List of Payment Gateway</request>\r\n<merchant_id>99999</merchant_id>\r\n<merchant>STORE</merchant>\r\n<signature>1ac4d5a611ec5376d8da43bbe33aaea1719076b6</signature>\r\n</faspay>"
+  /cvr/300011/10:
+    post:
+      tags:
+        - Json
+      summary: Post Json
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Json:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Post Json:
+                value: "{\r\n\t\"request\":\"Transmisi Info Detil Pembelian\",\r\n\t\"merchant_id\":\"99999\",\r\n\t\"merchant\":\"FASPAY STORE\",\r\n\t\"bill_no\":\"AGS/2997\",\r\n\t\"bill_reff\":\"StagingTest\",\r\n\t\"bill_date\":\"2023-04-27 14:00:00\",\r\n\t\"bill_expired\":\"2023-04-28 13:45:00\",\r\n\t\"bill_desc\":\"Pembayaran #12345678\",\r\n\t\"bill_currency\":\"IDR\",\r\n\t\"bill_gross\":\"0\",\r\n\t\"bill_tax\":\"0\",\r\n\t\"bill_miscfee\":\"0\",\r\n\t\"bill_total\":\"4000000\",\r\n\t\"cust_no\":\"1\",\r\n\t\"cust_name\":\"Test Faspay\",\r\n\t\"cust_lastname\":\"faspay\",\r\n\t\"payment_channel\":\"812\",\r\n\t\"pay_type\":\"1\",\r\n\t\"bank_userid\":\"\",\r\n\t\"msisdn\":\"\",\r\n\t\"email\":\"\",\r\n\t\"terminal\":\"10\",\r\n\t\"billing_name\":\"test faspay\",\r\n\t\"billing_lastname\":\"0\",\r\n\t\"billing_address\":\"jalan pintu air raya\",\r\n\t\"billing_address_city\":\"Jakarta Pusat\",\r\n\t\"billing_address_region\":\"DKI Jakarta\",\r\n\t\"billing_address_state\":\"Indonesia\",\r\n\t\"billing_address_poscode\":\"10710\",\r\n\t\"billing_msisdn\":\"\",\r\n\t\"billing_address_country_code\":\"ID\",\r\n\t\"receiver_name_for_shipping\":\"Faspay Test\",\r\n\t\"shipping_lastname\":\"\",\r\n\t\"shipping_address\":\"jalan pintu air raya\",\r\n\t\"shipping_address_city\":\"Jakarta Pusat\",\r\n\t\"shipping_address_region\":\"DKI Jakarta\",\r\n\t\"shipping_address_state\":\"Indonesia\",\r\n\t\"shipping_address_poscode\":\"10710\",\r\n\t\"shipping_msisdn\":\"08766688686\",\r\n\t\"shipping_address_country_code\":\"ID\",\r\n\t\"item\":[{\t\r\n\t\t\t\"id\":\"01\",\r\n\t\t\t\"product\":\"Invoice No. inv-985/2017-03/1234567892\",\r\n\t\t\t\"qty\":\"1\",\r\n\t\t\t\"amount\":\"10000\",\r\n\t\t\t\"payment_plan\":\"01\",\r\n\t\t\t\"tenor\":\"00\",\r\n\t\t\t\"type\":\"Smartphone\",\r\n\t\t\t\"url\":\"http://localhost:8088/index\",\r\n\t\t\t\"image_url\":\"https://cdn.mos.cms.futurecdn.net/Mffc35PH77Dq7USrHb4qNm-1200-80.jpg\"\r\n\t\t\t\r\n\t}],\r\n\t\"reserve1\":\"0\",\r\n\t\"reserve2\":\"\",\r\n\t\"signature\":\"a2f94b8c673ea11d9fbf9a7baa1af4d1996515ce\"\r\n}"
+  /cvr/300013/10:
+    post:
+      tags:
+        - Json
+      summary: Post Refund
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Refund:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Post Refund:
+                value: "{\r\n  \"request\" : \"Pembatalan Pembelian Barang\",\r\n  \"merchant_id\" : \"99999\",\r\n  \"merchant\" : \"Mi Test\",\r\n  \"trx_id\" : \"9999970900002998\",\r\n  \"bill_no\" : \"999333\",\r\n  \"payment_reff\" : \"999333\",\r\n  \"payment_channel_uid\" : \"302\",\r\n  \"bill_total\" : \"1000000\",\r\n  \"cancellation_reason\" : \"Out of stock\",\r\n  \"cancelled_by\" : \"Dummy\",\r\n  \"cancellation_type\" : \"FULL\",\r\n  \"signature\" : \"b4ea7bd1a7fcaddd3a65e78072d88065c6333cb6\"\r\n}"
+  /cvr/100005/10:
+    post:
+      tags:
+        - Json
+      summary: Post Cancel
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Post Cancel:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Post Cancel:
+                value: "{\r\n \"request\":\"Canceling Payment\",\r\n \"trx_id\":\"7139999902053922\",\r\n \"merchant_id\":\"99999\",\r\n \"merchant\" : \"Faspay Demo\",\r\n \"bill_no\":\"14143135\",\r\n \"payment_cancel\" : \"Barang Habis\",\r\n \"signature\":\"05bcad0dc7cc6538c4bcd76ed884243931575752\"\r\n}"
+  /cvr/100004/10:
+    post:
+      tags:
+        - Json
+      summary: Inquiry Status
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Inquiry Status:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Inquiry Status:
+                value: "{\r\n    \"request\": \"Pengecekan Status Pembayaran\",\r\n    \"trx_id\": \"9999981209493296\",\r\n    \"merchant_id\": \"99999\",\r\n    \"bill_no\": \"776781331\",\r\n    \"signature\": \"35b5cde57c64ce943a16634f0f315c46be1bcc01\"\r\n}"
+  /cvr/100001/10:
+    post:
+      tags:
+        - Json
+      summary: Inquiry Channel
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Inquiry Channel:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Inquiry Channel:
+                value: |
+                  {
+                    "request": "Request List of Payment Gateway",
+                    "merchant_id": "99999",
+                    "merchant": "STORE",
+                    "signature": "1ac4d5a611ec5376d8da43bbe33aaea1719076b6"
+                  }
+tags:
+  - name: XML
+  - name: Json
+servers:
+  - url: https://debit-sandbox.faspay.co.id

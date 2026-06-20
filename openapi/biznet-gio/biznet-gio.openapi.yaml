@@ -1,0 +1,6820 @@
+openapi: 3.0.2
+info:
+  title: Biznetgio Portal - API
+  version: '1'
+servers:
+  - url: /v1
+paths:
+  /baremetals:
+    post:
+      tags:
+        - NEO Metal - Create
+        - NEO Metal - Service Management
+      summary: Create NEO Metal
+      operationId: create_baremetals_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaremetalCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/openvpn:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Openvpn
+      operationId: openvpn_baremetals_openvpn_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/accounts:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Accounts
+      operationId: accounts_baremetals_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Account Details
+      operationId: account_details_baremetals_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/{account_id}:
+    put:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Update
+      summary: Update Label
+      operationId: update_label_baremetals__account_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaremetalUpdateLabelPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Delete
+      summary: Delete NEO Metal
+      operationId: delete_baremetals__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/accounts/{account_id}/state:
+    get:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Helpers
+      summary: Account Server State
+      operationId: server_state_baremetals_accounts__account_id__state_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/accounts/{account_id}/state/{state}:
+    put:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Update
+      summary: Set Server State
+      operationId: set_server_state_baremetals_accounts__account_id__state__state__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/State_options'
+          name: state
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/products:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Products
+      operationId: products_baremetals_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/products/{product_id}:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Product Details
+      operationId: product_details_baremetals_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/products/{product_id}/oss:
+    get:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Helpers
+      summary: List OS
+      operationId: select_oss_baremetals_products__product_id__oss_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/states:
+    get:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Helpers
+      summary: Server States
+      operationId: server_states_baremetals_states_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/{account_id}/rebuild/oss:
+    get:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Helpers
+        - NEO Metal - Rebuild
+      summary: Prepare Rebuild NEO Metal - OS
+      operationId: prepare_rebuild_baremetals__account_id__rebuild_oss_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/{account_id}/rebuild:
+    put:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Update
+        - NEO Metal - Rebuild
+      summary: Rebuild NEO Metal
+      operationId: rebuild_baremetals__account_id__rebuild_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaremetalRebuildPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-neo-elastic-storages:
+    get:
+      tags:
+        - NEO Elastic Storage - Service Management
+      summary: Get Neo Elastic Storages
+      operationId: get_neo_elastic_storages_baremetal_neo_elastic_storages_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Elastic Storage - Service Management
+        - NEO Elastic Storage - Create
+      summary: Create
+      operationId: create_baremetal_neo_elastic_storages_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NeoElasticStorageCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-neo-elastic-storages/products:
+    get:
+      tags:
+        - NEO Elastic Storage - Service Management
+      summary: Products
+      operationId: products_baremetal_neo_elastic_storages_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-neo-elastic-storages/products/{product_id}:
+    get:
+      tags:
+        - NEO Elastic Storage - Service Management
+      summary: Product Details
+      operationId: product_details_baremetal_neo_elastic_storages_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-neo-elastic-storages/{account_id}:
+    get:
+      tags:
+        - NEO Elastic Storage - Service Management
+      summary: Get Neo Elastic Storage
+      operationId: get_neo_elastic_storage_baremetal_neo_elastic_storages__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Elastic Storage - Service Management
+        - NEO Elastic Storage - Update
+      summary: Upgrade Neo Elastic Storage
+      operationId: >-
+        upgrade_neo_elastic_storage_baremetal_neo_elastic_storages__account_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpgradeNeoElasticStorage'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Elastic Storage - Service Management
+        - NEO Elastic Storage - Create
+      summary: Change Package
+      operationId: change_package_baremetal_neo_elastic_storages__account_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePackageNeoElasticStorage'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Elastic Storage - Service Management
+        - NEO Elastic Storage - Delete
+      summary: Delete
+      operationId: delete_baremetal_neo_elastic_storages__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Get Additional Ips
+      operationId: get_additional_ips_baremetal_additional_ips_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Metal Additional IP - Service Management
+        - NEO Metal Additional IP - Create
+      summary: Create
+      operationId: create_baremetal_additional_ips_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdditionalIPCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/regions:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+        - NEO Metal Additional IP - Helpers
+      summary: Regions
+      operationId: regions_baremetal_additional_ips_regions_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/products:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Products
+      operationId: products_baremetal_additional_ips_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/products/{product_id}:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Product Details
+      operationId: product_details_baremetal_additional_ips_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/{account_id}:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Get Additional Ip
+      operationId: get_additional_ip_baremetal_additional_ips__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: string
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Metal Additional IP - Service Management
+        - NEO Metal Additional IP - Delete
+      summary: Delete
+      operationId: delete_baremetal_additional_ips__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/assignments-by-metal-account-id/{metal_account_id}:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Get Assignments By Metal Account Id
+      operationId: >-
+        get_assignments_by_metal_account_id_baremetal_additional_ips_assignments_by_metal_account_id__metal_account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Metal Account Id
+            type: integer
+          name: metal_account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/{account_id}/assigns:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Get Ip Assignments To Machines
+      operationId: >-
+        get_ip_assignments_to_machines_baremetal_additional_ips__account_id__assigns_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Metal Additional IP - Service Management
+        - NEO Metal Additional IP - Update
+      summary: Assign To Machine
+      operationId: assign_to_machine_baremetal_additional_ips__account_id__assigns_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignToMachinePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetal-additional-ips/{account_id}/assigns/{metal_account_id}:
+    get:
+      tags:
+        - NEO Metal Additional IP - Service Management
+      summary: Get Ip Assignments To Machine
+      operationId: >-
+        get_ip_assignments_to_machine_baremetal_additional_ips__account_id__assigns__metal_account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Metal Account Id
+            type: integer
+          name: metal_account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Metal Additional IP - Service Management
+        - NEO Metal Additional IP - Delete
+      summary: Unassign From Machine
+      operationId: >-
+        unassign_from_machine_baremetal_additional_ips__account_id__assigns__metal_account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Metal Account Id
+            type: integer
+          name: metal_account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/keypairs/:
+    get:
+      tags:
+        - NEO Metal - Service Management
+      summary: Get Keypairs
+      operationId: get_keypairs_baremetals_keypairs__get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Create
+      summary: Create Keypair
+      operationId: create_keypair_baremetals_keypairs__post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/routers__baremetal_keypairs__KeypairCreatePayload
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/keypairs/import:
+    post:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Create
+      summary: Import Keypair
+      operationId: import_keypair_baremetals_keypairs_import_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/routers__baremetal_keypairs__KeypairImportPayload
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /baremetals/keypairs/{keypair_id}:
+    delete:
+      tags:
+        - NEO Metal - Service Management
+        - NEO Metal - Delete
+      summary: Delete Keypair
+      operationId: delete_baremetals_keypairs__keypair_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Keypair Id
+            type: integer
+          name: keypair_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites:
+    post:
+      tags:
+        - NEO Lite - Create
+        - NEO Lite - Service Management
+      summary: Create Neolite
+      operationId: create_neolites_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__NeoliteCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Accounts
+      operationId: accounts_neolites_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Account Details
+      operationId: account_details_neolites_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/snapshot:
+    post:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+        - NEO Lite (Snapshot) - Create
+      summary: Create Snapshot
+      operationId: snapshot_neolites_accounts__account_id__snapshot_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__SnapshotPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/vm-details:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Vm Details
+      operationId: vm_details_neolites_accounts__account_id__vm_details_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/change-package:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Prepare Change Package
+      operationId: prepare_change_package_neolites_accounts__account_id__change_package_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+      summary: Change Package
+      operationId: change_package_neolites_accounts__account_id__change_package_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__ChangePackagePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/change-vm-name:
+    put:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Update
+      summary: Change Vm Name
+      operationId: change_vm_name_neolites_accounts__account_id__change_vm_name_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__ChangeVMNamePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/storage:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Prepare Upgrade Storage
+      operationId: prepare_upgrade_neolites_accounts__account_id__storage_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Update
+      summary: Upgrade Storage
+      operationId: upgrade_neolites_accounts__account_id__storage_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__UpgradePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/vm-state/{state}:
+    put:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Update
+      summary: Change Vm State
+      operationId: change_vm_state_neolites_accounts__account_id__vm_state__state__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/routers__neolites__States'
+          name: state
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/keypair:
+    put:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Update
+      summary: Change Keypair
+      operationId: change_keypair_neolites_accounts__account_id__keypair_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__ChangeKeypairPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/rebuild:
+    put:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Update
+      summary: Rebuild
+      operationId: rebuild_neolites_accounts__account_id__rebuild_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolites__RebuildPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/migrate-to-pro/products:
+    get:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+      summary: Migrate To Pro Products
+      operationId: >-
+        migrate_to_pro_products_neolites_accounts__account_id__migrate_to_pro_products_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/accounts/{account_id}/migrate-to-pro:
+    post:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+      summary: Migrate To Pro
+      operationId: migrate_to_pro_neolites_accounts__account_id__migrate_to_pro_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MigrateToProPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/products:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Products
+      operationId: products_neolites_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Product Details
+      operationId: product_details_neolites_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/products/{product_id}/ip-availability:
+    get:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Helpers
+      summary: Check Ip Availability
+      operationId: check_ip_availability_neolites_products__product_id__ip_availability_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/products/{product_id}/oss:
+    get:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Helpers
+      summary: List OS
+      operationId: oss_neolites_products__product_id__oss_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/{account_id}:
+    delete:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Delete
+      summary: Delete Neolite
+      operationId: delete_neolites__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/keypairs/:
+    get:
+      tags:
+        - NEO Lite - Service Management
+      summary: Get Keypairs
+      operationId: get_keypairs_neolites_keypairs__get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+      summary: Create Keypair
+      operationId: create_keypair_neolites_keypairs__post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/keypairs/import:
+    post:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Create
+      summary: Import Keypair
+      operationId: import_keypair_neolites_keypairs_import_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairImportPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/keypairs/{keypair_id}:
+    delete:
+      tags:
+        - NEO Lite - Service Management
+        - NEO Lite - Delete
+      summary: Delete Keypair
+      operationId: delete_neolites_keypairs__keypair_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Keypair Id
+            type: integer
+          name: keypair_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/accounts:
+    get:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+      summary: Snapshot Accounts
+      operationId: snapshot_accounts_neolites_snapshots_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+      summary: Snapshot Account Details
+      operationId: snapshot_account_details_neolites_snapshots_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/accounts/{account_id}/create:
+    post:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+        - NEO Lite (Snapshot) - Create
+        - NEO Lite - Create
+      summary: Create NEO Lite from Snapshot
+      operationId: create_neolites_snapshots_accounts__account_id__create_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/routers__neolite_snapshots__NeoliteFromSnapshotPayload
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/accounts/{account_id}/restore:
+    put:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+        - NEO Lite (Snapshot) - Update
+      summary: Restore Snapshot Account
+      operationId: >-
+        restore_snapshot_account_neolites_snapshots_accounts__account_id__restore_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/products:
+    get:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+      summary: Snapshot Products
+      operationId: snapshot_products_neolites_snapshots_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+      summary: Snapshot Product Details
+      operationId: snapshot_product_details_neolites_snapshots_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/snapshots/{account_id}:
+    delete:
+      tags:
+        - NEO Lite (Snapshot) - Service Management
+        - NEO Lite (Snapshot) - Delete
+      summary: Delete Snapshot
+      operationId: snapshot_delete_neolites_snapshots__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks/accounts:
+    get:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+      summary: Neolite Additional Disk Accounts
+      operationId: neolite_additional_disk_accounts_neolites_disks_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+      summary: Neolite Additional Disk Account Details
+      operationId: >-
+        neolite_additional_disk_account_details_neolites_disks_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+        - NEO Lite (Additional Disk) - Update
+      summary: Upgrade Storage
+      operationId: upgrade_storage_neolites_disks_accounts__account_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_disks__UpgradePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks:
+    post:
+      tags:
+        - NEO Lite (Additional Disk) - Create
+        - NEO Lite (Additional Disk) - Service Management
+      summary: Create Neolite Additional Disk
+      operationId: create_neolite_additional_disk_neolites_disks_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NeoliteDiskCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks/{account_id}:
+    delete:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+        - NEO Lite (Additional Disk) - Delete
+      summary: Delete Neolite Additional Disk
+      operationId: delete_neolites_disks__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks/products:
+    get:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+      summary: Products
+      operationId: products_neolites_disks_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolites/disks/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite (Additional Disk) - Service Management
+      summary: Product Details
+      operationId: product_details_neolites_disks_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros:
+    post:
+      tags:
+        - NEO Lite Pro - Create
+        - NEO Lite Pro - Service Management
+      summary: Create Neolite Pro
+      operationId: create_neolite_pros_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__NeoliteCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Accounts
+      operationId: accounts_neolite_pros_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Account Details
+      operationId: account_details_neolite_pros_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/snapshot:
+    post:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Create
+        - NEO Lite Pro (Snapshot) - Create
+      summary: Create Snapshot
+      operationId: snapshot_neolite_pros_accounts__account_id__snapshot_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__SnapshotPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/vm-details:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Vm Details
+      operationId: vm_details_neolite_pros_accounts__account_id__vm_details_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/change-package:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Prepare Change Package
+      operationId: >-
+        prepare_change_package_neolite_pros_accounts__account_id__change_package_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Create
+      summary: Change Package
+      operationId: change_package_neolite_pros_accounts__account_id__change_package_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__ChangePackagePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/change-vm-name:
+    put:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Update
+      summary: Change Vm Name
+      operationId: change_vm_name_neolite_pros_accounts__account_id__change_vm_name_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__ChangeVMNamePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/storage:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Prepare Upgrade Storage
+      operationId: prepare_upgrade_neolite_pros_accounts__account_id__storage_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Update
+      summary: Upgrade Storage
+      operationId: upgrade_neolite_pros_accounts__account_id__storage_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__UpgradePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/vm-state/{state}:
+    put:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Update
+      summary: Change Vm State
+      operationId: change_vm_state_neolite_pros_accounts__account_id__vm_state__state__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/routers__neolite_pros__States'
+          name: state
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/keypair:
+    put:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Update
+      summary: Change Keypair
+      operationId: change_keypair_neolite_pros_accounts__account_id__keypair_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__ChangeKeypairPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/accounts/{account_id}/rebuild:
+    put:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Update
+      summary: Rebuild
+      operationId: rebuild_neolite_pros_accounts__account_id__rebuild_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_pros__RebuildPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/products:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Products
+      operationId: products_neolite_pros_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Product Details
+      operationId: product_details_neolite_pros_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/products/{product_id}/ip-availability:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Helpers
+      summary: Check Ip Availability
+      operationId: >-
+        check_ip_availability_neolite_pros_products__product_id__ip_availability_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/products/{product_id}/oss:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Helpers
+      summary: List OS
+      operationId: oss_neolite_pros_products__product_id__oss_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/{account_id}:
+    delete:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Delete
+      summary: Delete Neolite
+      operationId: delete_neolite_pros__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/keypairs/:
+    get:
+      tags:
+        - NEO Lite Pro - Service Management
+      summary: Get Keypairs
+      operationId: get_keypairs_neolite_pros_keypairs__get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Create
+      summary: Create Keypair
+      operationId: create_keypair_neolite_pros_keypairs__post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/keypairs/import:
+    post:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Create
+      summary: Import Keypair
+      operationId: import_keypair_neolite_pros_keypairs_import_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairImportPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/keypairs/{keypair_id}:
+    delete:
+      tags:
+        - NEO Lite Pro - Service Management
+        - NEO Lite Pro - Delete
+      summary: Delete Keypair
+      operationId: delete_neolite_pros_keypairs__keypair_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Keypair Id
+            type: integer
+          name: keypair_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/accounts:
+    get:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+      summary: Snapshot Accounts
+      operationId: snapshot_accounts_neolite_pros_snapshots_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+      summary: Snapshot Account Details
+      operationId: >-
+        snapshot_account_details_neolite_pros_snapshots_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/accounts/{account_id}/create:
+    post:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+        - NEO Lite Pro (Snapshot) - Create
+        - NEO Lite Pro - Create
+      summary: Create NEO Lite Pro from Snapshot
+      operationId: create_neolite_pros_snapshots_accounts__account_id__create_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/routers__neolite_pro_snapshots__NeoliteFromSnapshotPayload
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/accounts/{account_id}/restore:
+    put:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+        - NEO Lite Pro (Snapshot) - Update
+      summary: Restore Snapshot Account
+      operationId: >-
+        restore_snapshot_account_neolite_pros_snapshots_accounts__account_id__restore_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/products:
+    get:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+      summary: Snapshot Products
+      operationId: snapshot_products_neolite_pros_snapshots_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+      summary: Snapshot Product Details
+      operationId: >-
+        snapshot_product_details_neolite_pros_snapshots_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/snapshots/{account_id}:
+    delete:
+      tags:
+        - NEO Lite Pro (Snapshot) - Service Management
+        - NEO Lite Pro (Snapshot) - Delete
+      summary: Delete Snapshot
+      operationId: snapshot_delete_neolite_pros_snapshots__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks/accounts:
+    get:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+      summary: Neolite Additional Disk Accounts
+      operationId: neolite_additional_disk_accounts_neolite_pros_disks_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+      summary: Neolite Additional Disk Account Details
+      operationId: >-
+        neolite_additional_disk_account_details_neolite_pros_disks_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+        - NEO Lite Pro (Additional Disk) - Update
+      summary: Upgrade Storage
+      operationId: upgrade_storage_neolite_pros_disks_accounts__account_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neolite_disks__UpgradePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks:
+    post:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Create
+        - NEO Lite Pro (Additional Disk) - Service Management
+      summary: Create Neolite Additional Disk
+      operationId: create_neolite_additional_disk_neolite_pros_disks_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NeoliteProDiskCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks/{account_id}:
+    delete:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+        - NEO Lite Pro (Additional Disk) - Delete
+      summary: Delete Neolite Additional Disk
+      operationId: delete_neolite_pros_disks__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks/products:
+    get:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+      summary: Products
+      operationId: products_neolite_pros_disks_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neolite-pros/disks/products/{product_id}:
+    get:
+      tags:
+        - NEO Lite Pro (Additional Disk) - Service Management
+      summary: Product Details
+      operationId: product_details_neolite_pros_disks_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages:
+    post:
+      tags:
+        - NEO Object Storage - Create
+        - NEO Object Storage - Service Management
+      summary: Create NEO Object Storage
+      operationId: create_object_storages_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Accounts
+      operationId: accounts_object_storages_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Account Details
+      operationId: account_details_object_storages_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Quota Upgrade
+      operationId: quota_upgrade_object_storages_accounts__account_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSQuotaUpgradePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/credentials:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Credentials
+      operationId: credentials_object_storages_accounts__account_id__credentials_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Create Credential
+      operationId: create_credential_object_storages_accounts__account_id__credentials_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/credentials/{accessKey}:
+    put:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Update
+      summary: Update Credential Status
+      operationId: >-
+        update_credential_status_object_storages_accounts__account_id__credentials__accessKey__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Accesskey
+            type: string
+          name: accessKey
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSCredentialStatusPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Delete
+      summary: Update Credential Status
+      operationId: >-
+        update_credential_status_object_storages_accounts__account_id__credentials__accessKey__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Accesskey
+            type: string
+          name: accessKey
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Buckets
+      operationId: buckets_object_storages_accounts__account_id__buckets_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Create Bucket
+      operationId: create_bucket_object_storages_accounts__account_id__buckets_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSCreateBucketPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/info/{object_or_directory}:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Object or Directory Info
+      operationId: >-
+        bucket_info_object_storages_accounts__account_id__buckets__bucket_name__info__object_or_directory__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Or Directory
+            type: string
+          name: object_or_directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/info:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Bucket Info
+      operationId: >-
+        bucket_info_object_storages_accounts__account_id__buckets__bucket_name__info_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: false
+          schema:
+            title: Object Or Directory
+            type: string
+            default: ''
+          name: object_or_directory
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/usage:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Bucket Usage
+      operationId: >-
+        bucket_usage_object_storages_accounts__account_id__buckets__bucket_name__usage_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}:
+    put:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Update
+      summary: Set Bucket Acl
+      operationId: >-
+        set_bucket_acl_object_storages_accounts__account_id__buckets__bucket_name__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSSetObjectOrDirectoryACL'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Delete
+      summary: Delete Bucket
+      operationId: >-
+        delete_bucket_object_storages_accounts__account_id__buckets__bucket_name__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/objects:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Bucket Objects
+      operationId: >-
+        bucket_objects_object_storages_accounts__account_id__buckets__bucket_name__objects_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/objects/{directory}/:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Bucket Objects In Directory
+      operationId: >-
+        bucket_objects_in_directory_object_storages_accounts__account_id__buckets__bucket_name__objects__directory___get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Directory
+            type: string
+          name: directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/upload/{directory}:
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Upload Object
+      operationId: >-
+        upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload__directory__post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Directory
+            type: string
+          name: directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: >-
+                #/components/schemas/Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload__directory__post
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/upload:
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Upload Object
+      operationId: >-
+        upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: false
+          schema:
+            title: Directory
+            type: string
+            default: ''
+          name: directory
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: >-
+                #/components/schemas/Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload_post
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/objects/{object_name}:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Download Object
+      operationId: >-
+        download_object_object_storages_accounts__account_id__buckets__bucket_name__objects__object_name__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Name
+            type: string
+          name: object_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/url/{object_name}:
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Generate Object Url
+      description: expiry in seconds
+      operationId: >-
+        generate_object_url_object_storages_accounts__account_id__buckets__bucket_name__url__object_name__post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Name
+            type: string
+          name: object_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSGenerateObjectURL'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/copy/{to_bucket_name}/{object_name}:
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Copy Object To Bucket
+      operationId: >-
+        copy_object_to_bucket_object_storages_accounts__account_id__buckets__bucket_name__copy__to_bucket_name___object_name__post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: To Bucket Name
+            type: string
+          name: to_bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Name
+            type: string
+          name: object_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/move/{to_bucket_name}/{object_name}:
+    put:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Update
+      summary: Move Object To Bucket
+      operationId: >-
+        move_object_to_bucket_object_storages_accounts__account_id__buckets__bucket_name__move__to_bucket_name___object_name__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: To Bucket Name
+            type: string
+          name: to_bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Name
+            type: string
+          name: object_name
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/objects/{new_directory}/:
+    post:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Create
+      summary: Create Directory
+      operationId: >-
+        create_directory_object_storages_accounts__account_id__buckets__bucket_name__objects__new_directory___post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: New Directory
+            type: string
+          name: new_directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/accounts/{account_id}/buckets/{bucket_name}/objects/{object_or_directory}:
+    put:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Update
+      summary: Set Object or Directory ACL
+      operationId: >-
+        set_object_or_directory_acl_object_storages_accounts__account_id__buckets__bucket_name__objects__object_or_directory__put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Or Directory
+            type: string
+          name: object_or_directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NOSSetObjectOrDirectoryACL'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Delete
+      summary: Delete Object Or Directory
+      operationId: >-
+        delete_object_or_directory_object_storages_accounts__account_id__buckets__bucket_name__objects__object_or_directory__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: Bucket Name
+            type: string
+          name: bucket_name
+          in: path
+        - required: true
+          schema:
+            title: Object Or Directory
+            type: string
+          name: object_or_directory
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/products:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Products
+      operationId: products_object_storages_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/products/{product_id}:
+    get:
+      tags:
+        - NEO Object Storage - Service Management
+      summary: Product
+      operationId: product_object_storages_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /object-storages/{account_id}:
+    delete:
+      tags:
+        - NEO Object Storage - Service Management
+        - NEO Object Storage - Delete
+      summary: Delete Neo Object Storage
+      operationId: delete_object_storages__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus:
+    post:
+      tags:
+        - NEO GPU - Create
+        - NEO GPU - Service Management
+      summary: Create
+      operationId: create_neo_gpus_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NEOGPUCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/one-time:
+    post:
+      tags:
+        - NEO GPU - Create
+        - NEO GPU - Service Management
+      summary: Create - One Time
+      operationId: create_one_time_neo_gpus_one_time_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NEOGPUOneTimeCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Accounts
+      operationId: accounts_neo_gpus_accounts_get
+      parameters:
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Account Details
+      operationId: account_details_neo_gpus_accounts__account_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: false
+          schema:
+            title: Status
+            type: array
+            items:
+              type: string
+            default:
+              - Active
+              - Pending
+              - Suspended
+              - Terminated
+          name: status
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}/console-access:
+    post:
+      tags:
+        - NEO GPU - Service Management
+      summary: Console Access
+      operationId: console_access_neo_gpus_accounts__account_id__console_access_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}/rebuild:
+    put:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Update
+      summary: Rebuild
+      operationId: rebuild_neo_gpus_accounts__account_id__rebuild_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NEOGPURebuildPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}/vm-status:
+    get:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Update
+      summary: Vm Status
+      operationId: vm_status_neo_gpus_accounts__account_id__vm_status_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Update
+      summary: Set Vm Status
+      operationId: set_vm_status_neo_gpus_accounts__account_id__vm_status_put
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetVMStatusPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}/reserve-additional-hours:
+    post:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Update
+      summary: Reserve Additional Hours
+      operationId: >-
+        reserve_additional_hours_neo_gpus_accounts__account_id__reserve_additional_hours_post
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReserveAdditionalHoursPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/accounts/{account_id}/graph-monitor:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Graph Monitor
+      operationId: graph_monitor_neo_gpus_accounts__account_id__graph_monitor_get
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/TimeFrame'
+          name: timeframe
+          in: query
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/products:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Products
+      operationId: products_neo_gpus_products_get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/products/{product_id}:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Product
+      operationId: product_neo_gpus_products__product_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/products/{product_id}/select-os:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: NEO GPU - Select OS
+      operationId: select_os_neo_gpus_products__product_id__select_os_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/products/{product_id}/flavors:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: NEO GPU - Available Flavors
+      operationId: product_flavors_neo_gpus_products__product_id__flavors_get
+      parameters:
+        - required: true
+          schema:
+            title: Product Id
+            type: integer
+          name: product_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/{account_id}:
+    delete:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Delete
+      summary: Delete NEO GPU
+      operationId: delete_neo_gpus__account_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Account Id
+            type: integer
+          name: account_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/keypairs/:
+    get:
+      tags:
+        - NEO GPU - Service Management
+      summary: Get Keypairs
+      operationId: get_keypairs_neo_gpus_keypairs__get
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Create
+      summary: Create Keypair
+      operationId: create_keypair_neo_gpus_keypairs__post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairCreatePayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/keypairs/import:
+    post:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Create
+      summary: Import Keypair
+      operationId: import_keypair_neo_gpus_keypairs_import_post
+      parameters:
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/routers__neo_sshkeys__KeypairImportPayload'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /neo-gpus/keypairs/{keypair_id}:
+    delete:
+      tags:
+        - NEO GPU - Service Management
+        - NEO GPU - Delete
+      summary: Delete Keypair
+      operationId: delete_neo_gpus_keypairs__keypair_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Keypair Id
+            type: integer
+          name: keypair_id
+          in: path
+        - required: true
+          schema:
+            title: X-Token
+            type: string
+          name: x-token
+          in: header
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AdditionalIPCreatePayload:
+      title: AdditionalIPCreatePayload
+      required:
+        - product_id
+        - cycle
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: >-
+            #/components/schemas/routers__baremetal_additional_ips__Cycle_options
+        region:
+          title: Region
+          type: string
+          default: wjv-1
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: >-
+                #/components/schemas/routers__baremetal_additional_ips__Yes_No_options
+          default: 'no'
+    AssignToMachinePayload:
+      title: AssignToMachinePayload
+      required:
+        - metal_account_id
+      type: object
+      properties:
+        metal_account_id:
+          title: Metal Account Id
+          type: integer
+    BaremetalCreatePayload:
+      title: BaremetalCreatePayload
+      required:
+        - product_id
+        - cycle
+        - keypair_id
+        - label
+        - public_ip
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__baremetals__Cycle_options'
+        select_os:
+          title: Select Os
+          type: string
+          default: ubuntu-22
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        label:
+          title: Label
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\.\-_\s]*$
+          type: string
+          example: server-name
+        public_ip:
+          $ref: '#/components/schemas/Public_IP_options'
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__baremetals__Yes_No_options'
+          default: 'no'
+    BaremetalRebuildPayload:
+      title: BaremetalRebuildPayload
+      type: object
+      properties:
+        os:
+          title: Os
+          type: string
+          example: centos7-base
+    BaremetalUpdateLabelPayload:
+      title: BaremetalUpdateLabelPayload
+      required:
+        - label
+      type: object
+      properties:
+        label:
+          title: Label
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\.\-_\s]*$
+          type: string
+          example: new label
+    Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload__directory__post:
+      title: >-
+        Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload__directory__post
+      required:
+        - file
+      type: object
+      properties:
+        file:
+          title: File
+          type: string
+          format: binary
+    Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload_post:
+      title: >-
+        Body_upload_object_object_storages_accounts__account_id__buckets__bucket_name__upload_post
+      required:
+        - file
+      type: object
+      properties:
+        file:
+          title: File
+          type: string
+          format: binary
+    ChangePackageNeoElasticStorage:
+      title: ChangePackageNeoElasticStorage
+      required:
+        - new_product_id
+      type: object
+      properties:
+        new_product_id:
+          title: New Product Id
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: >-
+                #/components/schemas/routers__baremetal_neo_elastic_storages__Yes_No_options
+          default: 'no'
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    MigrateToProPayload:
+      title: MigrateToProPayload
+      required:
+        - neolitepro_product_id
+      type: object
+      properties:
+        neolitepro_product_id:
+          title: Neolitepro Product Id
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolites__Yes_No_options'
+          default: 'no'
+    NEOGPUCreatePayload:
+      title: NEOGPUCreatePayload
+      required:
+        - product_id
+        - select_os
+        - keypair_id
+        - ssh_and_console_user
+        - console_password
+        - cycle
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        select_os:
+          title: Select Os
+          type: string
+          example: Ubuntu 24.04 LTS
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        service_name:
+          title: Service Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: service-name
+        ssh_and_console_user:
+          title: Ssh And Console User
+          maxLength: 32
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: ubuntu
+        console_password:
+          title: Console Password
+          minLength: 10
+          type: string
+          example: Password1234!
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neo_gpus__Yes_No_options'
+          default: 'no'
+        cycle:
+          $ref: '#/components/schemas/routers__neo_gpus__Cycle_options'
+    NEOGPUOneTimeCreatePayload:
+      title: NEOGPUOneTimeCreatePayload
+      required:
+        - product_id
+        - select_os
+        - keypair_id
+        - ssh_and_console_user
+        - console_password
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        select_os:
+          title: Select Os
+          type: string
+          example: Ubuntu 24.04 LTS
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        service_name:
+          title: Service Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: service-name
+        ssh_and_console_user:
+          title: Ssh And Console User
+          maxLength: 32
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: ubuntu
+        console_password:
+          title: Console Password
+          minLength: 10
+          type: string
+          example: Password1234!
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neo_gpus__Yes_No_options'
+          default: 'no'
+        additional_hours:
+          title: Additional Hours
+          minimum: 0
+          type: integer
+          default: 0
+    NEOGPURebuildPayload:
+      title: NEOGPURebuildPayload
+      required:
+        - select_os
+      type: object
+      properties:
+        select_os:
+          title: Select Os
+          type: string
+          example: Ubuntu 24.04 LTS
+    NOSCreateBucketPayload:
+      title: NOSCreateBucketPayload
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          title: Name
+          minLength: 3
+          pattern: ^[a-zA-Z0-9\-_]*$
+          type: string
+          example: bucket-name
+        acl:
+          allOf:
+            - $ref: '#/components/schemas/ObjectACL_options'
+          default: ''
+    NOSCreatePayload:
+      title: NOSCreatePayload
+      required:
+        - product_id
+        - cycle
+        - label
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__object_storages__Cycle_options'
+        label:
+          title: Label
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-_]*$
+          type: string
+          example: object-name
+        quota:
+          title: Quota
+          minimum: 10
+          type: integer
+          default: 10
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__object_storages__Yes_No_options'
+          default: 'no'
+    NOSCredentialStatusPayload:
+      title: NOSCredentialStatusPayload
+      required:
+        - active
+      type: object
+      properties:
+        active:
+          title: Active
+          type: boolean
+    NOSGenerateObjectURL:
+      title: NOSGenerateObjectURL
+      type: object
+      properties:
+        expiry:
+          title: Expiry
+          minimum: 1
+          type: integer
+          description: in seconds
+          default: 3600
+    NOSQuotaUpgradePayload:
+      title: NOSQuotaUpgradePayload
+      type: object
+      properties:
+        add_quota:
+          title: Add Quota
+          minimum: 10
+          type: integer
+          default: 10
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__object_storages__Yes_No_options'
+          default: 'no'
+    NOSSetObjectOrDirectoryACL:
+      title: NOSSetObjectOrDirectoryACL
+      type: object
+      properties:
+        acl:
+          allOf:
+            - $ref: '#/components/schemas/ObjectACL_options'
+          default: ''
+    NeoElasticStorageCreatePayload:
+      title: NeoElasticStorageCreatePayload
+      required:
+        - product_id
+        - cycle
+        - storage_name
+        - metal_account_id
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: >-
+            #/components/schemas/routers__baremetal_neo_elastic_storages__Cycle_options
+        storage_name:
+          title: Storage Name
+          type: string
+        metal_account_id:
+          title: Metal Account Id
+          exclusiveMinimum: 0
+          type: integer
+        size:
+          title: Size
+          multipleOf: 100
+          maximum: 10000
+          minimum: 100
+          type: integer
+          default: 100
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: >-
+                #/components/schemas/routers__baremetal_neo_elastic_storages__Yes_No_options
+          default: 'no'
+    NeoliteDiskCreatePayload:
+      title: NeoliteDiskCreatePayload
+      required:
+        - product_id
+        - cycle
+        - neolite_account_id
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_disks__Cycle_options'
+        neolite_account_id:
+          title: Neolite Account Id
+          type: integer
+        service_name:
+          title: Service Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: service-name
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_disks__Yes_No_options'
+          default: 'no'
+        size:
+          title: Size
+          minimum: 60
+          type: integer
+          default: 60
+    NeoliteProDiskCreatePayload:
+      title: NeoliteProDiskCreatePayload
+      required:
+        - product_id
+        - cycle
+        - neolite_account_id
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_disks__Cycle_options'
+        neolite_account_id:
+          title: Neolite Account Id
+          type: integer
+        service_name:
+          title: Service Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: service-name
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_disks__Yes_No_options'
+          default: 'no'
+        size:
+          title: Size
+          minimum: 30
+          type: integer
+          default: 30
+    ObjectACL_options:
+      title: ObjectACL_options
+      enum:
+        - ''
+        - private
+        - public-read
+        - public-read-write
+        - authenticated-read
+        - log-delivery-write
+      type: string
+      description: An enumeration.
+    Public_IP_options:
+      title: Public_IP_options
+      enum:
+        - 1
+      type: integer
+      description: An enumeration.
+    ReserveAdditionalHoursPayload:
+      title: ReserveAdditionalHoursPayload
+      type: object
+      properties:
+        hours:
+          title: Hours
+          minimum: 1
+          type: integer
+          default: 1
+    SetVMStatusPayload:
+      title: SetVMStatusPayload
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/VMStatus'
+    State_options:
+      title: State_options
+      enum:
+        - 'on'
+        - 'off'
+        - reset
+      type: string
+      description: An enumeration.
+    TimeFrame:
+      title: TimeFrame
+      enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+      type: string
+      description: An enumeration.
+    UpgradeNeoElasticStorage:
+      title: UpgradeNeoElasticStorage
+      required:
+        - size
+      type: object
+      properties:
+        size:
+          title: Size
+          multipleOf: 100
+          maximum: 10000
+          minimum: 100
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: >-
+                #/components/schemas/routers__baremetal_neo_elastic_storages__Yes_No_options
+          default: 'no'
+    VMStatus:
+      title: VMStatus
+      enum:
+        - start
+        - stop
+        - restart
+      type: string
+      description: An enumeration.
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+    routers__baremetal_additional_ips__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__baremetal_additional_ips__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__baremetal_keypairs__KeypairCreatePayload:
+      title: KeypairCreatePayload
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    routers__baremetal_keypairs__KeypairImportPayload:
+      title: KeypairImportPayload
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        public_key:
+          title: Public Key
+          type: string
+          default: ssh-rsa ...
+    routers__baremetal_neo_elastic_storages__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__baremetal_neo_elastic_storages__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__baremetals__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__baremetals__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neo_gpus__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neo_gpus__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neo_sshkeys__KeypairCreatePayload:
+      title: KeypairCreatePayload
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+    routers__neo_sshkeys__KeypairImportPayload:
+      title: KeypairImportPayload
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          title: Name
+          type: string
+        public_key:
+          title: Public Key
+          type: string
+          default: ssh-rsa ...
+    routers__neolite_disks__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neolite_disks__UpgradePayload:
+      title: UpgradePayload
+      type: object
+      properties:
+        additional_size:
+          title: Additional Size
+          minimum: 10
+          type: integer
+          default: 10
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_disks__Yes_No_options'
+          default: 'no'
+    routers__neolite_disks__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neolite_pro_snapshots__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neolite_pro_snapshots__NeoliteFromSnapshotPayload:
+      title: NeoliteFromSnapshotPayload
+      required:
+        - product_id
+        - cycle
+        - keypair_id
+        - name
+        - ssh_and_console_user
+        - console_password
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_pro_snapshots__Cycle_options'
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: new-server-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        ssh_and_console_user:
+          title: Ssh And Console User
+          type: string
+          example: debianuser
+        console_password:
+          title: Console Password
+          type: string
+          example: Password1234!%
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: >-
+                #/components/schemas/routers__neolite_pro_snapshots__Yes_No_options
+          default: 'no'
+    routers__neolite_pro_snapshots__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neolite_pros__ChangeKeypairPayload:
+      title: ChangeKeypairPayload
+      required:
+        - keypair_id
+      type: object
+      properties:
+        keypair_id:
+          title: Keypair Id
+          type: integer
+    routers__neolite_pros__ChangePackagePayload:
+      title: ChangePackagePayload
+      required:
+        - new_product_id
+      type: object
+      properties:
+        new_product_id:
+          title: New Product Id
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_pros__Yes_No_options'
+          default: 'no'
+    routers__neolite_pros__ChangeVMNamePayload:
+      title: ChangeVMNamePayload
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: new-name
+    routers__neolite_pros__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neolite_pros__NeoliteCreatePayload:
+      title: NeoliteCreatePayload
+      required:
+        - product_id
+        - cycle
+        - select_os
+        - keypair_id
+        - ssh_and_console_user
+        - console_password
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_pros__Cycle_options'
+        select_os:
+          title: Select Os
+          type: string
+          example: Rocky-8
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        vm_name:
+          title: Vm Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: server-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        ssh_and_console_user:
+          title: Ssh And Console User
+          maxLength: 32
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: debianuser
+        console_password:
+          title: Console Password
+          minLength: 8
+          pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
+          type: string
+          example: Password1234!%
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_pros__Yes_No_options'
+          default: 'no'
+    routers__neolite_pros__RebuildPayload:
+      title: RebuildPayload
+      type: object
+      properties:
+        select_os:
+          title: Select Os
+          type: string
+          default: ''
+    routers__neolite_pros__SnapshotPayload:
+      title: SnapshotPayload
+      required:
+        - cycle
+      type: object
+      properties:
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_pros__Cycle_options'
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: snapshot-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_pros__Yes_No_options'
+          default: 'no'
+    routers__neolite_pros__States:
+      title: States
+      enum:
+        - stop
+        - suspend
+        - resume
+        - shutdown
+        - start
+        - reset
+      type: string
+      description: An enumeration.
+    routers__neolite_pros__UpgradePayload:
+      title: UpgradePayload
+      required:
+        - disk_size
+      type: object
+      properties:
+        disk_size:
+          title: Disk Size
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_pros__Yes_No_options'
+          default: 'no'
+    routers__neolite_pros__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neolite_snapshots__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neolite_snapshots__NeoliteFromSnapshotPayload:
+      title: NeoliteFromSnapshotPayload
+      required:
+        - product_id
+        - cycle
+        - keypair_id
+        - name
+        - ssh_and_console_user
+        - console_password
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolite_snapshots__Cycle_options'
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: new-server-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        ssh_and_console_user:
+          title: Ssh And Console User
+          type: string
+          example: debianuser
+        console_password:
+          title: Console Password
+          type: string
+          example: Password1234!%
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolite_snapshots__Yes_No_options'
+          default: 'no'
+    routers__neolite_snapshots__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__neolites__ChangeKeypairPayload:
+      title: ChangeKeypairPayload
+      required:
+        - keypair_id
+      type: object
+      properties:
+        keypair_id:
+          title: Keypair Id
+          type: integer
+    routers__neolites__ChangePackagePayload:
+      title: ChangePackagePayload
+      required:
+        - new_product_id
+      type: object
+      properties:
+        new_product_id:
+          title: New Product Id
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolites__Yes_No_options'
+          default: 'no'
+    routers__neolites__ChangeVMNamePayload:
+      title: ChangeVMNamePayload
+      type: object
+      properties:
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: new-name
+    routers__neolites__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__neolites__NeoliteCreatePayload:
+      title: NeoliteCreatePayload
+      required:
+        - product_id
+        - cycle
+        - select_os
+        - keypair_id
+        - ssh_and_console_user
+        - console_password
+      type: object
+      properties:
+        product_id:
+          title: Product Id
+          type: integer
+        cycle:
+          $ref: '#/components/schemas/routers__neolites__Cycle_options'
+        select_os:
+          title: Select Os
+          type: string
+          example: Rocky-8
+        keypair_id:
+          title: Keypair Id
+          type: integer
+        vm_name:
+          title: Vm Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: server-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        ssh_and_console_user:
+          title: Ssh And Console User
+          maxLength: 32
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          example: debianuser
+        console_password:
+          title: Console Password
+          minLength: 8
+          pattern: ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$
+          type: string
+          example: Password1234!%
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolites__Yes_No_options'
+          default: 'no'
+    routers__neolites__RebuildPayload:
+      title: RebuildPayload
+      type: object
+      properties:
+        select_os:
+          title: Select Os
+          type: string
+          default: ''
+    routers__neolites__SnapshotPayload:
+      title: SnapshotPayload
+      required:
+        - cycle
+      type: object
+      properties:
+        cycle:
+          $ref: '#/components/schemas/routers__neolites__Cycle_options'
+        name:
+          title: Name
+          maxLength: 16
+          minLength: 6
+          pattern: ^[a-zA-Z0-9\-\.]*$
+          type: string
+          default: snapshot-name
+        description:
+          title: Description
+          type: string
+          default: ''
+        promocode:
+          title: Promocode
+          type: string
+          default: ''
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolites__Yes_No_options'
+          default: 'no'
+    routers__neolites__States:
+      title: States
+      enum:
+        - stop
+        - suspend
+        - resume
+        - shutdown
+        - start
+        - reset
+      type: string
+      description: An enumeration.
+    routers__neolites__UpgradePayload:
+      title: UpgradePayload
+      required:
+        - disk_size
+      type: object
+      properties:
+        disk_size:
+          title: Disk Size
+          type: integer
+        pay_invoice_with_cc:
+          allOf:
+            - $ref: '#/components/schemas/routers__neolites__Yes_No_options'
+          default: 'no'
+    routers__neolites__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.
+    routers__object_storages__Cycle_options:
+      title: Cycle_options
+      enum:
+        - m
+        - a
+        - q
+        - s
+        - b
+        - t
+        - p4
+        - p5
+      type: string
+      description: An enumeration.
+    routers__object_storages__Yes_No_options:
+      title: Yes_No_options
+      enum:
+        - 'yes'
+        - 'no'
+      type: string
+      description: An enumeration.

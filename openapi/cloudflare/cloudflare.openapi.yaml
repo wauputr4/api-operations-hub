@@ -1,0 +1,939 @@
+openapi: 3.1.0
+info:
+  title: Cloudflare API
+  version: 1.0.0
+  description: >-
+    Here’s a comprehensive and **fully detailed guide** for creating,
+    documenting, and using Postman with Cloudflare API. This explanation ensures
+    all aspects of the API, including **parameters**, **headers**, **global
+    variables**, and request/response structures, are covered.
+
+
+    ### **1\. Introduction to Postman & Cloudflare API**
+
+
+    Postman is a tool for API testing, and Cloudflare API allows you to interact
+    with Cloudflare services programmatically.
+
+
+    You will set up:
+
+
+    - **Environment variables**: To simplify repeated use of authentication
+    keys, account IDs, zone IDs, etc.
+        
+    - **Requests**: These are for all major Cloudflare API endpoints categorized
+    by service.
+        
+    - **Collections**: Organized groups of requests with reusable variables and
+    proper documentation.
+        
+
+    ### **2\. Setting Up Environment Variables in Postman**
+
+
+    To streamline API requests, create environment variables:
+
+
+    1. Go to **Environments** in Postman.
+        
+    2. Create a new environment named `Cloudflare API`.
+        
+    3. Add the following variables:
+        
+
+    | **Variable Name** | **Example Value** | **Description** |
+
+    | --- | --- | --- |
+
+    | `base_url` | `https://api.cloudflare.com/client/v4` | Base URL for all
+    Cloudflare API requests. |
+
+    | `auth_key` | `Bearer` | Your Cloudflare API key for authorization. |
+
+    | `zone_id` |  | Unique identifier for your Cloudflare zone. |
+
+    | `account_id` |  | Your Cloudflare account ID. |
+
+    | `database_id` |  | Unique identifier for your D1 database. |
+
+    | `script_name` | `example-worker` | Worker script name for Cloudflare
+    Workers API. |
+
+    | `record_id` |  | Specific DNS record ID for operations like update/delete.
+    |
+
+    | `namespace_id` |  | KV namespace ID for KV storage API operations. |
+paths:
+  /user:
+    get:
+      tags:
+        - Account
+      summary: Get User Details
+  /accounts:
+    get:
+      tags:
+        - Account
+      summary: List Accounts
+  /memberships:
+    post:
+      tags:
+        - Account
+      summary: Create Account Membership
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Create Account Membership:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Account Membership:
+                value: '{ "account_id": "example_id", "roles": ["admin"] }'
+  /zones:
+    get:
+      tags:
+        - Zone
+      summary: List Zones
+  /zones/{zone_id}:
+    get:
+      tags:
+        - Zone
+      summary: Get Zone Details
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+    delete:
+      tags:
+        - Zone
+      summary: Delete Zone
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /zones/{zone_id}/dns_records:
+    get:
+      tags:
+        - DNS
+      summary: List DNS Records
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+    post:
+      tags:
+        - DNS
+      summary: Create DNS Record
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create DNS Record:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create DNS Record:
+                value: >-
+                  { "type": "A", "name": "example.com", "content": "192.0.2.1",
+                  "ttl": 3600 }
+  /zones/{zone_id}/dns_records/{record_id}:
+    put:
+      tags:
+        - DNS
+      summary: Update DNS Record
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: record_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Update DNS Record:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Update DNS Record:
+                value: >-
+                  { "type": "A", "name": "updated-example.com", "content":
+                  "192.0.2.2", "ttl": 3600 }
+    delete:
+      tags:
+        - DNS
+      summary: Delete DNS Record
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: record_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /zones/{zone_id}/firewall/rules:
+    get:
+      tags:
+        - Firewall
+        - Firewall Rules
+      summary: List Firewall Rules
+      responses: {}
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples: {}
+    post:
+      tags:
+        - Firewall
+        - Firewall Rules
+      summary: Create Firewall Rule
+      responses: {}
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+          examples: {}
+        - name: Content-Type
+          in: header
+          examples:
+            'Create Firewall Rule #1':
+              value: application/json
+              x-disabled: false
+            Create Firewall Rule:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              'Create Firewall Rule #1':
+                value: >-
+                  { "action": "block", "filter": { "expression": "ip.src in
+                  {192.0.2.1}" } }
+              Create Firewall Rule:
+                value: >-
+                  { "filter": { "expression": "http.request.uri.path contains
+                  '/admin'" }, "action": "block" }
+  /accounts/{account_id}/workers/scripts:
+    get:
+      tags:
+        - Workers
+      summary: List Worker Scripts
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/workers/scripts/{script_name}:
+    put:
+      tags:
+        - Workers
+      summary: Upload Worker Script
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: script_name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Upload Worker Script:
+              value: application/javascript
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/javascript:
+            schema:
+              type: string
+            examples:
+              Upload Worker Script:
+                value: // Your Worker code here
+    delete:
+      tags:
+        - Workers
+      summary: Delete Worker Script
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: script_name
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/storage/kv/namespaces:
+    get:
+      tags:
+        - KV Storage
+      summary: List KV Namespaces
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/values/{key}:
+    put:
+      tags:
+        - KV Storage
+      summary: Write KV Pair
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: namespace_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Write KV Pair:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Write KV Pair:
+                value: '{ "value": "example_value" }'
+    delete:
+      tags:
+        - KV Storage
+      summary: Delete KV Pair
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: namespace_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: key
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/d1/databases:
+    get:
+      tags:
+        - D1
+      summary: List D1 Databases
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/d1/databases/{database_id}/query:
+    post:
+      tags:
+        - D1
+      summary: Execute Query
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: database_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Execute Query:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Execute Query:
+                value: '{ "query": "SELECT * FROM example_table;" }'
+  /accounts/{account_id}/workers/durable_objects/namespaces:
+    get:
+      tags:
+        - Durable Objects
+      summary: List Durable Objects
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /path:
+    post:
+      tags:
+        - Durable Objects
+      summary: Send Request to Durable Object
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Send Request to Durable Object:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Send Request to Durable Object:
+                value: '{ "key": "value" }'
+      servers:
+        - url: https://{durable_object_url}
+          variables:
+            durable_object_url:
+              default: example.com
+              description: Declared in Postman collection variables.
+  /zones/{zone_id}/analytics/dashboard:
+    get:
+      tags:
+        - Analytics
+      summary: Get Zone Analytics
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/access/apps:
+    get:
+      tags:
+        - Access
+      summary: List Access Applications
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+    post:
+      tags:
+        - Access
+      summary: Create Access Application
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Access Application:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Access Application:
+                value: '{ "name": "Example App", "domain": "example.com" }'
+  /accounts/{account_id}/access/apps/{app_id}:
+    delete:
+      tags:
+        - Access
+      summary: Delete Access Application
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: app_id
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/pages/projects:
+    get:
+      tags:
+        - Pages
+      summary: List Pages Projects
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+    post:
+      tags:
+        - Pages
+      summary: Create Pages Project
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Pages Project:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Pages Project:
+                value: >-
+                  { "name": "example-project", "source": { "type": "git",
+                  "config": { "repo_name": "user/repo", "production_branch":
+                  "main" } } }
+  /accounts/{account_id}/pages/projects/{project_name}:
+    delete:
+      tags:
+        - Pages
+      summary: Delete Pages Project
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: project_name
+          in: path
+          required: true
+          schema:
+            type: string
+  /accounts/{account_id}/load_balancers:
+    get:
+      tags:
+        - Load Balancers
+      summary: List Load Balancers
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+    post:
+      tags:
+        - Load Balancers
+      summary: Create Load Balancer
+      parameters:
+        - name: account_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Load Balancer:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Load Balancer:
+                value: >-
+                  { "name": "example-lb", "origin": [ { "address":
+                  "origin1.example.com" } ] }
+  /zones/{zone_id}/spectrum/apps:
+    get:
+      tags:
+        - Spectrum
+      summary: List Spectrum Applications
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+    post:
+      tags:
+        - Spectrum
+      summary: Create Spectrum Application
+      parameters:
+        - name: zone_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Create Spectrum Application:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+            examples:
+              Create Spectrum Application:
+                value: >-
+                  { "protocol": "tcp", "dns": { "type": "CNAME", "name":
+                  "example.tcp" }, "origin": { "address": "192.0.2.1", "port":
+                  1234 } }
+tags:
+  - name: Account
+    description: >-
+      ### **Introduction**
+
+
+      The **Account** folder contains API endpoints related to user and account
+      management. These endpoints allow you to retrieve user details, list
+      accounts, and create account memberships. Below is a summary of the
+      available requests in this folder:
+
+
+      1. **Get User Details**
+          
+          - **Method:** `GET`
+              
+          - **Description:** Fetches details about the current user.
+              
+          - **URL:** `{{base_url}}/user`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+          - **Parameters:** None.
+              
+      2. **List Accounts**
+          
+          - **Method:** `GET`
+              
+          - **Description:** Retrieves a list of accounts.
+              
+          - **URL:** `{{base_url}}/accounts`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+          - **Parameters:** None.
+              
+      3. **Create Account Membership**
+          
+          - **Method:** `POST`
+              
+          - **Description:** Creates a membership for a specific account, which can include roles like "admin."
+              
+          - **URL:** `{{base_url}}/memberships`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+              - Content-Type: `application/json`
+                  
+          - Body : { "account_id": "example_id", "roles": \["admin"\]}
+              
+          - **Parameters:**
+              
+              - `account_id` (string) – The ID of the account for which the membership is being created.
+                  
+              - `roles` (array) – The roles assigned to the user for the account (e.g., "admin").
+                  
+
+      These endpoints can be tested using Postman by setting appropriate
+      variables like `{{base_url}}` and `{{auth_key}}`. Let me know if you'd
+      like more details for any specific request!
+  - name: Zone
+    description: "### **Introduction**\n\nThe\_**Zone**\_folder contains API endpoints related to managing zones. These include listing zones, retrieving details about a specific zone, and deleting a zone. Below is a summary of the available requests in this folder:\n\n1. **List Zones**\n    \n    - **Method:**\_`GET`\n        \n    - **Description:**\_Retrieves a list of all zones.\n        \n    - **URL:**\_`{{base_url}}/zones`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\_None.\n        \n2. **Get Zone Details**\n    \n    - **Method:**\_`GET`\n        \n    - **Description:**\_Retrieves detailed information about a specific zone, identified by\_`zone_id`.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n3. **Delete Zone**\n    \n    - **Method:**\_`DELETE`\n        \n    - **Description:**\_Deletes a specific zone identified by\_`zone_id`.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone to delete.\n            \n\nThese endpoints can be tested using Postman by setting appropriate variables like\_`{{base_url}}`,\_`{{auth_key}}`, and\_`{{zone_id}}`. Let me know if you need more details for any specific request!"
+  - name: DNS
+    description: "### **Introduction**\n\n### Intro\n\nThe\_**DNS**\_folder contains API endpoints for managing DNS records within a specific zone. These endpoints allow you to list, create, update, and delete DNS records. Here are the available requests:\n\n1. **List DNS Records**\n    \n    - **Method:**\_`GET`\n        \n    - **Description:**\_Retrieves a list of all DNS records within a specific zone, identified by\_`zone_id`.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/dns_records`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n2. **Create DNS Record**\n    \n    - **Method:**\_`POST`\n        \n    - **Description:**\_Creates a new DNS record within a specific zone.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/dns_records`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n        - Content-Type:\_`application/json`\n            \n    - jsonCopy code{ \"type\": \"A\", \"name\": \"example.com\", \"content\": \"192.0.2.1\", \"ttl\": 3600}\n        \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n3. **Update DNS Record**\n    \n    - **Method:**\_`PUT`\n        \n    - **Description:**\_Updates an existing DNS record within a specific zone.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/dns_records/{{record_id}}`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n        - Content-Type:\_`application/json`\n            \n    - code : { \"type\": \"A\", \"name\": \"updated-example.com\", \"content\": \"192.0.2.2\", \"ttl\": 3600}\n        \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n        - `record_id`\_(string) – The unique identifier of the DNS record.\n            \n4. **Delete DNS Record**\n    \n    - **Method:**\_`DELETE`\n        \n    - **Description:**\_Deletes a DNS record within a specific zone.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/dns_records/{{record_id}}`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n        - `record_id`\_(string) – The unique identifier of the DNS record to delete."
+  - name: Firewall
+    description: "### **Introduction**\n\nThe\_**Firewall**\_folder contains API endpoints for managing firewall rules within a specific zone. These endpoints allow you to list and create firewall rules for better control of the zone's security. Here are the available requests:\n\n1. **List Firewall Rules**\n    \n    - **Method:**\_`GET`\n        \n    - **Description:**\_Retrieves a list of all firewall rules for a specific zone, identified by\_`zone_id`.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/firewall/rules`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n2. **Create Firewall Rule**\n    \n    - **Method:**\_`POST`\n        \n    - **Description:**\_Creates a new firewall rule for a specific zone.\n        \n    - **URL:**\_`{{base_url}}/zones/{{zone_id}}/firewall/rules`\n        \n    - **Headers:**\n        \n        - Authorization:\_`Bearer {{auth_key}}`\n            \n        - Content-Type:\_`application/json`\n            \n    - jsonCopy code{ \"filter\": { \"expression\": \"http.request.uri.path contains '/admin'\" }, \"action\": \"block\"}\n        \n    - **Parameters:**\n        \n        - `zone_id`\_(string) – The unique identifier of the zone.\n            \n\nThese endpoints can be tested using Postman by setting appropriate variables like\_`{{base_url}}`,\_`{{auth_key}}`,\_`{{zone_id}}`, and\_`{{record_id}}`. Let me know if you need further details!"
+  - name: Workers
+    description: >-
+      ### Introduction
+
+
+      The **Workers** folder contains API endpoints for managing Cloudflare
+      Workers within an account. These endpoints allow you to list, upload, and
+      delete worker scripts associated with an account. Here are the available
+      requests:
+
+
+      1. **List Worker Scripts**
+          
+          - **Method:** `GET`
+              
+          - **Description:** Retrieves a list of all worker scripts for a specific account.
+              
+          - **URL:** `{{base_url}}/accounts/{{account_id}}/workers/scripts`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+          - **Parameters:**
+              
+              - `account_id` (string) – The unique identifier of the account.
+                  
+      2. **Upload Worker Script**
+          
+          - **Method:** `PUT`
+              
+          - **Description:** Uploads a new worker script to a specific account.
+              
+          - **URL:** `{{base_url}}/accounts/{{account_id}}/workers/scripts/{{script_name}}`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+              - Content-Type: `application/javascript`
+                  
+          - javascriptCopy code// Your Worker code here
+              
+          - **Parameters:**
+              
+              - `account_id` (string) – The unique identifier of the account.
+                  
+              - `script_name` (string) – The name of the script you wish to upload.
+                  
+      3. **Delete Worker Script**
+          
+          - **Method:** `DELETE`
+              
+          - **Description:** Deletes a specific worker script from an account.
+              
+          - **URL:** `{{base_url}}/accounts/{{account_id}}/workers/scripts/{{script_name}}`
+              
+          - **Headers:**
+              
+              - Authorization: `Bearer {{auth_key}}`
+                  
+          - **Parameters:**
+              
+              - `account_id` (string) – The unique identifier of the account.
+                  
+              - `script_name` (string) – The name of the script to delete.
+                  
+
+      These endpoints are useful for managing Cloudflare Workers and performing
+      actions such as uploading or removing worker scripts. You can test these
+      using Postman by setting the appropriate variables like `{{base_url}}`,
+      `{{auth_key}}`, `{{account_id}}`, and `{{script_name}}`. Let me know if
+      you need further explanations!
+  - name: KV Storage
+    description: "The\_**KV Storage**\_collection in Postman contains three essential requests to interact with Cloudflare's KV (Key-Value) storage. Here’s an overview of each request:\n\n---\n\n### 1.\_**List KV Namespaces**\n\n- **Description:**\_This request retrieves a list of all Key-Value (KV) namespaces available for a given Cloudflare account.\n    \n- **Method:**\_`GET`\n    \n- **URL:**\_`{{base_url}}/accounts/{{account_id}}/storage/kv/namespaces`\n    \n- **Headers:**\n    \n    - **Authorization:**\_`Bearer {{auth_key}}`\n        \n- **Response:**\_Returns a list of namespaces within the specified account.\n    \n\n#### Example Request:\n\n```\nhttpCopy codeGET {{base_url}}/accounts/{{account_id}}/storage/kv/namespaces\n\n ```\n\n---\n\n### 2.\_**Write KV Pair**\n\n- **Description:**\_This request writes a key-value pair to a specified KV namespace.\n    \n- **Method:**\_`PUT`\n    \n- **URL:**`{{base_url}}/accounts/{{account_id}}/storage/kv/namespaces/{{namespace_id}}/values/{{key}}`\n    \n- **Headers:**\n    \n    - **Authorization:**\_`Bearer {{auth_key}}`\n        \n    - **Content-Type:**\_`application/json`\n        \n- jsonCopy code{ \"value\": \"example_value\"}\n    \n- **Response:**\_Writes the key-value pair to the specified namespace.\n    \n\n#### Example Request:\n\n```\nhttpCopy codePUT {{base_url}}/accounts/{{account_id}}/storage/kv/namespaces/{{namespace_id}}/values/{{key}}\n\n ```\n\n---\n\n### 3.\_**Delete KV Pair**\n\n- **Description:**\_This request deletes a key-value pair from a specific KV namespace.\n    \n- **Method:**\_`DELETE`\n    \n- **URL:**`{{base_url}}/accounts/{{account_id}}/storage/kv/namespaces/{{namespace_id}}/values/{{key}}`\n    \n- **Headers:**\n    \n    - **Authorization:**\_`Bearer {{auth_key}}`\n        \n- **Response:**\_Deletes the specified key-value pair from the provided namespace.\n    \n\n#### Example Request:\n\n```\nhttpCopy codeDELETE {{base_url}}/accounts/{{account_id}}/storage/kv/namespaces/{{namespace_id}}/values/{{key}\n\n ```\n\n---\n\n### Postman Setup:\n\n#### Global Variables:\n\n- `base_url`: The Cloudflare API base URL.\n    \n- `auth_key`: Your Cloudflare API authentication key.\n    \n- `account_id`: The Cloudflare account ID.\n    \n- `namespace_id`: The ID of the KV namespace.\n    \n- `key`: The key of the key-value pair you want to write or delete.\n    \n\n#### Collection Structure:\n\n- **KV Storage**\n    \n    - **List KV Namespaces**\n        \n    - **Write KV Pair**\n        \n    - **Delete KV Pair**\n        \n\nThis setup helps manage Cloudflare's KV storage directly via Postman for tasks such as viewing, adding, and removing key-value pairs.\n\nLet me know if you need any adjustments or further help with this setup!"
+  - name: D1
+    description: "### Introduction\n\nThis collection provides Postman requests for interacting with Cloudflare's\_**D1**\_database service. It allows you to manage and query databases within your Cloudflare account using two main actions: listing databases and executing SQL queries. You can integrate these requests into your workflows to manage your data storage efficiently on Cloudflare’s platform.\n\n---\n\n### 1.\_**List D1 Databases**\n\n- **Description:**\_This request retrieves a list of all D1 databases for the specified Cloudflare account.\n    \n- **Method:**\_`GET`\n    \n- **URL:**\_`{{base_url}}/accounts/{{account_id}}/d1/databases`\n    \n- **Headers:**\n    \n    - **Authorization:**\_`Bearer {{auth_key}}`\n        \n- **Response:**\_Returns a list of D1 databases within the specified account.\n    \n\n#### Example Request:\n\n```\nhttpCopy codeGET {{base_url}}/accounts/{{account_id}}/d1/databases\n\n ```\n\n---\n\n### 2.\_**Execute Query**\n\n- **Description:**\_This request executes a SQL query on a specific D1 database.\n    \n- **Method:**\_`POST`\n    \n- **URL:**\_`{{base_url}}/accounts/{{account_id}}/d1/databases/{{database_id}}/query`\n    \n- **Headers:**\n    \n    - **Authorization:**\_`Bearer {{auth_key}}`\n        \n    - **Content-Type:**\_`application/json`\n        \n- jsonCopy code{ \"query\": \"SELECT \\* FROM example_table;\"}\n    \n- **Response:**\_Executes the SQL query and returns the results.\n    \n\n#### Example Request:\n\n```\nhttpCopy codePOST {{base_url}}/accounts/{{account_id}}/d1/databases/{{database_id}}/query\n\n ```"
+  - name: Durable Objects
+    description: "# Introduction\n\n#### **. List Durable Objects**\n\n- **Endpoint:**  \n    `GET /accounts/{account_id}/workers/durable_objects/namespaces`\n    \n- **Description:**  \n    Retrieves a list of durable object namespaces for a given account.\n    \n- **URL Parameters:**\n    \n    - `account_id`\_(required): The unique identifier of the account.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n- **Response:**  \n    A list of namespaces for durable objects associated with the specified account.\n    \n\n---\n\n#### **2\\. Send Request to Durable Object**\n\n- **Endpoint:**  \n    `POST {durable_object_url}/path`\n    \n- **Description:**  \n    Sends a request to a durable object, passing a JSON payload.\n    \n- **URL Parameters:**\n    \n    - `durable_object_url`\_(required): The URL for the specific durable object instance.\n        \n    - `path`\_(required): The specific path of the durable object request.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n    - `Content-Type`: Must be set to\_`application/json`.\n        \n- jsonCopy code{ \"key\": \"value\"}\n    \n- **Response:**  \n    The response depends on the specific implementation of the durable object."
+  - name: Analytics
+    description: "### **Introduction**\n\n#### **1\\. Get Zone Analytics**\n\n- **Endpoint:**  \n    `GET /zones/{zone_id}/analytics/dashboard`\n    \n- **Description:**  \n    Retrieves the analytics dashboard for a specified zone. This includes metrics and insights on the zone's performance.\n    \n- **URL Parameters:**\n    \n    - `zone_id`\_(required): The unique identifier of the zone.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n- **Response:**  \n    The response will include analytics data for the specified zone, such as traffic data, performance metrics, and insights."
+  - name: Access
+    description: "#### **1\\. Get Zone Analytics**\n\n- **Endpoint:**  \n    `GET /zones/{zone_id}/analytics/dashboard`\n    \n- **Description:**  \n    Retrieves the analytics dashboard for a specified zone. This includes metrics and insights on the zone's performance.\n    \n- **URL Parameters:**\n    \n    - `zone_id`\_(required): The unique identifier of the zone.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n- **Response:**  \n    The response will include analytics data for the specified zone, such as traffic data, performance metrics, and insights."
+  - name: Pages
+    description: >-
+      #### **Pages Project**
+
+
+      - **Endpoint:**  
+          `POST /accounts/{account_id}/pages/projects`
+          
+      - **Description:**  
+          Creates a new page project for a specific account. You must provide project details such as the project name and repository configuration.
+          
+      - **URL Parameters:**
+          
+          - `account_id` (required): The unique identifier of the account.
+              
+      - **Request Headers:**
+          
+          - `Authorization`: Bearer token for authentication.  
+              Example: `Authorization: Bearer {auth_key}`
+              
+          - `Content-Type`: `application/json` (required)
+              
+      - Code : { "name": "example-project", "source": { "type": "git", "config":
+      { "repo_name": "user/repo", "production_branch": "main" } }}
+          
+          - `name`: The name of the project.
+              
+          - `source`: The source repository details.
+              
+              - `type`: The repository type (e.g., `git`).
+                  
+              - `config`: The repository configuration.
+                  
+                  - `repo_name`: The name of the repository.
+                      
+                  - `production_branch`: The branch to use for production.
+                      
+
+      **Response:**  
+
+      The response will include details about the newly created project.
+  - name: Load Balancers
+    description: "### **Indroduction**\n\n#### **1\\. List Load Balancers**\n\n- **Endpoint:**  \n    `GET /accounts/{account_id}/load_balancers`\n    \n- **Description:**  \n    Retrieves a list of all load balancers associated with a specific account.\n    \n- **URL Parameters:**\n    \n    - `account_id`\_(required): The unique identifier of the account.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n- **Response:**  \n    The response will include a list of all load balancers related to the specified account.\n    \n\n---\n\n#### **2\\. Create Load Balancer**\n\n- **Endpoint:**  \n    `POST /accounts/{account_id}/load_balancers`\n    \n- **Description:**  \n    Creates a new load balancer for a specific account.\n    \n- **URL Parameters:**\n    \n    - `account_id`\_(required): The unique identifier of the account.\n        \n- **Request Headers:**\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n    - `Content-Type`:\_`application/json`\_(required)\n        \n- jsonCopy code{ \"name\": \"example-lb\", \"origin\": \\[ { \"address\": \"origin1.example.com\" } \\]}\n    \n    - `name`: The name of the load balancer.\n        \n    - `origin`: The origin servers to which the load balancer routes traffic.\n        \n        - `address`: The address of the origin server.\n            \n- **Response:**  \n    The response will include details of the newly created load balancer."
+  - name: Firewall Rules
+    description: >-
+      #### **Introduction  
+        
+        
+      1\. List Firewall Rules**
+
+
+      - **Endpoint**:  
+          `GET /zones/{zone_id}/firewall/rules`
+          
+      - **Description**:  
+          Retrieves a list of all firewall rules for the specified zone.
+          
+      - **URL Parameters**:
+          
+          - `zone_id` (required): The unique identifier of the zone.
+              
+      - **Headers**:
+          
+          - `Authorization`: Bearer token for authentication.  
+              Example: `Authorization: Bearer {auth_key}`
+              
+      - **Response**:  
+          A list of firewall rules associated with the specified zone.
+          
+
+      ---
+
+
+      #### **2\. Create Firewall Rule**
+
+
+      - **Endpoint**:  
+          `POST /zones/{zone_id}/firewall/rules`
+          
+      - **Description**:  
+          Creates a new firewall rule for the specified zone.
+          
+      - **URL Parameters**:
+          
+          - `zone_id` (required): The unique identifier of the zone.
+              
+      - **Headers**:
+          
+          - `Authorization`: Bearer token for authentication.  
+              Example: `Authorization: Bearer {auth_key}`
+              
+          - `Content-Type`: `application/json` (required)
+              
+      - jsonCopy code{ "action": "block", "filter": { "expression": "ip.src in
+      {192.0.2.1}" }}
+          
+          - `action`: The action to take (e.g., `block`, `allow`).
+              
+          - `filter`: The filter criteria for the rule.
+              
+              - `expression`: The filtering expression (e.g., IP addresses).
+                  
+      - **Response**:  
+          A success message with the details of the created firewall rule.
+  - name: Spectrum
+    description: "### **Introduction**\n\n#### **1\\. List Spectrum Applications**\n\n- **Endpoint**:  \n    `GET /zones/{zone_id}/spectrum/apps`\n    \n- **Description**:  \n    Retrieves a list of all Spectrum applications for the specified zone.\n    \n- **URL Parameters**:\n    \n    - `zone_id`\_(required): The unique identifier of the zone.\n        \n- **Headers**:\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n- **Response**:  \n    A list of Spectrum applications associated with the specified zone.\n    \n\n---\n\n#### **2\\. Create Spectrum Application**\n\n- **Endpoint**:  \n    `POST /zones/{zone_id}/spectrum/apps`\n    \n- **Description**:  \n    Creates a new Spectrum application for the specified zone.\n    \n- **URL Parameters**:\n    \n    - `zone_id`\_(required): The unique identifier of the zone.\n        \n- **Headers**:\n    \n    - `Authorization`: Bearer token for authentication.  \n        Example:\_`Authorization: Bearer {auth_key}`\n        \n    - `Content-Type`:\_`application/json`\_(required)\n        \n- jsonCopy code{ \"protocol\": \"tcp\", \"dns\": { \"type\": \"CNAME\", \"name\": \"example.tcp\" }, \"origin\": { \"address\": \"192.0.2.1\", \"port\": 1234 }}\n    \n    - `protocol`: The protocol used for the application (e.g.,\_`tcp`).\n        \n    - `dns`: DNS settings for the application.\n        \n        - `type`: The DNS record type (e.g.,\_`CNAME`).\n            \n        - `name`: The name of the DNS record.\n            \n    - `origin`: The origin server details for the application.\n        \n        - `address`: The IP address of the origin server.\n            \n        - `port`: The port on which the origin server is listening.\n            \n- **Response**:  \n    A success message with the details of the created Spectrum application."
+servers:
+  - url: https://{base_url}
+    variables:
+      base_url:
+        default: example.com
+        description: Declared in Postman collection variables.

@@ -21,6 +21,14 @@ If you work with several providers and need a single source of truth for API def
 - Xendit API
 - Xendit SNAP API
 - iPaymu API (v2)
+- Faspay API
+- Finpay Billing API
+- Finpay Disbursement API
+- Finpay Payment Gateway API
+- Mayar API
+- Hostinger API
+- Biznet Gio API
+- Cloudflare API
 
 ## Repository structure
 
@@ -29,8 +37,13 @@ If you work with several providers and need a single source of truth for API def
   - `doku/`
   - `xendit/`
   - `ipaymu/`
+  - `fastpay/`
+  - `finpay/`
+  - `mayar/`
+  - `hostinger/`
+  - `cloudflare/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -38,13 +51,14 @@ If you work with several providers and need a single source of truth for API def
 - `scripts/`
   - `convert-postman-to-openapi-modern.mjs`
   - `convert-postman-to-openapi.mjs`
+  - `convert-mayar-mintlify.mjs`
   - `clean-openapi-modern.mjs`
 - `package.json`
 - `package-lock.json`
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -64,6 +78,17 @@ npm run convert-postman
 ```
 
 This reads Postman collections and outputs modern OpenAPI artifacts under `openapi/`.
+
+### Convert Mintlify docs to Mayar (best-effort)
+
+```bash
+npm run convert-mayar
+```
+
+This reads Mintlify docs pages from `https://docs.mayar.id/llms.txt`, extracts endpoint examples, and outputs:
+
+- `openapi/mayar/mayar.openapi.yaml`
+- `postman/mayar/mayar.postman_collection.json`
 
 ### Convert legacy OpenAPI
 
@@ -86,6 +111,16 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
 - `openapi/ipaymu/ipaymu.openapi.yaml`
+- `openapi/fastpay/fastpay.openapi.yaml`
+- `openapi/finpay/finpay-billing.openapi.yaml`
+- `openapi/finpay/finpay-disbursement.openapi.yaml`
+- `openapi/finpay/finpay-payment-gateway.openapi.yaml`
+- `openapi/mayar/mayar.openapi.yaml`
+- `openapi/hostinger/hostinger.openapi.yaml`
+- `openapi/hostinger/hostinger.openapi.json`
+- `openapi/biznet-gio/biznet-gio.openapi.yaml`
+- `openapi/biznet-gio/biznet-gio.openapi.json`
+- `openapi/cloudflare/cloudflare.openapi.yaml`
 
 ## Contributing
 

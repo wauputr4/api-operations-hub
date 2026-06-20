@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "231c9993-5ba5-4d52-830c-05b361b5df8c",
+		"name": "Finpay Billing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18946373"
+	},
+	"item": [
+		{
+			"name": "Inquiry",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"\r",
+							"var userName = pm.globals.get(\"userName\");\r",
+							"var password = pm.globals.get(\"userPass\");\r",
+							"\r",
+							"var bodyRaw = pm.request.body\r",
+							"var obj = JSON.parse(bodyRaw)\r",
+							"\r",
+							"\r",
+							"var date = Date.now()\r",
+							"timestamp = moment().format(\"DD-MM-YYYY HH:mm:ss:Z\")\r",
+							"\r",
+							"\r",
+							"var sha256Param = CryptoJS.SHA256(timestamp+password).toString()\r",
+							"var signatureToParse = userName+\r",
+							"                obj.productCode+\r",
+							"                obj.channel+\r",
+							"                obj.terminal+\r",
+							"                obj.transactionType+\r",
+							"                obj.billNumber+\r",
+							"                date+\r",
+							"                sha256Param\r",
+							"\r",
+							"var signature = CryptoJS.SHA256(signatureToParse).toString()\r",
+							"\r",
+							"pm.environment.set(\"userName\", userName)\r",
+							"pm.environment.set(\"signature\", signature)\r",
+							"pm.environment.set(\"timestamp\", timestamp)\r",
+							"pm.environment.set(\"traxId\", date)\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"productCode\": \"001001\",\r\n    \"terminal\": \"G009TRKK\",\r\n    \"terminalName\": \"FINNET\",\r\n    \"terminalLocation\": \"Bidakara Pancoran\",\r\n    \"transactionType\": \"38\",\r\n    \"channel\": \"6018\",\r\n    \"billNumber\": \"0021001236001 \",\r\n    \"amount\": \"0\",\r\n    \"feeAmount\": \"3500\",\r\n    \"bit32\": \"770\",\r\n    \"bit33\": \"770924\",    \r\n    \"bit61\": \"021001234001\",\r\n    \"traxId\": \"{{traxId}}\",\r\n    \"timeStamp\": \"{{timestamp}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBilling}}",
+					"host": [
+						"{{urlBilling}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Payment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"\r",
+							"var userName = pm.globals.get(\"userName\");\r",
+							"var password = pm.globals.get(\"userPass\");\r",
+							"\r",
+							"var bodyRaw = pm.request.body\r",
+							"var obj = JSON.parse(bodyRaw)\r",
+							"\r",
+							"var date = Date.now()\r",
+							"timestamp = moment().format(\"DD-MM-YYYY HH:mm:ss:Z\")\r",
+							"\r",
+							"\r",
+							"var sha256Param = CryptoJS.SHA256(timestamp+password).toString()\r",
+							"var signatureToParse = userName+\r",
+							"                obj.productCode+\r",
+							"                obj.channel+\r",
+							"                obj.terminal+\r",
+							"                obj.transactionType+\r",
+							"                obj.billNumber+\r",
+							"                date+\r",
+							"                sha256Param\r",
+							"\r",
+							"var signature = CryptoJS.SHA256(signatureToParse).toString()\r",
+							"\r",
+							"pm.environment.set(\"userName\", userName)\r",
+							"pm.environment.set(\"signature\", signature)\r",
+							"pm.environment.set(\"timestamp\", timestamp)\r",
+							"pm.environment.set(\"traxId\", date)\r",
+							"\r",
+							"console.log(sha256Param)\r",
+							"console.log(signatureToParse)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userName\": \"{{userName}}\",\r\n    \"signature\": \"{{signature}}\",\r\n    \"productCode\": \"001001\",\r\n    \"terminal\": \"G009TRKK\",\r\n    \"terminalName\": \"FINNET\",\r\n    \"terminalLocation\": \"Bidakara Pancoran\",\r\n    \"transactionType\": \"50\",\r\n    \"channel\": \"6018\",\r\n    \"billNumber\": \"0021001234001\",\r\n    \"amount\": \"000000010000\",\r\n    \"feeAmount\": \"2500\",\r\n    \"bit32\": \"770\",\r\n    \"bit33\": \"770924\",    \r\n    \"bit61\": \"00210829990010200011302A              10000IDHAM DHIYAULHAQ HABIBI       5066555567     \",\r\n    \"traxId\": \"{{traxId}}\",\r\n    \"timeStamp\": \"{{timestamp}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{urlBilling}}",
+					"host": [
+						"{{urlBilling}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "127.0.0.1:7979",
+			"type": "string"
+		},
+		{
+			"key": "local",
+			"value": "127.0.0.1:7979",
+			"type": "string"
+		},
+		{
+			"key": "staging",
+			"value": "http://10.202.200.36",
+			"type": "string"
+		}
+	]
+}

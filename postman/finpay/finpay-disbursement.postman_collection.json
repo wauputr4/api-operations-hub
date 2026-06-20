@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "5cf3f5cf-4990-4e49-9557-e0378a1ab6b1",
+		"name": "Finpay Disbursement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18946373"
+	},
+	"item": [
+		{
+			"name": "List of Bank",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var key = 'mykey'\r",
+							"var date = Date.now()\r",
+							"var orderId = date\r",
+							"var bodyRaw = pm.request.body\r",
+							"pm.environment.set(\"orderId\", orderId)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"d191f909-d443-4d18-855c-aaea045f9a78\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321770\",\r\n        \"destBankCode\": \"07615\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/bank",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"bank"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inquiry",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/inquiry/91161/654321772",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"inquiry",
+						"91161",
+						"654321772"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var key = 'mykey'\r",
+							"var date = Date.now()\r",
+							"var orderId = date\r",
+							"var bodyRaw = pm.request.body\r",
+							"pm.environment.set(\"orderId\", orderId)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"e2010b92426345d88605f6d56cbc80d6\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321772\",\r\n        \"destBankCode\": \"91161\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/transfer",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var key = 'mykey'\r",
+							"var date = Date.now()\r",
+							"var orderId = date\r",
+							"var bodyRaw = pm.request.body\r",
+							"pm.environment.set(\"orderId\", orderId)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": {\r\n        \"id\":\"{{orderId}}\"\r\n    },\r\n    \"disbursement\": {\r\n        \"refCode\": \"d191f909-d443-4d18-855c-aaea045f9a78\",\r\n        \"amount\": \"1000\",\r\n        \"destAccName\": \"Siti Finpay\",\r\n        \"destAccNumber\": \"654321770\",\r\n        \"destBankCode\": \"07615\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/check/91161/654321770/fa18bdad5d2f4d1ea3094027e42aa353",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"check",
+						"91161",
+						"654321770",
+						"fa18bdad5d2f4d1ea3094027e42aa353"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Balance",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/balance",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Balance History",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\"\r\n    },\r\n    \"startDate\": \"2023-06-01\",\r\n    \"endDate\": \"2023-09-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/balance/history",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"balance",
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "mykey",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "FINPAY770",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"order\": {\r\n        \"id\": \"{{orderId}}\"\r\n    },\r\n    \"startDate\": \"2023-06-01\",\r\n    \"endDate\": \"2023-09-01\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{adapterMerchant}}disbursement/report",
+					"host": [
+						"{{adapterMerchant}}disbursement"
+					],
+					"path": [
+						"report"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
