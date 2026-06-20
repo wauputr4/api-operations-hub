@@ -1,0 +1,3300 @@
+openapi: 3.0.3
+info:
+  title: Mayar API
+  version: 1.0.0
+  description: >-
+    Generated from Mayar documentation pages in llms.txt and markdown endpoint
+    examples. This is best-effort extraction from docs.
+servers:
+  - url: https://api.mayar.id
+tags:
+  - name: Mayar
+security:
+  - bearerAuth: []
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  /credit/v1/credit/customer/add-credit:
+    post:
+      operationId: post_creditbasedproduct_addcustomercredit
+      summary: Add Customer Credit
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                data:
+                  customerId: faa4ee60-cf45-4043-b964-303890713bb9
+                  productId: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+                  amount: 100
+                  customerBalance: 911090
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              customerId: 9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55
+              productId: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+              amount: 100
+  /credit/v1/credit/customer/balance:
+    get:
+      operationId: get_creditbasedproduct_customerbalance
+      summary: Get Customer Balance
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: customerId
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >-
+            Sample placeholder/value from docs:
+            9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55
+        - name: productId
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >-
+            Sample placeholder/value from docs:
+            2b649982-411e-42e0-9b9c-0a17f9a55d44
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                customerBalance: 30001
+                customerMainBalance: 29801
+                customerBalanceAddon: 500
+  /credit/v1/credit/generate/immutable/checkout:
+    post:
+      operationId: post_creditbasedproduct_generateimmutablecheckoutlink
+      summary: Generate Immutable Checkout Link
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                creditUsageImmutableCheckoutUrl: >-
+                  https://donasisekutscom.myr.id/pl/test-product-credit?immutable=eyJuYW1lIjoiam9obiBkb2UiLCJlbWFpbCI6ImpvaG5kb2U1QGdtYWlsLmNvbSIsIm1vYmlsZSI6IjA4Nzc3Nzc3Nzc3IiwiY3JlZGl0QW1vdW50IjoyMDAwMH0=.03de9bf29c5861d950d13364c2c23d62675cd2f03cd27a5b7c682f2c43d25b4e
+                paymentLinkUrl: https://donasisekutscom.myr.id/pl/test-product-credit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              productId: 0e787345-9aaf-4b72-aa00-1174be6b52b1
+              creditAmount: 1000
+              customerInfo:
+                name: memberTambahan
+                email: tambahan@gg.com
+                mobile: '08777777799'
+  /credit/v1/credit/customer/paginate-credit-history/PQVS4KGY:
+    get:
+      operationId: get_creditbasedproduct_paginatecustomercredithistory
+      summary: Get Paginate Customer Credit History
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: productId
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >-
+            Sample placeholder/value from docs:
+            40f26fbe-f4d8-4693-975f-e6d105d291e6
+        - name: membershipTierId
+          in: query
+          required: false
+          schema:
+            type: string
+          description: >-
+            Sample placeholder/value from docs:
+            261acae0-d6ae-4d8c-adf5-6fb8c2361514
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                total: 3
+                page: 1
+                limit: 10
+                totalPages: 1
+                data:
+                  - id: 6970b4bcdfcfcfbbd8d7b617
+                    createdAt: '2026-01-21T11:13:00.044Z'
+                    credit: 0
+                    debit: 50
+                    productId: 10291a3d-c53f-426f-9987-f879b4b87c64
+                    status: ACTIVE
+                    customerId: 210e5193-7d66-4345-a5c7-07fe7552f2f7
+                    merchantId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    expiredAt: null
+                    walletType: ADD_ON
+                    type: CREDIT_USAGE
+                  - id: 6970b49fdfcfcfbbd8d7b616
+                    createdAt: '2026-01-21T11:12:31.325Z'
+                    credit: 200
+                    debit: 0
+                    productId: 10291a3d-c53f-426f-9987-f879b4b87c64
+                    status: ACTIVE
+                    customerId: 210e5193-7d66-4345-a5c7-07fe7552f2f7
+                    merchantId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    expiredAt: null
+                    walletType: ADD_ON
+                    type: MERCHANT_TOPUP
+                  - id: 6970b416dfcfcfbbd8d7b612
+                    createdAt: '2026-01-21T11:10:14.827Z'
+                    credit: 3000
+                    debit: 0
+                    productId: 10291a3d-c53f-426f-9987-f879b4b87c64
+                    status: ACTIVE
+                    customerId: 210e5193-7d66-4345-a5c7-07fe7552f2f7
+                    merchantId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    expiredAt: null
+                    walletType: ADD_ON
+                    type: TRIAL_TOPUP
+  /credit/v1/credit/credit-usage/customer/regist:
+    post:
+      operationId: post_creditbasedproduct_registernewcustomer
+      summary: Regist New Customer
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                data:
+                  customerId: bcf56452-ec21-4791-aca2-7a41b033e9d2
+                  paymentLinkId: 43eadce2-bc52-4e38-a832-93fb835f2a69
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              productId: 43eadce2-bc52-4e38-a832-93fb835f2a69
+              trialCredit: 300
+              customerInfo:
+                name: john doe
+                email: johndoe@gmail.com
+                mobile: '08777777777'
+  /credit/v1/credit/customer/spend:
+    post:
+      operationId: post_creditbasedproduct_spendcustomercredit
+      summary: Spend Customer Credit
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: 'Successfully spent 10. MAIN: 10, ADD_ON: 0'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              customerId: 9de4b4b4-525c-4ee0-ac9c-b29c3e10fe55
+              productId: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+              amount: 10
+  /hl/v1/customer/create:
+    post:
+      operationId: post_customer_create
+      summary: Create Customer
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  name: Raihan Nur Azmii
+                  email: mraihanna19@gmail.com
+                  mobile: '089912345678'
+                  userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                  customerId: b0356d4c-516a-403e-abfe-b144da7068b4
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              name: Raihan Nur Azmii
+              email: mraihanna19@gmail.com
+              mobile: '089912345678'
+  /hl/v1/customer/login/portal:
+    post:
+      operationId: post_customer_createmagiclink
+      summary: Create Magic Link
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  url: Sudah kami kirim ke email anda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              email: mraihannanewpatch@gmail.com
+  /hl/v1/customer:
+    get:
+      operationId: get_customer_getdetail
+      summary: Get Customer
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 10'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 98
+                pageSize: 12
+                page: 1
+                totalCustomer: 1176
+                data:
+                  - id: 0072cf8e-a8f1-4ce9-9dcd-3683f085ebf1
+                    createdAt: 1735787039376
+                    email: ghasyiyahps@gmail.com
+                    mobile: '6281296450946'
+                    name: Kirana
+                    status: active
+                    updatedAt: 1735787039377
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 0088e7bd-2f80-4cd8-ae7d-e5b01694669d
+                    createdAt: 1735787039363
+                    email: gusty.saram@gmail.com
+                    mobile: '628114618877'
+                    name: Gusty Saram
+                    status: active
+                    updatedAt: 1735787039363
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 00ae7695-1739-4bc3-a04f-16aa4b85ee1c
+                    createdAt: 1735787039379
+                    email: mettakariyani@gmail.com
+                    mobile: '6289693468304'
+                    name: Metta
+                    status: active
+                    updatedAt: 1735787039379
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 00bd27a6-8aac-4cac-bf3f-bf59db397730
+                    createdAt: 1730951705156
+                    email: embuhsihombing.123@gmail.com
+                    mobile: '6285797522261'
+                    name: embuhsihombing
+                    status: active
+                    updatedAt: 1730951705156
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 00cda35d-8a9a-4a95-93d8-788fdb6461b4
+                    createdAt: 1735787039347
+                    email: arnoldardian70@gmail.com
+                    mobile: '6281329269290'
+                    name: Arnoldus Ardiandono
+                    status: active
+                    updatedAt: 1735787039347
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 00fb4573-56a1-4133-9cec-aa87cc137abb
+                    createdAt: 1735787039394
+                    email: rio.aliwarga1@gmail.com
+                    mobile: '6281388251387'
+                    name: Rio Handoko
+                    status: active
+                    updatedAt: 1735787039394
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 00fd76f0-db12-4d53-939d-8c68d767bd76
+                    createdAt: 1735787039365
+                    email: kddianda25@gmail.com
+                    mobile: '6285159103357'
+                    name: I kadek dianda saputra
+                    status: active
+                    updatedAt: 1735787039365
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 010e087c-4bc3-4aab-9eac-ab4001533a6d
+                    createdAt: 1736218312836
+                    email: caca.bispes.1dddddddd567.87@gmail.com
+                    mobile: '6285156369011'
+                    name: caca. 90o bispes
+                    status: active
+                    updatedAt: 1736218312836
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 012b8d85-2a79-48ed-b5a9-d50f8503413d
+                    createdAt: 1735787039380
+                    email: mochamadwirasanjaya@gmail.com
+                    mobile: '6281353621080'
+                    name: 'Mochamad Wira SanjayaÂ '
+                    status: active
+                    updatedAt: 1735787039380
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 01382010-1a88-4f7b-800b-54efb35179a4
+                    createdAt: 1735787039371
+                    email: hizkiajun@gmail.com
+                    mobile: '6282299990094'
+                    name: Juan
+                    status: active
+                    updatedAt: 1735787039371
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 01533b70-25bf-4fa5-97f5-8c30fd9fe8d4
+                    createdAt: 1735787039375
+                    email: ladyrajagukguk@gmail.com
+                    mobile: '6285242715097'
+                    name: Kezia Lady
+                    status: active
+                    updatedAt: 1735787039375
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+                  - id: 01656fe8-2715-41ea-ba73-6a6ec1a18119
+                    createdAt: 1735787039401
+                    email: th_movita@yahoo.com
+                    mobile: '6281310388140'
+                    name: Theresia
+                    status: active
+                    updatedAt: 1735787039401
+                    userId: 4dba4996-7d74-483e-99fe-b52c60368cb5
+  /hl/v1/customer/detail:
+    get:
+      operationId: get_customer_searchcustomerbyemail
+      summary: Search Customer By Email
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: email
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: testingmayar@gmail.com'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 22eb6224-c20a-4bc2-9b99-13b21e7048c6
+                  createdAt: 1730782544663
+                  email: testingmayar@gmail.com
+                  mobile: '08112280103422'
+                  name: Test Mayar
+                  status: active
+                  updatedAt: 1730782544663
+                  userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                  user:
+                    id: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                    name: GlazerOut
+                    urlHook: >-
+                      https://qtwxxqfulqrpuerjmtya.supabase.co/functions/v1/payment-webhook
+                    email: aldodwrzy@gmail.com
+                    paymeLink: testingmayar
+                    isSelfDomain: false
+                    accountId: be305ea4-5fe1-4bb9-a5c8-6bc1d0bfd279
+                    account:
+                      id: be305ea4-5fe1-4bb9-a5c8-6bc1d0bfd279
+                      name: Mayar Team
+                      imageId: efeecb5d-acac-45f8-8249-396f8a5b6a95
+                      logo:
+                        id: efeecb5d-acac-45f8-8249-396f8a5b6a95
+                        fileType: jpeg
+                        url: >-
+                          https://media.mayar.id/images/efeecb5d-acac-45f8-8249-396f8a5b6a95.jpeg
+  /hl/v1/customer/update:
+    post:
+      operationId: post_customer_update
+      summary: Update Customer Email
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: sukses
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              fromEmail: mraihanna19@gmail.com
+              toEmail: mraihannanewpatch@gmail.com
+  /hl/v1/product/digital-product/create:
+    post:
+      operationId: post_digitalproduct_create
+      summary: Create Digital Product
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 6894b1b2-f303-423b-a6b6-93e230e1d393
+                  link: >-
+                    https://testingmayar.myr.id/catalog/E-Book-Panduan-Bisnis-Buat-Pemula/
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+            example: null
+  /hl/v1/product/digital-product/edit:
+    post:
+      operationId: post_digitalproduct_edit
+      summary: Edit Digital Product
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 6894b1b2-f303-423b-a6b6-93e230e1d393
+                  link: >-
+                    https://testingmayar.myr.id/catalog/E-Book-Panduan-Bisnis-Buat-Pemula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              id: 6894b1b2-f303-423b-a6b6-93e230e1d393
+              name: E-Book Panduan Bisnis Untuk Pemula Editan
+              description: Panduan lengkap memulai bisnis online
+              amount: 75000
+              crossoutPrice: 150000
+              redirectUrl: https://example.com/ebook-download
+              notes: diskon-50
+              expiredAt: '2026-06-15T12:00:00.000Z'
+              limit: 200
+              tax: 7500
+  /hl/v1/coupon/create:
+    post:
+      operationId: post_discount_create
+      summary: Create Discount with Coupon
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  id: c9aa143a-53f9-44e7-a9c6-83229ad7199b
+                  createdAt: 1755665561029
+                  expiredAt: 1893488774933
+                  discountType: monetary
+                  discountProductType: all
+                  eligibleCustomerType: all
+                  name: Diskon Murmer
+                  minimumPurchase: 500000
+                  isLifeTime: null
+                  totalCoupons: 100
+                  value: 100000
+                  coupons:
+                    - code: haribaik
+                      type: reusable
+                      expiredAt: '2030-01-01T09:06:14.933Z'
+                      isActive: true
+                  productDiscount: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              expiredAt: '2030-01-01T09:06:14.933Z'
+              name: Diskon Murmer
+              discount:
+                discountType: monetary
+                eligibleCustomerType: all
+                minimumPurchase: 500000
+                value: 100000
+                totalCoupons: 100
+              coupon:
+                code: haribaik
+                type: reusable
+              products: []
+  /hl/v1/coupon/c9aa143a-53f9-44e7-a9c6-83229ad7199b:
+    get:
+      operationId: get_discount_detail
+      summary: Get Coupon Detail
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  id: c9aa143a-53f9-44e7-a9c6-83229ad7199b
+                  createdAt: 1755665561029
+                  expiredAt: 1893488774933
+                  productDiscount: []
+                  discountType: monetary
+                  discountProductType: all
+                  eligibleCustomerType: all
+                  name: Diskon Murmer
+                  minimumPurchase: 500000
+                  isLifeTime: null
+                  totalCoupons: 100
+                  value: 100000
+                  coupons:
+                    - id: 532858fe-3722-4cf4-a8eb-f7c6765aba17
+                      code: haribaik
+                      createdAt: 1755665561256
+                      discountId: c9aa143a-53f9-44e7-a9c6-83229ad7199b
+                      endMonthTrial: null
+                      expiredAt: 1893488774933
+                      isActive: true
+                      limit: 100
+                      type: reusable
+                      updatedAt: 1755665561256
+                      userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+  /hl/v1/coupon/validate:
+    post:
+      operationId: post_discount_validate
+      summary: Validate Coupon
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  valid: true
+                  coupon:
+                    id: 08d233e9-91bc-4d9b-afc2-1dbbe38a1186
+                    code: 143KYCN
+                    discountType: percentage
+                    discountValue: 10
+                    minimumPurchase: null
+                    eligibleCustomerType: all
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              paymentLinkId: 4d26ea37-d093-4b92-8f5f-0faec64d65b0
+              tickets: []
+              couponCode: NFRBFUK
+              finalAmount: 0
+              customerEmail: ''
+  /hl/v1/product/event/create:
+    post:
+      operationId: post_event_create
+      summary: Create Event
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 7f992557-8791-41b5-a1c8-c5641c3e72b5
+                  link: >-
+                    https://testingmayar.myr.id/event/Bootcamp-Coding-Fullstack-Asix/
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              name: Bootcamp Coding Fullstack Asix
+              description: Workshop fullstack development 2 hari
+              amount: 3100000
+              crossoutPrice: 500000
+              eventUrl: https://meet.google.com/abc-defg-hij
+              notes: offline-jakarta
+              terms: Tiket tidak dapat di-refund
+              redirectUrl: https://example.com/event-thanks
+              paymentType: paid
+              startAt: '2026-07-01T08:00:00.000Z'
+              eventStartAt: '2026-07-15T08:00:00.000Z'
+              eventEndAt: '2026-07-16T17:00:00.000Z'
+              expiredAt: '2026-07-10T17:00:00.000Z'
+              limit: 50
+              event:
+                eventAddress: jl perjuangan no 32
+                isOnlineEvent: false
+                maxTicket: 5
+  /hl/v1/product/paymentlink/create:
+    post:
+      operationId: post_genericlink_create
+      summary: Create Generic Link
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 21d84338-b46d-42d7-9b49-d402520407a5
+                  link: https://testingmayar.myr.id/pl/Jasa-Buat-Website-Kece/
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+            example: null
+  /hl/v1/product/paymentlink/edit:
+    post:
+      operationId: post_genericlink_edit
+      summary: Edit Generic Link
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 21d84338-b46d-42d7-9b49-d402520407a5
+                  link: https://testingmayar.myr.id/pl/Jasa-Buat-Website-Kece
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+            example: null
+  /hl/v1/installment/create:
+    post:
+      operationId: post_installment_create
+      summary: POST Create Installment
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  id: ba82c2dd-06c1-4b6c-bc59-a9c00801c842
+                  createdAt: 1755631209521
+                  dueDate: 11
+                  interest: 0
+                  interestType: FLAT
+                  period: MONTHLY
+                  tenure: 3
+                  invoices:
+                    - id: 9fe1b9c4-b5d5-4d45-bf1a-5c4849631725
+                      amount: 500000
+                      updatedAt: 1755631210118
+                      category: null
+                      status: unpaid
+                      index: 1
+                      link: mkcn4u72ki
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 1000000
+                      customerId: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                      customer:
+                        id: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                        email: azumiikecee@gmail.com
+                        mobile: '089961367511'
+                        name: Azumii
+                    - id: 977777d6-af25-464e-a8ca-e290b3007275
+                      amount: 500000
+                      updatedAt: 1755631210119
+                      category: null
+                      status: unpaid
+                      index: 2
+                      link: 0ll429zxvsue
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 500000
+                      customerId: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                      customer:
+                        id: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                        email: azumiikecee@gmail.com
+                        mobile: '089961367511'
+                        name: Azumii
+                    - id: 1dde3426-f6a4-43d2-a1d9-2cd2fa05eb9a
+                      amount: 500000
+                      updatedAt: 1755631210120
+                      category: null
+                      status: unpaid
+                      index: 3
+                      link: h8fiobqkek
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 0
+                      customerId: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                      customer:
+                        id: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                        email: azumiikecee@gmail.com
+                        mobile: '089961367511'
+                        name: Azumii
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              email: azumiikecee@gmail.com
+              mobile: '089961367511'
+              name: Azumii
+              amount: 1500000
+              installment:
+                description: Cicil Produk Kelas Online 3 Bulan
+                interest: 0
+                tenure: 3
+                dueDate: 11
+  /hl/v1/installment/ba82c2dd-06c1-4b6c-bc59-a9c00801c842:
+    get:
+      operationId: get_installment_detail
+      summary: Get Installment Detail
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  id: ba82c2dd-06c1-4b6c-bc59-a9c00801c842
+                  createdAt: 1755631209521
+                  period: MONTHLY
+                  tenure: 3
+                  dueDate: 11
+                  interest: 0
+                  interestType: FLAT
+                  paymentLinkId: 8f722421-e8fd-4d05-ae0c-5f4a224b7923
+                  updatedAt: 1755631209521
+                  userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                  paymentLink:
+                    id: 8f722421-e8fd-4d05-ae0c-5f4a224b7923
+                    name: Azumii
+                    amount: 1500000
+                    description: Cicil Produk Kelas Online 3 Bulan
+                    customerId: 62d1a396-07d8-4d93-a14c-9ec801f3af20
+                  invoices:
+                    - id: 9fe1b9c4-b5d5-4d45-bf1a-5c4849631725
+                      expiredAt: 1757523600000
+                      amount: 500000
+                      category: null
+                      status: unpaid
+                      index: 1
+                      link: mkcn4u72ki
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 1000000
+                    - id: 977777d6-af25-464e-a8ca-e290b3007275
+                      expiredAt: 1760115600000
+                      amount: 500000
+                      category: null
+                      status: unpaid
+                      index: 2
+                      link: 0ll429zxvsue
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 500000
+                    - id: 1dde3426-f6a4-43d2-a1d9-2cd2fa05eb9a
+                      expiredAt: 1762794000000
+                      amount: 500000
+                      category: null
+                      status: unpaid
+                      index: 3
+                      link: h8fiobqkek
+                      description: Cicil Produk Kelas Online 3 Bulan
+                      interestAmount: 0
+                      remainingAmount: 0
+  /hl/v1/invoice/close/f774034d-d9cc-43a0-97d8-a2520c127f03:
+    get:
+      operationId: get_invoice_close
+      summary: Close Invoice
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+  /hl/v1/invoice/create:
+    post:
+      operationId: post_invoice_create
+      summary: Create Invoice
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: df65d192-8396-4f9a-b4e5-8244648c07c5
+                  transactionId: ca87fd13-8742-4d48-af33-7de1a417bc34
+                  link: https://korban-motivator.mayar.shop/invoices/ycfyxbj2h3
+                  expiredAt: 1776617003000
+                  extraData:
+                    noCustomer: 827hiueqy271hj
+                    idProd: contoh aja
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: string
+            example: null
+  /hl/v1/invoice/f774034d-d9cc-43a0-97d8-a2520c127f03:
+    get:
+      operationId: get_invoice_detail
+      summary: Get Detail / Invoice Status
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: f774034d-d9cc-43a0-97d8-a2520c127f03
+                  amount: 110000
+                  status: unpaid
+                  link: ibzfrf4880
+                  expiredAt: 1764582069401
+                  transactions:
+                    - id: 23fa41c5-c6ed-45d4-8302-5fac4a165dfa
+                  customerId: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                  customer:
+                    id: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                    email: azumiikecee@gmail.com
+                    mobile: '08996136751'
+                    name: Azumii
+                  transactionId: 23fa41c5-c6ed-45d4-8302-5fac4a165dfa
+                  paymentUrl: https://andiak.myr.id/invoices/ibzfrf4880
+                  paymentLinkId: f774034d-d9cc-43a0-97d8-a2520c127f03
+  /hl/v1/invoice/edit:
+    post:
+      operationId: post_invoice_edit
+      summary: Edit Invoice
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: f774034d-d9cc-43a0-97d8-a2520c127f03
+                  link: https://andiak.myr.id/invoices/ibzfrf4880
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              id: f774034d-d9cc-43a0-97d8-a2520c127f03
+              redirectUrl: https://web.mayar.id
+              description: Berubah Jadi Invoice Yang Sudah Diedit
+              items:
+                - quantity: 2
+                  rate: 55000
+                  description: Berubah Jadi Invoice Yang Sudah Diedit
+  /hl/v1/invoice:
+    get:
+      operationId: get_invoice_filter
+      summary: Get Sort / Filter Invoice
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: closed'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 2
+                pageSize: 10
+                page: 1
+                data:
+                  - id: 01918da0-704b-45d8-bf14-afbd738eb682
+                    amount: 2000
+                    category: null
+                    createdAt: 1691046324713
+                    description: ''
+                    link: 75py7f7vwwr
+                    type: invoice
+                    status: paid
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    transactions:
+                      - id: d442dcbd-6dbb-4e26-aec5-8c4b5f5e13a2
+                        status: created
+                      - id: 5824155d-e125-418e-abb6-bd25e1cb6eaf
+                        status: paid
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                      name: Harus Buat auto testing
+                  - id: 0c0505d8-8265-4299-baa3-9fd4d7759588
+                    amount: 10000
+                    category: null
+                    createdAt: 1726051915939
+                    description: Belajar
+                    link: w2wdxisnbtp
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                    transactions:
+                      - id: 9a5e044b-07b3-4dc5-a5a7-65aaef019728
+                        status: created
+                    customer:
+                      id: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                      email: mayartesting11@gmail.com
+                      mobile: '081320549499'
+                      name: Andika01
+                  - id: 11d15244-7ca1-42c0-9d06-def8574fd4f3
+                    amount: 9000
+                    category: null
+                    createdAt: 1737302488652
+                    description: Terimakasih telah membeli prodak ini
+                    link: oby6el1hf4
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    transactions:
+                      - id: 752a5838-353c-4e68-84d6-fcd78a563889
+                        status: created
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                      name: Harus Buat auto testing
+                  - id: 1545a45b-8b18-47b4-8371-532afd040f61
+                    amount: 575000
+                    category: null
+                    createdAt: 1730269014120
+                    description: >-
+                      buat keterangan yang OCR mending gini gimana?
+
+                      Sheets in one file that has OCR are limited to a maximum
+                      of 100 pages
+                    link: 3rjngpjzys8
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: e74850ba-bd72-4703-a7fa-b99c4166352e
+                    transactions:
+                      - id: c887e49c-0b47-43b9-b22c-263fb3fdfe79
+                        status: created
+                    customer:
+                      id: e74850ba-bd72-4703-a7fa-b99c4166352e
+                      email: aldobaik18@gmail.com
+                      mobile: '0877828291999'
+                      name: Aldoghandika
+                  - id: 52aadb07-18a8-4b1b-be30-c35923890252
+                    amount: 10000
+                    category: null
+                    createdAt: 1737105096056
+                    description: xcxcxc
+                    link: g0mlnqxi84n
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    transactions:
+                      - id: 00151cc8-858e-4dfb-a63d-57a4e74b88aa
+                        status: created
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                      name: Harus Buat auto testing
+                  - id: 634e664e-a7bf-4f85-a321-ebeae0aa01cd
+                    amount: 100000
+                    category: null
+                    createdAt: 1732254931782
+                    description: Jsjwhsbsbs
+                    link: gqevn4vro1f
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 627bc86f-44c8-401b-b4fc-50127183f9f9
+                    transactions:
+                      - id: ff388716-35ca-4427-b737-7d7d23329290
+                        status: created
+                    customer:
+                      id: 627bc86f-44c8-401b-b4fc-50127183f9f9
+                      email: Andiak@gmail.com
+                      mobile: '081320547855'
+                      name: Aandika
+                  - id: 89400a8d-276b-4b07-aad3-ac6cd3112281
+                    amount: 1000000
+                    category: null
+                    createdAt: 1732255465802
+                    description: Bajwwhwh
+                    link: 0aq2mvgze91
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 627bc86f-44c8-401b-b4fc-50127183f9f9
+                    transactions:
+                      - id: 6464ad54-0e60-44d8-8056-f20ee601eab0
+                        status: created
+                    customer:
+                      id: 627bc86f-44c8-401b-b4fc-50127183f9f9
+                      email: Andiak@gmail.com
+                      mobile: '081320547855'
+                      name: Aandika
+                  - id: 8cb09626-aad6-4589-aabb-5d7887991922
+                    amount: 9000
+                    category: null
+                    createdAt: 1739088135842
+                    description: >-
+                      Lorem ipsum dolor sit amet consectetur adipiscing elit
+                      risus etiam, eu vitae dapibus dui bibendum litora
+                      facilisis aliquet fames, velit cum mauris ultrices
+                      facilisi montes lobortis feugiat. Varius etiam eu cursus
+                      senectus magna orci pharetra vitae proin ornare, fusce ut
+                      molestie mi nascetur tellus quis mattis sem maecenas,
+                      ultrices montes vel sollicitudin duis auctor tincidunt
+                      aliquet primis. Tempus a cras sagittis sapien viverra
+                      maecenas non justo pharetra, sociosqu convallis vestibulum
+                      malesuada feugiat morbi hendrerit sociis, molestie
+                      fermentum sed orci urna pellentesque mollis faucibus.
+                      Nostra ad tempor sed venenatis eros fringilla semper
+                      euismod praesent, egestas eget purus proin vivamus est
+                      sagittis felis.
+                    link: 2l2xp7qz3bs
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    transactions:
+                      - id: 31917bf2-1073-4655-8bf4-1229fa0d6d80
+                        status: created
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                      name: Harus Buat auto testing
+                  - id: a52e905f-3366-4199-9dfc-8ddeca679328
+                    amount: 100000
+                    category: null
+                    createdAt: 1730285756976
+                    description: >-
+                      Bugs
+
+                      - kalo akunnya belum pernah login lewat web mayar ga bisa
+                      daftar di app mayarbuat keterangan yang OCR mending gini
+                      gimana?
+
+                      Sheets in one file that has OCR are limited to a maximum
+                      of 100 pagesbuat keterangan yang OCR mending gini gimana?
+
+                      Sheets in one file that has OCR are limited to a maximum
+                      of 100 pages
+                    link: r4lhlfqzv
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                    transactions:
+                      - id: 86f439f4-55cf-4789-9e60-9701531f5499
+                        status: created
+                    customer:
+                      id: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                      email: mayartesting11@gmail.com
+                      mobile: '081320549499'
+                      name: Andika01
+                  - id: bc8c1d9f-68e2-4f9c-a7b8-2718acec2f8c
+                    amount: 1000000
+                    category: null
+                    createdAt: 1731459885215
+                    description: ''
+                    link: ly6bm0jkqhf
+                    type: invoice
+                    status: closed
+                    name: INVOICE
+                    redirectUrl: null
+                    customerId: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                    transactions:
+                      - id: 9f509c2e-0910-4b5a-9fcf-b7259b9f3324
+                        status: created
+                    customer:
+                      id: eaf5cd15-49c4-433b-b57b-a2175f4c41d8
+                      email: mayartesting11@gmail.com
+                      mobile: '081320549499'
+                      name: Andika01
+                total: 17
+  /hl/v1/invoice/open/f774034d-d9cc-43a0-97d8-a2520c127f03:
+    get:
+      operationId: get_invoice_reopen
+      summary: Re-open Invoice
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+  /software/v1/license/verify:
+    post:
+      operationId: post_licensecode_verifylicense
+      summary: Verify License
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                isLicenseActive: true
+                licenseCode:
+                  licenseCode: LICENSECODE12345
+                  status: ACTIVE
+                  expiredAt: '2025-12-12T19:46:24.000Z'
+                  transactionId: 994d4071-a81e-4558-a854-47530eea9b6d
+                  productId: 84d1d247-a8b3-4c7d-96f0-cf276edb7c33
+                  customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                  customerName: John Doe
+                  customerEmail: johndoe@gmail.com
+                  activationLimit: Tidak terbatas
+                  useCount: 10
+                  createdAt: '2024-02-12T08:41:13.579Z'
+                  updatedAt: '2024-02-12T08:57:36.047Z'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              licenseCode: YOUR-LICENSE-CODE
+              productId: YOUR-PRODUCT-ID
+  /hl/v1/product/close/a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4:
+    get:
+      operationId: get_product_close
+      summary: Close Product
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+  /hl/v1/product/4d26ea37-d093-4b92-8f5f-0faec64d65b0:
+    get:
+      operationId: get_product_detail
+      summary: Get Detail Product
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 6f8c19ff-5b97-4792-aa89-d2a12797b356
+                  link: pembuatan-jasa-web
+                  name: Pembuatan Jasa Web
+                  category: null
+                  limit: null
+                  type: generic_link
+                  subType: null
+                  variant: >-
+                    [{"id":"986cb91e-70ee-4579-a046-3201f936e6e1","name":"Landing
+                    Page
+                    ","description":"<p></p>\n","amount":100000,"limit":null,"notes":"","redirectUrl":"","status":"ACTIVE","createdAt":1778236239496},{"id":"99de25dc-0302-4d64-9467-6f1c85fbc1bb","name":"Sistem
+                    Crud","description":"<p></p>\n","amount":500000,"limit":null,"notes":"","redirectUrl":"","status":"ACTIVE","createdAt":1778236254836}]
+                  userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                  membershipTier: []
+                  event: null
+                  order: null
+                  qty: null
+                  amount: 100000
+                  status: active
+                  description: |
+                    <p>Testing</p>
+                  coverImageId: null
+                  multipleImageId: 62840541-d45d-4e3f-a13a-e4f8bcdf4e5d
+                  transactions: []
+                  coverImage: null
+                  multipleImage:
+                    - id: 503d493e-7ae5-4892-80a6-b925e057698f
+                      fileType: jpeg
+                      url: >-
+                        https://media.mayar.id/images/503d493e-7ae5-4892-80a6-b925e057698f.jpeg
+                  linkUrl: https://testingmayar.myr.id/plink/pembuatan-jasa-web
+                  linkPayment: https://testingmayar.myr.id/pl/pembuatan-jasa-web
+                  variants:
+                    - id: 986cb91e-70ee-4579-a046-3201f936e6e1
+                      name: 'Landing Page '
+                      description: |
+                        <p></p>
+                      amount: 100000
+                      limit: null
+                      notes: ''
+                      redirectUrl: ''
+                      status: ACTIVE
+                      createdAt: 1778236239496
+                    - id: 99de25dc-0302-4d64-9467-6f1c85fbc1bb
+                      name: Sistem Crud
+                      description: |
+                        <p></p>
+                      amount: 500000
+                      limit: null
+                      notes: ''
+                      redirectUrl: ''
+                      status: ACTIVE
+                      createdAt: 1778236254836
+  /hl/v1/product:
+    get:
+      operationId: get_product_productpage
+      summary: Get Product Page
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 10'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 14
+                pageSize: '10'
+                page: 1
+                data:
+                  - id: fca92d4c-33e8-4334-b2f3-491af6d78a5b
+                    amount: 200000
+                    category: null
+                    createdAt: 1692004154797
+                    description: >
+                      <p><span style="color: rgb(51,51,51);background-color:
+                      rgb(251,252,252);font-size: 18px;font-family: Open
+                      Sans;">The Invisible Man</span> <span style="color:
+                      rgb(51,51,51);background-color:
+                      rgb(251,252,252);font-size: 18px;font-family: Open
+                      Sans;">(1897) is one of the most famous science fiction
+                      novels of all time. Written by H.G. Wells (1866-1946), it
+                      tells the story of a scientist who discovers the secret of
+                      invisibility and uses it on himself. The story begins as
+                      the Invisible Man, with a bandaged face and a heavy coat
+                      and gloves, takes a train to lodge in a country inn whilst
+                      he tries to discover the antidote and make himself visible
+                      again. The book inspired several films and is notable for
+                      its vivid descriptions of the invisible man-no mean feat,
+                      given that you can't see him!</span>&nbsp;</p>
+                    link: invisible-man
+                    type: audiobook
+                    subType: null
+                    status: active
+                    name: Invisible Man
+                    limit: null
+                    redirectUrl: null
+                    installmentId: null
+                    variant: null
+                    membershipTier: []
+                    event: null
+                    order: null
+                    coverImageId: 2529541f-dc98-4ca0-93bb-3c1d35a8dd07
+                    multipleImageId: null
+                    multipleImage: null
+                    coverImage:
+                      id: 2529541f-dc98-4ca0-93bb-3c1d35a8dd07
+                      fileType: jpeg
+                      url: >-
+                        https://media.mayar.id/images/2529541f-dc98-4ca0-93bb-3c1d35a8dd07.jpeg
+                    variants: null
+                    transactions: []
+                    linkUrl: https://testingmayar.myr.id/audiobook/invisible-man
+                    linkPayment: https://testingmayar.myr.id/pl/invisible-man
+                total: 1
+  /hl/v1/product/type/ebook:
+    get:
+      operationId: get_product_productpagewithfilter
+      summary: Get Product Page with Type Filter
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 100'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: false
+                pageCount: 1
+                pageSize: 10
+                page: 1
+                data:
+                  - id: b1eae80c-cecf-48ee-8879-36f0b915603b
+                    amount: 0
+                    category: null
+                    createdAt: 1685963288286
+                    description: >
+                      <p style="text-align:start;"><span style="color:
+                      rgb(73,80,87);background-color:
+                      rgb(251,252,252);font-size: 13px;font-family: Open
+                      Sans">COVID-19 has plagued almost all corners of the
+                      world, including in Indonesia where the most common
+                      symptom is fever up to 38℃. Therefore, at this time in
+                      various places have imposed body temperature checks to
+                      detect the body temperature of visitors. To inhibit the
+                      spread of COVID-19 , the Government appeals to the public
+                      to implement health protocols, including wearing masks.
+                      This is the basis for making a visitor's body temperature
+                      detector when entering a building or public room, not only
+                      detecting body temperature but this tool is also able to
+                      detect the use of masks using the Haar Cascade Classifier
+                      method as one of the applications. An appeal from the
+                      government regarding health protocols. </span></p>
+
+                      <p style="text-align:left;"><span style="color:
+                      rgb(73,80,87);background-color:
+                      rgb(251,252,252);font-size: 13px;font-family: Open
+                      Sans">The mask detection tool and body temperature
+                      detector use Arduino UNO as a microcontroller, ESP32-Cam
+                      as a face detection camera, MLX90614 sensor as a body
+                      temperature detector, LCD to display information about the
+                      results of body temperature detection and also masks, and
+                      servos as door movers. In designing the automatic door to
+                      detect face masks and body temperature, the author uses a
+                      Flowchart as a method for designing the system, this
+                      system is made using the C++ programming language and also
+                      the Open CV (Open Computer Vision) algorithm. Then perform
+                      system testing using hardware testing. After testing,
+                      conclusions are made whether the functions, inputs, and
+                      outputs of the system are in accordance with the required
+                      specifications or not. </span>&nbsp;</p>
+                    link: >-
+                      journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya
+                    type: ebook
+                    subType: null
+                    status: active
+                    name: >-
+                      DUPLICATE - JOURNAL DESIGN OF AUTOMATIC DOOR DETECTION OF
+                      FACE MASK AND  HUMAN BODY TEMPERATURE BASED ON Arduino UNO
+                      USING HAAR  CASCADE CLASSIFIER METHOD
+                    limit: null
+                    redirectUrl: null
+                    installmentId: null
+                    variant: null
+                    membershipTier: []
+                    event: null
+                    order: null
+                    coverImageId: 681abbf7-8620-405a-96f6-246cd7397cd9
+                    multipleImageId: null
+                    multipleImage: null
+                    coverImage: null
+                    transactions: []
+                    linkUrl: >-
+                      https://testingmayar.myr.id/ebook/journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya
+                    linkPayment: >-
+                      https://testingmayar.myr.id/pl/journal-design-of-automatic-door-detection-of-face-mask-and-human-body-temperature-based-on-arduino-uno-using-haar-cascade-classifier-method-w9ya
+                total: 1
+  /hl/v1/product/open/a02a76e1-25b4-49dd-9d1f-e84dd34ecbb4:
+    get:
+      operationId: get_product_reopen
+      summary: Re-open Product
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+  /hl/v1/payment/close/e890d24a-cfc0-4915-83d2-3166b9ffba9e:
+    get:
+      operationId: get_reqpayment_close
+      summary: Close Single Payment Request
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+  /hl/v1/payment/e890d24a-cfc0-4915-83d2-3166b9ffba9e:
+    get:
+      operationId: get_reqpayment_detail
+      summary: Get Detail Single Payment Request
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: e890d24a-cfc0-4915-83d2-3166b9ffba9e
+                  link: ohsjrd3wko
+                  name: Azumii
+                  category: null
+                  limit: null
+                  type: payment_request
+                  userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                  event: null
+                  order: null
+                  qty: null
+                  amount: 100000
+                  status: unpaid
+                  description: Ubah ReqPayment
+                  coverImageId: null
+                  multipleImageId: null
+                  coverImage: null
+                  multipleImage: null
+  /hl/v1/payment:
+    get:
+      operationId: get_reqpayment_filter
+      summary: Get Sort / Filter Single Payment Request Page
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: paid'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: false
+                pageCount: 1
+                pageSize: 10
+                page: 1
+                data:
+                  - id: abbf58dc-6e12-4bdc-bdcf-e0a53340227d
+                    amount: 1000
+                    category: null
+                    createdAt: 1685960215853
+                    description: >
+                      <p>Pembayaran Uang Demo Produk, mohon untuk menyelesaikan
+                      dan melakukan pembayaran.</p>
+                    link: pagovztwbu
+                    type: payment_request
+                    status: paid
+                    name: Penagihan
+                    limit: null
+                    redirectUrl: null
+                    installmentId: null
+                    event: null
+                    order: null
+                    coverImageId: null
+                    multipleImageId: null
+                    coverImage: null
+                    multipleImage: null
+  /hl/v1/reviews:
+    get:
+      operationId: get_reviews_getallreviews
+      summary: Get All Reviews
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: false
+                pageCount: 1
+                pageSize: 10
+                page: 1
+                total: 1
+                data:
+                  - id: 11f4d767-4d88-41ff-8777-06564d906fe7
+                    createdAt: 1778223034383
+                    customerId: 22eb6224-c20a-4bc2-9b99-13b21e7048c6
+                    message: Bagus sekali, takde minusnyo
+                    paymentLinkId: e2b3f5d5-0c62-47ba-8a01-6c1c209e0f77
+                    rating: 5
+                    status: ACTIVE
+                    updatedAt: 1778225558788
+                    userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                    multipleImage: []
+                    content: []
+                    customer:
+                      id: 22eb6224-c20a-4bc2-9b99-13b21e7048c6
+                      name: Test Mayar
+                    paymentLink:
+                      id: e2b3f5d5-0c62-47ba-8a01-6c1c209e0f77
+                      name: Kelas Pemrograman Web Dasar
+                      type: course
+                      link: website
+                      subType: null
+  /saas/v1/license/activate:
+    post:
+      operationId: post_saas_activate
+      summary: Activate License
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: Success updating license code status to ACTIVE.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              licenseCode: YOUR-LICENSE-CODE
+              productId: YOUR-PRODUCT-ID
+  /saas/v1/license/deactivate:
+    post:
+      operationId: post_saas_deactivate
+      summary: Deactivate License
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: Success updating license code status to INACTIVE.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              licenseCode: YOUR-LICENSE-CODE
+              productId: YOUR-PRODUCT-ID
+  /saas/v1/license/verify:
+    post:
+      operationId: post_saas_verify
+      summary: Verify License SaaS Subscription
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                isLicenseActive: true
+                licenseCode:
+                  licenseCode: LICENSECODE12345
+                  status: ACTIVE
+                  expiredAt: '2025-12-12T19:46:24.000Z'
+                  transactionId: 994d4071-a81e-4558-a854-47530eea9b6d
+                  productId: 84d1d247-a8b3-4c7d-96f0-cf276edb7c33
+                  customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                  customerName: John Doe
+                  customerEmail: johndoe@gmail.com
+                  activationLimit: Tidak terbatas
+                  useCount: 10
+                  createdAt: '2024-02-12T08:41:13.579Z'
+                  updatedAt: '2024-02-12T08:57:36.047Z'
+                  membershipTierId: c96850f9-b379-4ed3-bcf2-6d88a87bd20c
+                  membershipTierName: Master Black Belt Membership
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              licenseCode: YOUR-LICENSE-CODE
+              productId: YOUR-PRODUCT-ID
+  /hl/v1/balance:
+    get:
+      operationId: get_transaction_accountbalance
+      summary: Get Account Balance
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  balanceActive: 0
+                  balancePending: 0
+                  balance: 0
+  /hl/v1/qrcode/create:
+    post:
+      operationId: post_transaction_createdynamicqrcode
+      summary: Create Dynamic QRCode
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: Success
+                data:
+                  url: >-
+                    https://media.mayar.id/images/resized/480/a30ed45f-976b-490f-b97c-72c90d1e8d9d.png
+                  amount: 10000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              amount: 10000
+  /hl/v1/transactions/daily:
+    get:
+      operationId: get_transaction_dailytransaction
+      summary: Transaction Daily
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                data:
+                  date: '2026-05-08'
+                  tpvCount: 125000
+                  trxCount: 10
+  /hl/v1/transactions:
+    get:
+      operationId: get_transaction_paidtransaction
+      summary: Get Paid Transactions
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 10'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 70
+                pageSize: 10
+                page: 1
+                data:
+                  - id: ff5e591d-6740-442b-8aec-26e72b60c29e
+                    credit: 0
+                    status: settled
+                    balanceHistoryType: webinar
+                    paymentMethod: Gratis
+                    customerId: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                    createdAt: 1755534083905
+                    paymentLinkTransactionId: 98f26871-de3c-4bca-ac59-d079ca44d5bd
+                    fee: []
+                    paymentLinkId: 015ff1af-c83f-4684-9401-dd74a7c6da0f
+                    subscriptionId: null
+                    xenditTransactionId: null
+                    subscription: null
+                    xenditTransaction: null
+                    paymentLinkTransaction:
+                      id: 98f26871-de3c-4bca-ac59-d079ca44d5bd
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: null
+                      isChannelFeeBorneByCustomer: null
+                    customeField: null
+                    customer:
+                      id: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                      name: trial
+                      email: trial@gmail.com
+                      mobile: '0884444730242'
+                    paymentLink:
+                      id: 015ff1af-c83f-4684-9401-dd74a7c6da0f
+                      name: test outlook
+                  - id: 40067bb5-e06f-4dc6-bd65-e2f6ac35643f
+                    credit: 0
+                    status: settled
+                    balanceHistoryType: membership
+                    paymentMethod: Gratis
+                    customerId: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                    createdAt: 1755244097529
+                    paymentLinkTransactionId: 00617429-fc1c-44db-a0ba-e31d3f0edd70
+                    fee: []
+                    paymentLinkId: a6be24df-1335-4682-902c-f0474c1826c0
+                    subscriptionId: null
+                    xenditTransactionId: null
+                    subscription: null
+                    xenditTransaction: null
+                    paymentLinkTransaction:
+                      id: 00617429-fc1c-44db-a0ba-e31d3f0edd70
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: null
+                      isChannelFeeBorneByCustomer: null
+                    customeField: null
+                    customer:
+                      id: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                      name: trial
+                      email: trial@gmail.com
+                      mobile: '0884444730242'
+                    paymentLink:
+                      id: a6be24df-1335-4682-902c-f0474c1826c0
+                      name: test membership cohort analisis
+                  - id: 306aa4ae-e41b-4dc3-89c5-585ec0ae92dd
+                    credit: 1059
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1755012459984
+                    paymentLinkTransactionId: 8e7646b1-8c65-4219-9c49-50de5e2f0420
+                    fee:
+                      - id: 66e365d3-9afc-4dec-ad2d-ed925433ddd9
+                        balanceHistoryType: xendit_fee
+                        debit: 6
+                      - id: 973d31bb-c3cf-4b80-b09f-783b0a7fec88
+                        balanceHistoryType: mayar_fee
+                        debit: 53
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: a57b842e-8ffe-4851-9d15-7716c2f56902
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: 8e7646b1-8c65-4219-9c49-50de5e2f0420
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: a57b842e-8ffe-4851-9d15-7716c2f56902
+                      paymentLinkTransactionId: 8e7646b1-8c65-4219-9c49-50de5e2f0420
+                      paymentLinkTransaction:
+                        id: 8e7646b1-8c65-4219-9c49-50de5e2f0420
+                        couponUsage: null
+                  - id: 59be9cd3-503b-446b-92cf-8df6b2b96345
+                    credit: 1059
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1755012407864
+                    paymentLinkTransactionId: e1f9298c-01ad-4a1a-8677-e1afdc964a45
+                    fee:
+                      - id: b9356032-dd15-4808-869a-43d6b6d8fa18
+                        balanceHistoryType: xendit_fee
+                        debit: 6
+                      - id: c172f92e-711d-4759-8236-1cd9ab3a5bd0
+                        balanceHistoryType: mayar_fee
+                        debit: 53
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: 0f62b59a-ca73-4ee5-ae33-bfe1631f2218
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: e1f9298c-01ad-4a1a-8677-e1afdc964a45
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: 0f62b59a-ca73-4ee5-ae33-bfe1631f2218
+                      paymentLinkTransactionId: e1f9298c-01ad-4a1a-8677-e1afdc964a45
+                      paymentLinkTransaction:
+                        id: e1f9298c-01ad-4a1a-8677-e1afdc964a45
+                        couponUsage: null
+                  - id: 618a2e42-fea1-49e7-8a2a-3b3b7b9d42e0
+                    credit: 1059
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1755012388185
+                    paymentLinkTransactionId: 11a8a7ee-88d5-4a36-9523-9e14fc845155
+                    fee:
+                      - id: 2a043370-b62a-4f14-967f-5060224434a6
+                        balanceHistoryType: xendit_fee
+                        debit: 6
+                      - id: 8dc17d96-fa3f-4467-a21f-e316ab68b2ca
+                        balanceHistoryType: mayar_fee
+                        debit: 53
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: 15e8a711-e99b-4a54-acf9-67cdcf3c034e
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: 11a8a7ee-88d5-4a36-9523-9e14fc845155
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: 15e8a711-e99b-4a54-acf9-67cdcf3c034e
+                      paymentLinkTransactionId: 11a8a7ee-88d5-4a36-9523-9e14fc845155
+                      paymentLinkTransaction:
+                        id: 11a8a7ee-88d5-4a36-9523-9e14fc845155
+                        couponUsage: null
+                  - id: 1d55351c-940f-4eb7-99ad-1ab6b1f0fd29
+                    credit: 1077
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: Ewallet - Gopay
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1754909424974
+                    paymentLinkTransactionId: d6c93069-3c65-4235-8392-5644987a3a52
+                    fee:
+                      - id: 16d2c286-f081-4e74-b481-6d6d25ed83af
+                        balanceHistoryType: xendit_fee
+                        debit: 23
+                      - id: 7b1353b9-2c12-488b-af5a-5950308e6fc2
+                        balanceHistoryType: mayar_fee
+                        debit: 54
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: 1e3e3905-0fac-419a-b919-019ecfe3f7f9
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: d6c93069-3c65-4235-8392-5644987a3a52
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: 1e3e3905-0fac-419a-b919-019ecfe3f7f9
+                      paymentLinkTransactionId: d6c93069-3c65-4235-8392-5644987a3a52
+                      paymentLinkTransaction:
+                        id: d6c93069-3c65-4235-8392-5644987a3a52
+                        couponUsage: null
+                  - id: 41c9ffd1-388d-40a1-8cef-965e33d459a1
+                    credit: 1059
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1754909018059
+                    paymentLinkTransactionId: f62c271c-a7fd-443c-a437-80929ea6d98c
+                    fee:
+                      - id: 9c37092d-780a-4ca1-963c-264280a9d944
+                        balanceHistoryType: xendit_fee
+                        debit: 6
+                      - id: d29f93d8-06f1-4f9d-a348-3998bde669d8
+                        balanceHistoryType: mayar_fee
+                        debit: 53
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: f05f4764-2561-4ef3-8ba5-0a644d7eed16
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: f62c271c-a7fd-443c-a437-80929ea6d98c
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: f05f4764-2561-4ef3-8ba5-0a644d7eed16
+                      paymentLinkTransactionId: f62c271c-a7fd-443c-a437-80929ea6d98c
+                      paymentLinkTransaction:
+                        id: f62c271c-a7fd-443c-a437-80929ea6d98c
+                        couponUsage: null
+                  - id: 8ad2dfe7-ca76-4d97-b7de-6f6e58480404
+                    credit: 10493
+                    status: settled
+                    balanceHistoryType: event
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1754908707277
+                    paymentLinkTransactionId: 61617dfd-cf70-4cd8-9f20-b5ef77ebb390
+                    fee:
+                      - id: 8d118e9a-393b-40b5-a559-def7f347c195
+                        balanceHistoryType: mayar_fee
+                        debit: 420
+                      - id: 92424261-0f69-4c79-bb99-9b389aadca44
+                        balanceHistoryType: xendit_fee
+                        debit: 73
+                    paymentLinkId: a14295a7-f37c-44e0-a488-7c4732cb8491
+                    subscriptionId: null
+                    xenditTransactionId: 31ab6c69-12c6-4234-b29f-59bba82b44d8
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: 61617dfd-cf70-4cd8-9f20-b5ef77ebb390
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: a14295a7-f37c-44e0-a488-7c4732cb8491
+                      name: test UIUX Event / Acara
+                    xenditTransaction:
+                      id: 31ab6c69-12c6-4234-b29f-59bba82b44d8
+                      paymentLinkTransactionId: 61617dfd-cf70-4cd8-9f20-b5ef77ebb390
+                      paymentLinkTransaction:
+                        id: 61617dfd-cf70-4cd8-9f20-b5ef77ebb390
+                        couponUsage: null
+                  - id: e258dc42-191a-43a5-8856-582622553486
+                    credit: 15042
+                    status: settled
+                    balanceHistoryType: event
+                    paymentMethod: Transfer VA - MANDIRI
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1754908251426
+                    paymentLinkTransactionId: 0d8efb5a-403b-4060-ae31-6f9de016662c
+                    fee:
+                      - id: 48bc4322-bd98-47d1-95db-e51f9805b19a
+                        balanceHistoryType: xendit_fee
+                        debit: 4440
+                      - id: a1aa2545-f38a-41f3-afda-5d7bbddf46ae
+                        balanceHistoryType: mayar_fee
+                        debit: 602
+                    paymentLinkId: a14295a7-f37c-44e0-a488-7c4732cb8491
+                    subscriptionId: null
+                    xenditTransactionId: f5f50c26-a484-4105-badf-94c67a5528c7
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: 0d8efb5a-403b-4060-ae31-6f9de016662c
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: a14295a7-f37c-44e0-a488-7c4732cb8491
+                      name: test UIUX Event / Acara
+                    xenditTransaction:
+                      id: f5f50c26-a484-4105-badf-94c67a5528c7
+                      paymentLinkTransactionId: 0d8efb5a-403b-4060-ae31-6f9de016662c
+                      paymentLinkTransaction:
+                        id: 0d8efb5a-403b-4060-ae31-6f9de016662c
+                        couponUsage: null
+                  - id: be5bfd6f-28b8-4729-8304-05a8cf95abcf
+                    credit: 1059
+                    status: settled
+                    balanceHistoryType: digital_product
+                    paymentMethod: QRIS
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    createdAt: 1754906098343
+                    paymentLinkTransactionId: 1ed9252b-d56b-4be3-8bb5-f75f654ec3ab
+                    fee:
+                      - id: 5324f5c2-3520-481d-a106-889696a89f61
+                        balanceHistoryType: xendit_fee
+                        debit: 6
+                      - id: e16e0178-ab58-4d10-9e33-d05d761d5969
+                        balanceHistoryType: mayar_fee
+                        debit: 53
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    subscriptionId: null
+                    xenditTransactionId: 7454ad4f-307a-4917-b3cc-ad87ab9fc26a
+                    subscription: null
+                    paymentLinkTransaction:
+                      id: 1ed9252b-d56b-4be3-8bb5-f75f654ec3ab
+                      urlParamTrackingData: null
+                      isAdminFeeBorneByCustomer: true
+                      isChannelFeeBorneByCustomer: true
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      name: Harus Buat auto testing
+                      email: mayartesting05@gmail.com
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: d071116a-4359-4262-90dc-a7bd137c1baa
+                      name: test UIUX Produk Digital
+                    xenditTransaction:
+                      id: 7454ad4f-307a-4917-b3cc-ad87ab9fc26a
+                      paymentLinkTransactionId: 1ed9252b-d56b-4be3-8bb5-f75f654ec3ab
+                      paymentLinkTransaction:
+                        id: 1ed9252b-d56b-4be3-8bb5-f75f654ec3ab
+                        couponUsage: null
+  /hl/v1/transactions/unpaid:
+    get:
+      operationId: get_transaction_unpaidtransaction
+      summary: Get Unpaid Transaction
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 10'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 28
+                pageSize: 10
+                page: 1
+                data:
+                  - id: 040d5adb-1496-45de-8435-5cab16526a8c
+                    createdAt: 1755627439078
+                    type: payment_request
+                    amount: 100000
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: e890d24a-cfc0-4915-83d2-3166b9ffba9e
+                    customerId: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                    customeField: null
+                    customer:
+                      id: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                      email: azumiikecee@gmail.com
+                      name: Azumii
+                      mobile: '08996136751'
+                    paymentLink:
+                      id: e890d24a-cfc0-4915-83d2-3166b9ffba9e
+                      category: null
+                      createdAt: 1755627438790
+                      description: Ubah ReqPayment
+                      link: ohsjrd3wko
+                      name: Azumii
+                      redirectUrl: https://web.mayar.id.
+                      userId: 348e083d-315a-4e5c-96b1-5a2a98c48413
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/040d5adb-1496-45de-8435-5cab16526a8c
+                  - id: 23fa41c5-c6ed-45d4-8302-5fac4a165dfa
+                    createdAt: 1755621464062
+                    type: invoice
+                    amount: 110000
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: f774034d-d9cc-43a0-97d8-a2520c127f03
+                    customerId: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                    customeField: null
+                    customer:
+                      id: ae57ce73-89a2-46a7-84d7-93a616ef220e
+                      email: azumiikecee@gmail.com
+                      name: Azumii
+                      mobile: '08996136751'
+                    paymentLink:
+                      id: f774034d-d9cc-43a0-97d8-a2520c127f03
+                      category: null
+                      createdAt: 1755621463743
+                      description: Berubah Jadi Invoice Yang Sudah Diedit
+                      link: ibzfrf4880
+                      name: INVOICE
+                      redirectUrl: https://web.mayar.id
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/23fa41c5-c6ed-45d4-8302-5fac4a165dfa
+                  - id: 03f2e6e9-78c6-428c-999f-c02fdb067e32
+                    createdAt: 1755533945187
+                    type: membership_payment
+                    amount: 104930
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: fdc44ac4-d06b-4906-ab3a-e35b61c1a6d0
+                    customerId: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                    customeField: null
+                    customer:
+                      id: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                      email: trial@gmail.com
+                      name: trial
+                      mobile: '0884444730242'
+                    paymentLink:
+                      id: fdc44ac4-d06b-4906-ab3a-e35b61c1a6d0
+                      category: null
+                      createdAt: 1755533914224
+                      description: Pembayaran Paket Membership paket 2 - Andika
+                      link: 3j2z9bb1e5
+                      name: Tagihan Membership - paket 2
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/03f2e6e9-78c6-428c-999f-c02fdb067e32
+                  - id: 252fdc97-e14f-404a-956d-06262a7f2245
+                    createdAt: 1755511718734
+                    type: generic_link
+                    amount: 10489
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: 8872687f-f548-4327-b59b-1be9e8b9aa36
+                    customerId: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                    customeField: null
+                    customer:
+                      id: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                      email: trial@gmail.com
+                      name: trial
+                      mobile: '0884444730242'
+                    paymentLink:
+                      id: 8872687f-f548-4327-b59b-1be9e8b9aa36
+                      category: null
+                      createdAt: 1731653740699
+                      description: <p>Hshshwhwh</p>
+                      link: Hshshshshsh
+                      name: Hshshshshsh
+                      redirectUrl: ''
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: 162c8020-fdb0-4504-8999-4d23cfb96fdf
+                      multipleImageId: null
+                      multipleImage: null
+                      coverImage:
+                        id: 162c8020-fdb0-4504-8999-4d23cfb96fdf
+                        fileType: jpeg
+                        url: >-
+                          https://media.mayar.id/images/162c8020-fdb0-4504-8999-4d23cfb96fdf.jpeg
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/252fdc97-e14f-404a-956d-06262a7f2245
+                  - id: 05321c55-9c78-4627-b689-23e24d7e7957
+                    createdAt: 1755256632035
+                    type: membership_payment
+                    amount: 41972
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: a33ce773-2380-48da-b891-e89a32170c7d
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      name: Harus Buat auto testing
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: a33ce773-2380-48da-b891-e89a32170c7d
+                      category: null
+                      createdAt: 1755256271521
+                      description: Pembayaran Paket Membership paket 1 - Andika
+                      link: evq5sq825kf
+                      name: Tagihan Membership - paket 1
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/05321c55-9c78-4627-b689-23e24d7e7957
+                  - id: 7943b939-fb78-4e8c-bb3a-b9b26e5eb9be
+                    createdAt: 1755256538587
+                    type: membership_payment
+                    amount: 14840
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: a33ce773-2380-48da-b891-e89a32170c7d
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      name: Harus Buat auto testing
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: a33ce773-2380-48da-b891-e89a32170c7d
+                      category: null
+                      createdAt: 1755256271521
+                      description: Pembayaran Paket Membership paket 1 - Andika
+                      link: evq5sq825kf
+                      name: Tagihan Membership - paket 1
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/7943b939-fb78-4e8c-bb3a-b9b26e5eb9be
+                  - id: 82472171-f815-4cac-b8a9-f924cbceec35
+                    createdAt: 1755256520598
+                    type: membership_payment
+                    amount: 14840
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: a33ce773-2380-48da-b891-e89a32170c7d
+                    customerId: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                    customeField: null
+                    customer:
+                      id: 6a38cf26-6bab-42c8-92be-72f3a9fd4c33
+                      email: mayartesting05@gmail.com
+                      name: Harus Buat auto testing
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: a33ce773-2380-48da-b891-e89a32170c7d
+                      category: null
+                      createdAt: 1755256271521
+                      description: Pembayaran Paket Membership paket 1 - Andika
+                      link: evq5sq825kf
+                      name: Tagihan Membership - paket 1
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/82472171-f815-4cac-b8a9-f924cbceec35
+                  - id: f8b0ffba-c1bb-47c6-bd31-4b33fdbe3dd6
+                    createdAt: 1755256470651
+                    type: membership_payment
+                    amount: 10493
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: 586a2d96-41bb-4940-b54f-9d3dfdaf069e
+                    customerId: 3a5d26f9-894d-47e8-b9e7-4f611979b007
+                    customeField: null
+                    customer:
+                      id: 3a5d26f9-894d-47e8-b9e7-4f611979b007
+                      email: muslimbasic8@gmail.com
+                      name: Raihan
+                      mobile: '081320547877'
+                    paymentLink:
+                      id: 586a2d96-41bb-4940-b54f-9d3dfdaf069e
+                      category: null
+                      createdAt: 1755256364050
+                      description: Pembayaran Paket Membership paket 2 - Andika
+                      link: e7uvqy4gbb9
+                      name: Tagihan Membership - paket 2
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/f8b0ffba-c1bb-47c6-bd31-4b33fdbe3dd6
+                  - id: 6457c7ae-632a-4708-acee-582cde2352b0
+                    createdAt: 1755256342870
+                    type: membership_payment
+                    amount: 10493
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: bd98b446-1373-4842-a129-c75af36a9bf9
+                    customerId: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                    customeField: null
+                    customer:
+                      id: ce1234f3-6843-4d5c-8838-b7d6f7506955
+                      email: trial@gmail.com
+                      name: trial
+                      mobile: '0884444730242'
+                    paymentLink:
+                      id: bd98b446-1373-4842-a129-c75af36a9bf9
+                      category: null
+                      createdAt: 1755244488205
+                      description: Pembayaran Paket Membership paket 2 - Andika
+                      link: sei6i61sv4
+                      name: Tagihan Membership - paket 2
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/6457c7ae-632a-4708-acee-582cde2352b0
+                  - id: dd33202d-bab4-4283-9b78-b9f4f1ba308e
+                    createdAt: 1755256318689
+                    type: membership_payment
+                    amount: 13640
+                    status: active
+                    urlParamTrackingData: null
+                    paymentLinkId: 75130b99-5ecf-4846-967a-a240d75721b4
+                    customerId: db721f94-2f69-46de-8744-46066dd42af6
+                    customeField: null
+                    customer:
+                      id: db721f94-2f69-46de-8744-46066dd42af6
+                      email: mayartesting19@gmail.com
+                      name: test UIUX
+                      mobile: '6281320549999'
+                    paymentLink:
+                      id: 75130b99-5ecf-4846-967a-a240d75721b4
+                      category: null
+                      createdAt: 1755256280592
+                      description: Pembayaran Paket Membership paket 3 - Andika
+                      link: bn046sqay3
+                      name: Tagihan Membership - paket 3
+                      redirectUrl: null
+                      userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                      coverImageId: null
+                      multipleImageId: null
+                      coverImage: null
+                      multipleImage: null
+                    paymentUrl: >-
+                      https://andiak.myr.id/plt/dd33202d-bab4-4283-9b78-b9f4f1ba308e
+                total: 278
+  /credit/v1/credit/membership/customer/regist:
+    post:
+      operationId: post_usagebasedmembership_registnewmembershipcustomer
+      summary: Regist New Membership Customer
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                message: success
+                membershipCustomer:
+                  id: 68ca1a1c-7ed8-47f3-a5c2-c5ff314dd750
+                  userId: 35776524-8ea9-46ac-b2dd-89efc496593f
+                  paymentLinkId: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+                  createdAt: 1756088397669
+                  nextPayment: 1758766797571
+                  isLifetimePeriod: null
+                  paymentLink:
+                    id: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+                    name: produk baru 2
+                    description: >
+                      <p class=&#x27;preserveHtml&#x27;
+                      class=&#x27;preserveHtml&#x27;
+                      class=&#x27;preserveHtml&#x27;>xcxcxccx</p>
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              productId: 40f26fbe-f4d8-4693-975f-e6d105d291e6
+              membershipTierId: 9bbbfa01-1bf8-4e4d-8470-cdf7066b6ea2
+              membershipMonthlyPeriod: 1
+              trialCredit: 100
+              customerInfo:
+                name: memberTambahan
+                email: tambahan@gg.com
+                mobile: '08777777799'
+  /hl/v1/webhook/history:
+    get:
+      operationId: get_webhook_history
+      summary: Get History
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 1'
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: string
+          description: 'Sample placeholder/value from docs: 10'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                hasMore: true
+                pageCount: 77
+                pageSize: 10
+                page: 1
+                data:
+                  - id: 7d567063-ad7f-48d5-9e84-0e41938783a5
+                    createdAt: 1745919352229
+                    nextDelivery: null
+                    paymentLinkId: 688b6a9f-2893-4b8a-a637-a008d91d0cfc
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"43b2f0ce-03f2-4f59-a341-299ea3ef19b6","transactionId":"43b2f0ce-03f2-4f59-a341-299ea3ef19b6","status":"SUCCESS","transactionStatus":"paid","createdAt":"2025-04-29T09:35:43.635Z","updatedAt":"2025-04-29T09:35:43.635Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"ladu","customerEmail":"ladusing@gmail.com","customerMobile":"0888775540242","amount":0,"isAdminFeeBorneByCustomer":null,"isChannelFeeBorneByCustomer":null,"productId":"688b6a9f-2893-4b8a-a637-a008d91d0cfc","productName":"E-Book
+                      JOURNAL DESIGN OF
+                      AUTOMATIC","productType":"ebook","pixelFbp":"fb.1.1716364188358.1111830624","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745919352229
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 43b2f0ce-03f2-4f59-a341-299ea3ef19b6
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 7c98876e-bed4-44de-bd37-b144a4559476
+                    createdAt: 1745918541638
+                    nextDelivery: null
+                    paymentLinkId: f361e6f5-5e92-4ba8-a244-b9b7823003fc
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"8e537afc-4f2f-4e1c-b91b-f75af34bf71a","transactionId":"8e537afc-4f2f-4e1c-b91b-f75af34bf71a","status":"SUCCESS","transactionStatus":"paid","createdAt":"2025-04-29T09:22:11.239Z","updatedAt":"2025-04-29T09:22:11.239Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"ladu","customerEmail":"ladusing@gmail.com","customerMobile":"0888775540242","amount":0,"isAdminFeeBorneByCustomer":null,"isChannelFeeBorneByCustomer":null,"productId":"f361e6f5-5e92-4ba8-a244-b9b7823003fc","productName":"Test
+                      04","productType":"digital_product","pixelFbp":"fb.1.1716364188358.1111830624","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745918541638
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 8e537afc-4f2f-4e1c-b91b-f75af34bf71a
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 6e93eae5-e190-4989-8e0f-1b4870be9bce
+                    createdAt: 1745569215626
+                    nextDelivery: null
+                    paymentLinkId: d071116a-4359-4262-90dc-a7bd137c1baa
+                    payload: >-
+                      {"event":"payment.reminder","data":{"id":"089fcdc2-5292-4e09-8b29-cfb7bdde3be6","transactionId":"089fcdc2-5292-4e09-8b29-cfb7bdde3be6","status":"SUCCESS","transactionStatus":"created","createdAt":"2025-04-25T07:58:27.539Z","updatedAt":"2025-04-25T08:00:21.672Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantEmail":"mayartesting05@gmail.com","customerName":"Harus
+                      Buat auto
+                      testing","customerEmail":"mayartesting05@gmail.com","customerMobile":"081320547877","amount":107135,"isAdminFeeBorneByCustomer":true,"isChannelFeeBorneByCustomer":true,"productId":"d071116a-4359-4262-90dc-a7bd137c1baa","productName":"test
+                      UIUX Produk
+                      Digital","productType":"digital_product","pixelFbp":"fb.1.1737105110463.389414050868219356","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":"qris","paymentUrl":"https://andiak.myr.id/select-channel/089fcdc2-5292-4e09-8b29-cfb7bdde3be6?webhook=true"}}
+                    status: SUCCESS
+                    type: payment.reminder
+                    updatedAt: 1745569215626
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 089fcdc2-5292-4e09-8b29-cfb7bdde3be6
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: af46a267-8896-446d-ac7e-90c212e756db
+                    createdAt: 1745386516347
+                    nextDelivery: null
+                    paymentLinkId: 0dd01bc9-ca99-4c0f-94df-fcfb78b835de
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"2c53458c-51ee-4fcc-8f6c-03b4ee948054","transactionId":"2c53458c-51ee-4fcc-8f6c-03b4ee948054","status":"SUCCESS","transactionStatus":"paid","createdAt":"2025-04-23T05:35:05.951Z","updatedAt":"2025-04-23T05:35:05.951Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"Harus
+                      Buat auto
+                      testing","customerEmail":"mayartesting05@gmail.com","customerMobile":"081320547877","amount":0,"isAdminFeeBorneByCustomer":null,"isChannelFeeBorneByCustomer":null,"productId":"0dd01bc9-ca99-4c0f-94df-fcfb78b835de","productName":"
+                      Algoritma Pemrograman
+                      Dasar","productType":"course","pixelFbp":"fb.1.1737105110463.389414050868219356","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745386516348
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 2c53458c-51ee-4fcc-8f6c-03b4ee948054
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 7514ea9b-61e7-4d3f-af42-7f7fc08cfaa6
+                    createdAt: 1745386309689
+                    nextDelivery: null
+                    paymentLinkId: f361e6f5-5e92-4ba8-a244-b9b7823003fc
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"e801de8c-ab24-4ffa-ac14-99349495c325","transactionId":"e801de8c-ab24-4ffa-ac14-99349495c325","status":"SUCCESS","transactionStatus":"paid","createdAt":"2025-04-23T05:31:39.805Z","updatedAt":"2025-04-23T05:31:39.805Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"Harus
+                      Buat auto
+                      testing","customerEmail":"mayartesting05@gmail.com","customerMobile":"081320547877","amount":0,"isAdminFeeBorneByCustomer":null,"isChannelFeeBorneByCustomer":null,"productId":"f361e6f5-5e92-4ba8-a244-b9b7823003fc","productName":"Test
+                      04","productType":"digital_product","pixelFbp":"fb.1.1737105110463.389414050868219356","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745386309689
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: e801de8c-ab24-4ffa-ac14-99349495c325
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 544df424-7584-478b-8ec9-37e4507d3296
+                    createdAt: 1745386189675
+                    nextDelivery: null
+                    paymentLinkId: 4f1af572-9a12-489f-b6bb-a067ab1402d5
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"f90f4d32-bdf7-4d11-8253-6f7ce19e4a78","transactionId":"f90f4d32-bdf7-4d11-8253-6f7ce19e4a78","status":"SUCCESS","transactionStatus":"created","createdAt":"2025-04-23T05:28:45.172Z","updatedAt":"2025-04-23T05:28:46.785Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"Harus
+                      Buat auto
+                      testing","customerEmail":"mayartesting05@gmail.com","customerMobile":"081320547877","amount":1045,"isAdminFeeBorneByCustomer":true,"isChannelFeeBorneByCustomer":true,"productId":"4f1af572-9a12-489f-b6bb-a067ab1402d5","productName":"test
+                      UIUX Link
+                      Pembayaran","productType":"generic_link","pixelFbp":"fb.1.1737105110463.389414050868219356","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":"QRIS","nettAmount":1000,"custom_field":[{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"text","isRequired":false,"key":"6df52b26-b018-4855-ab3d-8fdfb46861b8","type":"string","value":"tests"},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"multipleText","isRequired":false,"key":"80912ec7-e83d-46c6-afab-55ad39e88114","type":"string","value":"belajara"},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"checkbox","isRequired":false,"key":"55695415-e3bb-4127-92e0-29c7a756812d","type":"lists","value":[{"name":"Harus
+                      Buat auto
+                      testing","value":"55695415-e3bb-4127-92e0-29c7a756812d","selected":true}]},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"textNumber","isRequired":false,"key":"ddcd3c04-928e-4dd2-b011-5d5919a622e3","type":"number","value":"1232"},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"date","isRequired":false,"key":"fffe0331-8813-4e63-9802-8a3fab49368d","type":"datetime","value":"2025-04-25T17:00:00.000Z"},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"select","isRequired":false,"key":"0922d967-5635-43ce-855e-cb66e375047e","type":"lists","value":[{"name":"ddfdf","value":"ddfdf","key":"9f66d951-b773-4992-bccd-03586ffb865d","selected":false},{"name":"perempuan","value":"perempuan","key":"51f180ec-70be-4588-83ba-f3faca6deea1","selected":false},{"name":"laki","value":"laki","key":"c25f5360-c3e8-47d7-940c-d2f60d788225","selected":true}],"selectedValue":{"name":"laki","value":"laki","key":"c25f5360-c3e8-47d7-940c-d2f60d788225","selected":true}},{"name":"Harus
+                      Buat auto
+                      testing","description":"Baskomg","fieldType":"url","isRequired":false,"key":"a598d6d6-e39c-4f30-8755-62141567c848","type":"url","value":"https://andiak.myr.id/pl/test-uiux-55576"}]}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745386189676
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: f90f4d32-bdf7-4d11-8253-6f7ce19e4a78
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 897920cd-4dd8-4d40-af96-0c8c541fac43
+                    createdAt: 1745378929327
+                    nextDelivery: null
+                    paymentLinkId: 670ee967-8d09-40d4-95b2-7983f6ce5544
+                    payload: >-
+                      {"event":"payment.received","data":{"id":"43bf4898-c081-4e5d-a6da-f5c78ec46486","transactionId":"43bf4898-c081-4e5d-a6da-f5c78ec46486","status":"SUCCESS","transactionStatus":"paid","createdAt":"2025-04-23T03:28:39.894Z","updatedAt":"2025-04-23T03:28:39.895Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantName":"Andika","merchantEmail":"mayartesting05@gmail.com","customerName":"Aldoghandika","customerEmail":"aldobaik18@gmail.com","customerMobile":"0877828291999","amount":0,"isAdminFeeBorneByCustomer":null,"isChannelFeeBorneByCustomer":null,"productId":"670ee967-8d09-40d4-95b2-7983f6ce5544","productName":"test
+                      UIUX
+                      Membership","productType":"membership","pixelFbp":"fb.1.1737105110463.389414050868219356","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null,"membershipTier":{"id":"3a57c51e-48d8-4051-9651-6eff0a5eae24","createdAt":1738212685739,"paymentAtStart":true,"paymentLinkId":"670ee967-8d09-40d4-95b2-7983f6ce5544","updatedAt":1738212685739,"gracePeriodInDays":0,"isTrialAvailable":true,"finishMembershipAt":null,"name":"test
+                      UIUX 3","notes":"Lorem ipsum dolor sit amet consectetur
+                      adipiscing, elit posuere euismod nascetur purus morbi, nam
+                      commodo fames sociis non. Litora aliquam imperdiet
+                      vulputate iaculis quisque eleifend nam lectus eget
+                      facilisi maecenas ullamcorper, sed malesuada nisi est
+                      sollicitudin magnis aptent blandit lacus donec. Sed
+                      placerat volutpat natoque ullamcorper cubilia senectus,
+                      elementum nisi tristique venenatis himenaeos metus felis,
+                      faucibus scelerisque cras arcu pretium. Nisl tincidunt
+                      nullam imperdiet scelerisque condimentum lectus inceptos,
+                      risus suspendisse purus sociosqu hendrerit consequat arcu
+                      neque, erat urna donec nunc dapibus maecenas. Nostra id
+                      pellentesque bibendum porttitor cubilia etiam luctus
+                      platea nec, porta magnis tortor fringilla venenatis
+                      conubia enim nisi, dictumst habitasse eros integer dictum
+                      praesent accumsan euismod. 
+                      ","limit":null},"membershipCustomer":{"id":"3d22701d-0811-406e-b289-f7c92ce04a89","isInTrial":true,"expiredAt":1747970919291,"status":"active","isLifetimePeriod":null,"nextPayment":1747970919291,"monthlyPaymentPeriod":null,"membershipTierId":"3a57c51e-48d8-4051-9651-6eff0a5eae24","isAlreadyUsedTrial":null}}}
+                    status: SUCCESS
+                    type: payment.received
+                    updatedAt: 1745378929327
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 43bf4898-c081-4e5d-a6da-f5c78ec46486
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 8153c243-c5bf-4145-941e-9aef43011677
+                    createdAt: 1745377230152
+                    nextDelivery: null
+                    paymentLinkId: 670ee967-8d09-40d4-95b2-7983f6ce5544
+                    payload: >-
+                      {"event":"payment.reminder","data":{"id":"d43eaa25-01b7-461e-9340-ba95b453cb84","transactionId":"d43eaa25-01b7-461e-9340-ba95b453cb84","status":"SUCCESS","transactionStatus":"created","createdAt":"2025-04-23T02:31:30.865Z","updatedAt":"2025-04-23T02:35:31.483Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantEmail":"mayartesting05@gmail.com","customerName":"ali
+                      kusnadi","customerEmail":"kugutsu.hiruko@gmail.com","customerMobile":"6285797522261","amount":33000,"isAdminFeeBorneByCustomer":false,"isChannelFeeBorneByCustomer":false,"productId":"670ee967-8d09-40d4-95b2-7983f6ce5544","productName":"test
+                      UIUX
+                      Membership","productType":"membership","pixelFbp":"fb.1.1745375116069.518591344665233937","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":null,"paymentUrl":"https://andiak.myr.id/plt/d43eaa25-01b7-461e-9340-ba95b453cb84?webhook=true"}}
+                    status: SUCCESS
+                    type: payment.reminder
+                    updatedAt: 1745377230152
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: d43eaa25-01b7-461e-9340-ba95b453cb84
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: 539e936e-5fa2-4710-b8fd-50863c188921
+                    createdAt: 1745377228533
+                    nextDelivery: null
+                    paymentLinkId: 670ee967-8d09-40d4-95b2-7983f6ce5544
+                    payload: >-
+                      {"event":"payment.reminder","data":{"id":"c238d027-fe8c-4777-9241-48c635b66597","transactionId":"c238d027-fe8c-4777-9241-48c635b66597","status":"SUCCESS","transactionStatus":"created","createdAt":"2025-04-23T02:26:35.509Z","updatedAt":"2025-04-23T02:30:24.027Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantEmail":"mayartesting05@gmail.com","customerName":"ali
+                      kusnadi","customerEmail":"kugutsu.hiruko@gmail.com","customerMobile":"6285797522261","amount":13782,"isAdminFeeBorneByCustomer":true,"isChannelFeeBorneByCustomer":true,"productId":"670ee967-8d09-40d4-95b2-7983f6ce5544","productName":"test
+                      UIUX
+                      Membership","productType":"membership","pixelFbp":"fb.1.1745375116069.518591344665233937","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":"qris","paymentUrl":"https://andiak.myr.id/select-channel/c238d027-fe8c-4777-9241-48c635b66597?webhook=true"}}
+                    status: SUCCESS
+                    type: payment.reminder
+                    updatedAt: 1745377228533
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: c238d027-fe8c-4777-9241-48c635b66597
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+                  - id: b13dbe97-1dd6-4383-ab92-400f9cdd3b74
+                    createdAt: 1745377224450
+                    nextDelivery: null
+                    paymentLinkId: 805ceb62-54c9-4671-9b2a-4d13c643b78e
+                    payload: >-
+                      {"event":"payment.reminder","data":{"id":"8850d886-39a7-42f7-927c-16e8fb346d16","transactionId":"8850d886-39a7-42f7-927c-16e8fb346d16","status":"SUCCESS","transactionStatus":"created","createdAt":"2025-04-23T02:30:29.693Z","updatedAt":"2025-04-23T02:35:31.235Z","merchantId":"8afa8430-9ccd-4d33-9c1b-e0999a319994","merchantEmail":"mayartesting05@gmail.com","customerName":"Firzha
+                      Ardhia
+                      Ramadhan","customerEmail":"zhaardhiatesting@gmail.com","customerMobile":"08551498798","amount":1073,"isAdminFeeBorneByCustomer":true,"isChannelFeeBorneByCustomer":true,"productId":"805ceb62-54c9-4671-9b2a-4d13c643b78e","productName":"test
+                      UIUX
+                      Audiobook","productType":"audiobook","pixelFbp":"fb.1.1721824347392.952216048745555286","pixelFbc":null,"qty":1,"couponUsed":null,"paymentMethod":"qris","paymentUrl":"https://andiak.myr.id/select-channel/8850d886-39a7-42f7-927c-16e8fb346d16?webhook=true"}}
+                    status: SUCCESS
+                    type: payment.reminder
+                    updatedAt: 1745377224450
+                    userId: 8afa8430-9ccd-4d33-9c1b-e0999a319994
+                    paymentLinkTransactionId: 8850d886-39a7-42f7-927c-16e8fb346d16
+                    urlDestination: https://eoze6x1sc8k58q4.m.pipedream.net
+                    responsePayload: null
+                    source: AUTOMATIC
+  /hl/v1/webhook/register:
+    post:
+      operationId: post_webhook_registerurlhook
+      summary: Register URL Hook
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              urlHook: https://example.mayar.com
+  /hl/v1/webhook/retry:
+    post:
+      operationId: post_webhook_retryhistory
+      summary: Retry History
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              webhookHistoryId: 9f8050f0-9a58-4432-bf36-a7eeff7d6aea
+  /hl/v1/webhook/test:
+    post:
+      operationId: post_webhook_testurlhook
+      summary: Test URL Hook
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              urlHook: https://example.mayar.com
+  /hl/v1/product/webinar/create:
+    post:
+      operationId: post_webinar_create
+      summary: Create Webinar
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 3f4fc3fd-10dc-4a97-b54c-7632881858cb
+                  link: >-
+                    https://testingmayar.myr.id/pl/Webinar-Belajar-Crypto-Untuk-Pemula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              name: Webinar Belajar Crypto Untuk Pemula
+              description: Belajar dulu
+              amount: 100000
+              crossoutPrice: 199000
+              eventUrl: https://zoom.us/j/123456
+              notes: early-bird sd ds ds
+              terms: Tidak ada refund setelah pembelian
+              redirectUrl: https://example.com/webinar-thanks
+              paymentType: paid
+              startAt: '2026-06-01T09:00:00.000Z'
+              eventStartAt: '2026-06-10T09:00:00.000Z'
+              eventEndAt: '2026-06-10T12:00:00.000Z'
+              expiredAt: '2026-06-15T12:00:00.000Z'
+              limit: 100
+  /hl/v1/product/webinar/edit:
+    post:
+      operationId: post_webinar_edit
+      summary: Edit Webinar
+      description: '## Documentation Index'
+      tags:
+        - Mayar
+      parameters: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+              example:
+                statusCode: 200
+                messages: success
+                data:
+                  id: 3f4fc3fd-10dc-4a97-b54c-7632881858cb
+                  link: >-
+                    https://testingmayar.myr.id/pl/Webinar-Belajar-Crypto-Untuk-Pemula
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+            example:
+              id: 3f4fc3fd-10dc-4a97-b54c-7632881858cb
+              name: Webinar Belajar Crypto Untuk Pemula
+              description: Belajar dulu
+              amount: 100000
+              crossoutPrice: 199000
+              eventUrl: https://zoom.us/j/123456
+              notes: Kalo susah tanya aja ya
+              terms: Tidak ada refund setelah pembelian
+              redirectUrl: https://example.com/webinar-thanks
+              paymentType: paid
+              startAt: '2026-06-01T09:00:00.000Z'
+              eventStartAt: '2026-06-10T09:00:00.000Z'
+              eventEndAt: '2026-06-10T12:00:00.000Z'
+              expiredAt: '2026-06-15T12:00:00.000Z'
+              limit: 100

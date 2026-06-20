@@ -12,6 +12,7 @@ OpenAPI modern dibuat dari Postman collections:
 - Finpay Billing: [postman/finpay/finpay-billing.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-billing.postman_collection.json)
 - Finpay Disbursement: [postman/finpay/finpay-disbursement.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-disbursement.postman_collection.json)
 - Finpay Payment Gateway: [postman/finpay/finpay-payment-gateway.postman_collection.json](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/postman/finpay/finpay-payment-gateway.postman_collection.json)
+- Mayar API (Mintlify): [https://docs.mayar.id/api-reference/introduction](https://docs.mayar.id/api-reference/introduction)
 
 ## Output (OpenAPI modern)
 - [openapi/midtrans/midtrans.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/midtrans/midtrans.openapi.yaml)
@@ -22,6 +23,7 @@ OpenAPI modern dibuat dari Postman collections:
 - [openapi/finpay/finpay-billing.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-billing.openapi.yaml)
 - [openapi/finpay/finpay-disbursement.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-disbursement.openapi.yaml)
 - [openapi/finpay/finpay-payment-gateway.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/finpay/finpay-payment-gateway.openapi.yaml)
+- [openapi/mayar/mayar.openapi.yaml](/Users/wauputra/Documents/02_Bisnis_Pekerjaan/07_Dev/api-operations-hub/openapi/mayar/mayar.openapi.yaml)
 
 ## Cleanup yang dilakukan
 - Semua `/v2/[INSERT-ORDER-ID]/...` (hanya di Midtrans) dinormalisasi jadi `/v2/{order_id}/...`.
@@ -42,6 +44,7 @@ npm run clean-openapi-modern
 - `openapi/finpay/finpay-billing.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/finpay/finpay-disbursement.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/finpay/finpay-payment-gateway.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
+- `openapi/mayar/mayar.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0` (best-effort Mintlify extraction)
 
 ## Ringkasan cepat (setelah convert)
 - Midtrans: `10` path, `10` operasi
@@ -52,6 +55,7 @@ npm run clean-openapi-modern
 - Finpay Billing: `1` path, `1` operasi
 - Finpay Disbursement: `7` path, `7` operasi
 - Finpay Payment Gateway: `11` path, `11` operasi
+- Mayar: `52` path, `52` operasi (hasil parser Mintlify dari llms.txt)
 
 ## Catatan kualitas
 Konversi modern tetap endpoint-complete dari source collection, tapi belum semua schema/request-response di-hardcode.
@@ -59,3 +63,4 @@ Perlu penajaman manual untuk:
 - `securitySchemes` dan mapping auth tiap produk
 - schema `type/required` di request-response
 - konsistensi tags dan policy untuk gateway
+- Mayar masih best-effort karena berasal dari Markdown example (Request/ResponseExample), bukan export OpenAPI asli.

@@ -24,6 +24,9 @@ If you work with several providers and need a single source of truth for API def
 - Finpay Billing API
 - Finpay Disbursement API
 - Finpay Payment Gateway API
+- Mayar API
+- Hostinger API
+- Biznet Gio API
 
 ## Repository structure
 
@@ -33,22 +36,25 @@ If you work with several providers and need a single source of truth for API def
   - `xendit/`
   - `fastpay/`
   - `finpay/`
+  - `mayar/`
+  - `hostinger/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay, Mayar, Hostinger, Biznet Gio.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
   - Cleanup notes and process documentation.
 - `scripts/`
-  - `convert-postman-to-openapi-modern.mjs`
+- `convert-postman-to-openapi-modern.mjs`
   - `convert-postman-to-openapi.mjs`
+  - `convert-mayar-mintlify.mjs`
   - `clean-openapi-modern.mjs`
 - `package.json`
 - `package-lock.json`
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -68,6 +74,17 @@ npm run convert-postman
 ```
 
 This reads Postman collections and outputs modern OpenAPI artifacts under `openapi/`.
+
+### Convert Mintlify docs to Mayar (best-effort)
+
+```bash
+npm run convert-mayar
+```
+
+This reads Mintlify docs pages from `https://docs.mayar.id/llms.txt`, extracts endpoint examples, and outputs:
+
+- `openapi/mayar/mayar.openapi.yaml`
+- `postman/mayar/mayar.postman_collection.json`
 
 ### Convert legacy OpenAPI
 
@@ -93,6 +110,11 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/finpay/finpay-billing.openapi.yaml`
 - `openapi/finpay/finpay-disbursement.openapi.yaml`
 - `openapi/finpay/finpay-payment-gateway.openapi.yaml`
+- `openapi/mayar/mayar.openapi.yaml`
+- `openapi/hostinger/hostinger.openapi.yaml`
+- `openapi/hostinger/hostinger.openapi.json`
+- `openapi/biznet-gio/biznet-gio.openapi.yaml`
+- `openapi/biznet-gio/biznet-gio.openapi.json`
 
 ## Contributing
 
