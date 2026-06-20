@@ -6,6 +6,7 @@ const targets = [
   'openapi/doku/doku.openapi.yaml',
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
+  'openapi/ipaymu/ipaymu.openapi.yaml',
 ];
 
 for (const target of targets) {

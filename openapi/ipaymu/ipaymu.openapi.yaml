@@ -1,0 +1,4992 @@
+openapi: 3.1.0
+info:
+  title: iPaymu Public API v2
+  version: 1.0.0
+  description: >-
+    <html><head></head><body><ul>
+
+    <li><p>Url Live/Production: <a
+    href="https://my.ipaymu.com"><b>https://my.ipaymu.com</b></a></p>
+
+    </li>
+
+    <li><p>Url Development/Sandbox: <a
+    href="https://sandbox.ipaymu.com"><b>https://sandbox.ipaymu.com</b></a></p>
+
+    </li>
+
+    </ul>
+
+    <p><strong>Sample Generate Signature:</strong></p>
+
+    <ul>
+
+    <li><p>PHP (<a
+    href="https://github.com/putuedi/ipaymu-payment-v2-sample-php">https://github.com/ipaymu/ipaymu-payment-v2-sample-php</a>)</p>
+
+    </li>
+
+    <li><p>NodeJS (<a
+    href="https://github.com/putuedi/ipaymu-payment-v2-sample-nodejs">https://github.com/ipaymu/ipaymu-payment-v2-sample-nodejs</a>)</p>
+
+    </li>
+
+    <li><p>Python (<a
+    href="https://github.com/putuedi/ipaymu-payment-v2-sample-python">https://github.com/ipaymu/ipaymu-payment-v2-sample-python</a>)</p>
+
+    </li>
+
+    <li><p>Golang (<a
+    href="https://github.com/putuedi/ipaymu-payment-v2-sample-go">https://github.com/ipaymu/ipaymu-payment-v2-sample-go</a>)</p>
+
+    </li>
+
+    <li><p>Dotnet C# (<a
+    href="https://github.com/putuedi/ipaymu-payment-v2-sample-dotnet">https://github.com/ipaymu/ipaymu-payment-v2-sample-dotnet</a>)</p>
+
+    </li>
+
+    <li><p>Ruby (<a
+    href="https://github.com/ipaymu/ipaymu-payment-v2-sample-ruby">https://github.com/ipaymu/ipaymu-payment-v2-sample-ruby</a>)</p>
+
+    </li>
+
+    <li><p>Java (<a
+    href="https://github.com/ipaymu/ipaymu-payment-v2-sample-java">https://github.com/ipaymu/ipaymu-payment-v2-sample-java</a>)</p>
+
+    </li>
+
+    </ul>
+
+    <p><strong>Catatan:</strong></p>
+
+    <ul>
+
+    <li><p>VA dan Api Key bisa didapatkan pada menu Integrasi di dashboard
+    iPaymu Anda.</p>
+
+    </li>
+
+    <li><p>VA dan Api Key Mode Sandbox/Development berbeda dengan VA dan Api Key
+    Mode Production/Live.</p>
+
+    </li>
+
+    <li><p>Jika mendapatkan kendala integrasi silakan hubungi <a
+    href="https://mailto:support@ipaymu.com"><b>support@ipaymu.com</b></a> atau
+    WhatsApp <a href="https://wa.link/p8vnr7">https://wa.link/p8vnr7</a></p>
+
+    </li>
+
+    </ul>
+
+    <p><strong>Notes:</strong></p>
+
+    <p>• VA and Api Key can be found in the Integration menu on your iPaymu
+    dashboard.<br>• VA and Api Key Mode Sandbox/Development are different with
+    VA and Api Key Mode Production/Live.<br>• If you have problem for
+    integration, please contact <a
+    href="https://mailto:support@ipaymu.com">support@ipaymu.com</a> or via
+    WhatsApp <a href="https://wa.link/p8vnr7">https://wa.link/p8vnr7</a></p>
+
+    </body></html>
+paths:
+  /api/v2/cod/area:
+    get:
+      tags:
+        - Direct Payment COD
+      summary: Get Area
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 05 Jul 2024 01:58:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            vary:
+              schema:
+                type: string
+                examples:
+                  - Origin
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            x-ratelimit-limit:
+              schema:
+                type: string
+                examples:
+                  - '60'
+            x-ratelimit-remaining:
+              schema:
+                type: string
+                examples:
+                  - '59'
+            referrer-policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            x-content-type-options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            strict-transport-security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            content-security-policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            x-frame-options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            x-proxy-cache:
+              schema:
+                type: string
+                examples:
+                  - BYPASS
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            CF-Cache-Status:
+              schema:
+                type: string
+                examples:
+                  - DYNAMIC
+            Report-To:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=VO2F%2BnTGJFdkESVrhjfIqj07ZKf83Hw2lvX0dRU8%2FU0oFJt2GF489dm%2Fo0EerRP9zxXqvFgk7QpW40UWTDtpJxws1mF01kUiVjLVV4sr16mZocVRwha8vqHAcEs69GGPiH0AyKQ%3D"}],"group":"cf-nel","max_age":604800}
+            NEL:
+              schema:
+                type: string
+                examples:
+                  - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+            Server:
+              schema:
+                type: string
+                examples:
+                  - cloudflare
+            CF-RAY:
+              schema:
+                type: string
+                examples:
+                  - 89e3c0680e755e9a-CGK
+            alt-svc:
+              schema:
+                type: string
+                examples:
+                  - h3=":443"; ma=86400
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  status: 200
+                  success: true
+                  status_title: success
+                  message: Success
+                  data:
+                    - id: 2042
+                      label: JAKARTA BARU, BULA BARAT, SERAM BAGIAN TIMUR, 97554
+                      subdistrict_name: JAKARTA BARU
+                      district_name: BULA BARAT
+                      city_name: SERAM BAGIAN TIMUR
+                      zip_code: '97554'
+                    - id: 17473
+                      label: GROGOL, GROGOL PETAMBURAN, JAKARTA BARAT, 11450
+                      subdistrict_name: GROGOL
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11450'
+                    - id: 17474
+                      label: JELAMBAR, GROGOL PETAMBURAN, JAKARTA BARAT, 11460
+                      subdistrict_name: JELAMBAR
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11460'
+                    - id: 17475
+                      label: JELAMBAR BARU, GROGOL PETAMBURAN, JAKARTA BARAT, 11460
+                      subdistrict_name: JELAMBAR BARU
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11460'
+                    - id: 17476
+                      label: >-
+                        TANJUNG DUREN SELATAN, GROGOL PETAMBURAN, JAKARTA BARAT,
+                        11470
+                      subdistrict_name: TANJUNG DUREN SELATAN
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11470'
+                    - id: 17477
+                      label: >-
+                        TANJUNG DUREN UTARA, GROGOL PETAMBURAN, JAKARTA BARAT,
+                        11470
+                      subdistrict_name: TANJUNG DUREN UTARA
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11470'
+                    - id: 17478
+                      label: TOMANG, GROGOL PETAMBURAN, JAKARTA BARAT, 11440
+                      subdistrict_name: TOMANG
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11440'
+                    - id: 17479
+                      label: WIJAYA KUSUMA, GROGOL PETAMBURAN, JAKARTA BARAT, 11460
+                      subdistrict_name: WIJAYA KUSUMA
+                      district_name: GROGOL PETAMBURAN
+                      city_name: JAKARTA BARAT
+                      zip_code: '11460'
+                    - id: 17480
+                      label: KALIDERES, KALIDERES, JAKARTA BARAT, 11840
+                      subdistrict_name: KALIDERES
+                      district_name: KALIDERES
+                      city_name: JAKARTA BARAT
+                      zip_code: '11840'
+                    - id: 17481
+                      label: KAMAL, KALIDERES, JAKARTA BARAT, 11810
+                      subdistrict_name: KAMAL
+                      district_name: KALIDERES
+                      city_name: JAKARTA BARAT
+                      zip_code: '11810'
+                    - id: 17482
+                      label: PEGADUNGAN, KALIDERES, JAKARTA BARAT, 11830
+                      subdistrict_name: PEGADUNGAN
+                      district_name: KALIDERES
+                      city_name: JAKARTA BARAT
+                      zip_code: '11830'
+                    - id: 17483
+                      label: SEMANAN, KALIDERES, JAKARTA BARAT, 11850
+                      subdistrict_name: SEMANAN
+                      district_name: KALIDERES
+                      city_name: JAKARTA BARAT
+                      zip_code: '11850'
+                    - id: 17484
+                      label: TEGAL ALUR, KALIDERES, JAKARTA BARAT, 11820
+                      subdistrict_name: TEGAL ALUR
+                      district_name: KALIDERES
+                      city_name: JAKARTA BARAT
+                      zip_code: '11820'
+                    - id: 17485
+                      label: DURI KEPA, KEBON JERUK, JAKARTA BARAT, 11510
+                      subdistrict_name: DURI KEPA
+                      district_name: KEBON JERUK
+                      city_name: JAKARTA BARAT
+                      zip_code: '11510'
+                    - id: 17486
+                      label: KEBON JERUK, KEBON JERUK, JAKARTA BARAT, 11530
+                      subdistrict_name: KEBON JERUK
+                      district_name: KEBON JERUK
+                      city_name: JAKARTA BARAT
+                      zip_code: '11530'
+                    - id: 17487
+                      label: KEDOYA SELATAN, KEBON JERUK, JAKARTA BARAT, 11520
+                      subdistrict_name: KEDOYA SELATAN
+                      district_name: KEBON JERUK
+                      city_name: JAKARTA BARAT
+                      zip_code: '11520'
+                    - id: 17488
+                      label: KEDOYA UTARA, KEBON JERUK, JAKARTA BARAT, 11520
+                      subdistrict_name: KEDOYA UTARA
+                      district_name: KEBON JERUK
+                      city_name: JAKARTA BARAT
+                      zip_code: '11520'
+                    - id: 17489
+                      label: KELAPA DUA, KEBON JERUK, JAKARTA BARAT, 11550
+                      subdistrict_name: KELAPA DUA
+                      district_name: KEBON JERUK
+                      city_name: JAKARTA BARAT
+                      zip_code: '11550'
+      parameters:
+        - name: va
+          in: header
+          examples:
+            Get Area:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: signature
+          in: header
+          examples:
+            Get Area:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Get Area:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Get Area:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /api/v2/cod/download-label/{transaction_id}:
+    get:
+      tags:
+        - Direct Payment COD
+      summary: Download Label
+      parameters:
+        - name: transaction_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: iPaymu COD transaction identifier.
+        - name: va
+          in: header
+          examples:
+            Download Label:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: signature
+          in: header
+          examples:
+            Download Label:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Download Label:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Download Label:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+  /api/v2/cod/shipping-calculate:
+    post:
+      tags:
+        - Direct Payment COD
+      summary: Shipping Calculate
+      parameters:
+        - name: va
+          in: header
+          examples:
+            Shipping Calculate:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: signature
+          in: header
+          examples:
+            Shipping Calculate:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Shipping Calculate:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Shipping Calculate:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                destination_area_id:
+                  type: string
+                  example: '17473'
+                pickup_area_id:
+                  type: string
+                  example: '17473'
+                weight:
+                  type: string
+                  description: |
+                    <p>in kilogram</p>
+                  example: '1'
+                amount:
+                  type: string
+                  example: '100000'
+            examples:
+              Shipping Calculate:
+                value:
+                  - key: destination_area_id
+                    value: '17473'
+                    type: text
+                  - key: pickup_area_id
+                    value: '17473'
+                    type: text
+                  - key: weight
+                    value: '1'
+                    description: |
+                      <p>in kilogram</p>
+                    type: text
+                  - key: amount
+                    value: '100000'
+                    type: text
+  /api/v2/cod/tracking:
+    post:
+      tags:
+        - Direct Payment COD
+      summary: Tracking
+      description: <p>Tracking package COD</p>
+      parameters:
+        - name: va
+          in: header
+          examples:
+            Tracking:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: signature
+          in: header
+          examples:
+            Tracking:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Tracking:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Tracking:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                awb:
+                  type: string
+                  description: |
+                    <p>awb</p>
+                  example: KOMSHIP00137699862
+                transaction_id:
+                  type: string
+                  description: |
+                    <p>iPaymu transaction id</p>
+                  example: '14919771'
+            examples:
+              Tracking:
+                value:
+                  - key: awb
+                    value: KOMSHIP00137699862
+                    description: |
+                      <p>awb</p>
+                    type: text
+                  - key: transaction_id
+                    value: '14919771'
+                    description: |
+                      <p>iPaymu transaction id</p>
+                    type: text
+  /api/v2/cod/pickup:
+    post:
+      tags:
+        - Direct Payment COD
+      summary: Request Pickup
+      description: <p>Pickup COD</p>
+      parameters:
+        - name: va
+          in: header
+          examples:
+            Request Pickup:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: signature
+          in: header
+          examples:
+            Request Pickup:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Request Pickup:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          examples:
+            Request Pickup:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                transaction_id:
+                  type: string
+                  description: |
+                    <p>iPaymu transaction id</p>
+                  example: '16158750'
+                pickup_date:
+                  type: string
+                  description: |
+                    <p>pickup date (format Y-m-d on WIB)</p>
+                  example: '2024-07-10'
+                pickup_time:
+                  type: string
+                  description: |
+                    <p>pickup time (format H:i on WIB)</p>
+                  example: '14:00'
+                pickup_vehicle:
+                  type: string
+                  description: |
+                    <ul>
+                    <li>Motor</li>
+                    <li>Mobil</li>
+                    </ul>
+                  example: Motor
+            examples:
+              Request Pickup:
+                value:
+                  - key: transaction_id
+                    value: '16158750'
+                    description: |
+                      <p>iPaymu transaction id</p>
+                    type: text
+                  - key: pickup_date
+                    value: '2024-07-10'
+                    description: |
+                      <p>pickup date (format Y-m-d on WIB)</p>
+                    type: text
+                  - key: pickup_time
+                    value: '14:00'
+                    description: |
+                      <p>pickup time (format H:i on WIB)</p>
+                    type: text
+                  - key: pickup_vehicle
+                    value: Motor
+                    description: |
+                      <ul>
+                      <li>Motor</li>
+                      <li>Mobil</li>
+                      </ul>
+                    type: text
+  /api/v2/payment-channels:
+    get:
+      tags:
+        - Payment
+      summary: List Payment Channels
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Thu, 18 Jul 2024 07:52:05 GMT
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            vary:
+              schema:
+                type: string
+                examples:
+                  - Origin
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            x-ratelimit-limit:
+              schema:
+                type: string
+                examples:
+                  - '60'
+            x-ratelimit-remaining:
+              schema:
+                type: string
+                examples:
+                  - '59'
+            referrer-policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            x-content-type-options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            strict-transport-security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            content-security-policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            x-frame-options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            x-proxy-cache:
+              schema:
+                type: string
+                examples:
+                  - BYPASS
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+            CF-Cache-Status:
+              schema:
+                type: string
+                examples:
+                  - DYNAMIC
+            Report-To:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    {"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=NNQTsbDwWyGolbXzQ2RIDR5sSQolpgR8VFFsH034oTkK5CpKxieWaDn135y%2F01oKgk3ZnEwYWERWsTrCAAcFoMPGxJFJp0Up5MqbOpEFUAEsKnYyQbN1sUxbQflIBrSmkVnmcyE%3D"}],"group":"cf-nel","max_age":604800}
+            NEL:
+              schema:
+                type: string
+                examples:
+                  - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+            Server:
+              schema:
+                type: string
+                examples:
+                  - cloudflare
+            CF-RAY:
+              schema:
+                type: string
+                examples:
+                  - 8a50e3d28ae0b5c4-CGK
+            alt-svc:
+              schema:
+                type: string
+                examples:
+                  - h3=":443"; ma=86400
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Success: true
+                  Message: Success
+                  Data:
+                    - Code: cod
+                      Name: COD
+                      Description: COD
+                      Channels:
+                        - Code: cod
+                          Name: COD
+                          Description: COD
+                          Logo: https://sandbox.ipaymu.com/asset/images/cod.png
+                          PaymentInstructionsDoc: ''
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 1.75
+                            ActualFeeType: PERCENT
+                            AdditionalFee: 0
+                    - Code: cstore
+                      Name: Convenience Store
+                      Description: Convenience Store
+                      Channels:
+                        - Code: alfamart
+                          Name: Alfamart
+                          Description: Alfamart
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/alfamart.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/constore.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 4000
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: indomaret
+                          Name: Indomaret
+                          Description: Indomaret
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/indomaret.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/constore.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 4000
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                    - Code: cc
+                      Name: Credit Card
+                      Description: Credit Card
+                      Channels:
+                        - Code: cc
+                          Name: Credit Card
+                          Description: Credit Card
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/logo_cc.png
+                          PaymentInstructionsDoc: ''
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 2.8
+                            ActualFeeType: PERCENT
+                            AdditionalFee: 5000
+                    - Code: debitonline
+                      Name: Debit Online
+                      Description: Debit Online
+                      Channels:
+                        - Code: debitonline
+                          Name: Debit Online
+                          Description: Debit Online
+                          Logo: ''
+                          PaymentInstructionsDoc: ''
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                    - Code: ewallet-asia
+                      Name: E-Wallet se-ASIA
+                      Description: E-Wallet se-ASIA
+                    - Code: paylater
+                      Name: Pay Later
+                      Description: Pay Later
+                      Channels:
+                        - Code: akulaku
+                          Name: Akulaku
+                          Description: Akulaku
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/akulaku-long.png
+                          PaymentInstructionsDoc: ''
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                    - Code: qris
+                      Name: QRIS
+                      Description: QRIS
+                      Channels:
+                        - Code: mpm
+                          Name: QRIS Dynamic NOBU
+                          Description: QRIS Dynamic NOBU
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/qris_default.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/qris.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                    - Code: va
+                      Name: Virtual Account
+                      Description: Virtual Account
+                      Channels:
+                        - Code: danamon
+                          Name: Danamon
+                          Description: Danamon
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/danamon.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-danamon.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: cimb
+                          Name: Cimb Niaga
+                          Description: Cimb Niaga
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/niaga.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-niaga.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bca
+                          Name: BCA
+                          Description: BCA
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bca.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bca.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 4000
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: permata
+                          Name: Permata
+                          Description: Permata
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/permata.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-permata.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bmi
+                          Name: Muamalat
+                          Description: Muamalat
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bmi.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bmi.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bni
+                          Name: BNI
+                          Description: BNI
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bni.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bni.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: mandiri
+                          Name: Mandiri
+                          Description: Mandiri
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/mandiri.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-mandiri.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 4000
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bri
+                          Name: BRI
+                          Description: BRI
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bri.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bri.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bsi
+                          Name: BSI
+                          Description: BSI
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bsi.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bsi.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bpd_bali
+                          Name: BPD Bali
+                          Description: BPD Bali
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/bpd-bali-long-2.png
+                          PaymentInstructionsDoc: ''
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+                        - Code: bag
+                          Name: BAG
+                          Description: BAG
+                          Logo: >-
+                            https://storage.googleapis.com/ipaymu-docs/assets/arthagraha.png
+                          PaymentInstructionsDoc: >-
+                            https://storage.googleapis.com/ipaymu-docs/cara-pembayaran/va-bag.pdf
+                          FeatureStatus: active
+                          HealthStatus: online
+                          TransactionFee:
+                            ActualFee: 3500
+                            ActualFeeType: FLAT
+                            AdditionalFee: 0
+        '401':
+          description: Unauthorized
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 02:59:05 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '88'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 401
+                  Message: unauthorized
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            List Payment Channels:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            List Payment Channels:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          examples:
+            List Payment Channels:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            List Payment Channels:
+              value: '20191209155701'
+              x-disabled: false
+          schema:
+            type: integer
+      x-pre-request: >-
+        const apikey = pm.variables.get('apiKey') //ipaymu apikey
+
+        const va = pm.variables.get('va')
+
+
+        // Mengambil semua parameter query dari request
+
+        const queryParams = pm.request.url.query.all();
+
+
+        // Membuat objek untuk menyimpan parameter query
+
+        const queryParamsObj = {};
+
+        queryParams.forEach(param => {
+            queryParamsObj[param.key] = param.value;
+        });
+
+
+        // Mengubah objek parameter query menjadi string JSON
+
+        const reqJson = JSON.stringify(queryParamsObj);
+
+
+
+        // Generate signature
+
+        const bodyEncrypt  = require('crypto-js').SHA256(reqJson);
+
+        const stringtosign = pm.request.method+":"+va+":"+bodyEncrypt+":"+apikey
+
+        const signature    =
+        require('crypto-js').enc.Hex.stringify(require('crypto-js').HmacSHA256(stringtosign,
+        apikey))
+
+
+        pm.environment.set("signature",signature)
+
+
+        console.log(`request: ${reqJson}`)
+
+        console.log(`stringToSign: ${stringtosign}`)
+
+        console.log(`signature: ${signature}`)
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+            examples:
+              List Payment Channels:
+                value: []
+  /api/v2/payment/direct:
+    post:
+      tags:
+        - Payment
+      summary: Direct Payment
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Mon, 18 Mar 2024 07:43:52 GMT
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            x-ratelimit-limit:
+              schema:
+                type: string
+                examples:
+                  - '60'
+            x-ratelimit-remaining:
+              schema:
+                type: string
+                examples:
+                  - '59'
+            access-control-allow-origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            referrer-policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            x-content-type-options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            strict-transport-security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            content-security-policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            x-frame-options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            CF-Cache-Status:
+              schema:
+                type: string
+                examples:
+                  - DYNAMIC
+            Server:
+              schema:
+                type: string
+                examples:
+                  - cloudflare
+            CF-RAY:
+              schema:
+                type: string
+                examples:
+                  - 866398172b71356e-CGK
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - br
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Success: true
+                  Message: Success
+                  Data:
+                    SessionId: '1'
+                    TransactionId: 130770
+                    ReferenceId: '1'
+                    Via: QRIS
+                    Channel: MPM
+                    PaymentNo: >-
+                      00020101021226670016COM.NOBUBANK.WWW01189360050300000488870214041800000314060303UMI51440014ID.CO.QRIS.WWW0215ID20200814001730303UMI52045499530336054061007005802ID5906iPaymu6015KABUPATEN
+                      TABAN61051581162810114031800027210570520202403181443516362880620202403181443516362880703A010804POSP630475A6
+                    QrString: >-
+                      00020101021226670016COM.NOBUBANK.WWW01189360050300000488870214041800000314060303UMI51440014ID.CO.QRIS.WWW0215ID20200814001730303UMI52045499530336054061007005802ID5906iPaymu6015KABUPATEN
+                      TABAN61051581162810114031800027210570520202403181443516362880620202403181443516362880703A010804POSP630475A6
+                    PaymentName: iPaymu
+                    SubTotal: 100000
+                    Fee: 700
+                    Total: 100700
+                    FeeDirection: BUYER
+                    Expired: '2024-03-19 14:43:51'
+                    QrImage: https://sandbox.ipaymu.com/qr/130770
+                    QrTemplate: https://sandbox.ipaymu.com/qr/template/130770
+                    Terminal: A01
+                    NNSCode: '93600503'
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:00:11 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '86'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 400
+                  Message: error - invalid request
+                  Error:
+                    name:
+                      - name wajib diisi.
+        '401':
+          description: Unauthorized
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 02:59:05 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '88'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 401
+                  Message: unauthorized
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Direct Payment:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            Direct Payment:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          examples:
+            Direct Payment:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            Direct Payment:
+              value: '2026-06-20T03:02:13.316Z'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: |
+                    <p>mandatory - Buyer name</p>
+                  example: Putu
+                phone:
+                  type: string
+                  description: |
+                    <p>mandatory - Buyer phone</p>
+                  example: '081999501092'
+                email:
+                  type: string
+                  description: |
+                    <p>mandatory - Buyer email</p>
+                  example: putu@mail.com
+                amount:
+                  type: string
+                  description: |
+                    <p>mandatory - Total price</p>
+                  example: '2000000'
+                notifyUrl:
+                  type: string
+                  description: >
+                    <p>mandatory - Notify URL for receive webhook from iPaymu.
+                    (iPaymu will send param in POST method to this URL when
+                    buyer make a payment)</p>
+                  example: https://your-website-notify-url.com
+                referenceId:
+                  type: string
+                  description: |
+                    <p>mandatory - Reference/transaction ID merchant</p>
+                  example: '1'
+                paymentMethod:
+                  type: string
+                  description: |
+                    <p>mandatory - Payment method. Value:</p>
+                    <ul>
+                    <li>Virtual Account =&gt; 'va'</li>
+                    <li>Convenience Store =&gt; 'cstore'</li>
+                    <li>COD =&gt; 'cod'</li>
+                    <li>QRIS =&gt; 'qris'</li>
+                    <li>Credit Card =&gt; 'cc'</li>
+                    <li>Pay Later =&gt; 'paylater'</li>
+                    </ul>
+                  example: va
+                paymentChannel:
+                  type: string
+                  description: |
+                    <p>mandatory - Payment channel of the payment method</p>
+                    <ul>
+                    <li><p>Virtual Account (va)</p>
+                    <ul>
+                    <li>BAG =&gt; bag</li>
+                    <li>BCA =&gt; bca</li>
+                    <li>BPD Bali =&gt; bpd_bali</li>
+                    <li>BNI =&gt; bni</li>
+                    <li>Cimb Niaga =&gt; cimb</li>
+                    <li>Mandiri =&gt; mandiri</li>
+                    <li>Muamalat =&gt; bmi</li>
+                    <li>BRI =&gt; bri</li>
+                    <li>BSI =&gt; bsi</li>
+                    <li>Permata =&gt;permata</li>
+                    <li>Danamon =&gt; danamon</li>
+                    </ul>
+                    </li>
+                    <li><p>Convenience Store (cstore)</p>
+                    <ul>
+                    <li>Alfamart =&gt; alfamart</li>
+                    <li>Indomaret =&gt; indomaret</li>
+                    </ul>
+                    </li>
+                    <li><p>Cash On Delivery (cod)</p>
+                    <ul>
+                    <li>Kurir RPX =&gt; rpx</li>
+                    </ul>
+                    </li>
+                    <li><p>QRIS (qris)</p>
+                    <ul>
+                    <li>QRIS =&gt; mpm</li>
+                    </ul>
+                    </li>
+                    <li><p>Credit Card</p>
+                    <ul>
+                    <li>Credit Card =&gt; cc</li>
+                    </ul>
+                    </li>
+                    <li><p>Pay Later</p>
+                    <ul>
+                    <li>Akulaku =&gt; akulaku</li>
+                    </ul>
+                    </li>
+                    </ul>
+                  example: cimb
+                expired:
+                  type: string
+                  description: >
+                    <p>optional - Custom expired payment code in hours 
+
+                    Nb:</p>
+
+                    <ul>
+
+                    <li>BSI VA max 3 hours</li>
+
+                    <li>BRI VA max 2 hours</li>
+
+                    <li>BCA VA can't be customized (default 12 hours)</li>
+
+                    <li>Con Store Alfamart can't be customized (default 24
+                    hours)</li>
+
+                    <li>QRIS can't be customized (default 5 minutes)</li>
+
+                    </ul>
+                  example: '24'
+                comments:
+                  type: string
+                  description: |
+                    <p>optional - Notes</p>
+                  example: Payment to XYZ
+                feeDirection:
+                  type: string
+                  description: |
+                    <p>optional - Custom fee direction (optional)</p>
+                    <ul>
+                    <li>MERCHANT =&gt; fee charged to merchant,</li>
+                    <li>BUYER =&gt; fee charged to buyer</li>
+                    </ul>
+                  example: BUYER
+                escrow:
+                  type: string
+                  description: |
+                    <p>optional - Activation escrow (true or false)</p>
+                  example: '0'
+                product[]:
+                  type: string
+                  description: |
+                    <p>conditional - Product (for COD payment)</p>
+                  example: produk 1
+                qty[]:
+                  type: string
+                  description: |
+                    <p>conditional - Qty product (for COD payment)</p>
+                  example: '1'
+                price[]:
+                  type: string
+                  description: |
+                    <p>conditional - Price product (for COD payment)</p>
+                  example: '2000000'
+                weight[]:
+                  type: string
+                  description: |
+                    <p>conditional - Weight product in kg  (for COD payment)</p>
+                  example: '1'
+                width[]:
+                  type: string
+                  description: |
+                    <p>conditional - Width product in cm (for COD payment)</p>
+                  example: '1'
+                height[]:
+                  type: string
+                  description: >
+                    <p>conditional - Height product in cm (for COD payment)
+                    (optional)</p>
+                  example: '1'
+                length[]:
+                  type: string
+                  description: |
+                    <p>conditional - Length product in cm (for COD payment)</p>
+                  example: '1'
+                deliveryArea:
+                  type: string
+                  description: |
+                    <p>conditional - Delivery postal code (for COD payment)</p>
+                  example: '17473'
+                deliveryAddress:
+                  type: string
+                  description: |
+                    <p>conditional - Delivery address (for COD payment)</p>
+                  example: GROGOL, GROGOL PETAMBURAN, JAKARTA BARAT, 11450
+                shipping:
+                  type: string
+                  description: >
+                    <p>conditional - Shipping name from API Shipping Calculate
+                    (for COD payment)</p>
+                  example: IDEXPRESS
+                shippingService:
+                  type: string
+                  description: >
+                    <p>conditional - Service name from API Shipping Calculate
+                    (for COD payment)</p>
+                  example: STD
+                pickupArea:
+                  type: string
+                  example: '17473'
+                  x-scalar-disabled: true
+                account:
+                  type: string
+                  description: |
+                    <p>optional - va child account</p>
+                  example: '1179000899'
+                successUrl:
+                  type: string
+                  description: >
+                    <p>optional - Success URL after payment (case redirect
+                    payment Akulaku &amp; Credit Card)</p>
+                  example: https://your-website.com/success-page
+                cancelUrl:
+                  type: string
+                  description: >
+                    <p>optional - Cancel URL for failed payment (case redirect
+                    payment optional - Akulaku &amp; Credit Card)</p>
+                  example: https://your-website.com/cancel-page
+            examples:
+              Direct Payment:
+                value:
+                  - key: name
+                    value: Putu
+                    description: |
+                      <p>mandatory - Buyer name</p>
+                    type: text
+                  - key: phone
+                    value: '081999501092'
+                    description: |
+                      <p>mandatory - Buyer phone</p>
+                    type: text
+                  - key: email
+                    value: putu@mail.com
+                    description: |
+                      <p>mandatory - Buyer email</p>
+                    type: text
+                  - key: amount
+                    value: '2000000'
+                    description: |
+                      <p>mandatory - Total price</p>
+                    type: text
+                  - key: notifyUrl
+                    value: https://your-website-notify-url.com
+                    description: >
+                      <p>mandatory - Notify URL for receive webhook from iPaymu.
+                      (iPaymu will send param in POST method to this URL when
+                      buyer make a payment)</p>
+                    type: text
+                  - key: referenceId
+                    value: '1'
+                    description: |
+                      <p>mandatory - Reference/transaction ID merchant</p>
+                    type: text
+                  - key: paymentMethod
+                    value: va
+                    description: |
+                      <p>mandatory - Payment method. Value:</p>
+                      <ul>
+                      <li>Virtual Account =&gt; 'va'</li>
+                      <li>Convenience Store =&gt; 'cstore'</li>
+                      <li>COD =&gt; 'cod'</li>
+                      <li>QRIS =&gt; 'qris'</li>
+                      <li>Credit Card =&gt; 'cc'</li>
+                      <li>Pay Later =&gt; 'paylater'</li>
+                      </ul>
+                    type: text
+                  - key: paymentChannel
+                    value: cimb
+                    description: |
+                      <p>mandatory - Payment channel of the payment method</p>
+                      <ul>
+                      <li><p>Virtual Account (va)</p>
+                      <ul>
+                      <li>BAG =&gt; bag</li>
+                      <li>BCA =&gt; bca</li>
+                      <li>BPD Bali =&gt; bpd_bali</li>
+                      <li>BNI =&gt; bni</li>
+                      <li>Cimb Niaga =&gt; cimb</li>
+                      <li>Mandiri =&gt; mandiri</li>
+                      <li>Muamalat =&gt; bmi</li>
+                      <li>BRI =&gt; bri</li>
+                      <li>BSI =&gt; bsi</li>
+                      <li>Permata =&gt;permata</li>
+                      <li>Danamon =&gt; danamon</li>
+                      </ul>
+                      </li>
+                      <li><p>Convenience Store (cstore)</p>
+                      <ul>
+                      <li>Alfamart =&gt; alfamart</li>
+                      <li>Indomaret =&gt; indomaret</li>
+                      </ul>
+                      </li>
+                      <li><p>Cash On Delivery (cod)</p>
+                      <ul>
+                      <li>Kurir RPX =&gt; rpx</li>
+                      </ul>
+                      </li>
+                      <li><p>QRIS (qris)</p>
+                      <ul>
+                      <li>QRIS =&gt; mpm</li>
+                      </ul>
+                      </li>
+                      <li><p>Credit Card</p>
+                      <ul>
+                      <li>Credit Card =&gt; cc</li>
+                      </ul>
+                      </li>
+                      <li><p>Pay Later</p>
+                      <ul>
+                      <li>Akulaku =&gt; akulaku</li>
+                      </ul>
+                      </li>
+                      </ul>
+                    type: text
+                  - key: expired
+                    value: '24'
+                    description: >
+                      <p>optional - Custom expired payment code in hours 
+
+                      Nb:</p>
+
+                      <ul>
+
+                      <li>BSI VA max 3 hours</li>
+
+                      <li>BRI VA max 2 hours</li>
+
+                      <li>BCA VA can't be customized (default 12 hours)</li>
+
+                      <li>Con Store Alfamart can't be customized (default 24
+                      hours)</li>
+
+                      <li>QRIS can't be customized (default 5 minutes)</li>
+
+                      </ul>
+                    type: text
+                  - key: comments
+                    value: Payment to XYZ
+                    description: |
+                      <p>optional - Notes</p>
+                    type: text
+                  - key: feeDirection
+                    value: BUYER
+                    description: |
+                      <p>optional - Custom fee direction (optional)</p>
+                      <ul>
+                      <li>MERCHANT =&gt; fee charged to merchant,</li>
+                      <li>BUYER =&gt; fee charged to buyer</li>
+                      </ul>
+                    type: text
+                  - key: escrow
+                    value: '0'
+                    description: |
+                      <p>optional - Activation escrow (true or false)</p>
+                    type: text
+                  - key: product[]
+                    value: produk 1
+                    description: |
+                      <p>conditional - Product (for COD payment)</p>
+                    type: text
+                  - key: qty[]
+                    value: '1'
+                    description: |
+                      <p>conditional - Qty product (for COD payment)</p>
+                    type: text
+                  - key: price[]
+                    value: '2000000'
+                    description: |
+                      <p>conditional - Price product (for COD payment)</p>
+                    type: text
+                  - key: weight[]
+                    value: '1'
+                    description: >
+                      <p>conditional - Weight product in kg  (for COD
+                      payment)</p>
+                    type: text
+                  - key: width[]
+                    value: '1'
+                    description: |
+                      <p>conditional - Width product in cm (for COD payment)</p>
+                    type: text
+                  - key: height[]
+                    value: '1'
+                    description: >
+                      <p>conditional - Height product in cm (for COD payment)
+                      (optional)</p>
+                    type: text
+                  - key: length[]
+                    value: '1'
+                    description: >
+                      <p>conditional - Length product in cm (for COD
+                      payment)</p>
+                    type: text
+                  - key: deliveryArea
+                    value: '17473'
+                    description: >
+                      <p>conditional - Delivery postal code (for COD
+                      payment)</p>
+                    type: text
+                  - key: deliveryAddress
+                    value: GROGOL, GROGOL PETAMBURAN, JAKARTA BARAT, 11450
+                    description: |
+                      <p>conditional - Delivery address (for COD payment)</p>
+                    type: text
+                  - key: shipping
+                    value: IDEXPRESS
+                    description: >
+                      <p>conditional - Shipping name from API Shipping Calculate
+                      (for COD payment)</p>
+                    type: text
+                  - key: shippingService
+                    value: STD
+                    description: >
+                      <p>conditional - Service name from API Shipping Calculate
+                      (for COD payment)</p>
+                    type: text
+                  - key: pickupArea
+                    value: '17473'
+                    type: text
+                    disabled: true
+                  - key: account
+                    value: '1179000899'
+                    description: |
+                      <p>optional - va child account</p>
+                    type: text
+                  - key: successUrl
+                    value: https://your-website.com/success-page
+                    description: >
+                      <p>optional - Success URL after payment (case redirect
+                      payment Akulaku &amp; Credit Card)</p>
+                    type: text
+                  - key: cancelUrl
+                    value: https://your-website.com/cancel-page
+                    description: >
+                      <p>optional - Cancel URL for failed payment (case redirect
+                      payment optional - Akulaku &amp; Credit Card)</p>
+                    type: text
+  /:
+    post:
+      tags:
+        - Payment
+      summary: Callback Params (Success, Pending, and, Expired Transaction)
+      description: >-
+        <h3 id="ipaymu-callback-documentation"><strong>iPaymu Callback
+        Documentation</strong></h3>
+
+        <p>Callback parameters will be sent when the buyer successfully makes
+        the payment.</p>
+
+        <p><strong>Configuration:</strong><br />You can configure the Callback
+        Content-Type (<code>application/x-www-form-urlencoded</code> or
+        <code>application/json</code>) in your dashboard settings:</p>
+
+        <ul>
+
+        <li><p><strong>Production:</strong> <a
+        href="https://my.ipaymu.com/integration/setting">https://my.ipaymu.com/integration/setting</a></p>
+
+        </li>
+
+        <li><p><strong>Sandbox:</strong> <a
+        href="https://sandbox.ipaymu.com/integration/setting">https://sandbox.ipaymu.com/integration/setting</a></p>
+
+        </li>
+
+        </ul>
+
+        <p><strong>Notes:</strong></p>
+
+        <ul>
+
+        <li><p>Callback is automatically re-sent if we don't get <code>http
+        response 200</code>.</p>
+
+        </li>
+
+        <li><p>Make sure to validate when receiving callbacks more than 1 time
+        not to update your transaction.</p>
+
+        </li>
+
+        <li><p><strong>Signature Validation:</strong> To verify the request is
+        truly from iPaymu, validate the <code>signature</code> parameter.</p>
+
+        </li>
+
+        <li><p><strong>Secret Key:</strong> Use your <strong>iPaymu Merchant VA
+        (Virtual Account)</strong> number as the <code>$secretKey</code>.</p>
+
+        </li>
+
+        <li><p><strong>Mechanism:</strong></p>
+
+        </li>
+
+        </ul>
+
+        <ol>
+
+        <li><p>Remove the <code>signature</code> parameter from the received
+        data.</p>
+
+        </li>
+
+        <li><p>Sort the data by keys in <strong>ascending order</strong>
+        (<code>ksort</code>).</p>
+
+        </li>
+
+        <li><p>Convert the sorted data to a JSON string.</p>
+
+        </li>
+
+        <li><p>Generate the <strong>HMAC-SHA256</strong> hash using the JSON
+        string and your Secret Key (VA).</p>
+
+        </li>
+
+        <li><p>Compare your generated signature with the received signature.</p>
+
+        </li>
+
+        </ol>
+
+        <p>=======================================================================</p>
+
+        <h3 id="dokumentasi-callback-ipaymu"><strong>Dokumentasi Callback
+        iPaymu</strong></h3>
+
+        <p>Parameter callback akan dikirimkan saat pembeli berhasil melakukan
+        pembayaran.</p>
+
+        <p><strong>Konfigurasi:</strong><br />Anda dapat mengatur Tipe Konten
+        Callback (<code>application/x-www-form-urlencoded</code> atau
+        <code>application/json</code>) melalui pengaturan dashboard:</p>
+
+        <ul>
+
+        <li><p><strong>Production:</strong> <a
+        href="https://my.ipaymu.com/integration/setting">https://my.ipaymu.com/integration/setting</a></p>
+
+        </li>
+
+        <li><p><strong>Sandbox:</strong> <a
+        href="https://sandbox.ipaymu.com/integration/setting">https://sandbox.ipaymu.com/integration/setting</a></p>
+
+        </li>
+
+        </ul>
+
+        <p><strong>Catatan:</strong></p>
+
+        <ul>
+
+        <li><p>Callback secara otomatis dikirim ulang jika kami tidak
+        mendapatkan <code>http response 200</code>.</p>
+
+        </li>
+
+        <li><p>Pastikan melakukan validasi saat menerima callback lebih dari 1
+        kali untuk tidak memperbarui status transaksi Anda ke berhasil
+        (mensukseskan transaksi).</p>
+
+        </li>
+
+        <li><p><strong>Validasi Signature:</strong> Untuk memverifikasi bahwa
+        request benar-benar dari iPaymu, validasi parameter
+        <code>signature</code>.</p>
+
+        </li>
+
+        <li><p><strong>Secret Key:</strong> Gunakan <strong>nomor VA Merchant
+        iPaymu (Virtual Account)</strong> Anda sebagai
+        <code>$secretKey</code>.</p>
+
+        </li>
+
+        <li><p><strong>Mekanisme:</strong></p>
+
+        </li>
+
+        </ul>
+
+        <ol>
+
+        <li><p>Hapus parameter <code>signature</code> dari data yang
+        diterima.</p>
+
+        </li>
+
+        <li><p>Urutkan data berdasarkan kunci (key) secara
+        <strong>ascending</strong> (<code>ksort</code>).</p>
+
+        </li>
+
+        <li><p>Konversi data yang sudah diurutkan menjadi string JSON.</p>
+
+        </li>
+
+        <li><p>Generate hash <strong>HMAC-SHA256</strong> menggunakan string
+        JSON tersebut dan Secret Key (VA) Anda.</p>
+
+        </li>
+
+        <li><p>Bandingkan signature hasil generate Anda dengan signature yang
+        diterima.</p>
+
+        </li>
+
+        </ol>
+
+        <h4 id="example-code-signature-validation-php"><strong>Example Code:
+        Signature Validation (PHP)</strong></h4>
+
+        <p><strong>1. PHP</strong></p>
+
+        <pre class="click-to-expand-wrapper is-snippet-wrapper"><code
+        class="language-php">// Nomor VA iPaymu Anda
+
+        $secretKey = '117000xxxxxx'; 
+
+        // 1. Ambil Data Masuk (Mendukung JSON atau Form-Data sesuai setting
+        dashboard)
+
+        $input = file_get_contents('php://input');
+
+        $data  = json_decode($input, true) ?? $_POST;
+
+        // 2. Pisahkan signature yang diterima
+
+        $receivedSignature = $data['signature'] ?? '';
+
+        unset($data['signature']); [cite_start]// [cite: 29]
+
+        // 3. Urutkan data berdasarkan key (Ascending A-Z)
+
+        ksort($data); [cite_start]// [cite: 31]
+
+        // 4. Generate Signature
+
+        $jsonBody = json_encode($data); [cite_start]// [cite: 33]
+
+        $calculatedSignature = hash_hmac('sha256', $jsonBody, $secretKey);
+        [cite_start]// [cite: 33]
+
+        // 5. Bandingkan
+
+        [cite_start]if (hash_equals($calculatedSignature, $receivedSignature)) {
+        // [cite: 35]
+            // Signature Valid. Proses transaksi update database.
+            echo json_encode(['status' =&gt; 'success']);
+        } else {
+            // Signature Tidak Valid. Abaikan.
+            http_response_code(400);
+        }
+
+        ?&gt;
+
+
+        </code></pre>
+
+        <p><strong>2. Node.js (Express)</strong></p>
+
+        <pre class="click-to-expand-wrapper is-snippet-wrapper"><code
+        class="language-javascript">const crypto = require('crypto');
+
+        const express = require('express');
+
+        const app = express();
+
+        // Middleware untuk handle JSON dan URL-encoded
+
+        app.use(express.json());
+
+        app.use(express.urlencoded({ extended: true }));
+
+        app.post('/callback', (req, res) =&gt; {
+            const secretKey = '117000xxxxxx'; // Nomor VA iPaymu Anda
+            // 1. Ambil Data
+            let data = req.body;
+            // 2. Pisahkan signature yang diterima
+            const receivedSignature = data.signature;
+            delete data.signature; // Hapus signature agar tidak ikut di-hash
+            // 3. Urutkan object berdasarkan key (Meniru PHP ksort)
+            const sortedKeys = Object.keys(data).sort();
+            const sortedData = {};
+            sortedKeys.forEach(key =&gt; {
+                sortedData[key] = data[key];
+            });
+            // 4. Generate Signature
+            const jsonBody = JSON.stringify(sortedData);
+            const calculatedSignature = crypto
+                .createHmac('sha256', secretKey)
+                .update(jsonBody)
+                .digest('hex');
+            // 5. Bandingkan
+            if (calculatedSignature === receivedSignature) {
+                // Valid
+                console.log('Transaksi Terverifikasi');
+                res.status(200).json({ status: 'OK' });
+            } else {
+                // Tidak Valid
+                console.error('Signature Salah');
+                res.status(400).send('Invalid Signature');
+            }
+        });
+
+
+        </code></pre>
+
+        <p><strong>Source:</strong></p>
+
+        <p><a
+        href="https://drive.google.com/file/d/1WfBEI5ry6V7knuSiCONYC4ZhQmD8Aipn/view">https://drive.google.com/file/d/1WfBEI5ry6V7knuSiCONYC4ZhQmD8Aipn/view</a></p>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Accept:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            X-Signature:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    b1a5339f20226fcd8447219f2ff23003e9f1dd7501c02ebc4330a23c69f6c52d
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/x-www-form-urlencoded
+          content:
+            application/x-www-form-urlencoded:
+              schema:
+                type: string
+              examples:
+                default:
+                  trx_id: 193205
+                  sid: 5892246c-82e6-4397-af7a-92bff3f96d77
+                  reference_id: '412097091706893'
+                  status: berhasil
+                  status_code: 1
+                  sub_total: '150000'
+                  total: '151050'
+                  amount: '151050'
+                  fee: '1050'
+                  paid_off: 150000
+                  created_at: '2026-01-27 02:47:53'
+                  expired_at: '2026-01-28 02:47:52'
+                  paid_at: '2026-01-27 02:48:08'
+                  settlement_status: settled
+                  transaction_status_code: 1
+                  is_escrow: false
+                  system_notes: Sandbox notify
+                  via: qris
+                  channel: mpm
+                  payment_no: ''
+                  buyer_name: Aut libero dolor aut
+                  buyer_email: bucafet@mailinator.com
+                  buyer_phone: +1 (297) 254-2663
+                  additional_info: []
+                  url: https://yournotifyUrl.com
+      parameters:
+        - name: Accept
+          in: header
+          examples:
+            Callback Params (Success, Pending, and, Expired Transaction):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          examples:
+            Callback Params (Success, Pending, and, Expired Transaction):
+              value: application/x-www-form-urlencoded
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-External-ID
+          in: header
+          examples:
+            Callback Params (Success, Pending, and, Expired Transaction):
+              value: '20251111101052209120'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: X-Signature
+          in: header
+          examples:
+            Callback Params (Success, Pending, and, Expired Transaction):
+              value: c9594cc8c9f5811ecf22422eed1c8071f7837211f58956f616658a904d94f024
+              x-disabled: false
+          schema:
+            type: string
+        - name: X-Timestamp
+          in: header
+          examples:
+            Callback Params (Success, Pending, and, Expired Transaction):
+              value: '2025-11-11T10:10:52+07:00'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                trx_id:
+                  type: string
+                  examples:
+                    - '184854'
+                sid:
+                  type: string
+                  examples:
+                    - f5aaa61d-7260-4c91-a718-5274a55cb4b8
+                reference_id:
+                  type: string
+                  examples:
+                    - ID1234
+                status:
+                  type: string
+                  examples:
+                    - berhasil
+                status_code:
+                  type: string
+                  examples:
+                    - '1'
+                  description: |
+                    <p>status 1 =&gt; berhasil, 
+                    0 =&gt; pending, 
+                    -2 =&gt; expired</p>
+                sub_total:
+                  type: string
+                  examples:
+                    - '102000'
+                total:
+                  type: string
+                  examples:
+                    - '102000'
+                amount:
+                  type: string
+                  examples:
+                    - '102000'
+                fee:
+                  type: string
+                  examples:
+                    - '714'
+                paid_off:
+                  type: string
+                  examples:
+                    - '101286'
+                created_at:
+                  type: string
+                  examples:
+                    - '2025-11-11 10:10:26'
+                expired_at:
+                  type: string
+                  examples:
+                    - '2025-11-12 10:10:25'
+                paid_at:
+                  type: string
+                  examples:
+                    - '2025-11-11 10:10:51'
+                settlement_status:
+                  type: string
+                  examples:
+                    - settled
+                transaction_status_code:
+                  type: string
+                  examples:
+                    - '1'
+                is_escrow:
+                  type: string
+                  examples:
+                    - 'false'
+                system_notes:
+                  type: string
+                  examples:
+                    - Sandbox notify
+                via:
+                  type: string
+                  examples:
+                    - qris
+                channel:
+                  type: string
+                  examples:
+                    - mpm
+                payment_no:
+                  type: string
+                  examples:
+                    - ''
+                buyer_name:
+                  type: string
+                  examples:
+                    - putu
+                buyer_email:
+                  type: string
+                  examples:
+                    - putu@mail.com
+                buyer_phone:
+                  type: string
+                  examples:
+                    - '08123456789'
+                additional_info:
+                  type: string
+                  examples:
+                    - '[]'
+                url:
+                  type: string
+                  examples:
+                    - https://webhook.site/caef335b-f0bf-49d3-a532-35564f5241a2
+              required: []
+            examples:
+              Callback Params (Success, Pending, and, Expired Transaction):
+                value:
+                  - key: trx_id
+                    value: '184854'
+                    type: text
+                  - key: sid
+                    value: f5aaa61d-7260-4c91-a718-5274a55cb4b8
+                    type: text
+                  - key: reference_id
+                    value: ID1234
+                    type: text
+                  - key: status
+                    value: berhasil
+                    type: text
+                  - key: status_code
+                    value: '1'
+                    type: text
+                    description: |
+                      <p>status 1 =&gt; berhasil, 
+                      0 =&gt; pending, 
+                      -2 =&gt; expired</p>
+                  - key: sub_total
+                    value: '102000'
+                    type: text
+                  - key: total
+                    value: '102000'
+                    type: text
+                  - key: amount
+                    value: '102000'
+                    type: text
+                  - key: fee
+                    value: '714'
+                    type: text
+                  - key: paid_off
+                    value: '101286'
+                    type: text
+                  - key: created_at
+                    value: '2025-11-11 10:10:26'
+                    type: text
+                  - key: expired_at
+                    value: '2025-11-12 10:10:25'
+                    type: text
+                  - key: paid_at
+                    value: '2025-11-11 10:10:51'
+                    type: text
+                  - key: settlement_status
+                    value: settled
+                    type: text
+                  - key: transaction_status_code
+                    value: '1'
+                    type: text
+                  - key: is_escrow
+                    value: 'false'
+                    type: text
+                  - key: system_notes
+                    value: Sandbox notify
+                    type: text
+                  - key: via
+                    value: qris
+                    type: text
+                  - key: channel
+                    value: mpm
+                    type: text
+                  - key: payment_no
+                    value: ''
+                    type: text
+                  - key: buyer_name
+                    value: putu
+                    type: text
+                  - key: buyer_email
+                    value: putu@mail.com
+                    type: text
+                  - key: buyer_phone
+                    value: '08123456789'
+                    type: text
+                  - key: additional_info
+                    value: '[]'
+                    type: text
+                  - key: url
+                    value: https://webhook.site/caef335b-f0bf-49d3-a532-35564f5241a2
+                    type: text
+      servers:
+        - url: https://yourcallbackurl.com
+  /api/v2/payment:
+    post:
+      tags:
+        - Payment
+      summary: Redirect Payment (iPaymu Payment Page)
+      description: >-
+        <p>Pembayaran menggunakan halaman pembayaran iPaymu. Integrasi yang
+        sangat mudah, tanpa membuat halaman pembayaran lagi.</p>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Wed, 19 May 2021 06:28:26 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '100'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '99'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            X-XSS-Protection:
+              schema:
+                type: string
+                examples:
+                  - 1; mode=block
+            X-Frame-Options:
+              schema:
+                type: string
+                examples:
+                  - DENY
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Data:
+                    SessionID: 91538218-5158-459B-8716-DD97FFE3EDAB
+                    Url: >-
+                      https://sandbox.ipaymu.com/payment/91538218-5158-459B-8716-DD97FFE3EDAB
+                  Message: success
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:01:51 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '88'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 400
+                  Message: invalid request
+                  Error:
+                    product:
+                      - product wajib diisi.
+        '401':
+          description: Unauthorized
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:01:15 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '89'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 401
+                  Message: unauthorized
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Redirect Payment (iPaymu Payment Page):
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            Redirect Payment (iPaymu Payment Page):
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          examples:
+            Redirect Payment (iPaymu Payment Page):
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            Redirect Payment (iPaymu Payment Page):
+              value: '2026-06-20T03:02:13.319Z'
+              x-disabled: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                product[]:
+                  type: string
+                  description: |
+                    <p>Product</p>
+                  example: T-Shirt
+                qty[]:
+                  type: string
+                  description: |
+                    <p>Quantity</p>
+                  example: '2'
+                price[]:
+                  type: string
+                  description: |
+                    <p>Price on IDR</p>
+                  example: '51000'
+                description[]:
+                  type: string
+                  description: |
+                    <p>Description</p>
+                  example: Size XL
+                imageUrl[]:
+                  type: string
+                  description: |
+                    <p>Product image url (optional)</p>
+                  example: https://demo.ipaymu.com/assets/images/product-7.jpg
+                weight[]:
+                  type: string
+                  description: |
+                    <p>Product weight in kg (optional,  for COD payment)</p>
+                  example: '0.5'
+                length[]:
+                  type: string
+                  description: |
+                    <p>Product length in cm (optional,  for COD payment)</p>
+                  example: '1'
+                width[]:
+                  type: string
+                  description: |
+                    <p>Product width in cm (optional,  for COD payment)</p>
+                  example: '1'
+                height[]:
+                  type: string
+                  description: |
+                    <p>Product height in cm (optional,  for COD payment)</p>
+                  example: '1'
+                referenceId:
+                  type: string
+                  description: |
+                    <p>Reference/transaction ID merchant (optional)</p>
+                  example: ID1234
+                returnUrl:
+                  type: string
+                  description: |
+                    <p>Thank you page</p>
+                  example: https://your-website.com/thank-you-page
+                notifyUrl:
+                  type: string
+                  description: >
+                    <p>Notify URL for receive webhook from iPaymu. (iPaymu will
+                    send param in POST method to this URL when buyer make a
+                    payment)</p>
+                  example: https://webhook.site/caef335b-f0bf-49d3-a532-35564f5241a2
+                cancelUrl:
+                  type: string
+                  description: |
+                    <p>Cancel/failed page</p>
+                  example: https://your-website.com/failed-page
+                buyerName:
+                  type: string
+                  description: |
+                    <p>Buyer name (optional)</p>
+                  example: putu
+                buyerEmail:
+                  type: string
+                  description: |
+                    <p>Buyer email (optional)</p>
+                  example: putu@mail.com
+                buyerPhone:
+                  type: string
+                  description: |
+                    <p>Buyer phone (optional)</p>
+                  example: '08123456789'
+                expired:
+                  type: string
+                  description: >
+                    <p>Custom expired payment code in hours (optional)
+
+                    Nb:</p>
+
+                    <ul>
+
+                    <li>BSI VA max 3 hours</li>
+
+                    <li>BCA VA can't be customized (default 12 hours)</li>
+
+                    <li>BRI VA max 2 hours</li>
+
+                    <li>Con Store Alfamart can't be customized (default 24
+                    hours)</li>
+
+                    <li>QRIS can't be customized (default 5 minutes)</li>
+
+                    </ul>
+                  example: '24'
+                feeDirection:
+                  type: string
+                  description: |
+                    <p>Custom fee direction (optional)</p>
+                    <ul>
+                    <li>MERCHANT =&gt; fee charged to merchant,</li>
+                    <li>BUYER =&gt; fee charged to buyer</li>
+                    </ul>
+                  example: MERCHANT
+                account:
+                  type: string
+                  description: |
+                    <p>va child account (optional)</p>
+                  example: '1179000899'
+                paymentMethod:
+                  type: string
+                  description: >
+                    <p>Customize the payment payment method that appears on the
+                    payment page (optional)</p>
+
+                    <ul>
+
+                    <li>Virtual Account =&gt; 'va'</li>
+
+                    <li>Bank Transfer =&gt; 'banktransfer'</li>
+
+                    <li>Convenience Store =&gt; 'cstore'</li>
+
+                    <li>COD =&gt; 'cod'</li>
+
+                    <li>QRIS =&gt; 'qris'</li>
+
+                    <li>Credit Card =&gt; 'cc'</li>
+
+                    </ul>
+                  example: cc
+                  x-scalar-disabled: true
+                pickupArea:
+                  type: string
+                  description: |
+                    <p>Delivery postal code (for COD payment) (optional)</p>
+                  example: '17473'
+                  x-scalar-disabled: true
+                lang:
+                  type: string
+                  description: |
+                    <p>Payment page language</p>
+                  example: id
+            examples:
+              Redirect Payment (iPaymu Payment Page):
+                value:
+                  - key: product[]
+                    value: T-Shirt
+                    description: |
+                      <p>Product</p>
+                    type: text
+                  - key: qty[]
+                    value: '2'
+                    description: |
+                      <p>Quantity</p>
+                    type: text
+                  - key: price[]
+                    value: '51000'
+                    description: |
+                      <p>Price on IDR</p>
+                    type: text
+                  - key: description[]
+                    value: Size XL
+                    description: |
+                      <p>Description</p>
+                    type: text
+                  - key: imageUrl[]
+                    value: https://demo.ipaymu.com/assets/images/product-7.jpg
+                    description: |
+                      <p>Product image url (optional)</p>
+                    type: text
+                  - key: weight[]
+                    value: '0.5'
+                    description: |
+                      <p>Product weight in kg (optional,  for COD payment)</p>
+                    type: text
+                  - key: length[]
+                    value: '1'
+                    description: |
+                      <p>Product length in cm (optional,  for COD payment)</p>
+                    type: text
+                  - key: width[]
+                    value: '1'
+                    description: |
+                      <p>Product width in cm (optional,  for COD payment)</p>
+                    type: text
+                  - key: height[]
+                    value: '1'
+                    description: |
+                      <p>Product height in cm (optional,  for COD payment)</p>
+                    type: text
+                  - key: referenceId
+                    value: ID1234
+                    description: |
+                      <p>Reference/transaction ID merchant (optional)</p>
+                    type: text
+                  - key: returnUrl
+                    value: https://your-website.com/thank-you-page
+                    description: |
+                      <p>Thank you page</p>
+                    type: text
+                  - key: notifyUrl
+                    value: https://webhook.site/caef335b-f0bf-49d3-a532-35564f5241a2
+                    description: >
+                      <p>Notify URL for receive webhook from iPaymu. (iPaymu
+                      will send param in POST method to this URL when buyer make
+                      a payment)</p>
+                    type: text
+                  - key: cancelUrl
+                    value: https://your-website.com/failed-page
+                    description: |
+                      <p>Cancel/failed page</p>
+                    type: text
+                  - key: buyerName
+                    value: putu
+                    description: |
+                      <p>Buyer name (optional)</p>
+                    type: text
+                  - key: buyerEmail
+                    value: putu@mail.com
+                    description: |
+                      <p>Buyer email (optional)</p>
+                    type: text
+                  - key: buyerPhone
+                    value: '08123456789'
+                    description: |
+                      <p>Buyer phone (optional)</p>
+                    type: text
+                  - key: expired
+                    value: '24'
+                    description: >
+                      <p>Custom expired payment code in hours (optional)
+
+                      Nb:</p>
+
+                      <ul>
+
+                      <li>BSI VA max 3 hours</li>
+
+                      <li>BCA VA can't be customized (default 12 hours)</li>
+
+                      <li>BRI VA max 2 hours</li>
+
+                      <li>Con Store Alfamart can't be customized (default 24
+                      hours)</li>
+
+                      <li>QRIS can't be customized (default 5 minutes)</li>
+
+                      </ul>
+                    type: text
+                  - key: feeDirection
+                    value: MERCHANT
+                    description: |
+                      <p>Custom fee direction (optional)</p>
+                      <ul>
+                      <li>MERCHANT =&gt; fee charged to merchant,</li>
+                      <li>BUYER =&gt; fee charged to buyer</li>
+                      </ul>
+                    type: text
+                  - key: account
+                    value: '1179000899'
+                    description: |
+                      <p>va child account (optional)</p>
+                    type: text
+                  - key: paymentMethod
+                    value: cc
+                    description: >
+                      <p>Customize the payment payment method that appears on
+                      the payment page (optional)</p>
+
+                      <ul>
+
+                      <li>Virtual Account =&gt; 'va'</li>
+
+                      <li>Bank Transfer =&gt; 'banktransfer'</li>
+
+                      <li>Convenience Store =&gt; 'cstore'</li>
+
+                      <li>COD =&gt; 'cod'</li>
+
+                      <li>QRIS =&gt; 'qris'</li>
+
+                      <li>Credit Card =&gt; 'cc'</li>
+
+                      </ul>
+                    type: text
+                    disabled: true
+                  - key: pickupArea
+                    value: '17473'
+                    description: |
+                      <p>Delivery postal code (for COD payment) (optional)</p>
+                    type: text
+                    disabled: true
+                  - key: lang
+                    value: id
+                    description: |
+                      <p>Payment page language</p>
+                    type: text
+  /api/v2/transaction:
+    post:
+      summary: Check Transaction
+      description: >-
+        <p>API ini berfungsi untuk mengetahui informasi transaksi, termasuk
+        status dan nilai transaksi secara realtime.<br />Status transaksi yang
+        bisa dianggap berhasil bisa dilihat pada response parameter:<br
+        />Data-&gt;Status: 1 atau 6 atau 7</p>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Thu, 23 Nov 2023 05:46:44 GMT
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            x-ratelimit-limit:
+              schema:
+                type: string
+                examples:
+                  - '60'
+            x-ratelimit-remaining:
+              schema:
+                type: string
+                examples:
+                  - '56'
+            access-control-allow-origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            referrer-policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            x-content-type-options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            strict-transport-security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            content-security-policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            x-frame-options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            CF-Cache-Status:
+              schema:
+                type: string
+                examples:
+                  - DYNAMIC
+            Server:
+              schema:
+                type: string
+                examples:
+                  - cloudflare
+            CF-RAY:
+              schema:
+                type: string
+                examples:
+                  - 82a71cfd0a0cbe8f-CGK
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - br
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Success: true
+                  Message: success
+                  Data:
+                    TransactionId: 4719
+                    SessionId: 50B97F0F-E4B7-49EF-900C-7DC22DB8297D
+                    ReferenceId: null
+                    RelatedId: 0
+                    Sender: System
+                    Receiver: Akun Demo IPAYMU
+                    Amount: 10000
+                    Fee: 4000
+                    Status: 1
+                    StatusDesc: Berhasil
+                    PaidStatus: paid
+                    IsLocked: false
+                    Type: 11
+                    TypeDesc: Convenience Store
+                    Notes: Convenience Store INDOMARET
+                    CreatedDate: '2019-12-30 08:37:06'
+                    SuccessDate: '2021-12-12 00:33:50'
+                    ExpiredDate: '2019-12-31 08:37:06'
+                    SettlementDate: '2020-01-31 12:44:12'
+                    PaymentChannel: ''
+                    PaymentCode: ''
+                    BuyerName: ''
+                    BuyerPhone: ''
+                    BuyerEmail: ''
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:02:57 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '87'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 400
+                  Message: error - invalid request
+                  Error:
+                    transactionId:
+                      - transaction id wajib diisi.
+        '401':
+          description: Unauthorized
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:02:32 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '88'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 401
+                  Message: unauthorized
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Check Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            Check Transaction:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          description: |
+            <p>iPaymu VA</p>
+          examples:
+            Check Transaction:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            Check Transaction:
+              value: '20191209155701'
+              x-disabled: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                transactionId:
+                  type: string
+                  description: |
+                    <p>iPaymu transaction id</p>
+                  example: '4719'
+                account:
+                  type: string
+                  description: |
+                    <p>iPaymu VA</p>
+                  example: '1179000899'
+            examples:
+              Check Transaction:
+                value:
+                  - key: transactionId
+                    value: '4719'
+                    description: |
+                      <p>iPaymu transaction id</p>
+                    type: text
+                  - key: account
+                    value: '1179000899'
+                    description: |
+                      <p>iPaymu VA</p>
+                    type: text
+  /api/v2/balance:
+    post:
+      summary: Check Balance
+      description: <p>Cek saldo iPaymu</p>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Wed, 18 Aug 2021 06:54:51 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '89'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            X-Frame-Options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - gzip
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Data:
+                    Va: '1179000899'
+                    MerchantBalance: '0'
+                    MemberBalance: '0'
+                  Message: success
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:07:30 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '89'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 400
+                  Message: error - invalid request
+                  Error:
+                    account:
+                      - Invalid va
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            Check Balance:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            Check Balance:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          description: |
+            <p>iPaymu VA</p>
+          examples:
+            Check Balance:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            Check Balance:
+              value: '20191209155701'
+              x-disabled: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  description: |
+                    <p>your iPaymu VA</p>
+                  example: '1179000899'
+            examples:
+              Check Balance:
+                value:
+                  - key: account
+                    value: '1179000899'
+                    description: |
+                      <p>your iPaymu VA</p>
+                    type: text
+  /api/v2/history:
+    post:
+      summary: History Transaction
+      description: <p>API untuk melihat data riwayat transaksi iPaymu.</p>
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Wed, 17 May 2023 03:41:31 GMT
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            vary:
+              schema:
+                type: string
+                examples:
+                  - Accept-Encoding
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            x-ratelimit-limit:
+              schema:
+                type: string
+                examples:
+                  - '60'
+            x-ratelimit-remaining:
+              schema:
+                type: string
+                examples:
+                  - '58'
+            access-control-allow-origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            referrer-policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            x-content-type-options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            strict-transport-security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            content-security-policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+            x-frame-options:
+              schema:
+                type: string
+                examples:
+                  - SAMEORIGIN
+            CF-Cache-Status:
+              schema:
+                type: string
+                examples:
+                  - DYNAMIC
+            Server:
+              schema:
+                type: string
+                examples:
+                  - cloudflare
+            CF-RAY:
+              schema:
+                type: string
+                examples:
+                  - 7c88d85bcdfc356e-CGK
+            Content-Encoding:
+              schema:
+                type: string
+                examples:
+                  - br
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 200
+                  Success: true
+                  Message: success
+                  Data:
+                    Transaction:
+                      - TransactionId: 96461
+                        SessionId: 8EF472D4-73AD-4240-A33F-923E1D01E803
+                        ReferenceId: ''
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 104000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: null
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 21:34:50'
+                        ExpiredDate: '2023-05-17 21:34:50'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: Mandiri
+                        PaymentCode: '000010157570'
+                        BuyerName: edi
+                        BuyerPhone: '081237774123'
+                        BuyerEmail: edi@mail.com
+                      - TransactionId: 96458
+                        SessionId: E3F67BC4-2AA6-4DA2-8351-D1639065FC89
+                        ReferenceId: '1234'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 163500
+                        Fee: 3500
+                        Status: -2
+                        StatusDesc: Expired
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: null
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 17:49:05'
+                        ExpiredDate: '2023-05-16 20:49:05'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: Muamalat
+                        PaymentCode: '7873004335986850'
+                        BuyerName: '3434'
+                        BuyerPhone: '964688655'
+                        BuyerEmail: tesats@gmail.com
+                      - TransactionId: 96450
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 16:06:57'
+                        ExpiredDate: '2023-05-17 16:06:57'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034814248'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96449
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 16:03:39'
+                        ExpiredDate: '2023-05-17 16:03:39'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034827863'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96446
+                        SessionId: null
+                        ReferenceId: null
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 44000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:55:54'
+                        ExpiredDate: '2023-05-17 15:55:54'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034793269'
+                        BuyerName: Gusmang Asmara
+                        BuyerPhone: '081936384166'
+                        BuyerEmail: ibasmara@gmail.com
+                      - TransactionId: 96437
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:27:14'
+                        ExpiredDate: '2023-05-17 15:27:14'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034947390'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96435
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:26:52'
+                        ExpiredDate: '2023-05-17 15:26:52'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034696914'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96429
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:16:25'
+                        ExpiredDate: '2023-05-17 15:16:25'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034190574'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96426
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:13:08'
+                        ExpiredDate: '2023-05-17 15:13:08'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034539342'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96423
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:10:28'
+                        ExpiredDate: '2023-05-17 15:10:28'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034212495'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96422
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:09:23'
+                        ExpiredDate: '2023-05-17 15:09:23'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034570218'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96418
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:08:09'
+                        ExpiredDate: '2023-05-17 15:08:08'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034446682'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96417
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:07:49'
+                        ExpiredDate: '2023-05-17 15:07:49'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034397541'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96413
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:05:27'
+                        ExpiredDate: '2023-05-17 15:05:27'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034639653'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96411
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:03:51'
+                        ExpiredDate: '2023-05-17 15:03:51'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034766083'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96410
+                        SessionId: 07781F30-9B63-4684-BA02-0D2B77C55803
+                        ReferenceId: null
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 114000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: null
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:03:10'
+                        ExpiredDate: '2023-05-17 15:03:09'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034229139'
+                        BuyerName: Gusmang Asmara
+                        BuyerPhone: '081936384166'
+                        BuyerEmail: ibasmara@gmail.com
+                      - TransactionId: 96408
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 15:01:21'
+                        ExpiredDate: '2023-05-17 15:01:21'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034706210'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96404
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 14:59:07'
+                        ExpiredDate: '2023-05-17 14:59:06'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034900237'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96401
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 14:58:23'
+                        ExpiredDate: '2023-05-17 14:58:23'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034875496'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                      - TransactionId: 96398
+                        SessionId: '1'
+                        ReferenceId: '1'
+                        RelatedId: 0
+                        Sender: System
+                        Receiver: Akun Demo IPAYMU
+                        Amount: 14000
+                        Fee: 4000
+                        Status: 0
+                        StatusDesc: Pending
+                        PaidStatus: unpaid
+                        Type: 7
+                        TypeDesc: VA & Transfer Bank
+                        Notes: BCA VA
+                        IsEscrow: false
+                        CreatedDate: '2023-05-16 14:55:49'
+                        ExpiredDate: '2023-05-17 14:55:49'
+                        SuccessDate: null
+                        SettlementDate: null
+                        PaymentChannel: BCA
+                        PaymentCode: '3811800034927268'
+                        BuyerName: bayu
+                        BuyerPhone: '085777777777'
+                        BuyerEmail: admin@email.com
+                    Pagination:
+                      total: 10141
+                      count: 20
+                      per_page: 20
+                      current_page: 1
+                      total_pages: 508
+        '400':
+          description: Bad Request
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:07:12 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '87'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 400
+                  Message: error - invalid request
+                  Error:
+                    page:
+                      - page harus berupa angka.
+        '401':
+          description: Unauthorized
+          headers:
+            Server:
+              schema:
+                type: string
+                examples:
+                  - nginx
+            Content-Type:
+              schema:
+                type: string
+                examples:
+                  - application/json
+            Transfer-Encoding:
+              schema:
+                type: string
+                examples:
+                  - chunked
+            Connection:
+              schema:
+                type: string
+                examples:
+                  - keep-alive
+            Cache-Control:
+              schema:
+                type: string
+                examples:
+                  - must-revalidate, no-cache, private
+            Date:
+              schema:
+                type: string
+                examples:
+                  - Fri, 29 Apr 2022 03:06:23 GMT
+            X-RateLimit-Limit:
+              schema:
+                type: string
+                examples:
+                  - '90'
+            X-RateLimit-Remaining:
+              schema:
+                type: string
+                examples:
+                  - '89'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                examples:
+                  - '*'
+            Referrer-Policy:
+              schema:
+                type: string
+                examples:
+                  - no-referrer-when-downgrade
+            X-Content-Type-Options:
+              schema:
+                type: string
+                examples:
+                  - nosniff
+            Strict-Transport-Security:
+              schema:
+                type: string
+                examples:
+                  - max-age=31536000; includeSubDomains; preload
+            Pragma:
+              schema:
+                type: string
+                examples:
+                  - no-cache
+            Content-Security-Policy:
+              schema:
+                type: string
+                examples:
+                  - >-
+                    default-src * 'unsafe-inline' 'unsafe-eval'; script-src *
+                    'unsafe-inline' 'unsafe-eval'; connect-src *
+                    'unsafe-inline'; img-src * data: blob: 'unsafe-inline';
+                    frame-src *; style-src * 'unsafe-inline';
+          content:
+            application/json:
+              schema:
+                type: string
+              examples:
+                default:
+                  Status: 401
+                  Message: unauthorized
+      parameters:
+        - name: Content-Type
+          in: header
+          examples:
+            History Transaction:
+              value: application/json
+              x-disabled: false
+          schema:
+            type: string
+        - name: signature
+          in: header
+          description: >
+            <p>Signature generate per-request. Read more <a
+            href="https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf">https://storage.googleapis.com/ipaymu-docs/ipaymu-api/iPaymu-signature-documentation-v2.pdf</a></p>
+          examples:
+            History Transaction:
+              value: ''
+              x-disabled: false
+          schema:
+            type: string
+        - name: va
+          in: header
+          examples:
+            History Transaction:
+              value: '1179000899'
+              x-disabled: false
+          schema:
+            type: integer
+        - name: timestamp
+          in: header
+          examples:
+            History Transaction:
+              value: '20191209155701'
+              x-disabled: false
+          schema:
+            type: integer
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  example: '341189'
+                  x-scalar-disabled: true
+                status:
+                  type: string
+                  description: |
+                    <p>-2 =&gt; Expired,
+                    0 =&gt; Pending,
+                    1 =&gt; Berhasil,
+                    2 =&gt; Batal,
+                    3 =&gt; Refund,
+                    4 =&gt; Error,
+                    5 =&gt; Gagal,
+                    6 =&gt; Berhasil - Unsettled,
+                    7 =&gt; Escrow,</p>
+                  example: '1'
+                  x-scalar-disabled: true
+                date:
+                  type: string
+                  description: |
+                    <ul>
+                    <li>created_at =&gt; filter by transaction created date</li>
+                    <li>indate =&gt; filter by transaction paid date</li>
+                    </ul>
+                  example: created_at
+                  x-scalar-disabled: true
+                startdate:
+                  type: string
+                  description: |
+                    <p>Start Date</p>
+                  example: '2019-12-01'
+                  x-scalar-disabled: true
+                enddate:
+                  type: string
+                  description: |
+                    <p>End Date</p>
+                  example: '2019-12-30'
+                  x-scalar-disabled: true
+                page:
+                  type: string
+                  description: |
+                    <p>Pagination (Page 1)</p>
+                  example: '1'
+                  x-scalar-disabled: true
+                type:
+                  type: string
+                  description: |
+                    <ul>
+                    <li>0 =&gt; Mutasi</li>
+                    <li>2 =&gt; Penarikan</li>
+                    <li>5 =&gt; Komisi</li>
+                    <li>7 =&gt; Bank Transfer/VA</li>
+                    <li>10 =&gt; COD</li>
+                    <li>11 =&gt; Convenience Store</li>
+                    <li>20 =&gt; Pindah Saldo</li>
+                    <li>22 =&gt; Akulaku</li>
+                    <li>23 =&gt; QRIS</li>
+                    <li>24 =&gt; EDC</li>
+                    <li>27 =&gt; QRIS Payment</li>
+                    </ul>
+                  example: ''
+                  x-scalar-disabled: true
+                orderBy:
+                  type: string
+                  description: |
+                    <ul>
+                    <li>id =&gt; transaction id</li>
+                    <li>created_at =&gt; filter by transaction created date</li>
+                    <li>indate =&gt; filter by transaction paid date</li>
+                    </ul>
+                  example: id
+                order:
+                  type: string
+                  description: |
+                    <ul>
+                    <li>ASC</li>
+                    <li>DESC</li>
+                    </ul>
+                  example: DESC
+                limit:
+                  type: string
+                  description: |
+                    <p>limit per page, max 20</p>
+                  example: '20'
+                lang:
+                  type: string
+                  description: |
+                    <p>language:</p>
+                    <ul>
+                    <li>en</li>
+                    <li>id</li>
+                    </ul>
+                  example: en
+                  x-scalar-disabled: true
+                bulkId:
+                  type: string
+                  description: |
+                    <p>list transaction id</p>
+                  example: 9357442,9357441
+                  x-scalar-disabled: true
+                account:
+                  type: string
+                  example: '1179000899'
+                  x-scalar-disabled: true
+                lockStatus:
+                  type: string
+                  description: |
+                    <p>0 =&gt; unlocked
+                    1 =&gt; lokced</p>
+                  example: '1'
+                  x-scalar-disabled: true
+            examples:
+              History Transaction:
+                value:
+                  - key: id
+                    value: '341189'
+                    type: text
+                    disabled: true
+                  - key: status
+                    value: '1'
+                    description: |
+                      <p>-2 =&gt; Expired,
+                      0 =&gt; Pending,
+                      1 =&gt; Berhasil,
+                      2 =&gt; Batal,
+                      3 =&gt; Refund,
+                      4 =&gt; Error,
+                      5 =&gt; Gagal,
+                      6 =&gt; Berhasil - Unsettled,
+                      7 =&gt; Escrow,</p>
+                    type: text
+                    disabled: true
+                  - key: date
+                    value: created_at
+                    description: >
+                      <ul>
+
+                      <li>created_at =&gt; filter by transaction created
+                      date</li>
+
+                      <li>indate =&gt; filter by transaction paid date</li>
+
+                      </ul>
+                    type: text
+                    disabled: true
+                  - key: startdate
+                    value: '2019-12-01'
+                    description: |
+                      <p>Start Date</p>
+                    type: text
+                    disabled: true
+                  - key: enddate
+                    value: '2019-12-30'
+                    description: |
+                      <p>End Date</p>
+                    type: text
+                    disabled: true
+                  - key: page
+                    value: '1'
+                    description: |
+                      <p>Pagination (Page 1)</p>
+                    type: text
+                    disabled: true
+                  - key: type
+                    value: ''
+                    description: |
+                      <ul>
+                      <li>0 =&gt; Mutasi</li>
+                      <li>2 =&gt; Penarikan</li>
+                      <li>5 =&gt; Komisi</li>
+                      <li>7 =&gt; Bank Transfer/VA</li>
+                      <li>10 =&gt; COD</li>
+                      <li>11 =&gt; Convenience Store</li>
+                      <li>20 =&gt; Pindah Saldo</li>
+                      <li>22 =&gt; Akulaku</li>
+                      <li>23 =&gt; QRIS</li>
+                      <li>24 =&gt; EDC</li>
+                      <li>27 =&gt; QRIS Payment</li>
+                      </ul>
+                    type: text
+                    disabled: true
+                  - key: orderBy
+                    value: id
+                    description: >
+                      <ul>
+
+                      <li>id =&gt; transaction id</li>
+
+                      <li>created_at =&gt; filter by transaction created
+                      date</li>
+
+                      <li>indate =&gt; filter by transaction paid date</li>
+
+                      </ul>
+                    type: text
+                  - key: order
+                    value: DESC
+                    description: |
+                      <ul>
+                      <li>ASC</li>
+                      <li>DESC</li>
+                      </ul>
+                    type: text
+                  - key: limit
+                    value: '20'
+                    description: |
+                      <p>limit per page, max 20</p>
+                    type: text
+                  - key: lang
+                    value: en
+                    description: |
+                      <p>language:</p>
+                      <ul>
+                      <li>en</li>
+                      <li>id</li>
+                      </ul>
+                    type: text
+                    disabled: true
+                  - key: bulkId
+                    value: 9357442,9357441
+                    description: |
+                      <p>list transaction id</p>
+                    type: text
+                    disabled: true
+                  - key: account
+                    value: '1179000899'
+                    type: text
+                    disabled: true
+                  - key: lockStatus
+                    value: '1'
+                    description: |
+                      <p>0 =&gt; unlocked
+                      1 =&gt; lokced</p>
+                    type: text
+                    disabled: true
+tags:
+  - name: Payment
+    description: >
+      <img
+      src="https://content.pstmn.io/fa658247-507e-44b9-9fe5-318368d54779/cGF5bWVudC1pcGF5bXUtZmxvdy5qcGc="
+      />
+
+
+      <p><strong>Unauthorized Credential</strong></p>
+
+      <ul>
+
+      <li><p><strong>Error Message:</strong> <code>unauthorized</code>,
+      <code>401</code></p>
+
+      </li>
+
+      <li><p><strong>Description:</strong> Usually happens when using wrong
+      credentials or mixing sandbox and production credentials</p>
+
+      </li>
+
+      <li><p><strong>Solutions:</strong> Ensure you're using the correct VA and
+      API Key for the environment (sandbox vs production)</p>
+
+      </li>
+
+      </ul>
+
+      <p><strong>Unauthorized Signature</strong></p>
+
+      <ul>
+
+      <li><p><strong>Error Message:</strong> <code>{"Message":"unauthorized
+      signature"}</code>, <code>401</code></p>
+
+      </li>
+
+      <li><p><strong>Description:</strong> Can be caused by illegal characters
+      that interfere with signature generation (like ` or special quotes) or
+      sending data with null values</p>
+
+      </li>
+
+      <li><p><strong>Solutions:</strong> Remove special characters from
+      parameters, ensure no null values, verify signature generation process</p>
+
+      </li>
+
+      </ul>
+
+      <p><strong>Invalid Domain</strong></p>
+
+      <ul>
+
+      <li><p><strong>Error Message:</strong> <code>invalid domain</code>,
+      <code>406</code></p>
+
+      </li>
+
+      <li><p><strong>Description:</strong> Occurs when return url, cancel url,
+      or notify url are not registered in the dashboard</p>
+
+      </li>
+
+      <li><p><strong>Solutions:</strong> Register all domains in your iPaymu
+      dashboard; for production, domains need activation</p>
+
+      </li>
+
+      <li><p><strong>Reference:</strong> <a
+      href="https://blog.ipaymu.com/mengatasi-masalah-error-invalid-ip-domain-di-ipaymu/">https://blog.ipaymu.com/mengatasi-masalah-error-invalid-ip-domain-di-ipaymu/</a></p>
+
+      </li>
+
+      </ul>
+
+      <p><strong>Production IP &amp; Domain Requirements</strong></p>
+
+      <ul>
+
+      <li><p><strong>IP Check:</strong> Production has IP validation - user
+      needs static IP registered to dashboard</p>
+
+      </li>
+
+      <li><p><strong>Domain Activation:</strong> Multiple domains can be
+      registered but require activation request</p>
+
+      </li>
+
+      <li><p><strong>Outgoing IP:</strong> Ensure registered IP is the one
+      making requests to iPaymu</p>
+
+      </li>
+
+      <li><p><strong>Domain Validation:</strong> URLs must be registered and
+      activated in dashboard for production use</p>
+
+      </li>
+
+      </ul>
+  - name: Direct Payment COD
+    description: Part of Payment
+servers:
+  - url: https://sandbox.ipaymu.com

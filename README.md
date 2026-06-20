@@ -20,6 +20,7 @@ If you work with several providers and need a single source of truth for API def
 - DOKU API Collection
 - Xendit API
 - Xendit SNAP API
+- iPaymu API (v2)
 
 ## Repository structure
 
@@ -27,8 +28,9 @@ If you work with several providers and need a single source of truth for API def
   - `midtrans/`
   - `doku/`
   - `xendit/`
+  - `ipaymu/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit.
+  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -42,7 +44,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -83,6 +85,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/doku/doku.openapi.yaml`
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
+- `openapi/ipaymu/ipaymu.openapi.yaml`
 
 ## Contributing
 
@@ -100,4 +103,3 @@ This repository is released under MIT. Contributions are welcome.
 ## Maintainers
 
 This is a community-friendly open source repository maintained by the project owner and contributors.
-

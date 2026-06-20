@@ -20,6 +20,10 @@ const pairs = [
     input: 'postman/xendit/xendit-snap.postman_collection.json',
     output: 'openapi/xendit/xendit-snap.openapi.yaml',
   },
+  {
+    input: 'postman/ipaymu/ipaymu.postman_collection.json',
+    output: 'openapi/ipaymu/ipaymu.openapi.yaml',
+  },
 ];
 
 for (const p of pairs) {
