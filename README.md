@@ -27,6 +27,7 @@ If you work with several providers and need a single source of truth for API def
 - Mayar API
 - Hostinger API
 - Biznet Gio API
+- Cloudflare API
 
 ## Repository structure
 
@@ -38,6 +39,7 @@ If you work with several providers and need a single source of truth for API def
   - `finpay/`
   - `mayar/`
   - `hostinger/`
+  - `cloudflare/`
 - `openapi/`
   - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, Fastpay, Finpay, Mayar, Hostinger, Biznet Gio.
 - `openapi-legacy/`
@@ -54,7 +56,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, Fastpay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
