@@ -14,7 +14,7 @@ If you work with several providers and need a single source of truth for API def
 - Reusable scripts to convert and clean Postman collections automatically.
 - Documented cleanup status for schema quality and path correctness.
 
-## Current API collections included
+## Current API assets included
 
 - Midtrans Payment API
 - DOKU API Collection
@@ -22,6 +22,7 @@ If you work with several providers and need a single source of truth for API def
 - Xendit SNAP API
 - iPaymu API (v2)
 - Flip for Business API
+- Duitku API
 - Faspay API
 - Finpay Billing API
 - Finpay Disbursement API
@@ -30,6 +31,7 @@ If you work with several providers and need a single source of truth for API def
 - Hostinger API
 - Biznet Gio API
 - Cloudflare API
+- Stripe API
 
 ## Repository structure
 
@@ -39,13 +41,14 @@ If you work with several providers and need a single source of truth for API def
   - `xendit/`
   - `ipaymu/`
   - `flip/`
+  - `duitku/`
   - `fastpay/`
   - `finpay/`
   - `mayar/`
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Flip for Business, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare.
+  - Converted and official OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Duitku, Flip for Business, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare, and Stripe.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -60,7 +63,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Flip for Business API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Duitku API, Flip for Business API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, Stripe API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -114,6 +117,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/xendit/xendit-snap.openapi.yaml`
 - `openapi/ipaymu/ipaymu.openapi.yaml`
 - `openapi/flip/flip.openapi.yaml`
+- `openapi/duitku/duitku.openapi.yaml`
 - `openapi/fastpay/fastpay.openapi.yaml`
 - `openapi/finpay/finpay-billing.openapi.yaml`
 - `openapi/finpay/finpay-disbursement.openapi.yaml`
@@ -124,6 +128,8 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/biznet-gio/biznet-gio.openapi.yaml`
 - `openapi/biznet-gio/biznet-gio.openapi.json`
 - `openapi/cloudflare/cloudflare.openapi.yaml`
+- `openapi/stripe/stripe.openapi.yaml`
+- `openapi/stripe/stripe.openapi.json`
 
 ## Contributing
 

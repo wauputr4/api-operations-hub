@@ -1,0 +1,138 @@
+{
+  "info": {
+    "name": "Duitku API",
+    "description": "Docs-derived Postman collection from Duitku API documentation. Official Run in Postman link is listed in the docs, but the public collection export endpoint is not directly downloadable without Postman API access.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://sandbox.duitku.com"
+    },
+    {
+      "key": "productionBaseUrl",
+      "value": "https://passport.duitku.com"
+    },
+    {
+      "key": "merchantCode",
+      "value": "DXXXX"
+    },
+    {
+      "key": "apiKey",
+      "value": "<YOUR_API_KEY>"
+    }
+  ],
+  "item": [
+    {
+      "name": "Get Payment Method",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webapi/api/merchant/paymentmethod/getpaymentmethod",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "webapi",
+            "api",
+            "merchant",
+            "paymentmethod",
+            "getpaymentmethod"
+          ]
+        },
+        "description": "Source: https://docs.duitku.com/api/en/#get-payment-method",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"merchantcode\": \"{{merchantCode}}\",\n  \"amount\": \"10000\",\n  \"datetime\": \"2026-06-20 10:00:00\",\n  \"signature\": \"<HMAC_SHA256(merchantcode + amount + datetime, apiKey)>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Request Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webapi/api/merchant/v2/inquiry",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "webapi",
+            "api",
+            "merchant",
+            "v2",
+            "inquiry"
+          ]
+        },
+        "description": "Source: https://docs.duitku.com/api/en/#request-transaction",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"merchantCode\": \"{{merchantCode}}\",\n  \"paymentAmount\": 40000,\n  \"paymentMethod\": \"VC\",\n  \"merchantOrderId\": \"abcde12345\",\n  \"productDetails\": \"Payment example for example merchant\",\n  \"additionalParam\": \"\",\n  \"merchantUserInfo\": \"\",\n  \"customerVaName\": \"John Doe\",\n  \"email\": \"customer@example.com\",\n  \"phoneNumber\": \"08123456789\",\n  \"callbackUrl\": \"https://example.com/callback\",\n  \"returnUrl\": \"https://example.com/return\",\n  \"expiryPeriod\": 10,\n  \"signature\": \"<HMAC_SHA256(merchantCode + merchantOrderId + paymentAmount, apiKey)>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Check Transaction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/webapi/api/merchant/transactionStatus",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "webapi",
+            "api",
+            "merchant",
+            "transactionStatus"
+          ]
+        },
+        "description": "Source: https://docs.duitku.com/api/en/#check-transaction",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"merchantCode\": \"{{merchantCode}}\",\n  \"merchantOrderId\": \"abcde12345\",\n  \"signature\": \"<HMAC_SHA256(merchantCode + merchantOrderId, apiKey)>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": []
+    }
+  ]
+}
