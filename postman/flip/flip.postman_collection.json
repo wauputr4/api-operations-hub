@@ -34,6 +34,11 @@
       "key": "bill_id",
       "value": "1234567890",
       "type": "string"
+    },
+    {
+      "key": "idempotency_key",
+      "value": "flip-disbursement-001",
+      "type": "string"
     }
   ],
   "item": [
@@ -100,7 +105,7 @@
           },
           {
             "key": "Content-Type",
-            "value": "application/json"
+            "value": "application/x-www-form-urlencoded"
           }
         ],
         "description": "Get the bank account holder name before creating a disbursement.",
@@ -117,13 +122,11 @@
           "query": []
         },
         "body": {
-          "mode": "raw",
-          "raw": "{\n  \"account_number\": \"1234567890\",\n  \"bank_code\": \"bca\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "account_number", "value": "1234567890", "type": "text" },
+            { "key": "bank_code", "value": "bca", "type": "text" }
+          ]
         }
       },
       "response": []
@@ -139,7 +142,11 @@
           },
           {
             "key": "Content-Type",
-            "value": "application/json"
+            "value": "application/x-www-form-urlencoded"
+          },
+          {
+            "key": "idempotency-key",
+            "value": "{{idempotency_key}}"
           }
         ],
         "description": "Create a common disbursement transaction.",
@@ -155,13 +162,13 @@
           "query": []
         },
         "body": {
-          "mode": "raw",
-          "raw": "{\n  \"account_number\": \"1234567890\",\n  \"bank_code\": \"bca\",\n  \"amount\": 10000,\n  \"remark\": \"Invoice payout\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "account_number", "value": "1234567890", "type": "text" },
+            { "key": "bank_code", "value": "bca", "type": "text" },
+            { "key": "amount", "value": "10000", "type": "text" },
+            { "key": "remark", "value": "Invoice payout", "type": "text" }
+          ]
         }
       },
       "response": []
@@ -189,7 +196,7 @@
           "query": [
             {
               "key": "id",
-              "value": "1234567890"
+              "value": "{{idempotency_key}}"
             }
           ]
         }
@@ -241,7 +248,7 @@
           },
           {
             "key": "Content-Type",
-            "value": "application/json"
+            "value": "application/x-www-form-urlencoded"
           }
         ],
         "description": "Create a payment/bill link.",
@@ -258,13 +265,14 @@
           "query": []
         },
         "body": {
-          "mode": "raw",
-          "raw": "{\n  \"title\": \"Invoice payment\",\n  \"type\": \"SINGLE\",\n  \"amount\": 10000,\n  \"expired_date\": \"2026-12-31 23:59\"\n}",
-          "options": {
-            "raw": {
-              "language": "json"
-            }
-          }
+          "mode": "urlencoded",
+          "urlencoded": [
+            { "key": "title", "value": "Invoice payment", "type": "text" },
+            { "key": "type", "value": "SINGLE", "type": "text" },
+            { "key": "amount", "value": "10000", "type": "text" },
+            { "key": "expired_date", "value": "2026-12-31 23:59", "type": "text" },
+            { "key": "step", "value": "3", "type": "text" }
+          ]
         }
       },
       "response": []

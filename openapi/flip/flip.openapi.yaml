@@ -12,96 +12,94 @@ paths:
     get:
       summary: Deposit balance
       description: Retrieve the current Flip account balance in Rupiah (IDR).
-      parameters:
-        - name: Accept
-          in: header
-          examples:
-            Deposit balance:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
   /v2/general/banks:
     get:
       summary: List of Bank
       description: Return bank codes and bank availability information.
-      parameters:
-        - name: Accept
-          in: header
-          examples:
-            List of Bank:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
   /v2/disbursement/bank-account-inquiry:
     post:
       summary: Bank Account Inquiry
       description: Get the bank account holder name before creating a disbursement.
-      parameters:
-        - name: Accept
-          in: header
-          examples:
-            Bank Account Inquiry:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          examples:
-            Bank Account Inquiry:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
+              properties:
+                account_number:
+                  type: string
+                bank_code:
+                  type: string
+              required:
+                - account_number
+                - bank_code
             examples:
               Bank Account Inquiry:
-                value: |-
-                  {
-                    "account_number": "1234567890",
-                    "bank_code": "bca"
-                  }
+                value:
+                  - key: account_number
+                    value: '1234567890'
+                    type: text
+                  - key: bank_code
+                    value: bca
+                    type: text
+      responses:
+        '200':
+          description: Successful response
   /v3/disbursement:
     post:
       summary: Create Disbursement
       description: Create a common disbursement transaction.
       parameters:
-        - name: Accept
+        - name: idempotency-key
           in: header
           examples:
             Create Disbursement:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          examples:
-            Create Disbursement:
-              value: application/json
+              value: '{{idempotency_key}}'
               x-disabled: false
           schema:
             type: string
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
+              properties:
+                account_number:
+                  type: string
+                bank_code:
+                  type: string
+                amount:
+                  type: integer
+                remark:
+                  type: string
+              required:
+                - account_number
+                - bank_code
+                - amount
             examples:
               Create Disbursement:
-                value: |-
-                  {
-                    "account_number": "1234567890",
-                    "bank_code": "bca",
-                    "amount": 10000,
-                    "remark": "Invoice payout"
-                  }
+                value:
+                  - key: account_number
+                    value: '1234567890'
+                    type: text
+                  - key: bank_code
+                    value: bca
+                    type: text
+                  - key: amount
+                    value: '10000'
+                    type: text
+                  - key: remark
+                    value: Invoice payout
+                    type: text
+      responses:
+        '200':
+          description: Successful response
     get:
       summary: Get All Disbursement
       description: Get the paginated list of disbursement transactions.
@@ -110,7 +108,7 @@ paths:
           in: query
           examples:
             Get All Disbursement:
-              value: '20'
+              value: 20
               x-disabled: false
           schema:
             type: integer
@@ -118,18 +116,13 @@ paths:
           in: query
           examples:
             Get All Disbursement:
-              value: '1'
+              value: 1
               x-disabled: false
           schema:
             type: integer
-        - name: Accept
-          in: header
-          examples:
-            Get All Disbursement:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
   /v3/get-disbursement:
     get:
       summary: Get Disbursement by ID or Idempotency Key
@@ -139,53 +132,59 @@ paths:
           in: query
           examples:
             Get Disbursement by ID or Idempotency Key:
-              value: '1234567890'
-              x-disabled: false
-          schema:
-            type: integer
-        - name: Accept
-          in: header
-          examples:
-            Get Disbursement by ID or Idempotency Key:
-              value: application/json
+              value: '{{idempotency_key}}'
               x-disabled: false
           schema:
             type: string
+      responses:
+        '200':
+          description: Successful response
   /v2/pwf/bill:
     post:
       summary: Create Bill
       description: Create a payment/bill link.
-      parameters:
-        - name: Accept
-          in: header
-          examples:
-            Create Bill:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          examples:
-            Create Bill:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
       requestBody:
         content:
-          application/json:
+          application/x-www-form-urlencoded:
             schema:
               type: object
+              properties:
+                title:
+                  type: string
+                type:
+                  type: string
+                amount:
+                  type: integer
+                expired_date:
+                  type: string
+                step:
+                  type: integer
+              required:
+                - title
+                - type
+                - amount
+                - step
             examples:
               Create Bill:
-                value: |-
-                  {
-                    "title": "Invoice payment",
-                    "type": "SINGLE",
-                    "amount": 10000,
-                    "expired_date": "2026-12-31 23:59"
-                  }
+                value:
+                  - key: title
+                    value: Invoice payment
+                    type: text
+                  - key: type
+                    value: SINGLE
+                    type: text
+                  - key: amount
+                    value: '10000'
+                    type: text
+                  - key: expired_date
+                    value: 2026-12-31 23:59
+                    type: text
+                  - key: step
+                    value: '3'
+                    type: text
+      responses:
+        '200':
+          description: Successful response
     get:
       summary: Get All Bills
       description: Get all existing payment links.
@@ -194,7 +193,7 @@ paths:
           in: query
           examples:
             Get All Bills:
-              value: '20'
+              value: 20
               x-disabled: false
           schema:
             type: integer
@@ -202,56 +201,41 @@ paths:
           in: query
           examples:
             Get All Bills:
-              value: '1'
+              value: 1
               x-disabled: false
           schema:
             type: integer
-        - name: Accept
-          in: header
-          examples:
-            Get All Bills:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
   /v2/pwf/{bill_id}/bill:
     get:
       summary: Get Bill / Payment Link
       description: Get a specific payment link.
       parameters:
-        - name: Accept
-          in: header
-          examples:
-            Get Bill / Payment Link:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
         - name: bill_id
           in: path
           required: true
           schema:
             type: string
           description: Flip payment link identifier.
+      responses:
+        '200':
+          description: Successful response
   /v2/pwf/{bill_id}/payment:
     get:
       summary: Get Payment
       description: Get payment transactions from a specific bill link.
       parameters:
-        - name: Accept
-          in: header
-          examples:
-            Get Payment:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
         - name: bill_id
           in: path
           required: true
           schema:
             type: string
           description: Flip payment link identifier.
+      responses:
+        '200':
+          description: Successful response
   /v2/pwf/payment:
     get:
       summary: Get All Payment
@@ -261,7 +245,7 @@ paths:
           in: query
           examples:
             Get All Payment:
-              value: '20'
+              value: 20
               x-disabled: false
           schema:
             type: integer
@@ -269,18 +253,13 @@ paths:
           in: query
           examples:
             Get All Payment:
-              value: '1'
+              value: 1
               x-disabled: false
           schema:
             type: integer
-        - name: Accept
-          in: header
-          examples:
-            Get All Payment:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
   /v2/international-disbursement/exchange-rates:
     get:
       summary: Get Exchanges Rate
@@ -294,14 +273,9 @@ paths:
               x-disabled: false
           schema:
             type: string
-        - name: Accept
-          in: header
-          examples:
-            Get Exchanges Rate:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
+      responses:
+        '200':
+          description: Successful response
 components:
   securitySchemes:
     basicAuth:

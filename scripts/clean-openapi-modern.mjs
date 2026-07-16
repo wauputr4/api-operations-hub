@@ -1,6 +1,8 @@
 import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 
+const HTTP_METHODS = new Set(['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace']);
+
 const targets = [
   'openapi/midtrans/midtrans.openapi.yaml',
   'openapi/doku/doku.openapi.yaml',
@@ -50,7 +52,10 @@ for (const target of targets) {
         continue;
       }
 
-      for (const op of Object.values(operations)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
         const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
         const hasOrderId = params.some((item) => item?.in === 'path' && item?.name === 'order_id');
         if (!hasOrderId) {
@@ -105,7 +110,10 @@ for (const target of targets) {
         continue;
       }
 
-      for (const op of Object.values(operations)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
         const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
         const hasBillId = params.some((item) => item?.in === 'path' && item?.name === 'bill_id');
         if (!hasBillId) {
@@ -154,6 +162,71 @@ for (const target of targets) {
         }
 
         op.parameters = params;
+      }
+    }
+  }
+
+  if (target.includes('flip')) {
+    const formSchemas = {
+      'Bank Account Inquiry': {
+        account_number: 'string',
+        bank_code: 'string',
+      },
+      'Create Disbursement': {
+        account_number: 'string',
+        bank_code: 'string',
+        amount: 'integer',
+        remark: 'string',
+      },
+      'Create Bill': {
+        title: 'string',
+        type: 'string',
+        amount: 'integer',
+        expired_date: 'string',
+        step: 'integer',
+      },
+    };
+
+    for (const operations of Object.values(cleanedPaths)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
+
+        if (Array.isArray(op.parameters)) {
+          op.parameters = op.parameters.filter(
+            (param) => !(
+              param?.in === 'header'
+              && ['content-type', 'accept'].includes(param.name?.toLowerCase())
+            ),
+          );
+          for (const param of op.parameters) {
+            if (param?.in === 'query' && param.schema?.type === 'integer') {
+              for (const example of Object.values(param.examples || {})) {
+                if (typeof example?.value === 'string' && /^-?\d+$/.test(example.value)) {
+                  example.value = Number(example.value);
+                }
+              }
+            }
+          }
+          if (op.parameters.length === 0) {
+            delete op.parameters;
+          }
+        }
+
+        const fields = formSchemas[op.summary];
+        const mediaType = op.requestBody?.content?.['application/x-www-form-urlencoded'];
+        if (fields && mediaType) {
+          mediaType.schema = {
+            type: 'object',
+            properties: Object.fromEntries(
+              Object.entries(fields).map(([name, type]) => [name, { type }]),
+            ),
+            required: Object.keys(fields).filter((name) => !['remark', 'expired_date'].includes(name)),
+          };
+        }
+
+        op.responses ??= { '200': { description: 'Successful response' } };
       }
     }
   }
