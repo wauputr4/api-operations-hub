@@ -21,6 +21,7 @@ If you work with several providers and need a single source of truth for API def
 - Xendit API
 - Xendit SNAP API
 - iPaymu API (v2)
+- Flip for Business API
 - Duitku API
 - Faspay API
 - Finpay Billing API
@@ -39,6 +40,7 @@ If you work with several providers and need a single source of truth for API def
   - `doku/`
   - `xendit/`
   - `ipaymu/`
+  - `flip/`
   - `duitku/`
   - `fastpay/`
   - `finpay/`
@@ -46,7 +48,7 @@ If you work with several providers and need a single source of truth for API def
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted and official OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Duitku, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare, and Stripe.
+  - Converted and official OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Duitku, Flip for Business, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare, and Stripe.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -61,7 +63,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Duitku API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, Stripe API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Duitku API, Flip for Business API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, Stripe API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -114,6 +116,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
 - `openapi/ipaymu/ipaymu.openapi.yaml`
+- `openapi/flip/flip.openapi.yaml`
 - `openapi/duitku/duitku.openapi.yaml`
 - `openapi/fastpay/fastpay.openapi.yaml`
 - `openapi/finpay/finpay-billing.openapi.yaml`

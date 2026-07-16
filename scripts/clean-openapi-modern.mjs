@@ -1,12 +1,15 @@
 import fs from 'node:fs/promises';
 import yaml from 'js-yaml';
 
+const HTTP_METHODS = new Set(['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace']);
+
 const targets = [
   'openapi/midtrans/midtrans.openapi.yaml',
   'openapi/doku/doku.openapi.yaml',
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
   'openapi/ipaymu/ipaymu.openapi.yaml',
+  'openapi/flip/flip.openapi.yaml',
   'openapi/duitku/duitku.openapi.yaml',
   'openapi/fastpay/fastpay.openapi.yaml',
   'openapi/finpay/finpay-billing.openapi.yaml',
@@ -28,6 +31,10 @@ for (const target of targets) {
         .replace('/183xx00010100000', '/{merchant_id}')
         .replace('/182xx00010100000', '/{merchant_id}');
     }
+
+    if (target.includes('flip')) {
+      normalizedPath = normalizedPath.replaceAll(':bill_id', '{bill_id}');
+    }
     const existing = cleanedPaths[normalizedPath];
     if (!existing) {
       cleanedPaths[normalizedPath] = operations;
@@ -46,7 +53,10 @@ for (const target of targets) {
         continue;
       }
 
-      for (const op of Object.values(operations)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
         const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
         const hasOrderId = params.some((item) => item?.in === 'path' && item?.name === 'order_id');
         if (!hasOrderId) {
@@ -95,6 +105,34 @@ for (const target of targets) {
     }
   }
 
+  if (target.includes('flip')) {
+    for (const [path, operations] of Object.entries(cleanedPaths)) {
+      if (!path.includes('{bill_id}')) {
+        continue;
+      }
+
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
+        const params = Array.isArray(op.parameters) ? [...op.parameters] : [];
+        const hasBillId = params.some((item) => item?.in === 'path' && item?.name === 'bill_id');
+        if (!hasBillId) {
+          params.push({
+            name: 'bill_id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string',
+            },
+            description: 'Flip payment link identifier.',
+          });
+          op.parameters = params;
+        }
+      }
+    }
+  }
+
   if (target.includes('ipaymu')) {
     for (const [path, operations] of Object.entries(cleanedPaths)) {
       for (const op of Object.values(operations)) {
@@ -129,10 +167,30 @@ for (const target of targets) {
     }
   }
 
-  if (target.includes('duitku')) {
+  if (target.includes('flip')) {
+    const formSchemas = {
+      'Bank Account Inquiry': {
+        account_number: 'string',
+        bank_code: 'string',
+      },
+      'Create Disbursement': {
+        account_number: 'string',
+        bank_code: 'string',
+        amount: 'integer',
+        remark: 'string',
+      },
+      'Create Bill': {
+        title: 'string',
+        type: 'string',
+        amount: 'integer',
+        expired_date: 'string',
+        step: 'integer',
+      },
+    };
+
     for (const operations of Object.values(cleanedPaths)) {
       for (const [method, op] of Object.entries(operations)) {
-        if (!['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'].includes(method)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
           continue;
         }
 
@@ -143,11 +201,51 @@ for (const target of targets) {
               && ['content-type', 'accept'].includes(param.name?.toLowerCase())
             ),
           );
+          for (const param of op.parameters) {
+            if (param?.in === 'query' && param.schema?.type === 'integer') {
+              for (const example of Object.values(param.examples || {})) {
+                if (typeof example?.value === 'string' && /^-?\d+$/.test(example.value)) {
+                  example.value = Number(example.value);
+                }
+              }
+            }
+          }
           if (op.parameters.length === 0) {
             delete op.parameters;
           }
         }
 
+        const fields = formSchemas[op.summary];
+        const mediaType = op.requestBody?.content?.['application/x-www-form-urlencoded'];
+        if (fields && mediaType) {
+          mediaType.schema = {
+            type: 'object',
+            properties: Object.fromEntries(
+              Object.entries(fields).map(([name, type]) => [name, { type }]),
+            ),
+            required: Object.keys(fields).filter((name) => !['remark', 'expired_date'].includes(name)),
+          };
+        }
+
+        op.responses ??= { '200': { description: 'Successful response' } };
+      }
+    }
+  }
+
+  if (target.includes('duitku')) {
+    for (const operations of Object.values(cleanedPaths)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!HTTP_METHODS.has(method.toLowerCase())) {
+          continue;
+        }
+        if (Array.isArray(op.parameters)) {
+          op.parameters = op.parameters.filter(
+            (param) => !(param?.in === 'header' && ['content-type', 'accept'].includes(param.name?.toLowerCase())),
+          );
+          if (op.parameters.length === 0) {
+            delete op.parameters;
+          }
+        }
         for (const mediaType of Object.values(op.requestBody?.content || {})) {
           for (const example of Object.values(mediaType.examples || {})) {
             if (typeof example?.value === 'string' && mediaType.schema?.type === 'object') {
@@ -159,7 +257,6 @@ for (const target of targets) {
             }
           }
         }
-
         op.responses ??= { '200': { description: 'Successful response' } };
       }
     }

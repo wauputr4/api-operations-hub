@@ -9,6 +9,7 @@ Modern OpenAPI outputs are generated from these Postman collections:
 - Xendit API: [postman/xendit/xendit.postman_collection.json](../postman/xendit/xendit.postman_collection.json)
 - Xendit SNAP: [postman/xendit/xendit-snap.postman_collection.json](../postman/xendit/xendit-snap.postman_collection.json)
 - iPaymu API v2: [postman/ipaymu/ipaymu.postman_collection.json](../postman/ipaymu/ipaymu.postman_collection.json)
+- Flip for Business API: [postman/flip/flip.postman_collection.json](../postman/flip/flip.postman_collection.json)
 - Duitku API: [postman/duitku/duitku.postman_collection.json](../postman/duitku/duitku.postman_collection.json)
 - Faspay API: [postman/fastpay/fastpay.postman_collection.json](../postman/fastpay/fastpay.postman_collection.json)
 - Finpay Billing: [postman/finpay/finpay-billing.postman_collection.json](../postman/finpay/finpay-billing.postman_collection.json)
@@ -22,6 +23,7 @@ Modern OpenAPI outputs are generated from these Postman collections:
 - [openapi/xendit/xendit.openapi.yaml](../openapi/xendit/xendit.openapi.yaml)
 - [openapi/xendit/xendit-snap.openapi.yaml](../openapi/xendit/xendit-snap.openapi.yaml)
 - [openapi/ipaymu/ipaymu.openapi.yaml](../openapi/ipaymu/ipaymu.openapi.yaml)
+- [openapi/flip/flip.openapi.yaml](../openapi/flip/flip.openapi.yaml)
 - [openapi/duitku/duitku.openapi.yaml](../openapi/duitku/duitku.openapi.yaml)
 - [openapi/fastpay/fastpay.openapi.yaml](../openapi/fastpay/fastpay.openapi.yaml)
 - [openapi/finpay/finpay-billing.openapi.yaml](../openapi/finpay/finpay-billing.openapi.yaml)
@@ -32,6 +34,7 @@ Modern OpenAPI outputs are generated from these Postman collections:
 ## Cleanup Performed
 - Normalized every Midtrans-only `/v2/[INSERT-ORDER-ID]/...` path to `/v2/{order_id}/...`.
 - Added the required `order_id` path parameter to matching operations.
+- Normalized Flip payment-link `:bill_id` route placeholders to OpenAPI `{bill_id}` path templates and added the required `bill_id` path parameter.
 - Automatically verified placeholders and path templates for relevant modern OpenAPI files.
 
 ## Run Verification
@@ -45,6 +48,7 @@ npm run clean-openapi-modern
 - `openapi/xendit/xendit.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=49`
 - `openapi/xendit/xendit-snap.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/ipaymu/ipaymu.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=1`
+- `openapi/flip/flip.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=2` (docs-derived from public Flip API docs)
 - `openapi/duitku/duitku.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
 - `openapi/fastpay/fastpay.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=5`
 - `openapi/finpay/finpay-billing.openapi.yaml`: `path-placeholders=0`, `path-item-template-brace=0`
@@ -58,6 +62,7 @@ npm run clean-openapi-modern
 - Xendit: `100` paths, `116` operations
 - Xendit SNAP: `13` paths, `13` operations
 - iPaymu: `12` paths, `12` operations
+- Flip for Business: `10` paths, `12` operations
 - Duitku: `3` paths, `3` operations
 - Faspay: `10` paths, `10` operations
 - Finpay Billing: `1` path, `1` operation
@@ -72,4 +77,5 @@ Manual refinement is still useful for:
 - request/response schema `type` and `required` fields
 - consistent tags and gateway policy conventions
 - Mayar is still best-effort because it is extracted from Markdown examples (`RequestExample`/`ResponseExample`), not from a native OpenAPI export.
+- Flip for Business is docs-derived from the public Docusaurus/OpenAPI-rendered API reference because the public Postman workspace does not expose a direct unauthenticated collection export.
 - Duitku is docs-derived from the official API page because the published Run in Postman link is not directly exportable without Postman API access.
