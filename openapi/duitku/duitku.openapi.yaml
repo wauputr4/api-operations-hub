@@ -11,15 +11,6 @@ paths:
     post:
       summary: Get Payment Method
       description: 'Source: https://docs.duitku.com/api/en/#get-payment-method'
-      parameters:
-        - name: Content-Type
-          in: header
-          examples:
-            Get Payment Method:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -27,26 +18,18 @@ paths:
               type: object
             examples:
               Get Payment Method:
-                value: |-
-                  {
-                    "merchantcode": "{{merchantCode}}",
-                    "amount": "10000",
-                    "datetime": "2026-06-20 10:00:00",
-                    "signature": "<HMAC_SHA256(merchantcode + amount + datetime, apiKey)>"
-                  }
+                value:
+                  merchantcode: '{{merchantCode}}'
+                  amount: '10000'
+                  datetime: '2026-06-20 10:00:00'
+                  signature: <HMAC_SHA256(merchantcode + amount + datetime, apiKey)>
+      responses:
+        '200':
+          description: Successful response
   /webapi/api/merchant/v2/inquiry:
     post:
       summary: Request Transaction
       description: 'Source: https://docs.duitku.com/api/en/#request-transaction'
-      parameters:
-        - name: Content-Type
-          in: header
-          examples:
-            Request Transaction:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -54,36 +37,30 @@ paths:
               type: object
             examples:
               Request Transaction:
-                value: |-
-                  {
-                    "merchantCode": "{{merchantCode}}",
-                    "paymentAmount": 40000,
-                    "paymentMethod": "VC",
-                    "merchantOrderId": "abcde12345",
-                    "productDetails": "Payment example for example merchant",
-                    "additionalParam": "",
-                    "merchantUserInfo": "",
-                    "customerVaName": "John Doe",
-                    "email": "customer@example.com",
-                    "phoneNumber": "08123456789",
-                    "callbackUrl": "https://example.com/callback",
-                    "returnUrl": "https://example.com/return",
-                    "expiryPeriod": 10,
-                    "signature": "<HMAC_SHA256(merchantCode + merchantOrderId + paymentAmount, apiKey)>"
-                  }
+                value:
+                  merchantCode: '{{merchantCode}}'
+                  paymentAmount: 40000
+                  paymentMethod: VC
+                  merchantOrderId: abcde12345
+                  productDetails: Payment example for example merchant
+                  additionalParam: ''
+                  merchantUserInfo: ''
+                  customerVaName: John Doe
+                  email: customer@example.com
+                  phoneNumber: '08123456789'
+                  callbackUrl: https://example.com/callback
+                  returnUrl: https://example.com/return
+                  expiryPeriod: 10
+                  signature: >-
+                    <HMAC_SHA256(merchantCode + merchantOrderId + paymentAmount,
+                    apiKey)>
+      responses:
+        '200':
+          description: Successful response
   /webapi/api/merchant/transactionStatus:
     post:
       summary: Check Transaction
       description: 'Source: https://docs.duitku.com/api/en/#check-transaction'
-      parameters:
-        - name: Content-Type
-          in: header
-          examples:
-            Check Transaction:
-              value: application/json
-              x-disabled: false
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
@@ -91,11 +68,12 @@ paths:
               type: object
             examples:
               Check Transaction:
-                value: |-
-                  {
-                    "merchantCode": "{{merchantCode}}",
-                    "merchantOrderId": "abcde12345",
-                    "signature": "<HMAC_SHA256(merchantCode + merchantOrderId, apiKey)>"
-                  }
+                value:
+                  merchantCode: '{{merchantCode}}'
+                  merchantOrderId: abcde12345
+                  signature: <HMAC_SHA256(merchantCode + merchantOrderId, apiKey)>
+      responses:
+        '200':
+          description: Successful response
 servers:
   - url: https://sandbox.duitku.com
