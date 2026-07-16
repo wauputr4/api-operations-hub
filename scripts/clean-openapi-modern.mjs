@@ -7,6 +7,7 @@ const targets = [
   'openapi/xendit/xendit.openapi.yaml',
   'openapi/xendit/xendit-snap.openapi.yaml',
   'openapi/ipaymu/ipaymu.openapi.yaml',
+  'openapi/duitku/duitku.openapi.yaml',
   'openapi/fastpay/fastpay.openapi.yaml',
   'openapi/finpay/finpay-billing.openapi.yaml',
   'openapi/finpay/finpay-disbursement.openapi.yaml',
@@ -124,6 +125,42 @@ for (const target of targets) {
         }
 
         op.parameters = params;
+      }
+    }
+  }
+
+  if (target.includes('duitku')) {
+    for (const operations of Object.values(cleanedPaths)) {
+      for (const [method, op] of Object.entries(operations)) {
+        if (!['get', 'put', 'post', 'delete', 'options', 'head', 'patch', 'trace'].includes(method)) {
+          continue;
+        }
+
+        if (Array.isArray(op.parameters)) {
+          op.parameters = op.parameters.filter(
+            (param) => !(
+              param?.in === 'header'
+              && ['content-type', 'accept'].includes(param.name?.toLowerCase())
+            ),
+          );
+          if (op.parameters.length === 0) {
+            delete op.parameters;
+          }
+        }
+
+        for (const mediaType of Object.values(op.requestBody?.content || {})) {
+          for (const example of Object.values(mediaType.examples || {})) {
+            if (typeof example?.value === 'string' && mediaType.schema?.type === 'object') {
+              try {
+                example.value = JSON.parse(example.value);
+              } catch {
+                // Keep non-JSON examples unchanged.
+              }
+            }
+          }
+        }
+
+        op.responses ??= { '200': { description: 'Successful response' } };
       }
     }
   }

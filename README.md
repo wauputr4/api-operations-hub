@@ -21,6 +21,7 @@ If you work with several providers and need a single source of truth for API def
 - Xendit API
 - Xendit SNAP API
 - iPaymu API (v2)
+- Duitku API
 - Faspay API
 - Finpay Billing API
 - Finpay Disbursement API
@@ -38,13 +39,14 @@ If you work with several providers and need a single source of truth for API def
   - `doku/`
   - `xendit/`
   - `ipaymu/`
+  - `duitku/`
   - `fastpay/`
   - `finpay/`
   - `mayar/`
   - `hostinger/`
   - `cloudflare/`
 - `openapi/`
-  - Converted and official OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare, Stripe.
+  - Converted and official OpenAPI outputs for Midtrans, DOKU, Xendit, iPaymu, Duitku, Faspay, Finpay, Mayar, Hostinger, Biznet Gio, Cloudflare, and Stripe.
 - `openapi-legacy/`
   - Legacy conversion outputs retained for comparison.
 - `openapi-modern/`
@@ -59,7 +61,7 @@ If you work with several providers and need a single source of truth for API def
 
 ## SEO-friendly keywords
 
-Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, Stripe API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
+Postman to OpenAPI, OpenAPI converter, payment API spec repo, API gateway reference, API documentation automation, Xendit API, Midtrans API, DOKU API, iPaymu API, Duitku API, Faspay API, Finpay API, Mayar API, Hostinger API, Biznet Gio API, Cloudflare API, Stripe API, OpenAPI 3.0 migration, OpenAPI 3.1 migration, API-first workflow.
 
 ## Prerequisites
 
@@ -112,6 +114,7 @@ This script checks and normalizes known path placeholders (for example Midtrans 
 - `openapi/xendit/xendit.openapi.yaml`
 - `openapi/xendit/xendit-snap.openapi.yaml`
 - `openapi/ipaymu/ipaymu.openapi.yaml`
+- `openapi/duitku/duitku.openapi.yaml`
 - `openapi/fastpay/fastpay.openapi.yaml`
 - `openapi/finpay/finpay-billing.openapi.yaml`
 - `openapi/finpay/finpay-disbursement.openapi.yaml`
